@@ -1,0 +1,16 @@
+.Rprofile
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+data/
+*.shp
+*.shx
+*.lock
+*.prj
+*.dbf
+*.csv
+*.pdf
+*.zip
+

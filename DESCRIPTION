@@ -1,0 +1,13 @@
+Package:indicators
+Title: A suite of tools
+Version: 2019.06.13
+Authors@R: c( person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role=c("aut", "cre")) )
+Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
+Description: This package does indicator-y stuff
+Depends:
+    R (>= 3.6)
+Imports:
+    lubridate
+License: MIT + file LICENSE
+LazyData: true
+RoxygenNote: 6.1.1
