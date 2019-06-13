@@ -1,11 +1,11 @@
-Package:indicators
+Package: indicators
 Title: A suite of tools
 Version: 2019.06.13
-Authors@R: c( person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role=c("aut", "cre")) )
+Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role=c("aut", "cre")))
 Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
-Description: This package does indicator-y stuff
+Description: This package does indicatory stuff.
 Depends:
-    R (>= 3.6)
+    R (>= 3.6.0)
 Imports:
     lubridate
 License: MIT + file LICENSE
