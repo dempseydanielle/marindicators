@@ -23,6 +23,7 @@
 #' @param user.defined add text here
 #' @param group add text here
 #' @param path add text here
+#' @importFrom stats aggregate
 #' @family resource potential indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -37,7 +38,7 @@
 #'
 #'   Pauly D, Christensen V, Walters C (2000) Ecopath, Ecosim, and Ecospace as
 #'   tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci
-#'   57:697–706
+#'   57:697–706 
 #'
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
@@ -46,7 +47,7 @@
 
 FishingInBalance<- function (land=dat,TE=0.1) {
 	mTL <- MeanTLLandings(land=land)
-	ll <- aggregate(CATCH~YEAR+NAMES,data=land,FUN=sum)
+	ll <- stats::aggregate(CATCH~YEAR+NAMES,data=land,FUN=sum)
 	l0 <- aggregate(CATCH~NAMES,data=ll[ll$YEAR %in% 1968:1970,],FUN=mean)
 	mTL0 <- aggregate(mTL~NAMES,data=mTL[mTL$YEAR %in% 1968:1970,],FUN=mean)
 	
