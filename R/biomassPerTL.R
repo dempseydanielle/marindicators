@@ -1,6 +1,6 @@
-#' @title Calculates the biomass (or abundace??) per trophic level
+#' @title Calculates the biomass or abundance per discrete trophic level
 #' @description This function takes a dataframe with columns **** and calculates
-#'   the biomass (or abundance) per discrete trophic level.
+#'   the biomass or abundance per discrete trophic level.
 #' @details **Recommended data: Fishery independent surveys, fish and
 #'   invertebrates.
 #' @param X add text here
@@ -9,13 +9,16 @@
 #' @param TL.grouping add text here
 #' @param path add text here
 #' @family stability and resistance indicators
-#' @references Coll et al 2006 (not in references!)
+#' @references Coll M, Shannon LJ, Moloney CL, Palomera I, Tudela S,
+#'   2006. Comparing trophic flows and fishing impacts of a NW Mediterranean
+#'   ecosystem with coastal upwellings by means of standardized ecological
+#'   models and indicators. Ecol. Model. 198, 53-70. (not in references!)
 #'
 #'   Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
 #'   evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci.
 #'   3232: xii + 212 p.
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
 
