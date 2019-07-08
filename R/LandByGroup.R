@@ -22,12 +22,13 @@
 #'@export
 
 
-
-LandByGroup <- function(land=dat,group=c('FINFISH','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','FORAGE',
-					'INVERTEBRATES','ALL','LARGE_PELAGIC')) {
-		u <- sqlQuery(channel,paste("select * from gomezc.indiseas_allcodes;"))
-		if(group !='ALL') {
-		  	u <- na.omit(u[,c('ALLCODES','ALLNAMES',group)])
+# this will depend on what "groups" the user has
+LandByGroup <- function(land = dat, groups) {
+  
+  u <- sqlQuery(channel,paste("select * from gomezc.indiseas_allcodes;")) # not sure what this is
+  
+  if(group !='ALL') {
+    u <- na.omit(u[,c('ALLCODES', 'ALLNAMES', groups)])
 			land <- land[land$SPECIES %in% u$ALLCODES,]
 			}
 		o <- aggregate(CATCH~YEAR+NAMES,data=land,FUN=sum)

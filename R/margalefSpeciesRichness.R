@@ -1,11 +1,11 @@
 #' @title Also calculates Margalef's species richness (see Margalef.R)
 #' @description This function takes a dataframe with columns **** and calculates
 #'   Margalef's species richness
-#' @details Margalef's species richness: \deqn{S = (S_y - 1)/log(F_y)} S is the
-#'   count of the number of species recorded in all trawl catches collected in
-#'   any one year (y). F is the total count of all individuals caught in all
-#'   trawl catches in any one year (y). 
-#'   
+#' @details Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
+#'   \eqn{S_y} is the count of the number of species recorded in all trawl
+#'   catches collected in year \eqn{y}. \eqn{F} is the total count of all
+#'   individuals caught in year \eqn{y}.
+#'
 #'   **Recommended data: Fishery independent surveys, fish and invertebrates.
 #'
 #' @param X is probably a dataframe with certain columns.
@@ -25,19 +25,38 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #' @export
 
-margalefSpeciesRichness <- function(X,group=c('FINFISH','ALL'),metric=c('BIOMASS','ABUNDANCE'))  {
+margalefSpeciesRichness <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE'),
+                                    start.year, end.year)  {
+  
+  # can I just use the species richness function?
+  years = c(start.year:end.year)
+  ind = data.frame(NULL)
+  
+  for(i in 1:length(years)){
+    
+    year.i = yers[i]
+    X.i = X[X$years =i, ]
+    
+    S.i = speciesrichness(X.i, group= group, grps) # not sure what grps is
 
+    logF.i = log(sum(X.i[metric])) # not sure that this indexes correctly
+    
+    ind.i = (S.i - 1)/logF.i
+  }
+  
+  ind
+  
+  
+  
+# I think these can go
 	if(group=='FINFISH') {
 		X <- X[X$SPECIES<1000,]
 		}
 	if(group=='GROUNDFISH' )  X <- X[X$SPECIES %in% c(10:22,24:59,140,141,142,143,110,111,112,113,114,115,116,117,118,200,201,202,203,204,205,206,207,208,209,210,211,220,221,300,301,304,310,320,340,350,400,620:650),]    	
+###################################
 
-	uI <- unique(X$ID)
-	marsr.est <- numeric()
-	 for(i in 1:length(uI)) {
-	 	Y <- X[X$ID==uI[i],]
-	 	Y <- Y[order(Y[metric]),metric]   
-	 	marsr.est[i] <- (length(Y)-1)/log(sum(Y))
+ 	X <- X[order(X[metric]),metric]  # why ordered? 
+	 	marsr.est[i] <- (length(X)-1)/log(sum(X))
 	 	if(marsr.est[i]>20 || marsr.est[i]<0) marsr.est[i]<-NA
 	 	}
 	out <- as.data.frame(cbind(uI,marsr.est))

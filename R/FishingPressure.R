@@ -1,16 +1,16 @@
 #' @title Calculates fishing pressure
 #' @description This function takes a dataframe with columns **** and calculates
 #'   fishing pressure on a fished group
-#' @details Fishing pressure (FP): \deqn{FP = Y_FG/B_FG} where \eqn{B_FG} is the
-#'   biomass of the fished group(s) and \eqn{Y_FG} is the landed catch of the
+#' @details Fishing pressure (FP): \deqn{FP = Y_{FG}/B_{FG}} where \eqn{B_{FG}} is the
+#'   biomass of the fished group(s) and \eqn{Y_{FG}} is the landed catch of the
 #'   group(s). **Give examples of groups that can be used in function
 #'
 #'   This indicator measures the level of exploitation or total fishing pressure
 #'   at the ecosystem level. Change in this indicator can result from change in
-#'   \eqn{B_FG}, \eqn{Y_FG} or both. If \eqn{B_FG} and \eqn{Y_FG} change in the
+#'   \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change in the
 #'   same direction, exploitation rate may not change.
 #'
-#'   Recommended data: B: fishery independent surveys, Y: commercial fisheries
+#'   Recommended data: \eqn{B_{FG}}: fishery independent surveys, \eqn{Y_{FG}}: commercial fisheries
 #'   landings
 #' @param path add text here
 #' @param land add text here

@@ -20,14 +20,33 @@
 #'@export
 
 
-#----------------------------------
-LandingsDiversity <- function(land=dat,grps=groups) {
-	a <- unique(land[,c('YEAR','NAMES')])
-	a$NSP <- NA
-	for ( i in 1:nrow(a)) {
+LandingsDiversity <- function(land = dat, grps = groups) {
+	
+  years = c(start.year:end.year)
+  ind = data.frame(NULL)
+  
+  for (i in 1:length(years)){
+    
+    year.i = years[i]
+    land.i = land[land$year == year.i,]
+    n.species.i = length(unique(land.i$SPECIES_NAMES))
+    
+    ind[i] = n.species.i
+    
+  }
+  
+  
+  # re-wrote this with a loop over each year
+  
+  a <- unique(land[,c('YEAR','NAMES')]) # I think this extracts the unique combinations of year and speices
+	a$NSP <- NA # what is NSP?
+	
+	for (i in 1:nrow(a)) {
 		h <- land[land$YEAR==a[i,1] & land$NAMES==a[i,2],]
 		a[i,'NSP'] <- length(unique(h$SPECIES))
 	}
+	
 	return(a)
+}  
 
 }

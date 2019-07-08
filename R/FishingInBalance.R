@@ -45,8 +45,10 @@
 #' @export
 
 # give option to CHOOSE years for the baseline --> base_start; base_end
-FishingInBalance<- function (land = dat, TE = 0.1, base.start, base.end) {
+FishingInBalance<- function (land = dat, TE = 0.1, base.start, base.end, start.year, end.year) {
 	
+  years = c(start.year:end.year)
+  
   mTL <- MeanTLLandings(land = land) # calculate the mean trophic level of the landings for all years??
 	land.total <- stats::aggregate(CATCH ~ YEAR, data = land, FUN=sum) #  I think this is just total landings for each year
 	
@@ -55,10 +57,16 @@ FishingInBalance<- function (land = dat, TE = 0.1, base.start, base.end) {
 	
  	# loop over all years
 	ind <- data.frame(NULL)
-	for (i in start.year:end.year){
+	for (i in 1:length(years)){
 	  ind[i] <- log(land.total$CATCH[i]*(1/TE)^mtl[i]) - log(land.0*(1/TE)^mTL.0) # could subtract the baseline
 	  # from each element of dataframe at the end, but I like to keep together for the equation
 	}
 	
 	ind
 }
+
+
+
+
+
+

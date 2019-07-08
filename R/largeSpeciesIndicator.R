@@ -1,9 +1,9 @@
 #'@title Calculates the Large Species Indicator
 #'@description This function takes a dataframe with columns **** and calculates
 #'  the Large Species Indicator (LSI)
-#'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_max >85
-#'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, i, and
-#'  \eqn{L_max} is the maximum asymptotic length (cm; here the default is 85
+#'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
+#'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i}, and
+#'  \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is 85
 #'  cm).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
@@ -29,19 +29,36 @@
 
 
 
-largeSpeciesIndicator <- function(X,lmax=85,linf.data.table='indiseas_max_length',metric='BIOMASS') {
-	ol <- sqlQuery(channel,paste("select * from ",linf.data.table,";",sep=""))
-	ss <- ol$SPECIES[ol$MAXLEN99>lmax]
-	uI <- unique(X$ID)
-	out <- list()
-	for(i in 1:length(uI)) {
-	                Y <- X[X$ID==uI[i],]
-	                A <- sum(Y[Y$SPECIES %in% ss, metric])
-	                B <- sum(Y[, metric])
-	            out[[i]] <- cbind(uI[i],A/B)
-		}
-		out <- as.data.frame(do.call(rbind,out))
-		out[,2] <- as.numeric(out[,2])
-		names(out) <- c('ID','LSI')
-	return(out)
-		}
+largeSpeciesIndicator <- function(X, lmax=85, linf.table = NA, metric='BIOMASS',
+                                  start.year, end.year) {
+
+  if (is.na(linf.table)) {
+    load("R/sysdata.rda/indiseas_MaxLength.rda")
+    ss <- indiseas_MaxLength$SPECIES[ol$MAXLEN99>lmax]
+  }
+  else{	ss <- linf.table$SPECIES[ol$MAXLEN99>lmax]}
+ 
+  years = c(start.year:end.year)
+  ind = data.frame(NULL)
+	
+  for (i in 1:length(years)){
+    
+    year.i = years[i]
+    X.i = X[X$years, ]
+    
+    A.i <- sum(X.i[X.i$SPECIES %in% ss, metric])  # biomass of species > 85 cm
+    B.i <- sum(X.i[, metric])                   # total biomass
+    ind[i] = A.i/B.i
+  }
+	
+  ind
+	
+}
+
+
+
+
+
+
+
+

@@ -25,21 +25,30 @@
 #'  sensitivity and specificity of fish community indicators to management
 #'  action. Can J Fish Aquat Sci 69:1065-1079
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
 
 
-largeFishIndicator <- function(X,metric=c('BIOMASS','ABUNDANCE'),large.fish=35) {
-	uI <- unique(X$ID)
-	mL <- numeric()
-		for(i in 1:length(uI)) {
-	Y <- X[X$ID==uI[i],]
-	id <- Y$FLEN>=large.fish
-		mL[i] <- sum(Y[id,metric])/sum(Y[,metric])
-	}
-	out <- as.data.frame(cbind(uI,mL))
-	out[,2] <- as.numeric(out[,2])
-	names(out) <- c('ID','mLc')
-	return(out)
-	}
+largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), large.fish = 35, start.year, end.year) {
+  
+  years = c(start.year:end.year)
+  ind = data.frame(NULL)
+  
+  for (i in 1:length(years)) {
+    
+    year.i = years[i]
+    X.i <- X[X$year = year.i, ]
+    
+    LF <- X.i$FLEN >= large.fish        # check that this subsetting works
+    ind[i] <- sum(X.i[LF, metric])/sum(X.i[,metric])
+  }
+  
+  ind
+}
+
+
+
+
+
+
