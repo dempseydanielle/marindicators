@@ -1,10 +1,10 @@
 #' @title Calculates Shannon's index of diversity (H')
 #' @description This function takes a dataframe with columns **** and calculates
 #'   Shannon's diversity index.
-#' @details Shannon diversity index (H'): \deqn{H' = -\Sigma(p_i ln( p_i ))}
+#' @details Shannon diversity index (H'): \deqn{H' = -\Sigma p_i ln(p_i)}
 #'   \eqn{p_i} is the proportion of the total sample contributed by the i(th)
-#'   species and S is the number of species recorded in the sample. This index
-#'   is sensitive to the number of species recorded in the sample.
+#'   species and \eqn{S} is the number of species recorded in the sample. This
+#'   index is sensitive to the number of species recorded in the sample.
 #'
 #'   Recommended data: Fishery independent surveys, fish and invertebrates.
 #' @param X is probably a dataframe with certain columns.
@@ -24,22 +24,29 @@
 #' @export
 
 
-
-shannon <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE')) {
-	if(group == 'FINFISH') {
+shannon <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE'),
+                    start.year, end.year) {
+	
+  # this could change depending on how we ask for the data
+  if(group == 'FINFISH') {
 		X <- X[X$SPECIES<1000,]
-		}
-	uI <- unique(X$ID)
-	sh.est <- numeric()
-	for(i in 1:length(uI)) {
-	 	Y <- X[X$ID==uI[i],]
-	 	Y <- Y[order(Y[metric]),metric]   
-	 	Y <- Y/sum(Y)
-	 	sh.est[i] <- -sum(Y*log(Y))
-		}
-	out <- as.data.frame(cbind(uI,sh.est))
-	names(out)[1] <-'ID'
-	out[,2] <- as.numeric(out[,2])
-#	return(out)
+  }
+  
+  years = c(start_year:end_year)
+  ind = data.frame(NULL)
+  
+  for (i in 1:length(years)){
+    
+    year.i = years[i]
+    X.i = X[X$years == year.i, ]
+
+	 	X.i <- X.i[order(X.i[metric]), metric]   
+	 	p <- X.i/sum(X.i)
+	 	ind[i] <- -sum(p*log(p)) 
+  }
+  
+  ind
+	 	
+	
 	}
 

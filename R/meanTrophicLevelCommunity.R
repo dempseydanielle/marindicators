@@ -2,10 +2,10 @@
 #'@description This function takes a dataframe with columns **** and calculates
 #'  the mean trophic level of the community, weighted by biomass
 #'@details Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
-#'  \eqn{TL_i} is trophic level of species i, and \eqn{B_i} is the biomass of
-#'  species i.
+#'  \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
+#'  of species \eqn{i}.
 #'
-#'  This indicator is based on trophic levels (TL) of all species with available
+#'  This indicator is based on trophic levels of all species with available
 #'  biomass time series, weighted by annual species-specific biomass, to reflect
 #'  the structure of the community.
 #'
@@ -26,18 +26,20 @@
 #'@export
 
 
-meanTrophicLevelCommunity <- function(X,pred.data.table='indiseas_wss_tl',metric='BIOMASS') {
-	ol <- sqlQuery(channel,paste("select research species,avg(TL) from ",pred.data.table," group by research;",sep=""))
-	X <- merge(X,ol,by='SPECIES')
-	uI <- unique(X$ID)
-	out <- numeric()
-	for(i in 1:length(uI)) {
-	                Y <- X[X$ID==uI[i],]
-	                out[i] <- aggregate(Y[metric]*Y['AVG(TL)'],by=Y['ID'],FUN=sum)[,2]/aggregate(Y[metric],by=Y['ID'],FUN=sum)[,2]
-		}
-		
-		out <- as.data.frame(cbind(uI,out))
-		out[,2] <- as.numeric(out[,2])
-		names(out) <- c('ID','MTLCom')
-	return(out)
+meanTrophicLevelCommunity <- function(X, TL.table = NA,  metric='BIOMASS') {
+                                      #pred.data.table='indiseas_wss_tl', metric='BIOMASS') {
+                                        
+  if (TL.table = NA) {
+    load("R/sysdata.rda/indiseas_TL.rda")
+    TL.table <- indiseas_TL
+    rm(indiseas_TL)
+  }
+
+  X <- merge(X, TL.table, by='SPECIES')
+  
+# find a better way to do this
+  # loop over years?
+	ind[i] <- aggregate(Y[metric]*Y['AVG(TL)'], by=Y['ID'], FUN=sum)[,2]/aggregate(Y[metric], by = Y['ID'], FUN=sum)[,2]
+	
+	ind
 		}

@@ -24,8 +24,11 @@
 
 
 
-resourcePotential <- function(X,user.defined=F, group=c('FINFISH','ALL','SKATES','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','INVERTEBRATES','FORAGE','PELAGIC','LBENTHIVORE','MBENTHIVORE','PISCIVORE',  
-														'PLANKTIVORE','ZOOPISCIVORE'),metric=c('BIOMASS','ABUNDANCE'),herring=T,yr=0)  {
+resourcePotential <- function(X, user.defined=F, group=c('FINFISH','ALL','SKATES',
+                                                         'CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS',
+                                                         'INVERTEBRATES','FORAGE','PELAGIC','LBENTHIVORE',
+                                                         'MBENTHIVORE','PISCIVORE', 'PLANKTIVORE','ZOOPISCIVORE'),
+                              metric=c('BIOMASS','ABUNDANCE'), herring = T, yr=0)  {
 														Y<-FALSE
 			#IF USER DEFINED FOR GROUP PUT IN A VECTOR OF THE SPECIES CODES YOU WANT TO INCLUDE
 			if(user.defined) {

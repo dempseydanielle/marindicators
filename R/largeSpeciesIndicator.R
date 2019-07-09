@@ -44,7 +44,7 @@ largeSpeciesIndicator <- function(X, lmax=85, linf.table = NA, metric='BIOMASS',
   for (i in 1:length(years)){
     
     year.i = years[i]
-    X.i = X[X$years, ]
+    X.i = X[X$years == year.i, ]
     
     A.i <- sum(X.i[X.i$SPECIES %in% ss, metric])  # biomass of species > 85 cm
     B.i <- sum(X.i[, metric])                   # total biomass

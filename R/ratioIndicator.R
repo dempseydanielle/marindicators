@@ -1,4 +1,4 @@
-#'@title not entirely sure that this one does
+#'@title I don't think this is in the Tech Report
 #'@description Text
 #'@details Text
 #'@param X add text here
@@ -15,10 +15,27 @@
 
 
 #ratio between groups
-ratioIndicator <- function(X,group,metric,user.defined) {
-	Y <- resourcePotential(X=X,group=group[1],metric=metric,user.defined=user.defined)  
-	Z <- resourcePotential(X=X,group=group[2],metric=metric,,user.defined=user.defined)  
-	V <- merge(Y,Z,all.x=T,by='ID')
-	V$RATIO <- V$BIOMASS.y/(V$BIOMASS.x+V$BIOMASS.y)
+ratioIndicator <- function(X, groups, metric =c('BIOMASS','ABUNDANCE'), start.year, end.year) {
+	
+  years = c(start_year:end_year)
+  ind = data.frame(NULL)
+  
+  for (i in 1:length(years)){
+    
+    year.i = years[i]
+    
+    X.i = X[X$years == year.i, ]
+    
+    group1 <- resourcePotential(X = X.i, group = groups[1], metric = metric)  
+    group2 <- resourcePotential(X = X.i, group = groups[2], metric = metric)  
+    ind <- V$BIOMASS.y/(V$BIOMASS.x+V$BIOMASS.y) # I think this should be one over the other, not one over the total
+    
+  }
 	return(V)	
-	}
+	
+  }
+  
+  
+  
+  
+  

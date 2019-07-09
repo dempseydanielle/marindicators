@@ -1,13 +1,10 @@
-# DD Changed the NAME of this function from speciesRichness to speciesrichness
-#' 
-#' @title Calculates species richness (S_y)
+#' @title Calculates species richness (\eqn{S_y})
 #' @description This function takes a dataframe with columns **** and calculates
 #'   species richness.
-#' @details S is the count of the number of species recorded in all trawl
-#'   catches collected in any one year (y). 
-#'   
-#'   Recommended data: Fishery independent
-#'   surveys, fish and invertebrates
+#' @details Species richness (\eqn{S_y}) is the count of the number of species
+#'   recorded in all trawl catches collected year \eqn{y}.
+#'
+#'   Recommended data: Fishery independent surveys, fish and invertebrates
 #'
 #' @param X is probably a dataframe with certain columns.
 #' @param group is where you select which groups to include
@@ -26,20 +23,24 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #' @export
 
-speciesrichness <- function(X, group=c('FINFISH','ALL'), grps)  {
+speciesrichness <- function(X, group=c('FINFISH','ALL'), grps, start.year, end.year)  {
 
+  # this could change depending on how we ask for the data
 	if(group=='FINFISH') {
 		X <- X[X$SPECIES<1000,]
 		}
 	
-	uI <- unique(X$ID)
-	sr.est <- numeric()
-	
-	for(i in 1:length(uI)) {
-	 	Y <- X[X$ID==uI[i],]
-	 	sr.est[i] <- length(unique(Y$SPECIES))
+  years = c(start_year:end_year)
+  ind = data.frame(NULL)
+  
+  for (i in 1:length(years)){
+    
+    year.i = years[i]
+    X.i = X[X$years == year.i, ]
+	 	
+	 	ind[i] <- length(unique(X.i$SPECIES))
 		}
-	out <- as.data.frame(cbind(uI,sr.est))
-	out[,2] <- as.numeric(out[,2])
-	return(out)
+	
+  ind
+  
 	}
