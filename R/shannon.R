@@ -20,33 +20,33 @@
 #'   fish community: identifying reference levels for an ecosystem approach to
 #'   management. ICES J Mar Sci J du Cons 63:573–593
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
 
 shannon <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE'),
-                    start.year, end.year) {
+                    years = c(start.year:end.year)) {
 	
   # this could change depending on how we ask for the data
-  if(group == 'FINFISH') {
-		X <- X[X$SPECIES<1000,]
+  if(group == 'FINFISH') X <- X[X$SPECIES<1000,]
+  
+  # Remove observations of "0" or will return NaN in -sum(p*log(p))
+  zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
+  X = X[-zero_index, ]                            # remove the rows where metric is zero 
+  if(length(zero_index) > 0){                     # message showing number of observations removed
+    print(paste(length(zero_index), "observations of zero removed from metric")) 
   }
   
-  years = c(start_year:end_year)
-  ind = data.frame(NULL)
+  ind = vector(length = length(years))            # inititalize vector to store indicator values
   
-  for (i in 1:length(years)){
+  for (i in 1:length(years)){                     # loop over all years
     
-    year.i = years[i]
-    X.i = X[X$years == year.i, ]
+    year.i = years[i]                             # set years.i to current year  
+    X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
 
-	 	X.i <- X.i[order(X.i[metric]), metric]   
-	 	p <- X.i/sum(X.i)
-	 	ind[i] <- -sum(p*log(p)) 
+	 	p <- X.i/sum(X.i)                             # calculate the proportion of each species by metric
+	 	ind[i] <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
   }
   
   ind
-	 	
-	
-	}
-
+}

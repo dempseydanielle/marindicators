@@ -23,24 +23,21 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #' @export
 
-speciesrichness <- function(X, group=c('FINFISH','ALL'), grps, start.year, end.year)  {
+speciesrichness <- function(X, group = c('FINFISH','ALL'), years = c(start.year:end.year))  {
 
   # this could change depending on how we ask for the data
-	if(group=='FINFISH') {
-		X <- X[X$SPECIES<1000,]
-		}
-	
-  years = c(start_year:end_year)
-  ind = data.frame(NULL)
+	if(group=='FINFISH') X <- X[X$SPECIES < 1000,]  # subset data to include only the species of interest
+		
+  ind = vector(length = length(years))            # inititalize vector to store indicator values
   
-  for (i in 1:length(years)){
+  for (i in 1:length(years)){                     # loop over each year
     
-    year.i = years[i]
-    X.i = X[X$years == year.i, ]
+    year.i = years[i]                             # set years.i to current year  
+    X.i = X[X$YEAR == year.i, ]                   # subset data to include only current year
 	 	
-	 	ind[i] <- length(unique(X.i$SPECIES))
+	 	ind[i] <- length(unique(X.i$SPECIES))         # count the number of species recorded and store value
 		}
 	
-  ind
+  ind                                             # return vector of indicator values for years c(start.year:end.year) 
   
 	}
