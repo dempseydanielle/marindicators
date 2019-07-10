@@ -27,10 +27,14 @@
 #' @export
 
 
-hillN1 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE')) {
-	ind <- shannon(X = X, group = group, metric = metric) # calculate Shannon's index of diversity
-	ind[,2] <- exp(ind[,2])                               # Exponential of Shannon's index
-	ind # why are there 2 cols?                           # Return Hill's index of diversity
+hillN1 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
+                   years = c(start.year:end.year)) {
+  
+  source("R/shannon.R") # do I need this?
+  H <- shannon(X = X, group = group, metric = metric) # calculate Shannon's index of diversity
+	ind <- exp(H)                                       # calculate Hill's index of diversity
+	
+	ind                                                 # Return Hill's index of diversity
 	
 	}
 

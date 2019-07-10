@@ -27,16 +27,33 @@
  
 
 # loop over all years?
-hillN2 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'))  {
+hillN2 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
+                   years = c(start.year:end.year))  {
 
   # subset to group and metric?
-	if(group=='FINFISH') {
-		X <- X[X$SPECIES<1000,]
-		}
-  
-  Y <- Y[order(Y[metric]), metric]   # why order?
-	p <- Y/sum(Y)
-	ind <- 1/sum(p^2)
+	if(group=='FINFISH')	X <- X[X$SPECIES<1000,]
 	
-	ind
+	zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
+	if(length(zero_index) > 0){                     # message showing number of observations removed
+	  X = X[-zero_index, ]                            # remove the rows where metric is zero 
+	  print(paste(length(zero_index), "observations of zero removed from metric"))
 	}
+	#X <- X[X[metric]>0,]                           # another way to remove the zeros (but doesn't count how many)
+	
+	ind = vector(length = length(years))            # inititalize vector to store indicator values
+	
+	for (i in 1:length(years)){                     # loop over each year
+	  
+	  year.i = years[i]                             # set years.i to current year  
+	  X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
+	  
+	  X.i = X.i[order(X.i)]                         # order from smallest to largest (not required)
+	  p <- X.i/sum(X.i)                             # calculate proportion of each species by metric
+	  ind[i] <- 1/sum(p^2)                          # calculate Hill's species dominance
+	}
+	
+	ind                                             # return Hill's species dominance
+}
+
+
+
