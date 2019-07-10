@@ -29,12 +29,19 @@
 pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
                                   years = c(start.year:end.year))  {
 
-  #source("R/speciesrichness.R")
-  #S <- speciesrichness(X, group = group, years = years) # See note nelw
+  source("R/shannon.R") # do I need this?
+  H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year
   
-  # Could possibly also use the shannon() function here
+  source("R/speciesrichness.R") # do I need this?
+  S <- speciesrichness(X, group = group, metric = metric, years = years) # calculate species richness for each year
   
-	if(group=='FINFISH') X <- X[X$SPECIES<1000,]
+
+  ind = H/log(S)
+  
+  ind
+}
+  
+  
   
   # Remove observations of "0" or will return NaN in -sum(p*log(p))
   zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
@@ -42,6 +49,7 @@ pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIO
   if(length(zero_index) > 0){                     # message showing number of observations removed
     print(paste(length(zero_index), "observations of zero removed from metric")) 
   }
+  #X <- X[X[metric]>0,]                           # another way to remove the zeros (but doesn't count how many)
   
 	ind = vector(length = length(years))            # inititalize vector to store indicator values
 	
@@ -50,11 +58,11 @@ pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIO
     year.i = years[i]                             # set years.i to current year  
     
     X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
-    p <- X.i/sum(X.i)                             # the proportion of each species by metric
-    ind[i] <- -sum(p*log(p))/log(length(X.i))     # Pielou's species evenness
-
-    #ind[i] <- -sum(p*log(p))/log(S[i])           # S[i] should be the same as length(X.i)
-    # BUT the speciesrichness() function doesn't remove zeros, so they are a bit different
+    p <- X.i/sum(X.i)                             # calculate the proportion of each species by metric
+    ind[i] <- -sum(p*log(p))/log(S[i])            # Pielou's species evenness
+    
+    # ind[i] <- -sum(p*log(p))/log(length(X.i))     
+    # S[i] should be the same as length(X.i) now that the speciesrichness() function removes zeros
      }
   
   ind
