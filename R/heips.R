@@ -26,19 +26,21 @@
 
 
 # would it be better to just use the Shannon and Species functions??
-heips <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'))  {
+heips <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
+                  years = c(start.year:end.year))  {
   
-  # subset to group and metric?
-  if(group=='FINFISH') {
-    X <- X[X$SPECIES<1000,]
-  }
+  #source("R/shannon.R") # do I need this?
+  H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year
   
-  H = shannon(X, group = group, metric = metric)
-  S = speciesrichness(X,  group = group, grps) # not sure what grps should be
+  #source("R/speciesrichness.R") # do I need this?
+  S <- speciesrichness(X, group = group, metric = metric, years = years) # calculate species richness for each year
   
-  ind = (exp(H)-1)/(S-1)
-
-  ind
+  H$heips = (exp(H$ShannonDiversity)-1)/(S$SpeciesRichness-1)
+  ind <- H
+  
+  ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
+  names(ind) = c("ID", "YEAR", "Heips")    # name the ind dataframe
+  ind      
 }
   # could put a check in here to make sure that it is the same as below
   

@@ -26,27 +26,31 @@
 
 shannon <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE'),
                     years = c(start.year:end.year)) {
-	
-  # this could change depending on how we ask for the data
-  if(group == 'FINFISH') X <- X[X$SPECIES<1000,]
   
-  # Remove observations of "0" or will return NaN in -sum(p*log(p))
-  zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
-  X = X[-zero_index, ]                            # remove the rows where metric is zero 
-  if(length(zero_index) > 0){                     # message showing number of observations removed
-    print(paste(length(zero_index), "observations of zero removed from metric")) 
-  }
-  
-  ind = vector(length = length(years))            # inititalize vector to store indicator values
-  
-  for (i in 1:length(years)){                     # loop over all years
-    
-    year.i = years[i]                             # set years.i to current year  
-    X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
+  if(group == 'FINFISH') X <- X[X$SPECIES<1000,] # this could change depending on how we ask for the data
+  #X <- rmzeros(X = X, metric = metric)
 
-	 	p <- X.i/sum(X.i)                             # calculate the proportion of each species by metric
-	 	ind[i] <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
+  uI = unique(X$ID)                   # extract the spatial scale ID's
+  ind <- NULL                         # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){            # loop over all spatal scales
+    
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+  
+    for (i in 1:length(years)){                   # loop over all years
+      
+      year.i = years[i]                             # set years.i to current year  
+      X.ij = X.j[X.j$YEAR == year.i, metric]        # subset data to include only current year
+      
+      p <- X.ij/sum(X.ij)                             # calculate the proportion of each species by metric
+      ind.i <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
+      
+      ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
+    }
   }
   
-  ind
+  names(ind) = c("ID", "YEAR", "ShannonDiversity")    # name the ind dataframe
+  ind                                                  # return ind 
 }
+  

@@ -26,33 +26,33 @@
 #' @export
  
 
-# loop over all years?
 hillN2 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
                    years = c(start.year:end.year))  {
 
   # subset to group and metric?
 	if(group=='FINFISH')	X <- X[X$SPECIES<1000,]
+	uI = unique(X$ID)                   # extract the spatial scale ID's
+	ind <- NULL                         # initialize dataframe for storing indicator values
 	
-	zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
-	if(length(zero_index) > 0){                     # message showing number of observations removed
-	  X = X[-zero_index, ]                            # remove the rows where metric is zero 
-	  print(paste(length(zero_index), "observations of zero removed from metric"))
-	}
-	#X <- X[X[metric]>0,]                           # another way to remove the zeros (but doesn't count how many)
-	
-	ind = vector(length = length(years))            # inititalize vector to store indicator values
-	
-	for (i in 1:length(years)){                     # loop over each year
+	for (j in 1:length(uI)){            # loop over all spatal scales
 	  
-	  year.i = years[i]                             # set years.i to current year  
-	  X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
+	  X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
 	  
-	  X.i = X.i[order(X.i)]                         # order from smallest to largest (not required)
-	  p <- X.i/sum(X.i)                             # calculate proportion of each species by metric
-	  ind[i] <- 1/sum(p^2)                          # calculate Hill's species dominance
+	  for (i in 1:length(years)){                     # loop over each year
+	    
+	    year.i = years[i]                             # set years.i to current year  
+	    X.ij = X.j[X.j$YEAR == year.i, metric]             # subset data to include only current year
+	    
+	    X.ij = X.ij[order(X.ij)]                         # order from smallest to largest (not required)
+	    p <- X.ij/sum(X.ij)                             # calculate proportion of each species by metric
+	    ind.i <- 1/sum(p^2)                          # calculate Hill's species dominance
+	    
+	    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+	    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+	  }
 	}
-	
-	ind                                             # return Hill's species dominance
+	  names(ind) = c("ID", "YEAR", "HillDominance")    # name the ind dataframe
+	  ind                                              # return Hill's species dominance
 }
 
 

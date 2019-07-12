@@ -29,41 +29,43 @@
 pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
                                   years = c(start.year:end.year))  {
 
-  source("R/shannon.R") # do I need this?
+  #source("R/shannon.R") # do I need this?
   H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year
   
-  source("R/speciesrichness.R") # do I need this?
+  #source("R/speciesrichness.R") # do I need this?
   S <- speciesrichness(X, group = group, metric = metric, years = years) # calculate species richness for each year
-  
 
-  ind = H/log(S)
+  H$Pielous = H$ShannonDiversity/log(S$SpeciesRichness) # calculate Pielou's species evenness
   
+  ind <- H
+  ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
+  names(ind) = c("ID", "YEAR", "PielouEvenness")    # name the ind dataframe
   ind
 }
-  
-  
-  
-  # Remove observations of "0" or will return NaN in -sum(p*log(p))
-  zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
-  X = X[-zero_index, ]                            # remove the rows where metric is zero 
-  if(length(zero_index) > 0){                     # message showing number of observations removed
-    print(paste(length(zero_index), "observations of zero removed from metric")) 
-  }
-  #X <- X[X[metric]>0,]                           # another way to remove the zeros (but doesn't count how many)
-  
-	ind = vector(length = length(years))            # inititalize vector to store indicator values
-	
-	for (i in 1:length(years)){                     # loop over all years
-  
-    year.i = years[i]                             # set years.i to current year  
-    
-    X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
-    p <- X.i/sum(X.i)                             # calculate the proportion of each species by metric
-    ind[i] <- -sum(p*log(p))/log(S[i])            # Pielou's species evenness
-    
-    # ind[i] <- -sum(p*log(p))/log(length(X.i))     
-    # S[i] should be the same as length(X.i) now that the speciesrichness() function removes zeros
-     }
-  
-  ind
-}
+#   
+#   
+#   
+#   # Remove observations of "0" or will return NaN in -sum(p*log(p))
+#   zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
+#   X = X[-zero_index, ]                            # remove the rows where metric is zero 
+#   if(length(zero_index) > 0){                     # message showing number of observations removed
+#     print(paste(length(zero_index), "observations of zero removed from metric")) 
+#   }
+#   #X <- X[X[metric]>0,]                           # another way to remove the zeros (but doesn't count how many)
+#   
+# 	ind = vector(length = length(years))            # inititalize vector to store indicator values
+# 	
+# 	for (i in 1:length(years)){                     # loop over all years
+#   
+#     year.i = years[i]                             # set years.i to current year  
+#     
+#     X.i = X[X$YEAR == year.i, metric]             # subset data to include only current year
+#     p <- X.i/sum(X.i)                             # calculate the proportion of each species by metric
+#     ind[i] <- -sum(p*log(p))/log(S[i])            # Pielou's species evenness
+#     
+#     # ind[i] <- -sum(p*log(p))/log(length(X.i))     
+#     # S[i] should be the same as length(X.i) now that the speciesrichness() function removes zeros
+#      }
+#   
+#   ind
+# }

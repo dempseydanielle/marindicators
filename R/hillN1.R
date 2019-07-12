@@ -30,11 +30,15 @@
 hillN1 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
                    years = c(start.year:end.year)) {
   
-  source("R/shannon.R") # do I need this?
-  H <- shannon(X = X, group = group, metric = metric) # calculate Shannon's index of diversity
-	ind <- exp(H)                                       # calculate Hill's index of diversity
+  #source("R/shannon.R") # do I need this?
+  H <- shannon(X = X, group = group, metric = metric, years = years) # calculate Shannon's index of diversity
 	
-	ind                                                 # Return Hill's index of diversity
+  H$hill1 <- exp(H$ShannonDiversity)     # calculate Hill's index of diversity
+  
+  ind <- H
+	ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
+	names(ind) = c("ID", "YEAR", "HillDiversity")    # name the ind dataframe
+	ind                                              # return Hill's index of diversity
 	
 	}
 

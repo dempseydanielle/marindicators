@@ -26,20 +26,38 @@
 #'@export
 
 
-meanTrophicLevelCommunity <- function(X, TL.table = NA,  metric='BIOMASS') {
+meanTrophicLevelCommunity <- function(X, TL.table = "scotianshelf",  metric= c('ABUNDANCE', 'BIOMASS'),
+                                      years = c(start.year:end.year)) {
                                       #pred.data.table='indiseas_wss_tl', metric='BIOMASS') {
                                         
-  if (TL.table = NA) {
+  if (TL.table == "indiseas") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
     load("R/sysdata.rda/indiseas_TL.rda")
-    TL.table <- indiseas_TL
-    rm(indiseas_TL)
+    TL.table <- indiseas_wss_tl
+    rm(indiseas_wss_tl)
   }
-
-  X <- merge(X, TL.table, by='SPECIES')
   
-# find a better way to do this
-  # loop over years?
-	ind[i] <- aggregate(Y[metric]*Y['AVG(TL)'], by=Y['ID'], FUN=sum)[,2]/aggregate(Y[metric], by = Y['ID'], FUN=sum)[,2]
-	
-	ind
+  X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
+                                              # Note that the merge function will drop species that do not have a TL
+  uI = unique(X$ID)                          # extract the spatial scale ID's
+  ind <- NULL                                 # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){            # loop over all spatal scales
+    
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+    
+    for (i in 1:length(years)){                     # loop over each year
+      
+      year.i = years[i]                             # set years.i to current year  
+      X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
+      
+      ind.i <- sum(X.ij[metric]*X.ij['AVG(TL)'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
+     
+      ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+ 
 		}
+  }
+  names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
+  ind                                                # return vector of indicator values for years c(start.year:end.year) 
+  
+}

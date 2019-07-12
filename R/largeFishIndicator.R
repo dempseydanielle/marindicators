@@ -28,9 +28,6 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-
-#############################################################
-
 largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), 
                                large.fish = 35, years = c(start.year:end.year)) {
   

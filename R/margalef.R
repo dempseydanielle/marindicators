@@ -20,7 +20,7 @@
 #'   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
 #'   (2012) Redundancy in metrics describing the composition, structure, and
 #'   functioning of the North Sea demersal fish community. ICES J Mar Sci
-#'   69:8–22
+#'   69:8?22 <- fix these 
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #' @export
@@ -29,27 +29,30 @@ margalef <- function(X, group=c('FINFISH','ALL'), metric=c('BIOMASS','ABUNDANCE'
                                     years = c(start.year:end.year))  {
   # Need to put in a groundfish only statement
   if(group == 'FINFISH') X <- X[as.numeric(X$SPECIES)<1000,]
-  
-  zero_index = which(X[,metric] == 0)             # index of where metric observations are zero
-  if(length(zero_index) > 0){                     # message showing number of observations removed
-    X = X[-zero_index, ]                          # remove the rows where metric is zero 
-    print(paste(length(zero_index), "observations of zero removed from metric")) 
-  }
-  
-  source("R/speciesrichness.R") # do I need this?
+
+ # source("R/speciesrichness.R") # do I need this?
   S <- speciesrichness(X = X, group = group, metric = metric, years = years) # calculate species richness for each year
   
-  ind = vector(length = length(years))            # inititalize vector to store indicator values
+  uI = unique(X$ID)                   # extract the spatial scale ID's
+  ind <- NULL                         # initialize dataframe for storing indicator values
   
-  for(i in 1:length(years)){
+  for (j in 1:length(uI)){            # loop over all spatal scales
     
-    year.i = years[i]
-    X.i = X[X$YEAR == year.i, metric]
-
-    logF.i = log(sum(X.i)) 
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+    S.j = S[S$ID == uI[j], ]
     
-    ind[i] = (S[i] - 1)/logF.i
-  }
-  
+    for(i in 1:length(years)){        # loop over all years
+     
+      year.i = years[i]                          # set years.i to current year
+      X.ij = X.j[X.j$YEAR == year.i, metric]     # subset data to include only current year
+      
+      logF.i = log(sum(X.ij))                       # calculate the log of the sum of metric over all species
+      ind.i = (S.j$SpeciesRichness[i] - 1)/logF.i   # calculate Margalef species richness
+      
+      ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
+      }
+    }  
+  names(ind) = c("ID", "YEAR", "MargalefRichness")    # name the ind dataframe
   ind
 }
