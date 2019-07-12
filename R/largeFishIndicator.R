@@ -9,7 +9,7 @@
 #'  of biomass occupying the top predator trophic level).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
-#'@param X add text here
+#'@param X add text here; no length data, write -99
 #'@param metric add text here
 #'@param large.fish say that set to 35
 #'@family ecosystem structure and function indicators
@@ -29,26 +29,34 @@
 #'@export
 
 
+#############################################################
 
-largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), large.fish = 35, start.year, end.year) {
+largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), 
+                               large.fish = 35, years = c(start.year:end.year)) {
   
-  years = c(start.year:end.year)
-  ind = data.frame(NULL)
+  uI = unique(X$ID)                   # extract the spatial scale ID's
+  X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data
+  ind <- NULL                         # initialize dataframe for storing indicator values
   
-  for (i in 1:length(years)) {
+  for (j in 1:length(uI)){            # loop over all spatal scales
     
-    year.i = years[i]
-    X.i <- X[X$year = year.i, ]
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+  
+    for (i in 1:length(years)) {      # loop over all years
+      
+      year.i = years[i]                  # set year.i to year i
+      X.ij <- X.j[X.j$YEAR == year.i, ]  # subset data to year i
+      
+      LF <- X.ij$FLEN >= large.fish                     # returns TRUE when fish length is >= large.fish   
+      ind.i <- sum(X.ij[LF, metric])/sum(X.ij[,metric]) # calculate the large fish indicator
+      
+      ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
+    }
     
-    LF <- X.i$FLEN >= large.fish        # check that this subsetting works
-    ind[i] <- sum(X.i[LF, metric])/sum(X.i[,metric])
   }
   
-  ind
+  names(ind) = c("ID", "YEAR", "LargeFishIndicator")    # name the ind dataframe
+  ind                                                   # return ind 
 }
-
-
-
-
-
 
