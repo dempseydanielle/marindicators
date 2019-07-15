@@ -34,32 +34,52 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
-# Do I want to make X someting more descriptive? RV_dat? dat?
-communityFultonK <- function(X, metric='ABUNDANCE',
-                             gp=groups,yr=yrs[i], user.defined=F, 
+
+communityFultonK <- function(X, metric='ABUNDANCE', LenWt.table = "scotianshelf",
+                             user.defined = F, 
                              group=c('FINFISH','SKATES','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','FORAGE',
-					'LBENTHIVORE','MBENTHIVORE','PISCIVORE','PLANKTIVORE','ZOOPISCIVORE')) {
-		#X is input data
-		#Finfish data only
-		#using length stratited estimates calculate the mean weight of fish at every sampled cm
-	
-	# see original script for species groupings and where the length and weight come from 
-  # Note: Y is X subsetted for the species group(s) of interest (i.e., no inverts)
-	out<-data.frame(ID=unique(Y$ID),mK=NA)
-	W <- defineGroups(dat = wt,gp=gp)                     # AC function specific to DFO(?) data, i.e., species codes
-	W <- aggregate(FWT ~ FLEN+SPECIES+ID,data=W,FUN=mean) # fish weights by length and species
-	if(any(unique(Y$SPECIES) %in% unique(W$SPECIES)))  {  # if there are the same species in Y (biomass) and W (weight). . . 
-	Z <- merge(Y,W,by=c('ID','SPECIES','FLEN'),all.y=T)   # merge them
-	Z <- merge(Z,aggregate(ABUNDANCE~ID,data=Z,FUN=sum),by='ID') # now also include the total abundance of all species
+                                     'LBENTHIVORE','MBENTHIVORE','PISCIVORE','PLANKTIVORE','ZOOPISCIVORE'),
+                             years = c(start.year:end.year)) {
+  
+  #could possibly even remove this. Or change to "FINFISH" or "ALL" lie the other inds
+  if(user.defined) {                                    
+    X <- X[X$SPECIES %in% group,]                        # subset X to the species of interest
+    } else { X <- speciesgroups(X = X, group = group)}
 
-	K <- FWT / FLEN^3*100
-	
-	ind <- aggregate(K*ABUNDANCE.x/ABUNDANCE.y ~ ID, data = Z, FUN = sum) # maybe change ~ID to ~year? OR loop over each year
-	# also: give better names to the two abundances
-	# double check how these all line up with each other 
-	names(ind) = c(...)
-
-	
-	}	
-	ind
+  X <- X[-which(X$FLEN == -99), ]                        # remove rows that do not contain length data
+  
+  if (LenWt.table == "scotianshelf") {                   # for Scotian Shelf ecosystem, import stored IndiSeas data
+    load("R/sysdata.rda/scotianshelf_lenwt.rda")
+  }
+    
+  uI = unique(X$ID)                                      # extract the spatial scale ID's
+  ind <- NULL                                            # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){                               # loop over all spatal scales
+    
+    X.j = X[X$ID == uI[j], ]                             # subset biomass and abundance data to spatial scale j
+    len_wgt.j = len_wgt[len_wgt$ID == uI[j], ]           # subset length-weight data to spatial scale j
+    
+    for (i in 1:length(years)){                          # loop over each year
+      
+      year.i = years[i]                                  # set years.i to current year  
+      X.ij = X.j[X.j$YEAR == year.i, ]                   # subset biomass and abundance data to include only current year
+      len_wgt.ij = len_wgt.j[len_wgt.j$YEAR == year.i, ] # subset length-weight data to include only current year
+    
+      W <- aggregate(FWT ~ FLEN + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
+      
+      if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . . 
+        Z <- merge(X.ij, W, by = c('ID', 'SPECIES','FLEN'), all.y = T)         # merge them
+        Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
+        
+        Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
+        ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID,data=Z,FUN=sum)   # calculate Fulton's condition index
+    
+        ind.i = data.frame(uI[j], year.i, ind.i[,2])          # create a dataframe with spatial scale ID, year, and indicator value
+        ind = rbind(ind, ind.i)                               # bind ind.i to ind dataframe
+      }
+    }
+    }
+  names(ind) = c("ID", "YEAR", "CommunityCondition")    # name the ind dataframe
+  ind                                                   # return ind 
 }
