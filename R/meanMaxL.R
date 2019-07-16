@@ -27,21 +27,64 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #'@export
 
-meanMaxL <- function(X,table.of.length.data='INDISEAS_MAX_LENGTH',metric=c('BIOMASS','ABUNDANCE'),path=NA) {
-		#this indicator is for finfish only
-		#X is input data
-		
-		if(is.na(path)) 	len <- sqlQuery(channel,paste("select * from ",table.of.length.data,";",sep=""))
-		if(!is.na(path)) 	len <- read.csv(file.path(path,"extra info",paste(table.of.length.data,".csv",sep="")))
-		X <- merge(X,len,by='SPECIES')
-		uI <- unique(X$ID) 	
-		mmL <-numeric()
-		for(i in 1:length(uI)) {
-			Y <- X[X$ID==uI[i],]
-			mmL[i] <- sum(Y[metric]*Y['MAXLEN99'])/sum(Y[metric])	
-		   }
-		   out <- as.data.frame(cbind(uI,mmL))
-		   names(out)[1] <-'ID'
-		   out[,2] <- as.numeric(out[,2])
-		   return(out)		
-	}
+meanMaxL <- function(X, length.table = "scotianshelf", metric=c('BIOMASS','ABUNDANCE'),
+                     years = c(start.year:end.year)) {
+  #this indicator is for finfish only
+  #X is input data
+  
+  if (length.table == "scotianshelf"){
+    load("R/sysdata.rda/indiseas_MaxLength.rda")
+    length.table = indiseas_MaxLength
+    rm(indiseas_MaxLength)
+  }
+  
+  X <- merge(X, length.table, by = 'SPECIES')
+  X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data
+
+  uI = unique(X$ID)                   # extract the spatial scale ID's
+  ind <- NULL                         # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){            # loop over all spatal scales
+    
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+    
+    for (i in 1:length(years)){                     # loop over each year
+      
+      year.i = years[i]                             # set years.i to current year  
+      X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
+      
+      ind.i <- sum(X.ij[metric]*X.ij['MAXLEN99'])/sum(X.ij[metric])	 # make sure this does what it should!
+               
+      ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+    }
+  }
+  
+  ind.name = paste("MMLength", metric, sep = "")
+  names(ind) = c("ID", "YEAR", ind.name)          # name the ind dataframe
+  ind                                             # return vector of indicator values for years c(start.year:end.year) 
+  
+}
+
+  
+  
+  
+  
+  
+  
+  
+		# uI <- unique(X$ID) 	
+		# mmL <-numeric()
+		# for(i in 1:length(uI)) {
+		# 	Y <- X[X$ID==uI[i],]
+		# 	mmL[i] <- sum(Y[metric]*Y['MAXLEN99'])/sum(Y[metric])	
+		#    }
+		#    out <- as.data.frame(cbind(uI,mmL))
+		#    names(out)[1] <-'ID'
+		#    out[,2] <- as.numeric(out[,2])
+		#    return(out)		
+#}
+
+
+
+
