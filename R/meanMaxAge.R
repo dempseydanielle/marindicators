@@ -26,35 +26,38 @@
 #'@export
 
 
-	meanMaxAge <- function(X, age.table = NA, metric=c('BIOMASS','ABUNDANCE'),
-	                       start.year, end.year) {
+	meanMaxAge <- function(X, age.table = "scotianshelf", metric=c('BIOMASS','ABUNDANCE'),
+	                       years = c(start.year:end.year)) {
 		
-	  if (is.na(age.table)){
+	  if (age.table == "scotianshelf"){
 	    load("R/sysdata.rda/indiseas_MaxAge.rda")
 	    age.table = indiseas_MaxAge
 	    rm(indiseas_MaxAge)
 	  }
 	  
 		X <- merge(X, age.table, by ='SPECIES')
+		uI = unique(X$ID)                   # extract the spatial scale ID's
+		ind <- NULL                         # initialize dataframe for storing indicator values
 		
-		years = c(start.year:end.year)
-		ind = data.frame(NULL)
-		
-		for (i in 1:length(years)){
+		for (j in 1:length(uI)){            # loop over all spatal scales
 		  
-		  year.i = years[i]
+		  X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
 		  
-		  X.i <- X[X$years == year.i,]
+		  for (i in 1:length(years)){                     # loop over each year
+		    
+		    year.i = years[i]                             # set years.i to current year  
+		    X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
 		  
-		  if(nrow(X.i)>1) { # not sure why need if statement for this ind but not the others
-		    ind[i] <- sum(X.i[metric]*X.i['MAXAGE'])/sum(X.i[metric])	 # make sure this does what it should!
-		    }
-		  else {
-		    ind[i]<-NA
+		    ind.i <- sum(X.ij[metric]*X.ij['MAXAGE'])/sum(X.ij[metric])	 # make sure this does what it should!
+	
+		    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+		    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
 		  }
 		}
-	
-		   	
+		names(ind) = c("ID", "YEAR", "MeanLifespan")    # name the ind dataframe
+		ind                                             # return vector of indicator values for years c(start.year:end.year) 
+		
 	}
+	
 	
 	
