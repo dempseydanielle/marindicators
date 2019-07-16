@@ -23,13 +23,14 @@
 #'@export
 
 
-resourcePotential <- function(X, user.defined=F, 
-                              group=c('FINFISH','ALL','SKATES',
+resourcePotential <- function(X, user.defined = F, 
+                              group = c('FINFISH','ALL','SKATES',
                                       'CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS',
                                       'INVERTEBRATES','FORAGE','PELAGIC','LBENTHIVORE',
                                       'MBENTHIVORE','PISCIVORE', 'PLANKTIVORE','ZOOPISCIVORE'),
-                              metric=c('BIOMASS','ABUNDANCE'))  {
-														Y<-FALSE
+                              metric = c('BIOMASS','ABUNDANCE')){
+
+			Y<-FALSE
 			#IF USER DEFINED FOR GROUP PUT IN A VECTOR OF THE SPECIES CODES YOU WANT TO INCLUDE
 			if(user.defined) {
 			Y <- X[X$SPECIES %in% group,]	
@@ -55,11 +56,16 @@ resourcePotential <- function(X, user.defined=F,
 				if(group=='ZOOPISCIVORE')   Y <- X[X$SPECIES %in% c(13,14,19,23),]
 
 			}
+			
 			if(nrow(Y)==0 || Y==FALSE ) dat <- data.frame(ID = unique(X$ID), Y=0)
 			else {
-			dat <- aggregate(Y[metric], by=Y['ID'], FUN = sum)
+			  
+			  ind <- aggregate(Y[metric], by= c(Y['ID'], Y['YEAR']), FUN = sum)    # add up metric for the species group for each year + spatial scale
+			  ind.name <- paste(metric, "_", group, sep ="")                       # name indicator: metric_group
+			  names(ind) = c("ID", "YEAR", ind.name)                             
+			  ind = ind[order(ind$ID), ]                                           # order by ID (to match output of other functions)
 			}
-			names(dat) <- c('ID','BIOMASS')
-						return(dat)
+		
+			ind                                                                    # return indicator
 		}	
 			
