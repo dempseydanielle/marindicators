@@ -23,15 +23,17 @@
 
 
 # this will depend on what "groups" the user has
-LandByGroup <- function(land = dat, groups) {
+LandByGroup <- function(land, 
+                        group=c('FINFISH','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','FORAGE',
+                                'INVERTEBRATES','ALL','LARGE_PELAGIC')) {
   
-  u <- sqlQuery(channel,paste("select * from gomezc.indiseas_allcodes;")) # not sure what this is
+  if(group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
   
-  if(group !='ALL') {
-    u <- na.omit(u[,c('ALLCODES', 'ALLNAMES', groups)])
-			land <- land[land$SPECIES %in% u$ALLCODES,]
-			}
-		o <- aggregate(CATCH~YEAR+NAMES,data=land,FUN=sum)
-		return(o)
+  ind <- aggregate(CATCH ~ ID + YEAR, data = land, FUN = sum)   # sum over years and spatial scales 
+  ind <- ind[order(ind$ID), ]                                   # order by "ID" to be consistent with other functions
+  
+  ind.name <- paste(group, "_", "landings", sep ="")            # name indicator: metric_group
+  names(ind) <- c("ID", "YEAR", ind.name)
+  ind
+  
 }
-	

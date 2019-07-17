@@ -27,43 +27,34 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-MeanTLLandings <- function (land = dat, cutoff = 0, res.table = NA, TL.table = NA) {
+MeanTLLandings <- function (land, TL.table.land = "scotianshelf", prop.land.table = "scotianshelf",
+                            cutoff = 0) {
 	
-  if (res.table = NA) {
-    load("R/sysdata.rda/indiseas_res.rda")
-    res.table <- indiseas_res
-    names(res.table)[1] <- 'SPECIES'
-    rm(indiseas_res)
+  if (prop.land.table == "scotianshelf"){            # if analyzing Scotian Shelf, import built-in data
+    load("R/sysdata.rda/indiseas_proplandings.rda")  # For species that are not identified to the lowest level
+    prop.land.table = prop.land                      # in the landings data, estimate the proportion of each 
+    names(prop.land.table)[1] <- "SPECIES"           # landed
+    rm(prop.land)
   }
   
-  if (TL.table = NA) {
-    load("R/sysdata.rda/indiseas_TL.rda")
-    TL.table <- indiseas_TL
-    rm(indiseas_TL)
+  if (TL.table.land == "scotianshelf") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
+    load("R/sysdata.rda/wss_tl_length.rda")
   }
   
-  # DD: not sure exactly what this means, but doesn't sound very generic
-  #In Land there duplicate entires for some species which allows for proportions of total landings to be calucaulted  as aggregate(LAND*PROPORTION_OF_LANDINGS~YEAR,data=Land,FUN=sum)
-  land.res <- merge(land, res.table)
-  land.TL <- merge(land.res, TL)
+  land.prop <- merge(land, prop.land.table)
+  land.TL <- merge(land.prop, TL.table.land)
   
-  # might want to re=work these
-  # does it need a loop over years?
-  if(cutoff == 0) { # not sure what pp is  (or LL)
-    land.TL$pp <- land.TL$CATCH*land.TL$LANDED*land.TL$PROPORTION_OF_LANDINGS #this is for the proprtion of different species
-		land.TL$LL <- land.TL$pp*land.TL$TL
-		}
+  land.TL$id <- land.TL$TL >= cutoff                                                         # returns TRUE when TL is >= cutoff
+  land.TL$pp <- land.TL$CATCH * land.TL$LANDED * land.TL$PROPORTION_OF_LANDINGS * land.TL$id #this is for the proprtion of different species
+  land.TL$LL <- land.TL$pp * land.TL$TL * land.TL$id                                       # calculates landings_species.i * TL_species.i
+
   
-  if(cutoff>0) {
-    land.TL$id <- land.TL$TL >= cutoff
-		land.TL$pp <- land.TL$CATCH*land.TL$LANDED*land.TL$PROPORTION_OF_LANDINGS*land.TL$id #this is for the proprtion of different species
-		land.TL$LL <- land.TL$pp*land.TL$TL*land.TL$id
-			}
-  
-  ind.calc <- merge(aggregate(LL ~ YEAR, data = land.TL, FUN = sum), # this hurts my brain. figure ot what it does 
-               aggregate(pp ~ YEAR, data = land.TL, FUN = sum))
-	ind <- ind.calc[,3]/ind.calc[,4] # is this the weighted landings/ total landings?
-	
+  ind <- merge(aggregate(LL ~ ID+YEAR, data = land.TL, FUN = sum), # this hurts my brain. figure ot what it does 
+               aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))
+	ind$ind <- ind$LL/ind$pp # is this the weighted landings/ total landings?
+	ind$LL <- NULL
+	ind$pp <- NULL
+	names(ind) <- c("ID", "YEAR", "MeanTL.Landings")
 	ind
 
 }

@@ -31,13 +31,31 @@
 
 	invCVBiomass <- function(X, window = 5){
 	  
-	  if(nrow(X)>window) {
-	    Yp <- aggregate(BIOMASS ~ YEAR, data=X, FUN=sum)
-	    aw <- data.frame(YEAR=Yp['YEAR'], BIOMASS=1/ movingStatistics(Yp[,'BIOMASS'], n = window, stat='cv'))
-	    my <- min(aw$YEAR)
-	    xy <- max(aw$YEAR)
-	    out[[i]] <- aw[!aw$YEAR %in% c(my,my+1,xy-1,xy),] # ????
+	  uI = unique(X$ID)                      # extract the spatial scale ID's
+	  ind <- NULL                            # initialize dataframe for storing indicator values
+
+	  for (j in 1:length(uI)){               # loop over all spatal scales
+
+	    X.j = X[X$ID == uI[j], ]             # subset data to spatial scale j
+
+	    if(nrow(X) > window) {               # if nrow(X) < window, movingStatistics will not work 
+	      
+	      bio <- aggregate(BIOMASS ~ YEAR + ID, data = X.j, FUN = sum)  # sum biomass for each year
+	      ind.j <- data.frame(YEAR = bio['YEAR'], 
+	                       BIOMASS = 1/ movingStatistics(bio[,'BIOMASS'], n = window, stat='cv')) # 1/moving average of coefficient of variation of the biomass
+	      min_year <- min(ind.j$YEAR)        # minimum year
+	      max_year <- max(ind.j$YEAR)        # maximum year
+	      
+	      ind.j[ind.j$YEAR %in% c(min_year, min_year + 1, max_year - 1, max_year), "BIOMASS"] <- NA   # set the first and last two years to NA 
+	   
+	      ind.j= data.frame(rep(uI[j], nrow(ind.j)), ind.j)     # create a dataframe with spatial scale ID, year, and indicator value
+	      names(ind.j) <- c("ID", "YEAR", "invCVbiomass")
+	      
+	      ind = rbind(ind, ind.j)  
+	    }
+	    
 	    }
 	  
-	  return(do.call(rbind,out)) # not sure what do.call does. Probbaly replace this line with ind
+	  ind
+	 
 	  }
