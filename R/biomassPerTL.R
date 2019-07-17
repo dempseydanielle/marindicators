@@ -23,45 +23,40 @@
 #' @export
 
 
-# DD - July 8, 2019
-# Could have start.year and end.year OR just the number of years
-# i.e., need to decide if user will subset to the years they want, or if we will
-# could also just look up the number of uniquw years inside the function: n.years = length(unique(X$years))
-# and then loop from i = 1 to n.years
-
-## hmmm but maybe better to loop from i = start.year to end.year
-## this way I can subset to the current year over each iteration
-## I think this will depend on what the input data looks like
-
-## or can i do some sort of plyr thing
-
-biomassPerTL <- function(X, table.of.trophic.level.data='INDISEAS_WSS_TL',
-                         metric=c('BIOMASS','ABUNDANCE'), TL.grouping = 1, start.year, end.year) {
+biomassPerTL <- function(X, TL.table = "scotianshelf",
+                         metric=c('BIOMASS','ABUNDANCE'), TL.grouping = 1, 
+                         years = c(start.year:end.year)) {
  
-  breaks <- seq(1, 10, by = TL.grouping) # makes a vector from 1 to 10 by 1
-  TLS['TL'] <- breaks[findInterval(TLS[,'TL'],breaks)]  # not sure about this one; Actually 
-  # maybe it creates a column "Trophic Level" in the TLS dataframe to use with the aggregate function
-  
-  X <- merge(X, TLS, by='SPECIES') # think this merges the species data with the TL data		
-  ind = data.frame() # initialize dataframe to store annual values
-  
-  # OPTION 1
-  # Calculate the [metric] per trophic level for each year
-  for (i in start.year:end.year){
-  	
-    X.year = X[X$year = i,]
-    ind[i] <- stats::aggregate(X.year[metric], by= X.year['TL'], FUN=sum) # still not sure how 
-    # aggregate is different than ddply
+  if (TL.table == "scotianshelf") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
+    load("R/sysdata.rda/indiseas_TL.rda")
+    TL.table <- indiseas_wss_tl
+    rm(indiseas_wss_tl)
   }
   
-  # OPTION 2
-  # OR can I just write: (or ddply)
-  ind <- stats::aggregate(X.year[metric], by= X.year[c('year', 'TL')], FUN=sum)
-		   
-		#   out <- as.data.frame(do.call(rbind,mmL)) # what does this do? Important??
-    # maybe it reattaches it to the years
-    ind		
+  breaks <- seq(1, 10, by = TL.grouping)                          # create a vector from 1 to 10 (increasing by TL.grouping)
+  TL.table['TL'] <- breaks[findInterval(TL.table[,'TL'], breaks)] # truncates "TL" (removes values after the decimal)
+  
+  X <- merge(X, TL.table, by = 'SPECIES')                                # merge X and the trophic level data		
+  
+  ind <- stats::aggregate(X[metric], by= X[c('ID', 'YEAR', 'TL')], FUN = sum)
+  
+  TL_biomass <- data.frame(years)
+  names(TL_biomass) <- "YEAR"
+
+  uTL <- unique(ind$TL) # unique trophic level
+  for(i in 1:length(uTL)){
+    
+    TL.i <- uTL[i]
+    biomass.i <- ind[ind$TL == TL.i, ]
+    
+    name.i <- paste(metric, "_TL", TL.i, sep = "")
+    names(biomass.i)[4] <- name.i
+    biomass.i$TL <- NULL
+    
+    TL_biomass <- merge(TL_biomass, biomass.i, all.y = T)
+    
+  }
+  TL_biomass <- TL_biomass[order(TL_biomass$ID), ]
+  TL_biomass	
 }
-
-
 
