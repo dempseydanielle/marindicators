@@ -21,7 +21,7 @@
 #'
 #'   Recommended data: Commercial fisheries landings, fish
 #' @param land add text here
-#' @param path add text
+#' @param path add text --> note that option to put propotion of landings
 #' @family stability and resistance indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -35,34 +35,56 @@
 #' @export
 
 
-# maybe add a path to the IVI data here
-# but they can use their own data if they have it
-# maybe IVI = NULL
-# if IVI = NULL(get the data from somewhere in the package)
-IVILandings <- function(land = dat, IVI.table = NA, prop.land = NA) {
-	
-	prop.land = read.csv("extra info/indiseas_allcodes2res.csv")	# take this out of final version! 
-	# Shoudl be included from main script as an argument 
-  # or just write something in to be the proporation of the catch to make more general?
-	if (is.na(IVI.table)) load("R/sysdata.rda/indiseasIVI.rda")
-	
-  names(prop,land)[1]<-'SPECIES'
-		#In Land there duplicate entires for some species which allows for proportions of total landings to be calucaulted  as aggregate(LAND*PROPORTION_OF_LANDINGS~YEAR,data=Land,FUN=sum)
-	# DD: seems like this is not very generic! might need to change
-	
-	# will have to put in a warning if there are species in the dataframe that
-	# are not included in indiSeasIVI
-	Land <- merge(land, prop.land)
-		if(is.na(path)) IVI <- sqlQuery(channel,paste('select * from indiseas_IVI;'))
-		if(!is.na(path)) IVI <- read.csv(file.path(path,"extra info","indiseasIVI.csv"))
-		
-	  IV <- merge(Land,IVI)
-		IV$IV1 <- IV$CATCH*IV$PROPORTION_OF_LANDINGS*IV$IVI
-		IV$CI <- IV$CATCH*IV$PROPORTION_OF_LANDINGS
-		
-		IV2 <- merge(aggregate(IV1~YEAR+NAMES,data=IV,FUN=sum),aggregate(CI~YEAR+NAMES,data=IV,FUN=sum))
-		IV2$INDI <- IV2[,3]/IV2[,4]
-		return(IV2[,c('YEAR','NAMES','INDI')])
+IVILandings <- function(land, IVI.table = "scotianshelf", prop.land.table = "scotianshelf",
+                        years = c(start.year:end.year)) {
+  
+  if (prop.land.table == "scotianshelf"){            # if analyzing Scotian Shelf, import built-in data
+    load("R/sysdata.rda/indiseas_proplandings.rda")  # for species that are not identified to the lowest level
+    prop.land.table = prop.land                      # in the landings data, estimate the proportion of each 
+    names(prop.land.table)[1] <- "SPECIES"           # landed
+    rm(prop.land)
+  }
+  
+  if (IVI.table == "scotianshelf"){                  # if analyzing Scotian Shelf, import built-in data
+    load("R/sysdata.rda/indiseas_IVI.rda")           # Instrinsic vulnerability Index for Scotian Shelf species
+    IVI.table = indiseasIVI
+    rm(indiseasIVI)
+  }
+
+  land <- merge(land, prop.land.table)    # maybe add by = "SPECIES" here
+  land <- merge(land, IVI.table)          # , by = "SPECIES"
+  
+  if(exists("prop.land.table")){
+    land$CATCH <- land$CATCH * land$PROPORTION_OF_LANDINGS  # multiply catch by proportion of landings
+  }                                                         # if required
+  
+  land$IV_num <- land$CATCH * land$IVI                      # multiply catch by IVI (for numerator)
+  
+  uI = unique(land$ID)                   # extract the spatial scale ID's
+  ind <- NULL                            # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){               # loop over all spatal scales
+    
+    land.j = land[land$ID == uI[j], ]    # subset data to spatial scale j
+    
+    for (i in 1:length(years)){          # loop over each year
+      
+      year.i = years[i]                             # set years.i to current year  
+      land.ij = land.j[land.j$YEAR == year.i, ]     # subset data to include only current year
+      
+      ind.i <- merge(aggregate(IV_num ~ YEAR + ID, data = land.ij, FUN = sum), # calculate sum over all species of C*IVI
+               aggregate(CATCH ~ YEAR + ID, data = land.ij, FUN=sum))          # calculate sum over all species of C
+      
+      ind.i <- ind.i[,3]/ind.i[,4]                                             # calculate IVI of landings
+      
+      ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+    }
+  }
+  
+  names(ind) = c("ID", "YEAR", "IVILandings")          # name the ind dataframe
+  ind                                                  # return dataframe for years c(start.year:end.year) 
+  
 }
 
 
