@@ -33,13 +33,16 @@
 #' @export
 
 
-
-
-FishingPressure <- function(path,land=dat,group,groups,qadj=T,qadjPostStrat=qadjPostStrat) {
-	la  <- LandByGroup(land,group)
-	out <- indicatorSpaceTime(path=path,indicator='resourcePotential',ags=c(group,'BIOMASS',user.defined=F),groups=groups,qadjusted=qadj,saveIndicatorData=F,yrs=1970:2015,qadjPostStrat=qadjPostStrat)
-	names(la)[which(names(la)=='NAMES')] <- 'ID'
-	fp <- merge(out,la,by=c('YEAR','ID'))
-	fp$FP <- fp$CATCH/fp$BIOMASS
-	return(fp[,c('YEAR','ID','FP')])
-	}
+FishingPressure <- function(X, land, group){
+                            
+  B <- resourcePotential(X, metric = "BIOMASS", group = group)  # calculate the biomass of "group" in the community
+  Y <- LandByGroup(land, group = group)                         # calculate the landings of "group"
+  
+  ind <- data.frame(cbind(B$ID, B$YEAR))                        # initialize dataframe to store indicator values
+  ind$FP <- Y[,3]/B[,3]                                         # calculate fishing pressure
+  
+  ind.name <- paste("FP", "_", group, sep ="")                  # name indicator: FP_group
+  names(ind) <- c("ID", "YEAR", ind.name)
+  ind                                                           # return indicator dataframe
+  
+}
