@@ -24,12 +24,13 @@
 #' @export
 
 # right now this depends on metric, but seems like it shouldn't!
-speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
+speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE', "CATCH"),
                             years = c(start.year:end.year))  {
 
   # this could change depending on how we ask for the data
-	if(group=='FINFISH') X <- X[X$SPECIES < 1000,]  # subset data to include only the species of interest
-	#X <- rmzeros(X = X, metric = metric)                       # another way to remove the zeros (but doesn't count how many)
+  # can I use resource potential for this>?
+	if((metric == "BIOMASS" || metric == "ABUNDANCE") & group =='FINFISH') X <- X[X$SPECIES < 1000,]  # subset data to include only the species of interest
+	if(metric == "CATCH" & group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
 	
 	uI = unique(X$ID)                   # extract the spatial scale ID's
 	ind <- NULL                         # initialize dataframe for storing indicator values
@@ -48,7 +49,9 @@ speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS',
 	    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
 	 	}
 	}
-	names(ind) = c("ID", "YEAR", "SpeciesRichness")    # name the ind dataframe
+	
+	if(metric == "BIOMASS" || metric == "ABUNDANCE") names(ind) = c("ID", "YEAR", "SpeciesRichness")    # name the ind dataframe
+	if(metric == "CATCH") names(ind) = c("ID", "YEAR", "DiversityTargetSpp")    # name the ind dataframe
 	ind                                             # return vector of indicator values for years c(start.year:end.year) 
 	
 }
