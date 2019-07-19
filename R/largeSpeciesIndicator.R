@@ -1,16 +1,27 @@
 #'@title Calculates the Large Species Indicator
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the Large Species Indicator (LSI)
+#'@description This function takes a dataframe of length-based fisheries
+#'  independent survey data and calculates the Large Species Indicator (LSI) for
+#'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
-#'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i}, and
-#'  \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is 85
-#'  cm).
+#'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
+#'  and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
+#'  85 cm).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
-#'@param X add text here
-#'@param lmax (set to 85)
-#'@param metric add text here
-#'@param linf.data.table to delete
+#'@param X dataframe of fishery independent survey data OR commercial landings
+#'  data with columns "YEAR", "ID", and "SPECIES". Fishery independent data will
+#'  have column "BIOMASS" and/or "ABUNDANCE". Commercial landings data will have
+#'  column "CATCH". "ID" is an area code designating where the observation was
+#'  recorded. "SPECIES" is a numeric code indicating the species sampled/landed.
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@param lmax threshold for large fish (cm). Default is 85 cm (i.e., large
+#'  species are those with MAXLEN99 >= 85 cm)
+#'@param lmax.table table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
+#'  recorded length of the corresponding species.
+#'@param years vector of years for which to calculate indicator.
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'  "LargeFishIndicator"
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -18,7 +29,7 @@
 #'
 #'  Shephard S, Fung T, Houle JE, Farnsworth KD, Reid DG, Rossberg AG (2012)
 #'  Size-selective fishing drives species composition in the Celtic Sea. ICES J
-#'  Mar Sci 69:223-234 
+#'  Mar Sci 69:223-234
 #'
 #'  Houle JE, Farnsworth KD, Rossberg AG, Reid DG (2012) Assessing the
 #'  sensitivity and specificity of fish community indicators to management
@@ -28,7 +39,7 @@
 #'@export
 
 
-largeSpeciesIndicator <- function(X, lmax=85, linf.table = NA, metric='BIOMASS',
+largeSpeciesIndicator <- function(X, metric = 'BIOMASS', lmax = 85, lmax.table = NA,
                                   years = c(start.year:end.year)) {
   # load maximum length data
   if (is.na(linf.table)) {

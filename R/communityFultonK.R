@@ -1,20 +1,34 @@
 #' @title Calculates Fulton's Condition Index for the community
-#' @description This function takes a dataframe with columns **** and calculates
-#'   Fulton's Condition Index (\deqn{K}) for the community (weighted by
-#'   abundance)
+#' @description This function takes a dataframe of length-based fisheries
+#'   independent survey data and calculates Fulton's condition index for \eqn{j}
+#'   areas and \eqn{i} years.
 #' @details Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
 #'   A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
 #'   the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
 #'   \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j}.
 #'
 #'   **Recommended data: Fishery independent surveys, fish.
-#' @param X add text here
-#' @param metric add text here
-#' @param gp add text here
-#' @param yr add text here
-#' @param user.defined add text here
-#' @param group add text here
-#' @param path add text here
+#' @param X dataframe of fishery independent survey data with columns "YEAR",
+#'   "ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
+#'   code designating where the observation was recorded (a string). "SPECIES"
+#'   is a numeric code indicating the species sampled. "FLEN" is the length
+#'   class (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
+#'   abundance at length. Species for which there are no length data should be
+#'   assigned FLEN = -99. These observations are removed by the function.
+#' @param group character string indicating which group of species to include.
+#'   Note that this subsetting is based on the Fisheries and Oceans Canada
+#'   species codes for the Scotian Shelf. For other regions it may be prudent to
+#'   subsetdata to species groups of interest prior to using the function and
+#'   then choose group = "ALL". Type ?speciesgroups for more information.
+#' @param metric character string indicating which metric to use to calculate
+#'   indicator. Default is set to "ABUNDANCE".
+#' @param LenWt.table table of annual length at weight data with 5 columns.
+#'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
+#'   length at the corresponding "FWT" (fish weight). **note default is
+#'   "scotianshelf" now but will change
+#' @param years vector of years for which to calculate indicator
+#' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'   "CommunityCondition"
 #' @family ecosystem structure and function indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -35,17 +49,12 @@
 #' @export
 
 
-communityFultonK <- function(X, metric='ABUNDANCE', LenWt.table = "scotianshelf",
-                             user.defined = F, 
-                             group=c('FINFISH','SKATES','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','FORAGE',
-                                     'LBENTHIVORE','MBENTHIVORE','PISCIVORE','PLANKTIVORE','ZOOPISCIVORE'),
+communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
+                             metric ='ABUNDANCE', LenWt.table = "scotianshelf",
                              years = c(start.year:end.year)) {
   
-  #could possibly even remove this. Or change to "FINFISH" or "ALL" lie the other inds
-  if(user.defined) {                                    
-    X <- X[X$SPECIES %in% group,]                        # subset X to the species of interest
-    } else { X <- speciesgroups(X = X, group = group)}
-
+  if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
+  
   X <- X[-which(X$FLEN == -99), ]                        # remove rows that do not contain length data
   
   if (LenWt.table == "scotianshelf") {                   # for Scotian Shelf ecosystem, import stored IndiSeas data
@@ -73,7 +82,7 @@ communityFultonK <- function(X, metric='ABUNDANCE', LenWt.table = "scotianshelf"
         Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
         
         Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
-        ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID,data=Z,FUN=sum)   # calculate Fulton's condition index
+        ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
     
         ind.i = data.frame(uI[j], year.i, ind.i[,2])          # create a dataframe with spatial scale ID, year, and indicator value
         ind = rbind(ind, ind.i)                               # bind ind.i to ind dataframe

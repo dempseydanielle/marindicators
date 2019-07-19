@@ -1,26 +1,34 @@
 #' @title Calculates Kempton's Biodiversity Index
-#' @description This function takes a dataframe with columns **** and calculates
-#'   Kempton's Biodiversity Index (Q)
-#' @details Kempton's Biodiversity Index (Q): \deqn{Q = S/2*log(R_2/R_1)}
-#'   \eqn{S} is the total number of species or functional groups, \eqn{R_1} and
-#'   \eqn{R_2} are the lower and upper quartiles of the species abundance
-#'   distribution. \eqn{Q} is a relative index of biomass diversity calculated
-#'   from the Kempton's Q75 index developed for expressing species diversity.
-#'   This index includes those species or functional groups with a trophic level
-#'   of three or higher. \eqn{R_1} and \eqn{R_2} are defaulted to 0.25 and 0.75,
-#'   respectively.
-#'
-#'   **Something seems fishy about how this equation is implemented or written.
-#'   I think it might just be that the equation assumes that using 0.25 and 0.75
-#'   (0.75 - 0.25 = 0.5 = 1/2)
-#'  
+#' @description This function takes a dataframe of fisheries independent survey
+#'   data and calculates Kempton's Biodiversity index (Q) for \eqn{j} areas and
+#'   \eqn{i} years.
+#' @details Kempton's Biodiversity Index \eqn{(Q)} is a relative index of
+#'   biomass diversity calculated from the Kempton's Q75 index developed for
+#'   expressing species diversity. This index includes those species or
+#'   functional groups with a trophic level of three or higher. \deqn{Q = S*(p_2
+#'   - p_1)*log(R_2/R_1)} \eqn{S} is the total number of species or functional
+#'   groups, \eqn{p_1} and  \eqn{p_2} are the lower and upper percentiles of
+#'   interest and \eqn{R_1} and \eqn{R_2} are the corresponding lower and upper
+#'   quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2}
+#'   are defaulted to 0.25 and 0.75, respectively.
 #'
 #'   **Recommended data: Fishery independent surveys, fish and invertebrates
-#' @param X add text here
-#' @param percentiles R1 and R2 are defaulted to .25 and .75 add text here
-#' @param metric add text here
-#' @param minTL sets a minimum trophic level for inclusion. Default is minTl =
-#'   3. For all species, set minTL = 0
+#' @param X dataframe of fishery independent survey data with columns "YEAR",
+#'   "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'   designating where the observation was recorded. "SPECIES" is a
+#'   numeric code indicating the species sampled.
+#' @param percentiles percentiles used to determine R1 and R2. Default here is
+#'   percentiles = c(0.25, 0.75).
+#' @param minTL minimum trophic level for species included in the calculation.
+#'   Default is minTl = 3.
+#' @param metric character string indicating whether to use "BIOMASS" or
+#'   "ABUNDANCE" to calculate the indicator.
+#' @param years vector of years for which to calculate indicator
+#' @param TL.table table with columns "SPECIES" and "TL", where the "SPECIES"
+#'   codes match those in X, and "TL" is the corresponding trophic level.
+#'   **Default set to  "SCOTIAN SHELF" right now but will change!
+#' @return Returns a dataframe with 3 columns: "ID", YEAR", and
+#'   "KemptonQ"
 #' @family biodiversity indicators
 #' @references Ainsworth, C, Pitcher, T (2006) Modifying Kempton's species
 #'   diversity index for use with ecosystem simulation models. Ecological
@@ -42,39 +50,53 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
+kemptonQ<- function(X, percentiles = c(.25, 0.75), minTL = 3, group = "ALL",
+                    metric = c('BIOMASS','ABUNDANCE'), years = c(start.year:end.year),
+                    TL.table = "scotianshelf") {
 
-
-kemptonQ<- function(X, percentiles = c(.25, 0.75), minTL = 3, metric = c('BIOMASS','ABUNDANCE')) {
-		#percentiles is the percentiles for r2 and r1
-		#based on Kempton and Taylor 1976 Nature 262
-		#minTL sets a minimum trophic level for inclusion in group for all species set minTL=0
-		#not length based TL, just any species with TL >3 at any size August 29, 2013 09:19:50 AM 
-	# find a way to subset the data based on trophic level
-  	if(minTL>0) {
-			sp <- sqlQuery(channel,paste("select distinct RESEARCH species from indiseas_wss_tl where tl>",minTL," order by research;",sep=""))[,1]
-			X <- X[X$SPECIES %in% sp,]
-			}
-  
-  # might be better to replace U with S and use the speciesrichness function
-  Y <- Y[order(X[metric]),metric]  # why ordered???  --> oh this might have somethign to do with the percentiles
-  U <- length(Y)                   # why does this matter?
-  # should just be able to use the "speciesrichness" function
-  if(U > 2) {                      # why does this matter?
-    w <- c(round(U*percentiles[1], 0), round(U*percentiles[2], 0))
-    if(w[1]==0) w[1]<-1 # why this??? I think so not diving by zero in next line
-    # how do the w[] get into Y?? is it an index??
-    Q.est[i] <- U*(percentiles[2]-percentiles[1])/log(Y[w[2]]/Y[w[1]]) # something seems weird about this equation
-    }  else {
-      Q.est[i]<-NA
-    }
+  if (TL.table == "scotianshelf") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
+    load("R/sysdata.rda/indiseas_TL.rda")
+    TL.table <- indiseas_wss_tl
+    rm(indiseas_wss_tl)
   }
-			out <- as.data.frame(cbind(uI,Q.est))
-			out[,2] <- as.numeric(out[,2])
-			names(out)[1] <-'ID'
-			return(out)
-	}
-#example
-#a<-biomassData(q.corr=T)
-#a$ID <- paste(a$MISSION,a$SETNO)	
-#ew <-kemptonQ(a,metric='ABUNDANCE')
-
+  
+  if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
+  X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
+  X <- X[X$TL > minTL, ]
+  
+  uI = unique(X$ID)                   # extract the spatial scale ID's
+  ind <- NULL                         # initialize dataframe for storing indicator values
+  
+  for (j in 1:length(uI)){            # loop over all spatal scales
+    
+    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+    
+    for (i in 1:length(years)){                     # loop over each year
+      
+      year.i = years[i]                             # set years.i to current year  
+      X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
+  
+      #S <- speciesrichness(X = X.ij, group = group, metric = metric, years = year.i) # calculate species richness
+      #S <- S[,3]                                                                     # extract number of species for spatila scale j and area i
+      
+      Y <- X.ij[order(X.ij[metric]),metric]        # set Y to metric ORDERED FROM SMALLEST TO LARGEST
+      S <- length(Y)                               # number of species recorded (simpler than speciesrichness function)
+      
+      if(S>2) {
+        w <- c(round(S*percentiles[1], 0), round(S*percentiles[2], 0)) # index of where percentile value is in Y
+                                                                       # this works becuase S = length(Y)
+        if(w[1]==0) w[1]<-1                                            # can't have index of 0, so if small number, set to 1
+        ind.i <- S*(percentiles[2]-percentiles[1])/log(Y[w[2]]/Y[w[1]]) # calculate Kemptons' Q
+      } else {
+          ind.i <- NA
+        } 
+      
+      ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+      
+    }
+    }
+  names(ind) = c("ID", "YEAR", "KemptonQ")    # name the ind dataframe
+  ind                                                # return vector of indicator values for years c(start.year:end.year) 
+  
+}

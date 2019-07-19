@@ -1,17 +1,28 @@
 #'@title Calculates the Large Fish Indicator
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the Large Fish Indicator (LFI)
+#'@description This function takes a dataframe of length-based fisheries
+#'  independent survey data and calculates the Large Fish Indicator (LFI) for
+#'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >50 cm)/\Sigma
 #'  B_m} \eqn{B_m} is biomass of individuals in a body size class centred at
-#'  mass m, and \eqn{L} is the length (cm) of an individual. This indicator describes
-#'  the proportion (by weight) of the fish community that is larger than some
-#'  length threshold (default here is 35 cm, **check this: i.e., the proportion
-#'  of biomass occupying the top predator trophic level).
+#'  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
+#'  describes the proportion (by weight) of the fish community that is larger
+#'  than some length threshold (default here is 35 cm, **check this: i.e., the
+#'  proportion of biomass occupying the top predator trophic level).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
-#'@param X add text here; no length data, write -99
-#'@param metric add text here
-#'@param large.fish say that set to 35
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
+#'  code designating where the observation was recorded (a string). "SPECIES" is
+#'  a numeric code indicating the species sampled. "FLEN" is the length class
+#'  (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
+#'  abundance at length. Species for which there are no length data should be
+#'  assigned FLEN = -99. These observations are removed by the function.
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@param large.fish threshold for large fish (cm). Default is 35 cm (i.e., large
+#'  fish are those with X$FLEN >= 35 cm)
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'  "LargeFishIndicator"
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

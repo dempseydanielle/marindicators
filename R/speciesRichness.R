@@ -1,16 +1,40 @@
-#' @title Calculates species richness (\eqn{S_y})
-#' @description This function takes a dataframe with columns **** and calculates
-#'   species richness.
+#' @title Calculates species richness of the community or the diversity of
+#'   target species
+#' @description This function counts the number of species recorded each year
+#'   \eqn{i} in fishery independent survey data or commercial landings data for
+#'   \eqn{j} areas.
 #' @details Species richness (\eqn{S_y}) is the count of the number of species
-#'   recorded in all trawl catches collected year \eqn{y}.
+#'   recorded in all research vessel trawl survesy collected year \eqn{y}.
 #'
 #'   Recommended data: Fishery independent surveys, fish and invertebrates
 #'
-#' @param X is probably a dataframe with certain columns.
-#' @param group is where you select which groups to include
-#' @param grps not sure what this is because it is NOT called inside the
-#'   function
+#'   The diversity of the target species for year y (\eqn{TS_y}) is the count of
+#'   the number of target species recorded in all trawl catches collected in
+#'   that year.
+#'
+#'   Recommended data: commercial fisheries landings, fish and invertebrates
+#'
+#' @param X dataframe of fishery independent survey data OR commercial landings
+#'   data with columns "YEAR", "ID", and "SPECIES". Fishery independent data
+#'   will have column "BIOMASS" and/or "ABUNDANCE". Commercial landings data
+#'   will have column "CATCH". "ID" is an area code designating where the
+#'   observation was recorded. "SPECIES" is a numeric code indicating the
+#'   species sampled/landed.
+#' @param group character string indicating which species to include (Only
+#'   applicable when X is research vessel survey data). Type ?speciesgroups for
+#'   more information on species groups.
+#' @param metric character string indicating whether X is fishery independent
+#'   survey data or commercial landings data. "BIOMASS" and "ABUNDANCE" indicate
+#'   fishery independent data. "CATCH" indicates commercial landings data. If
+#'   metric = "BIOMASS" or metric = "ABUNDANCE", indicator will be named
+#'   "SpeciesRichness". If metrc = "CATCH", indicator will be named
+#'   "DiversityTargetSpp".
+#' @param years vector of years for which to calculate indicator
+#' @return Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
+#'   "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If
+#'   metrc = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
 #' @family biodiversity indicators
+#' @family fishing pressure indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'   Aquat. Sci. 3232: xii + 212 p.
@@ -18,17 +42,15 @@
 #'   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
 #'   (2012) Redundancy in metrics describing the composition, structure, and
 #'   functioning of the North Sea demersal fish community. ICES J Mar Sci
-#'   69:8–22
+#'   69:8-22
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
 # right now this depends on metric, but seems like it shouldn't!
 speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE', "CATCH"),
                             years = c(start.year:end.year))  {
 
-  # this could change depending on how we ask for the data
-  # can I use resource potential for this>?
 	if((metric == "BIOMASS" || metric == "ABUNDANCE") & group =='FINFISH') X <- X[X$SPECIES < 1000,]  # subset data to include only the species of interest
 	if(metric == "CATCH" & group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
 	
@@ -45,8 +67,8 @@ speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS',
 	    X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
 	 	
 	    ind.i <- length(unique(X.ij$SPECIES))         # count the number of species recorded and store value
-	    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
-	    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
+	    ind.i = data.frame(uI[j], year.i, ind.i)      # create a dataframe with spatial scale ID, year, and indicator value
+	    ind = rbind(ind, ind.i)                       # bind ind.i to ind dataframe
 	 	}
 	}
 	
