@@ -39,7 +39,7 @@
 
 
 hillN1 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
-                   years = c(start.year:end.year)) {
+                   years) {
   
   H <- shannon(X = X, group = group, metric = metric, years = years) # calculate Shannon's index of diversity
 	

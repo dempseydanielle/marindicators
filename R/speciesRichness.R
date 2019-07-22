@@ -49,7 +49,7 @@
 
 # right now this depends on metric, but seems like it shouldn't!
 speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE', "CATCH"),
-                            years = c(start.year:end.year))  {
+                            years)  {
 
 	if((metric == "BIOMASS" || metric == "ABUNDANCE") & group =='FINFISH') X <- X[X$SPECIES < 1000,]  # subset data to include only the species of interest
 	if(metric == "CATCH" & group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"

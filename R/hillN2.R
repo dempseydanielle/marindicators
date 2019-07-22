@@ -38,7 +38,7 @@
  
 
 hillN2 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
-                   years = c(start.year:end.year))  {
+                   years)  {
 
   if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
 	uI = unique(X$ID)                   # extract the spatial scale ID's

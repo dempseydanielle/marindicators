@@ -22,7 +22,7 @@
 #'  information.
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate the indicator.
-#'@param years vector of years for which to calculate indicator
+#'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness"
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -38,7 +38,7 @@
 
 # add a warning for if there is 0 biomass
 pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
-                                  years = c(start.year:end.year))  {
+                                  years)  {
 
 
   H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year

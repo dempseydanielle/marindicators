@@ -26,7 +26,7 @@
 #'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
 #'   length at the corresponding "FWT" (fish weight). **note default is
 #'   "scotianshelf" now but will change
-#' @param years vector of years for which to calculate indicator
+#' @param years vector of years for which to calculate indicator.
 #' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'   "CommunityCondition"
 #' @family ecosystem structure and function indicators
@@ -50,24 +50,19 @@
 
 
 communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
-                             metric ='ABUNDANCE', LenWt.table = "scotianshelf",
-                             years = c(start.year:end.year)) {
+                             metric ='ABUNDANCE', LenWt.table,
+                             years) {
   
   if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
   
   X <- X[-which(X$FLEN == -99), ]                        # remove rows that do not contain length data
-  
-  if (LenWt.table == "scotianshelf") {                   # for Scotian Shelf ecosystem, import stored IndiSeas data
-    load("R/sysdata.rda/scotianshelf_lenwt.rda")
-  }
-    
   uI = unique(X$ID)                                      # extract the spatial scale ID's
   ind <- NULL                                            # initialize dataframe for storing indicator values
   
   for (j in 1:length(uI)){                               # loop over all spatal scales
     
     X.j = X[X$ID == uI[j], ]                             # subset biomass and abundance data to spatial scale j
-    len_wgt.j = len_wgt[len_wgt$ID == uI[j], ]           # subset length-weight data to spatial scale j
+    len_wgt.j = LenWt.table[LenWt.table$ID == uI[j], ]           # subset length-weight data to spatial scale j
     
     for (i in 1:length(years)){                          # loop over each year
       

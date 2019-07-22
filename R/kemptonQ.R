@@ -15,20 +15,24 @@
 #'   **Recommended data: Fishery independent surveys, fish and invertebrates
 #' @param X dataframe of fishery independent survey data with columns "YEAR",
 #'   "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'   designating where the observation was recorded. "SPECIES" is a
-#'   numeric code indicating the species sampled.
+#'   designating where the observation was recorded. "SPECIES" is a numeric code
+#'   indicating the species sampled.
+#' @param TL.table table with columns "SPECIES" and "TL", where the "SPECIES"
+#'   codes match those in X, and "TL" is the corresponding trophic level.
 #' @param percentiles percentiles used to determine R1 and R2. Default here is
 #'   percentiles = c(0.25, 0.75).
 #' @param minTL minimum trophic level for species included in the calculation.
 #'   Default is minTl = 3.
+#' @param  group character string indicating which species to include, either
+#'   "ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
+#'   Oceans Canada species codes for the Scotian Shelf. For other regions it may
+#'   be prudent to subsetdata to species groups of interest prior to using the
+#'   function and then choose group = "ALL". Type ?speciesgroups for more
+#'   information.
 #' @param metric character string indicating whether to use "BIOMASS" or
 #'   "ABUNDANCE" to calculate the indicator.
 #' @param years vector of years for which to calculate indicator
-#' @param TL.table table with columns "SPECIES" and "TL", where the "SPECIES"
-#'   codes match those in X, and "TL" is the corresponding trophic level.
-#'   **Default set to  "SCOTIAN SHELF" right now but will change!
-#' @return Returns a dataframe with 3 columns: "ID", YEAR", and
-#'   "KemptonQ"
+#' @return Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ"
 #' @family biodiversity indicators
 #' @references Ainsworth, C, Pitcher, T (2006) Modifying Kempton's species
 #'   diversity index for use with ecosystem simulation models. Ecological
@@ -50,15 +54,9 @@
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
-kemptonQ<- function(X, percentiles = c(.25, 0.75), minTL = 3, group = "ALL",
-                    metric = c('BIOMASS','ABUNDANCE'), years = c(start.year:end.year),
-                    TL.table = "scotianshelf") {
-
-  if (TL.table == "scotianshelf") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
-    load("R/sysdata.rda/indiseas_TL.rda")
-    TL.table <- indiseas_wss_tl
-    rm(indiseas_wss_tl)
-  }
+kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), 
+                    minTL = 3, group = "ALL",
+                    metric = c('BIOMASS','ABUNDANCE'), years) {
   
   if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data

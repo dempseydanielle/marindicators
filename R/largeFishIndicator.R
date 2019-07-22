@@ -21,6 +21,7 @@
 #'  "ABUNDANCE" to calculate indicator.
 #'@param large.fish threshold for large fish (cm). Default is 35 cm (i.e., large
 #'  fish are those with X$FLEN >= 35 cm)
+#'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "LargeFishIndicator"
 #'@family ecosystem structure and function indicators
@@ -40,7 +41,7 @@
 #'@export
 
 largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), 
-                               large.fish = 35, years = c(start.year:end.year)) {
+                               large.fish = 35, years) {
   
   uI = unique(X$ID)                   # extract the spatial scale ID's
   X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data

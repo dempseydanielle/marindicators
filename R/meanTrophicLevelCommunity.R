@@ -10,35 +10,41 @@
 #'  the structure of the community.
 #'
 #'  Recommended data: Fishery independent surveys, fish and invertebrates.
-#'@param X add text here
-#'@param lpred.data.table to delete?
-#'@param metric set to biomass
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'  designating where the observation was recorded. "SPECIES" is a numeric code
+#'  indicating the species sampled.
+#'@param TL.table dataframe with columns "SPECIES" and the corresponding "TL"
+#'  (trophic level).
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@param years vector of years for which to calculate indicator.
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'  "MeanTLCommunity"
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Christensen 1998 (not in tech report)
+#'  Christensen V. 1998. Fishery-induced changes in a marine ecosystem: insight
+#'  frommodels of the Gulf of Thailand. J. Fish Bio. 53:128-142. Article No.
+#'  jb980809
 #'
-#'  Shannon et al 2014
+#'  Shannon L, Coll M, Bundy A, Gascuel D, Heymans JJ, Kleisner K, Lynam CP,
+#'  Piroddi C, Tam J, Travers-Trolet M, Shin Y. 2014. Trophic level-based
+#'  indicators to track fishing impacts across marine ecosystems. Mar. Ecol.
+#'  Prog. Ser. 512, 115–140.
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
 
-meanTrophicLevelCommunity <- function(X, TL.table = "scotianshelf",  metric= c('ABUNDANCE', 'BIOMASS'),
-                                      years = c(start.year:end.year)) {
-                                      #pred.data.table='indiseas_wss_tl', metric='BIOMASS') {
+meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOMASS'), 
+                                      years) {
                                         
-  if (TL.table == "indiseas") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
-    load("R/sysdata.rda/indiseas_TL.rda")
-    TL.table <- indiseas_wss_tl
-    rm(indiseas_wss_tl)
-  }
-  
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
                                               # Note that the merge function will drop species that do not have a TL
-  uI = unique(X$ID)                          # extract the spatial scale ID's
+  uI = unique(X$ID)                           # extract the spatial scale ID's
   ind <- NULL                                 # initialize dataframe for storing indicator values
   
   for (j in 1:length(uI)){            # loop over all spatal scales
@@ -50,7 +56,7 @@ meanTrophicLevelCommunity <- function(X, TL.table = "scotianshelf",  metric= c('
       year.i = years[i]                             # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
       
-      ind.i <- sum(X.ij[metric]*X.ij['AVG(TL)'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
+      ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
      
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe

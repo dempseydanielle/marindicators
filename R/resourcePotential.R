@@ -1,17 +1,24 @@
-#'@title Calculates the resource potential of defined species groups
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the biomass or abundance of a defined group of species
-#'@details This indicator reflect temporal dynamics of seven fished groups:
-#'  Clupeids, Finfish, Flatfish, Gadoids, Groundfish, Invertebrates and Forage
-#'  fish (*or this might change depending on ow we tell them to organize data)
-#'  **Need to tell them how to label data
-#'** took out the 1999 bit for inverts and herring = T/F
+#'@title Calculates the resource potential of pre-defined species groups
+#'@description This function calculates the biomass or abundance of a
+#'  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
+#'@details This indicator reflects temporal dynamics species groups specific to
+#'  the Scotian Shelf.
+#'
 #'  Recommended data: Fishery independent surveys, fish and invertebrates.
-#'@param X add text here
-#'@param use.defined text
-#'@param metric can choose biomass or abundance
-#'@param herring text
-#'@param year text
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'  designating where the observation was recorded. "SPECIES" is a numeric code
+#'  indicating the species sampled.
+#'@param user.defined for a user-defined group of species, put a vector of
+#'  species codes to include here. Default is "FALSE"
+#'@param group character string indicating which group of species to include.
+#'  Note that this subsetting is based on the Fisheries and Oceans Canada
+#'  species codes for the Scotian Shelf. For other regions it may be prudent to
+#'  subsetdata to species groups of interest prior to using the function and
+#'  then choose group = "ALL". Type ?speciesgroups for more information.
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group"
 #'@family resource potential indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -19,7 +26,7 @@
 
 
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
 
@@ -66,6 +73,6 @@ resourcePotential <- function(X, user.defined = F,
 			  ind = ind[order(ind$ID), ]                                           # order by ID (to match output of other functions)
 			}
 		
-			ind                                                                    # return indicator
+			ind                                                                    # return indicator values for unique(X$YEAR) 
 		}	
 			

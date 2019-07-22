@@ -8,17 +8,16 @@
 #'  85 cm).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
-#'@param X dataframe of fishery independent survey data OR commercial landings
-#'  data with columns "YEAR", "ID", and "SPECIES". Fishery independent data will
-#'  have column "BIOMASS" and/or "ABUNDANCE". Commercial landings data will have
-#'  column "CATCH". "ID" is an area code designating where the observation was
-#'  recorded. "SPECIES" is a numeric code indicating the species sampled/landed.
-#'@param metric character string indicating whether to use "BIOMASS" or
-#'  "ABUNDANCE" to calculate indicator.
-#'@param lmax threshold for large fish (cm). Default is 85 cm (i.e., large
-#'  species are those with MAXLEN99 >= 85 cm)
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'  designating where the observation was recorded. "SPECIES" is a numeric code
+#'  indicating the species sampled.
 #'@param lmax.table table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
 #'  recorded length of the corresponding species.
+#'@param lmax threshold for large fish (cm). Default is 85 cm (i.e., large
+#'  species are those with MAXLEN99 >= 85 cm)
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "LargeFishIndicator"
@@ -39,13 +38,10 @@
 #'@export
 
 
-largeSpeciesIndicator <- function(X, metric = 'BIOMASS', lmax = 85, lmax.table = NA,
-                                  years = c(start.year:end.year)) {
-  # load maximum length data
-  if (is.na(linf.table)) {
-    load("R/sysdata.rda/indiseas_MaxLength.rda")
-    largespecies <- indiseas_MaxLength$SPECIES[indiseas_MaxLength$MAXLEN99>lmax] # extract species codes for large species
-  } else (largespecies <- linf.table$SPECIES[linf.table$MAXLEN99>lmax])
+largeSpeciesIndicator <- function(X, lmax.table, lmax = 85,  metric = 'BIOMASS',
+                                  years) {
+  
+  largespecies <- lmax.table$SPECIES[lmax.table$MAXLEN99 > lmax]
  
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

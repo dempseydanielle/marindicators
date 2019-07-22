@@ -36,7 +36,7 @@
 #' @export
 
 heips <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
-                  years = c(start.year:end.year))  {
+                  years)  {
   
   H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year
   S <- speciesrichness(X, group = group, metric = metric, years = years) # calculate species richness for each year
