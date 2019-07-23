@@ -44,6 +44,7 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
                                         
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
                                               # Note that the merge function will drop species that do not have a TL
+  
   uI = unique(X$ID)                           # extract the spatial scale ID's
   ind <- NULL                                 # initialize dataframe for storing indicator values
   
@@ -56,8 +57,10 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
       year.i = years[i]                             # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
       
-      ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
-     
+      #ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
+      
+      ind.i <- aggregate(X.ij[metric]*X.ij['TL'],by=X.ij['ID'],FUN=sum)[,2]/aggregate(X.ij[metric],by=X.ij['ID'],FUN=sum)[,2]
+                
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
  

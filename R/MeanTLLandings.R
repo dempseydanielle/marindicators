@@ -1,6 +1,7 @@
-#'@title Calculates the mean trophic level of fisheries landings
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the mean trophic level of fisheries landings
+#'@title Calculates the mean trophic level or marine trophic index of fisheries
+#'  landings
+#'@description This function calculates the mean trophic level or marine trophic
+#'  index of fisheries landingsfor \eqn{j} areas and \eqn{i} years.
 #'@details Mean trophic level of fisheries landings \eqn{TL_{Land}}:
 #'  \deqn{TL_{Land} = \Sigma (TL_i*Y_i)/Y} where \eqn{TL_i} is the trophic level
 #'  of species \eqn{i}, \eqn{Y_i} is the landings of species \eqn{i}, and
@@ -12,10 +13,46 @@
 #'  in the fishery. In general, this indicator reflects a gradual transition in
 #'  landings from long-lived, high trophic level, piscivorous bottom fish toward
 #'  short-lived, low trophic level invertebrates and planktivorous pelagic fish.
+#'  
+#'  The marine trophic index includes only species with TL \deqn{>= 3.25}.
 #'
 #'  Recommended data: Commercial fisheries landings, fish and invertebrates
-#'@param land add text here
-#'@param cutoff add text here
+#'@param land dataframe of commercial landings data with columns "YEAR", "ID",
+#'  "ALLCODES" and "CATCH". "ID" is an area code designating where the
+#'  observation was recorded. "ALLCODES" is a numeric commercial species code
+#'  indicating the species landed, and "CATCH" is the corresponding landed
+#'  weight.
+#'@param TL.table dataframe with four columns: "SPECIES", "GROUP_NAME", "TL",
+#'  and "LANDED". "SPECIES" is the fishery-independent species code, and
+#'  "GROUP_NAME" and "TL" are the corresponding size-based functional group and
+#'  trophic level, respectively. Note that one SPECIES code may be assigned more
+#'  than one GROUP_NAME if ontogentic shifts occur. For example, on the Scotian
+#'  Shelf small (< 33 cm) and large (>33 cm) haddock both have SPECIES code 11.
+#'  Small haddock are assigend to GROUP_NAME "Haddock<33" with trophic level
+#'  3.38. Large haddock are assigned to GROUP_NAME "Haddock33+" with trophic
+#'  level 3.43. "LANDED" estimates the proportion of the total landings of a
+#'  given species that is represented by GROUP_NAME. Landings of small haddock
+#'  are negligible in this example, and so Haddock<33 is assigned LANDED = 0,
+#'  while Haddock33+ is assigned LANDED = 1.
+#'@param propland.table dataframe with three columns: "SPECIES", "ALLCODE", and
+#'  "PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
+#'  species code (as in TL.table), and "ALLCODES" is the corresponding numeric
+#'  commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
+#'  to species that have different SPECIES codes, but the same ALLCODES code.
+#'  For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
+#'  code of 300, while sea ravens are assigned a species code of 320; however
+#'  they are grouped together in the commercial landings data and are both
+#'  assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
+#'  proportion of each species that makes up the commercial landings. In this
+#'  example, longhorn sculpins consist of about 40% of the total sculpin
+#'  landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
+#'  ravens consist of about 60% of the total sculpin landings and are assigned a
+#'  "PROPORTION_OF_LANDINGS" value of 0.6.
+#'@param cutoff the minimum trophic level of species to include. Set cutoff = 0
+#'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
+#'  calculate the marine trophic index.
+#'@return returns a dataframe with three columns: "ID", "YEAR", and if
+#'  cutoff = 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -27,34 +64,23 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-MeanTLLandings <- function (land, TL.table.land = "scotianshelf", prop.land.table = "scotianshelf",
-                            cutoff = 0) {
+MeanTLLandings <- function (land, TL.table, propland.table, cutoff = 0) {
 	
-  if (prop.land.table == "scotianshelf"){            # if analyzing Scotian Shelf, import built-in data
-    load("R/sysdata.rda/indiseas_proplandings.rda")  # For species that are not identified to the lowest level
-    prop.land.table = prop.land                      # in the landings data, estimate the proportion of each 
-    names(prop.land.table)[1] <- "SPECIES"           # landed
-    rm(prop.land)
-  }
-  
-  if (TL.table.land == "scotianshelf") {               # for Scotian Shelf ecosystem, import stored IndiSeas data
-    load("R/sysdata.rda/wss_tl_length.rda")
-  }
-  
-  land.prop <- merge(land, prop.land.table)
-  land.TL <- merge(land.prop, TL.table.land)
-  
+  land.prop <- merge(land, propland.table)
+  land.TL <- merge(land.prop, TL.table)
+
   land.TL$id <- land.TL$TL >= cutoff                                                         # returns TRUE when TL is >= cutoff
   land.TL$pp <- land.TL$CATCH * land.TL$LANDED * land.TL$PROPORTION_OF_LANDINGS * land.TL$id #this is for the proprtion of different species
   land.TL$LL <- land.TL$pp * land.TL$TL * land.TL$id                                       # calculates landings_species.i * TL_species.i
 
-  
-  ind <- merge(aggregate(LL ~ ID+YEAR, data = land.TL, FUN = sum), # this hurts my brain. figure ot what it does 
+  ind <- merge(aggregate(LL ~ ID + YEAR, data = land.TL, FUN = sum), 
                aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))
-	ind$ind <- ind$LL/ind$pp # is this the weighted landings/ total landings?
+	ind$ind <- ind$LL/ind$pp 
 	ind$LL <- NULL
 	ind$pp <- NULL
-	names(ind) <- c("ID", "YEAR", "MeanTL.Landings")
+
+	if(cutoff == 0)	names(ind) <- c("ID", "YEAR", "MeanTL.Landings")
+	if(cutoff >0) names(ind) <- c("ID", "YEAR", "MarineTophicIndex.Landings")
 	ind
 
 }

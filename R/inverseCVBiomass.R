@@ -10,8 +10,11 @@
 #'   the mean biomass for year i.
 #'
 #'   Data used: Fishery independent surveys, fish and invertebrates
-#' @param X add text here
-#' @param window Say that default is 5 for 5-year moving average. add text here
+#' @param X dataframe of fishery independent survey data with columns "YEAR",
+#'   "ID", "SPECIES", and "BIOMASS". "ID" is an area code designating where the
+#'   observation was recorded. "SPECIES" is a numeric code indicating the
+#'   species sampled.
+#' @param window window for the moving averge. Default is 5 years.
 #' @family stability and resistance indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

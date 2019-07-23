@@ -1,10 +1,22 @@
-#' @title Calculates the invertebrate to demersal biomass ratio
-#' @description This function takes a dataframe with columns **** and calculates
-#'   the invertebrate to demersal biomass ratio
-#' @details **Recommended data: Fishery independent surveys, fish and
-#'   invertebrates.
-#' @param X add text here
-#' @param syear add text here
+#' @title Calculates the biomass (or abundance) ratio between two species groups
+#'  
+#' @description This function calculates the biomass ration between two
+#'   pre-defined species groups for \eqn{j} areas and \eqn{i} years.
+#' @details Useful biomass ratio indicators include:
+#'   \deqn{B_invertebrates/B_demersal} and \deqn{B_pelagic/B_demersal}
+#'
+#'   **Recommended data: Fishery independent surveys, fish and invertebrates.
+#' @param X dataframe of fishery independent survey data with columns "YEAR",
+#'   "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'   designating where the observation was recorded. "SPECIES" is a numeric code
+#'   indicating the species sampled.
+#' @param group1 species group for the numerator (string), as defined in
+#'   functions "resourcePotential" and "speciesgroups"
+#' @param group2 species group for the denominator (string), as defined in
+#'   functions "resourcePotential" and "speciesgroups"
+#' @param metric character string indicating which metric to use to calculate
+#'   indicator.
+#' @return Returns a dataframe with 3 columns. "ID", "YEAR", and "group12group2"
 #' @family ecosystem structure and function indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -19,34 +31,19 @@
 #' @export
 
 biomassratio <- function(X, group1 = c('INVERTEBRATES', 'PELAGIC'), group2 = c('GROUNDFISH'),
-                    metric = 'BIOMASS', years = c(start.year:end.year)) {
+                    metric = 'BIOMASS') {
 	
+  num <- resourcePotential(X = X, group = group1, metric = metric)  # calculate biomass of invertebrates
+  names(num) <- c("ID", "YEAR", metric)
+  denom <- resourcePotential(X = X, group= group2, metric = metric)     # calculate biomass of demersal fish
+  names(denom) <- c("ID", "YEAR", metric)
+    
+  num$ind = num[, metric] / denom[, metric]       # calculate invertebrate to demersal ratio
+  num[metric] <- NULL
+  
   name.ind <- paste(group1, "2", group2, sep = "")
-  
-  uI = unique(X$ID)                          # extract the spatial scale ID's
-  ind <- NULL                                 # initialize dataframe for storing indicator values
-  
-  for (j in 1:length(uI)){            # loop over all spatal scales
-    
-    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
-    
-    for (i in 1:length(years)){                     # loop over each year
-      
-      year.i = years[i]                             # set years.i to current year  
-      X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
-      
-      num.i <- resourcePotential(X = X.ij, group = group1, metric = metric)  # calculate biomass of invertebrates
-      denom.i <- resourcePotential(X = X.ij, group= group2, metric = metric)     # calculate biomass of demersal fish
-    
-      ind.i = num.i$BIOMASS / denom.i$BIOMASS         # calculate invertebrate to demersal ratio
-      
-      ind.i = data.frame(uI[j], year.i, ind.i)      # create a dataframe with spatial scale ID, year, and indicator value
-       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
-    
-  }
-}
-names(ind) = c("ID", "YEAR", name.ind)    # name the ind dataframe
-ind                                                # return vector of indicator values for years c(start.year:end.year) 
+  names(num) = c("ID", "YEAR", name.ind)             # name the ind dataframe
+  num                                                # return dataframe of indicator values for years c(start.year:end.year) 
 
 }
 
