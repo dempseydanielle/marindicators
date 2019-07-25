@@ -18,7 +18,13 @@
 #'  then choose group = "ALL". Type ?speciesgroups for more information.
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate indicator.
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group"
+#'@param years vector of years for which to calculate indicator
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
+#'
+#'  If there is no data for a given year, the indicator value will be "NA". If
+#'  biomass of species “x” was not captured in the survey, species “x” is still
+#'  likely to present, just not detected or perhaps not recorded. Replacing with
+#'  zero would have an impact on trends, whereas treatin as NA does not.
 #'@family resource potential indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -35,8 +41,17 @@ resourcePotential <- function(X, user.defined = F,
                                       'CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS',
                                       'INVERTEBRATES','FORAGE','PELAGIC','LBENTHIVORE',
                                       'MBENTHIVORE','PISCIVORE', 'PLANKTIVORE','ZOOPISCIVORE'),
-                              metric = c('BIOMASS','ABUNDANCE')){
-
+                              metric = c('BIOMASS','ABUNDANCE'), years){
+  
+  df <- NULL
+  uI <- unique(X$ID)
+  for(j in 1:length(uI)){
+    ID.j <- rep(uI[j], times = length(years))
+    df.j <- data.frame(ID.j, years)
+    df <- rbind(df, df.j)
+  }
+  names(df) <- c("ID", "YEAR")
+  
 			Y<-FALSE
 			#IF USER DEFINED FOR GROUP PUT IN A VECTOR OF THE SPECIES CODES YOU WANT TO INCLUDE
 			if(user.defined) {
@@ -68,11 +83,12 @@ resourcePotential <- function(X, user.defined = F,
 			else {
 			  
 			  ind <- aggregate(Y[metric], by= c(Y['ID'], Y['YEAR']), FUN = sum)    # add up metric for the species group for each year + spatial scale
+			  ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)
 			  ind.name <- paste(metric, "_", group, sep ="")                       # name indicator: metric_group
 			  names(ind) = c("ID", "YEAR", ind.name)                             
 			  ind = ind[order(ind$ID), ]                                           # order by ID (to match output of other functions)
 			}
-		
+	
 			ind                                                                    # return indicator values for unique(X$YEAR) 
 		}	
 			
