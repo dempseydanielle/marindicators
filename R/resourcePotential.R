@@ -1,8 +1,7 @@
 #'@title Calculates the resource potential of pre-defined species groups
 #'@description This function calculates the biomass or abundance of a
 #'  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
-#'@details This indicator reflects temporal dynamics species groups specific to
-#'  the Scotian Shelf.
+#'@details This indicator reflects temporal dynamics species groups.
 #'
 #'  Recommended data: Fishery independent surveys, fish and invertebrates.
 #'@param X dataframe of fishery independent survey data with columns "YEAR",
@@ -21,11 +20,13 @@
 #'@param years vector of years for which to calculate indicator
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
 #'
-#'  If there is no data for a given year, the indicator value will be "NA". If
-#'  biomass of species “x” was not captured in the survey, species “x” is still
-#'  likely to present, just not detected or perhaps not recorded. Replacing with
-#'  zero would have an impact on trends, whereas treatin as NA does not.
+#'  If there is no data for a given year, the indicator value will be "NA" for
+#'  that year. If biomass of species “x” was not captured in the survey, species
+#'  “x” is still likely to present, just not detected or perhaps not recorded.
+#'  Replacing with zero would have an impact on trends, whereas treating as NA
+#'  does not.
 #'@family resource potential indicators
+#'@family ecosystem structure and functioning indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.

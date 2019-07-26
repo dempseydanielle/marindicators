@@ -20,7 +20,7 @@
 #'  "ALLCODES" and "CATCH". "ID" is an area code designating where the
 #'  observation was recorded. "ALLCODES" is a numeric commercial species code
 #'  indicating the species landed, and "CATCH" is the corresponding landed
-#'  weight.
+#'  weight. Note that land$YEAR should extend as far back as base.start.
 #'@param TL.table dataframe with four columns: "SPECIES", "GROUP_NAME", "TL",
 #'  and "LANDED". "SPECIES" is the fishery-independent species code, and
 #'  "GROUP_NAME" and "TL" are the corresponding size-based functional group and
@@ -39,17 +39,15 @@
 #'  commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
 #'  to species that have different SPECIES codes, but the same ALLCODES code.
 #'  For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
-#'  code of 300, while sea ravens are assigned a species code of 320; however
+#'  code of 300, while sea ravens are assigned a SPECIES code of 320; however
 #'  they are grouped together in the commercial landings data and are both
 #'  assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
 #'  proportion of each species that makes up the commercial landings. In this
-#'  example, longhorn sculpins consist of about 40% of the total sculpin
+#'  example, longhorn sculpins consist of about 40\% of the total sculpin
 #'  landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
-#'  ravens consist of about 60% of the total sculpin landings and are assigned a
-#'  "PROPORTION_OF_LANDINGS" value of 0.6.
-#'@param cutoff the minimum trophic level of species to include. Set cutoff = 0
-#'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
-#'  calculate the marine trophic index.
+#'  ravens consist of about 60\% of the total sculpin landings and are assigned
+#'  a "PROPORTION_OF_LANDINGS" value of 0.6.
+#'@param cutoff the minimum trophic level of species to include.
 #'@param TE trophic efficiency. Default is TE = 0.1.
 #'@param base.start beginning of baseline period
 #'@param base.end end of baseline period

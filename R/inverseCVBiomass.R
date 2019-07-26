@@ -1,7 +1,6 @@
 #' @title Calculates the inverse of the coefficient of variation of the biomass
-#' @description This function takes a dataframe with columns **** and calculates
-#'   the inverse of the coefficient of variation of the biomass
-#'   (InverseCVBiomass)
+#' @description This calculates the inverse of the coefficient of variation of
+#'   the biomass (InverseCVBiomass) for \eqn{j} areas and \eqn{i} years.
 #' @details  The inverse of the coefficient of variation of the biomass
 #'   (InverseCVBiomass) was estimated as a five year moving average:
 #'   \deqn{InverseCVBiomass = 1/(1/n)\Sigma(SD_i/Xbar_i)} The sum is from year

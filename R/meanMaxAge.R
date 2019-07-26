@@ -1,6 +1,6 @@
 #'@title Calculates the mean maximum age of fish in the community
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the mean maximum age (MMA) of fish in the community
+#'@description This function calculates the mean maximum age (MMA) of fish in
+#'  the community for \eqn{j} areas and \eqn{i} years.
 #'@details Mean Maximum Age (MMA): \deqn{MMA = \Sigma (age_{max,i}*B_i)/\Sigma
 #'  B_i} where the sum is over all species \eqn{i}, and \eqn{B_i} is biomass of
 #'  species \eqn{i}. The mean lifespan or longevity is considered to be a fixed
@@ -9,9 +9,16 @@
 #'  The variation of this indicator captures changes in species composition.
 #'
 #'  Recommended data: Fishery independent surveys, finfish and squid.
-#'@param X add text here
-#'@param table.of.age.data add text here --or delete
-#'@param metric add text here
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+#'  designating where the observation was recorded. "SPECIES" is a numeric code
+#'  indicating the species sampled.
+#'@param  age.table  table with 2 columns: "SPECIES" and "MAXAGE", the maximum
+#'  recorded age of the corresponding species.
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@param years vector of years for which to calculate indicator.
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan"
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -25,16 +32,8 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #'@export
 
-
-	meanMaxAge <- function(X, age.table = "scotianshelf", metric=c('BIOMASS','ABUNDANCE'),
-	                       years = c(start.year:end.year)) {
+	meanMaxAge <- function(X, age.table, metric = c('BIOMASS','ABUNDANCE'), years) {
 		
-	  if (age.table == "scotianshelf"){
-	    load("R/sysdata.rda/indiseas_MaxAge.rda")
-	    age.table = indiseas_MaxAge
-	    rm(indiseas_MaxAge)
-	  }
-	  
 		X <- merge(X, age.table, by ='SPECIES')
 		uI = unique(X$ID)                   # extract the spatial scale ID's
 		ind <- NULL                         # initialize dataframe for storing indicator values

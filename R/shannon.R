@@ -1,7 +1,6 @@
 #'@title Calculates Shannon's index of diversity (H')
-#'@description This function takes a dataframe of fisheries independent survey
-#'  data and calculates Shannon's index of diversity for \eqn{j} areas and
-#'  \eqn{i} years.
+#'@description This function calculates Shannon's index of diversity for \eqn{j}
+#'  areas and \eqn{i} years.
 #'@details Shannon diversity index (H'): \deqn{H' = -\Sigma p_i ln(p_i)}
 #'  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
 #'  species and \eqn{S} is the number of species recorded in the sample. This

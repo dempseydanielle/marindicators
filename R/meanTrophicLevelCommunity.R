@@ -1,6 +1,6 @@
 #'@title Calculates the mean trophic level of the community
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the mean trophic level of the community, weighted by biomass
+#'@description This calculates the mean trophic level of the community weighted
+#'  by biomass for \eqn{j} areas and \eqn{i} years.
 #'@details Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
 #'  \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
 #'  of species \eqn{i}.
@@ -57,9 +57,9 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
       year.i = years[i]                             # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
       
-      #ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
+      ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
       
-      ind.i <- aggregate(X.ij[metric]*X.ij['TL'],by=X.ij['ID'],FUN=sum)[,2]/aggregate(X.ij[metric],by=X.ij['ID'],FUN=sum)[,2]
+      #ind.i <- aggregate(X.ij[metric]*X.ij['TL'], by = X.ij['ID'], FUN = sum)[,2]/aggregate(X.ij[metric], by = X.ij['ID'], FUN = sum)[,2]
                 
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe

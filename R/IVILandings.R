@@ -1,6 +1,6 @@
 #'@title Calculates the intrinsic vulnerability index of the catch
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the intrinsic vulnerability index (IVI) of the catch
+#'@description This calculates the intrinsic vulnerability index (IVI) of the
+#'  catch for \eqn{j} areas and \eqn{i} years.
 #'@details The weighted intrinsic vulnerability index (IVI) of species in the
 #'  catch was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma C_j} where
 #'  the sum is over all species, j. The vulnerability for each species was

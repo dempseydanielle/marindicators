@@ -24,8 +24,7 @@
 #'   indicator. Default is set to "ABUNDANCE".
 #' @param LenWt.table table of annual length at weight data with 5 columns.
 #'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
-#'   length at the corresponding "FWT" (fish weight). **note default is
-#'   "scotianshelf" now but will change
+#'   length at the corresponding "FWT" (fish weight). 
 #' @param years vector of years for which to calculate indicator.
 #' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'   "CommunityCondition"

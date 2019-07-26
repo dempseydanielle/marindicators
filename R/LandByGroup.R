@@ -10,7 +10,7 @@
 #'  observation was recorded. "ALLCODES" is a numeric commercial species code
 #'  indicating the species landed, and "CATCH" is the corresponding landed
 #'  weight. Additional columns are required for each species group of interest.
-#'  These columns have value of "1" in the rows species included in the group
+#'  These columns have value of "1" in the rows of species included in the group
 #'  and "NA" in all other rows.
 #'@param group string indicating the species group for which to calculate the
 #'  landings. Should match one of the column names of land. If group = "ALL" the
@@ -31,7 +31,7 @@
 #'  and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
 #'  81:188–206
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca} 
+#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
 LandByGroup <- function(land, 

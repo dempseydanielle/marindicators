@@ -1,7 +1,7 @@
 #'@title Calculates the mean trophic level or marine trophic index of fisheries
 #'  landings
 #'@description This function calculates the mean trophic level or marine trophic
-#'  index of fisheries landingsfor \eqn{j} areas and \eqn{i} years.
+#'  index of fisheries landings for \eqn{j} areas and \eqn{i} years.
 #'@details Mean trophic level of fisheries landings \eqn{TL_{Land}}:
 #'  \deqn{TL_{Land} = \Sigma (TL_i*Y_i)/Y} where \eqn{TL_i} is the trophic level
 #'  of species \eqn{i}, \eqn{Y_i} is the landings of species \eqn{i}, and
@@ -13,8 +13,14 @@
 #'  in the fishery. In general, this indicator reflects a gradual transition in
 #'  landings from long-lived, high trophic level, piscivorous bottom fish toward
 #'  short-lived, low trophic level invertebrates and planktivorous pelagic fish.
-#'  
-#'  The marine trophic index includes only species with TL \deqn{>= 3.25}.
+#'
+#'  The marine trophic index is calculated similarly to \eqn{TL_{Land}}, but
+#'  only includes species with trophic level greater than or equal to an
+#'  explicitly stated trophic level cutoff. For instance, Pauly and Watson 2005
+#'  adopted a trophic level cutoff of 3.25 to emphasize changes in the relative
+#'  abundance of the more threatened high-trophic level fishes. If used is this
+#'  way, this indicator highlights changes in the relative abundance of the more
+#'  threatened high-trophic level fishes.
 #'
 #'  Recommended data: Commercial fisheries landings, fish and invertebrates
 #'@param land dataframe of commercial landings data with columns "YEAR", "ID",
@@ -44,15 +50,15 @@
 #'  they are grouped together in the commercial landings data and are both
 #'  assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
 #'  proportion of each species that makes up the commercial landings. In this
-#'  example, longhorn sculpins consist of about 40% of the total sculpin
+#'  example, longhorn sculpins consist of about 40\% of the total sculpin
 #'  landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
-#'  ravens consist of about 60% of the total sculpin landings and are assigned a
-#'  "PROPORTION_OF_LANDINGS" value of 0.6.
+#'  ravens consist of about 60\% of the total sculpin landings and are assigned
+#'  a "PROPORTION_OF_LANDINGS" value of 0.6.
 #'@param cutoff the minimum trophic level of species to include. Set cutoff = 0
 #'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
 #'  calculate the marine trophic index.
-#'@return returns a dataframe with three columns: "ID", "YEAR", and if
-#'  cutoff = 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
+#'@return returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
+#'  0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -60,6 +66,11 @@
 #'
 #'  Pauly D, Christensen V, Dalsgaard J, Froese R, Torres F (1998) Fishing Down
 #'  Marine Food Webs. Science 279:860-863
+#'
+#'  Pauly D, Watson R. 2005. Background and interpretation of the “Marine
+#'  Trophic Index” as a measure of biodiversity. Philos Trans R Soc B Biol Sci
+#'  360:415–423
+#'
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export

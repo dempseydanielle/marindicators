@@ -8,8 +8,7 @@
 #'   designating where the observation was recorded. "SPECIES" is a numeric code
 #'   indicating the species sampled.
 #' @param TL.table dataframe with columns "SPECIES" and the corresponding "TL"
-#'   (trophic level). **Note: for this draft TL.table = "scotianshelf" but will
-#'   take this out for next draft
+#'   (trophic level).
 #' @param metric character string indicating whether to use "BIOMASS" or
 #'   "ABUNDANCE" to calculate indicator.
 #' @param TL.grouping size of the trophic level bin for which to aggregrate
@@ -21,14 +20,16 @@
 #'   "BIOMASS_TL3", "BIOMASS_TL4"
 #' @importFrom stats aggregate
 #' @family stability and resistance indicators
-#' @references Coll M, Shannon LJ, Moloney CL, Palomera I, Tudela S, 2006.
-#'   Comparing trophic flows and fishing impacts of a NW Mediterranean ecosystem
-#'   with coastal upwellings by means of standardized ecological models and
-#'   indicators. Ecol. Model. 198, 53-70. (not in references!)
+#' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
+#'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+#'   Aquat. Sci. 3232: xii + 212 p.
 #'
-#'   Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
-#'   evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci.
-#'   3232: xii + 212 p.
+#'   (Alida: this was not in Tech Report references!) Coll M, Shannon LJ,
+#'   Moloney CL, Palomera I, Tudela S, 2006. Comparing trophic flows and fishing
+#'   impacts of a NW Mediterranean ecosystem with coastal upwellings by means of
+#'   standardized ecological models and indicators. Ecol. Model. 198, 53-70.
+#'   
+
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
@@ -41,27 +42,27 @@ biomassPerTL <- function(X, TL.table,
   breaks <- seq(1, 10, by = TL.grouping)                          # create a vector from 1 to 10 (increasing by TL.grouping)
   TL.table['TL'] <- breaks[findInterval(TL.table[,'TL'], breaks)] # truncates "TL" (removes values after the decimal)
   
-  X <- merge(X, TL.table, by = 'SPECIES')                                # merge X and the trophic level data		
+  X <- merge(X, TL.table, by = 'SPECIES')                         # merge X and the trophic level data		
   
-  ind <- stats::aggregate(X[metric], by= X[c('ID', 'YEAR', 'TL')], FUN = sum)
+  ind <- stats::aggregate(X[metric], by= X[c('ID', 'YEAR', 'TL')], FUN = sum) # calculate total biomass per TL
   
-  TL_biomass <- data.frame(years)
+  TL_biomass <- data.frame(years)                                # dataframe of all years
   names(TL_biomass) <- "YEAR"
 
-  uTL <- unique(ind$TL) # unique trophic level
+  uTL <- unique(ind$TL)                                          # unique trophic levels
   for(i in 1:length(uTL)){
     
-    TL.i <- uTL[i]
-    biomass.i <- ind[ind$TL == TL.i, ]
+    TL.i <- uTL[i]                                               # set TL.i to the current trophic level
+    biomass.i <- ind[ind$TL == TL.i, ]                           # subset ind to include only TL.i
     
-    name.i <- paste(metric, "_TL", TL.i, sep = "")
+    name.i <- paste(metric, "_TL", TL.i, sep = "")               # name indicator metric_TL.i
     names(biomass.i)[4] <- name.i
     biomass.i$TL <- NULL
     
-    TL_biomass <- merge(TL_biomass, biomass.i, all.y = T)
+    TL_biomass <- merge(TL_biomass, biomass.i, all.y = T)        # merge with years
     
   }
-  TL_biomass <- TL_biomass[order(TL_biomass$ID), ]
+  TL_biomass <- TL_biomass[order(TL_biomass$ID), ]               # order by ID to match other functions
   TL_biomass	
 }
 

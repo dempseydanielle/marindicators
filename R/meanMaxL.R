@@ -1,16 +1,27 @@
 #'@title Calculates the mean maximum length of fish in the community
-#'@description This function takes a dataframe with columns **** and calculates
-#'  the mean maximum length (MML) of fish in the community weighted by biomass
-#'  or abundance
+#'@description This function calculates the mean maximum length (MML) of fish in
+#'  the community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
+#'  years.
 #'@details Mean Maximum Length (MML): \deqn{MML = \Sigma (L_{max,i}*M_i)/\Sigma
 #'  M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
 #'  \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
 #'  invertebrates).
 #'
 #'  Recommended data: Fishery independent surveys, fish.
-#'@param X add text here
-#'@param table.of.length.data add text here --or delete
-#'@param metric add text here
+#'@param X X dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
+#'  code designating where the observation was recorded (a string). "SPECIES" is
+#'  a numeric code indicating the species sampled. "FLEN" is the length class
+#'  (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
+#'  abundance at length. Species for which there are no length data should be
+#'  assigned FLEN = -99. These observations are removed by the function.
+#'@param lmax.table table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
+#'  recorded length of the corresponding species.
+#'@param metric character string indicating whether to use "BIOMASS" or
+#'  "ABUNDANCE" to calculate indicator.
+#'@param years vector of years for which to calculate indicator.
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'  "MMlength_metric"
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -27,18 +38,9 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #'@export
 
-meanMaxL <- function(X, length.table = "scotianshelf", metric=c('BIOMASS','ABUNDANCE'),
-                     years = c(start.year:end.year)) {
-  #this indicator is for finfish only
-  #X is input data
-  
-  if (length.table == "scotianshelf"){
-    load("R/sysdata.rda/indiseas_MaxLength.rda")
-    length.table = indiseas_MaxLength
-    rm(indiseas_MaxLength)
-  }
-  
-  X <- merge(X, length.table, by = 'SPECIES')
+meanMaxL <- function(X, lmax.table, metric=c('BIOMASS','ABUNDANCE'), years) {
+
+  X <- merge(X, lmax.table, by = 'SPECIES')
   X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data
 
   uI = unique(X$ID)                   # extract the spatial scale ID's
@@ -65,26 +67,6 @@ meanMaxL <- function(X, length.table = "scotianshelf", metric=c('BIOMASS','ABUND
   ind                                             # return vector of indicator values for years c(start.year:end.year) 
   
 }
-
-  
-  
-  
-  
-  
-  
-  
-		# uI <- unique(X$ID) 	
-		# mmL <-numeric()
-		# for(i in 1:length(uI)) {
-		# 	Y <- X[X$ID==uI[i],]
-		# 	mmL[i] <- sum(Y[metric]*Y['MAXLEN99'])/sum(Y[metric])	
-		#    }
-		#    out <- as.data.frame(cbind(uI,mmL))
-		#    names(out)[1] <-'ID'
-		#    out[,2] <- as.numeric(out[,2])
-		#    return(out)		
-#}
-
 
 
 
