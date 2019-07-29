@@ -5,6 +5,7 @@ Junly 29, 2019 - Danielle Dempsey (danielle.dempsey@dfo-mpo.gc.ca)
 Welcome to the indicators package. It is awesome.
 
 NOTES on the Example folder:
+
 Please remove folder "Example" from indicators before installing the package.
 Save "Example" somewhere special and write the file path in scripts Example/calc_indicators.R (line 5)
 and Example/calc_indicators_test.R (line 8)
