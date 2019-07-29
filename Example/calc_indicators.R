@@ -1,8 +1,8 @@
 # July 26, 2019
 # This script calculates all indicators from Tech Report for ESS and WSS
 
-# set path to where you save Example folder!
-path <- file.path("C:/Users/DEMPSEYD/Desktop")
+#Example data folder is stored in R:\Science\Population Ecology Division\Shared\!PED_Staff\DempseyD\indicators_data
+path <- file.path("R:/Science/Population Ecology Division/Shared/!PED_Staff/DempseyD/indicators_data")
 
 
 library(indicators)
@@ -11,24 +11,24 @@ library(indicators)
 yrs= c(1970:2015)
 
 # fishery-independent data
-RV <- read.csv(paste(path, "/Example/RV/NotLengthBased/esswss_adjbiomass.csv", sep = ""), head = TRUE, sep = ",")
-RV_length <- read.csv(paste(path, "/Example/RV/LengthBased/esswss_adjbiomass_Length.csv", sep = ""), head = TRUE, sep = ",")
+RV <- read.csv(paste(path, "/RV/NotLengthBased/esswss_adjbiomass.csv", sep = ""), head = TRUE, sep = ",")
+RV_length <- read.csv(paste(path, "/RV/LengthBased/esswss_adjbiomass_Length.csv", sep = ""), head = TRUE, sep = ",")
 
 # commercial landings data
-land_all <- read.csv(paste(path, "/Example/Commercial/esswss_landings.csv", sep = ""), head = TRUE, sep = ",")
+land_all <- read.csv(paste(path, "/Commercial/esswss_landings.csv", sep = ""), head = TRUE, sep = ",")
 land_dat <- land_all[land_all$YEAR >= 1970 & land_all$YEAR <= 2015, ]
 
 # Extra data
-TL.table.simple <- read.csv(paste(path, "/Example/Extra Info/TL_simple.csv", sep = ""), header = TRUE, sep = ",")
-TL.table.length <- read.csv(paste(path, "/Example/Extra Info/TL_length_esswss.csv", sep = ""), header = TRUE, sep = ",")
+TL.table.simple <- read.csv(paste(path, "/Extra Info/TL_simple.csv", sep = ""), header = TRUE, sep = ",")
+TL.table.length <- read.csv(paste(path, "/Extra Info/TL_length_esswss.csv", sep = ""), header = TRUE, sep = ",")
 
-maxL.table <- read.csv(paste(path, "/Example/Extra Info//MaxLength_esswss.csv", sep = ""), header = TRUE, sep = ",")
-maxage.table <- read.csv(paste(path, "/Example/Extra Info/MaxAge_esswss.csv", sep =""), header = TRUE, sep = ",")
+maxL.table <- read.csv(paste(path, "/Extra Info//MaxLength_esswss.csv", sep = ""), header = TRUE, sep = ",")
+maxage.table <- read.csv(paste(path, "/Extra Info/MaxAge_esswss.csv", sep =""), header = TRUE, sep = ",")
 
-IVI.table <- read.csv(paste(path, "/Example/Extra Info/IVI_esswss.csv", sep = ""),header = TRUE, sep = ",")
-prop.land.table <- read.csv(paste(path, "/Example/Extra Info/Proportion_Landings_esswss.csv", sep = ""), header = TRUE, sep = ",")
+IVI.table <- read.csv(paste(path, "/Extra Info/IVI_esswss.csv", sep = ""),header = TRUE, sep = ",")
+prop.land.table <- read.csv(paste(path, "/Extra Info/Proportion_Landings_esswss.csv", sep = ""), header = TRUE, sep = ",")
 
-Length_Weight <- read.csv(paste(path, "/Example/Extra Info/Length_Weight_esswss.csv", sep = ""),header = TRUE, sep = ",") # read in length-at-weight data for ESS and WSS
+Length_Weight <- read.csv(paste(path, "/Extra Info/Length_Weight_esswss.csv", sep = ""),header = TRUE, sep = ",") # read in length-at-weight data for ESS and WSS
 id <- sapply(Length_Weight, is.factor)                                    # identify which columns are factors (ID)
 Length_Weight[id] <- lapply(Length_Weight[id], as.character)              # convert factors to text  
 
@@ -110,7 +110,6 @@ pel_dem = biomassratio(RV, group1 = "PELAGIC", group2 = "GROUNDFISH",
 bio = resourcePotential(RV, metric = "BIOMASS", group = "ALL", years = yrs)
 
 bio_clup = resourcePotential(RV, metric = "BIOMASS", group = "CLUPEIDS", years = yrs)
-all.equal(TARGET$BiomassClupeids, bio_clup$BIOMASS_CLUPEIDS)
 
 bio_fin = resourcePotential(RV, metric = "BIOMASS", group = "FINFISH", years = yrs)
 
