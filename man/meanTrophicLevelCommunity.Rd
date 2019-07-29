@@ -4,26 +4,37 @@
 \alias{meanTrophicLevelCommunity}
 \title{Calculates the mean trophic level of the community}
 \usage{
-meanTrophicLevelCommunity(X, pred.data.table = "indiseas_wss_tl",
-  metric = "BIOMASS")
+meanTrophicLevelCommunity(X, TL.table, metric = c("ABUNDANCE",
+  "BIOMASS"), years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{metric}{set to biomass}
+\item{TL.table}{dataframe with columns "SPECIES" and the corresponding "TL"
+(trophic level).}
 
-\item{lpred.data.table}{to delete?}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate indicator.}
+
+\item{years}{vector of years for which to calculate indicator.}
+}
+\value{
+Returns a dataframe with 3 columns. "ID", "YEAR", and
+ "MeanTLCommunity"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
- the mean trophic level of the community, weighted by biomass
+This calculates the mean trophic level of the community weighted
+ by biomass for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
- \eqn{TL_i} is trophic level of species i, and \eqn{B_i} is the biomass of
- species i.
+ \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
+ of species \eqn{i}.
 
- This indicator is based on trophic levels (TL) of all species with available
+ This indicator is based on trophic levels of all species with available
  biomass time series, weighted by annual species-specific biomass, to reflect
  the structure of the community.
 
@@ -34,21 +45,24 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Christensen 1998 (not in tech report)
+ Christensen V. 1998. Fishery-induced changes in a marine ecosystem: insight
+ frommodels of the Gulf of Thailand. J. Fish Bio. 53:128-142. Article No.
+ jb980809
 
- Shannon et al 2014
+ Shannon L, Coll M, Bundy A, Gascuel D, Heymans JJ, Kleisner K, Lynam CP,
+ Piroddi C, Tam J, Travers-Trolet M, Shin Y. 2014. Trophic level-based
+ indicators to track fishing impacts across marine ecosystems. Mar. Ecol.
+ Prog. Ser. 512, 115–140.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatioInv2Dem}},
-  \code{\link{biomassRatioPel2Dem}},
+Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{communityFultonK}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunityLength}},
-  \code{\link{predatoryFish}}, \code{\link{ratioIndicator}}
+  \code{\link{predatoryFish}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{ecosystem structure and function indicators}

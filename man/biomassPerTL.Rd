@@ -2,36 +2,51 @@
 % Please edit documentation in R/biomassPerTL.R
 \name{biomassPerTL}
 \alias{biomassPerTL}
-\title{Calculates the biomass (or abundace??) per trophic level}
+\title{Calculates the biomass or abundance per discrete trophic level}
 \usage{
-biomassPerTL(X, table.of.trophic.level.data = "INDISEAS_WSS_TL",
-  metric = c("BIOMASS", "ABUNDANCE"), TL.grouping = 1, path = NA)
+biomassPerTL(X, TL.table, metric = c("BIOMASS", "ABUNDANCE"),
+  TL.grouping = 1, years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{table.of.trophic.level.data}{add text here}
+\item{TL.table}{dataframe with columns "SPECIES" and the corresponding "TL"
+(trophic level).}
 
-\item{metric}{add text here}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate indicator.}
 
-\item{TL.grouping}{add text here}
+\item{TL.grouping}{size of the trophic level bin for which to aggregrate
+biomass (or abundance). Default is "TL.grouping = 1" so that biomass (or
+abundance) is aggregated over discrete trophic levels.}
 
-\item{path}{add text here}
+\item{years}{vector of years for which to calculate indicator.}
+}
+\value{
+Returns a dataframe with columns "ID", "YEAR", and the corresponding
+  biomass for each trophic level grouping, e.g., "BIOMASS_TL2",
+  "BIOMASS_TL3", "BIOMASS_TL4"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  the biomass (or abundance) per discrete trophic level.
+This function calculates the biomass or abundance per discrete
+  trophic level for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 **Recommended data: Fishery independent surveys, fish and
   invertebrates.
 }
 \references{
-Coll et al 2006 (not in references!)
+Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
+  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+  Aquat. Sci. 3232: xii + 212 p.
 
-  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
-  evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci.
-  3232: xii + 212 p.
+  (Alida: this was not in Tech Report references!) Coll M, Shannon LJ,
+  Moloney CL, Palomera I, Tudela S, 2006. Comparing trophic flows and fishing
+  impacts of a NW Mediterranean ecosystem with coastal upwellings by means of
+  standardized ecological models and indicators. Ecol. Model. 198, 53-70.
 }
 \seealso{
 Other stability and resistance indicators: \code{\link{IVILandings}},
@@ -40,6 +55,6 @@ Other stability and resistance indicators: \code{\link{IVILandings}},
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{stability and resistance indicators}

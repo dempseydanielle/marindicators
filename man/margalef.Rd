@@ -2,29 +2,44 @@
 % Please edit documentation in R/margalef.R
 \name{margalef}
 \alias{margalef}
-\title{Also calculates Margalef's species richness (see
-  MargalefSpeciesRichness.R)}
+\title{Calculates Margalef's species richness}
 \usage{
-margalef(X, group = c("FINFISH", "ALL"), metric = c("BIOMASS",
-  "ABUNDANCE"))
+margalef(X, group = c("ALL", "FINFISH", "GROUNDFISH"),
+  metric = c("BIOMASS", "ABUNDANCE"), years)
 }
 \arguments{
-\item{X}{is probably a dataframe with certain columns.}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{group}{is where you select which groups to include}
+\item{group}{character string indicating which species to include, either
+"ALL", "FINFISH" or "GROUNDFISH". Note that this subsetting is based on the
+Fisheries and Oceans Canada species codes for the Scotian Shelf. For other
+regions it may be prudent to subsetdata to species groups of interest prior
+to using the function and then choose group = "ALL". Type ?speciesgroups
+for more information.}
 
-\item{metric}{is where you choose if you want to calculate using biomass or}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate the indicator.}
+
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+Returns a dataframe with 3 columns: "ID", YEAR", and
+  "MargalefRichness"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  Margalef's species richness
+This function takes a dataframe of fisheries independent survey
+  data and calculates Margalef's species richness for \eqn{j} areas and
+  \eqn{i} years.
 }
 \details{
-Margalef's species richness: \deqn{S = (S_y - 1)/log(F_y)} S is the
-  count of the number of species recorded in all trawl catches collected in
-  any one year (y). F is the total count of all individuals caught in all
-  trawl catches in any one year (y). 
-  
+Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
+  \eqn{S_y} is the count of the number of species recorded in all trawl
+  catches collected in year \eqn{y}. \eqn{F} is the total count of all
+  individuals caught in year \eqn{y}.
+
   **Recommended data: Fishery independent surveys, fish and invertebrates.
 }
 \references{
@@ -35,18 +50,17 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
   (2012) Redundancy in metrics describing the composition, structure, and
   functioning of the North Sea demersal fish community. ICES J Mar Sci
-  69:8–22
+  69:8-22
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},
   \code{\link{hillN1}}, \code{\link{hillN2}},
   \code{\link{kemptonQ}},
-  \code{\link{margalefSpeciesRichness}},
   \code{\link{pielouSpeciesEvenness}},
   \code{\link{shannon}}, \code{\link{speciesrichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}

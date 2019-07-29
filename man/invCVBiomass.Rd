@@ -7,22 +7,24 @@
 invCVBiomass(X, window = 5)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "ID" is an area code designating where the
+observation was recorded. "SPECIES" is a numeric code indicating the
+species sampled.}
 
-\item{window}{Say that default is 5 for 5-year moving average. add text here}
+\item{window}{window for the moving averge. Default is 5 years.}
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  the inverse of the coefficient of variation of the biomass
-  (InverseCVBiomass)
+This calculates the inverse of the coefficient of variation of
+  the biomass (InverseCVBiomass) for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 The inverse of the coefficient of variation of the biomass
   (InverseCVBiomass) was estimated as a five year moving average:
   \deqn{InverseCVBiomass = 1/(1/n)\Sigma(SD_i/Xbar_i)} The sum is from year
   \eqn{i} to year \eqn{i+n-1}, where \eqn{n=5} for the 5-year moving average.
-  \eqn{SD_i} is the standard deviation of the mean biomass and \eqn{X_i} is the mean
-  biomass for year i.
+  \eqn{SD_i} is the standard deviation of the mean biomass and \eqn{X_i} is
+  the mean biomass for year i.
 
   Data used: Fishery independent surveys, fish and invertebrates
 }
@@ -31,7 +33,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
   Aquat. Sci. 3232: xii + 212 p.
 
-  Blanchard and Boucher 2001 (not in Tech refs)
+  Blanchard, F, Boucher, J (2001) Temporal variability of total biomass in
+  harvested communities of demersal fishes. Fisheries Research. 49. 283–293.
+  10.1016/S0165-7836(00)00203-4. (not in Tech refs)
 
   Shin YJ, Shannon LJ (2010) Using indicators for evaluating, comparing, and
   communicating the ecological status of exploited marine ecosystems. 1. the
@@ -44,6 +48,6 @@ Other stability and resistance indicators: \code{\link{IVILandings}},
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{stability and resistance indicators}

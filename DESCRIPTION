@@ -6,7 +6,7 @@ Authors: Danielle Dempsey, Alida Bundy, Adam Cooke, Michael McMahon, Catalina Go
 Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role=c("aut", "cre")),
            person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= "aut"),
            person("Adam", "Cooke", email="Adam.Cooke@dfo-mpo.gc.ca", role= "aut"),
-           person("Michael", "McMahon", email="Micahel.McMahon@dfo-mpo.gc.ca", role= "aut"),
+           person("Mike", "McMahon", email="Mike.McMahon@dfo-mpo.gc.ca", role= "aut"),
            person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"))
 Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
 Description: This package calculates a suite of ecosystem indicators.

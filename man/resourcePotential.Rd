@@ -2,33 +2,49 @@
 % Please edit documentation in R/resourcePotential.R
 \name{resourcePotential}
 \alias{resourcePotential}
-\title{Calculates the resource potential of defined species groups}
+\title{Calculates the resource potential of pre-defined species groups}
 \usage{
 resourcePotential(X, user.defined = F, group = c("FINFISH", "ALL",
   "SKATES", "CLUPEIDS", "GROUNDFISH", "FLATFISH", "GADOIDS",
   "INVERTEBRATES", "FORAGE", "PELAGIC", "LBENTHIVORE", "MBENTHIVORE",
   "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE"), metric = c("BIOMASS",
-  "ABUNDANCE"), herring = T, yr = 0)
+  "ABUNDANCE"), years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{metric}{can choose biomass or abundance}
+\item{user.defined}{for a user-defined group of species, put a vector of
+species codes to include here. Default is "FALSE"}
 
-\item{herring}{text}
+\item{group}{character string indicating which group of species to include.
+Note that this subsetting is based on the Fisheries and Oceans Canada
+species codes for the Scotian Shelf. For other regions it may be prudent to
+subsetdata to species groups of interest prior to using the function and
+then choose group = "ALL". Type ?speciesgroups for more information.}
 
-\item{use.defined}{text}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate indicator.}
 
-\item{year}{text}
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
+
+ If there is no data for a given year, the indicator value will be "NA" for
+ that year. If biomass of species “x” was not captured in the survey, species
+ “x” is still likely to present, just not detected or perhaps not recorded.
+ Replacing with zero would have an impact on trends, whereas treating as NA
+ does not.
 }
 \description{
-This function takes a dataframe with columns **** and calculates
- the biomass or abundance of a defined group of species
+This function calculates the biomass or abundance of a
+ pre-defined group of species for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This indicator reflect temporal dynamics of seven fished groups:
- Clupeids, Finfish, Flatfish, Gadoids, Groundfish, Invertebrates and Forage
- fish (*or this might change depending on ow we tell them to organize data)
+This indicator reflects temporal dynamics species groups.
 
  Recommended data: Fishery independent surveys, fish and invertebrates.
 }
@@ -42,6 +58,7 @@ Other resource potential indicators: \code{\link{FishingInBalance}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
+\concept{ecosystem structure and functioning indicators}
 \concept{resource potential indicators}

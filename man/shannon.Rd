@@ -5,48 +5,60 @@
 \title{Calculates Shannon's index of diversity (H')}
 \usage{
 shannon(X, group = c("FINFISH", "ALL"), metric = c("BIOMASS",
-  "ABUNDANCE"))
+  "ABUNDANCE"), years)
 }
 \arguments{
-\item{X}{is probably a dataframe with certain columns.}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{group}{is where you select which groups to include}
+\item{group}{character string indicating which species to include, either
+"ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
+Oceans Canada species codes for the Scotian Shelf. For other regions it may
+be prudent to subsetdata to species groups of interest prior to using the
+function and then choose grou = "ALL". Type ?speciesgroups for more
+information.}
 
-\item{metric}{is where you choose if you want to calculate using biomass or
-abundance}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate the indicator.}
+
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+Returns a dataframe with 3 columns: "ID", YEAR", and
+ "ShannonDiversity"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  Shannon's diversity index.
+This function calculates Shannon's index of diversity for \eqn{j}
+ areas and \eqn{i} years.
 }
 \details{
-Shannon diversity index (H'): \deqn{H' = -\Sigma(p_i ln( p_i ))}
-  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
-  species and S is the number of species recorded in the sample. This index
-  is sensitive to the number of species recorded in the sample.
+Shannon diversity index (H'): \deqn{H' = -\Sigma p_i ln(p_i)}
+ \eqn{p_i} is the proportion of the total sample contributed by the i(th)
+ species and \eqn{S} is the number of species recorded in the sample. This
+ index is sensitive to the number of species recorded in the sample.
 
-  Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent surveys, fish and invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
-  fish community: identifying reference levels for an ecosystem approach to
-  management. ICES J Mar Sci J du Cons 63:573–593
+ Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
+ fish community: identifying reference levels for an ecosystem approach to
+ management. ICES J Mar Sci J du Cons 63:573-593
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},
   \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}},
-  \code{\link{margalefSpeciesRichness}},
-  \code{\link{margalef}},
+  \code{\link{kemptonQ}}, \code{\link{margalef}},
   \code{\link{pielouSpeciesEvenness}},
   \code{\link{speciesrichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}

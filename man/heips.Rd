@@ -5,26 +5,41 @@
 \title{Calculates Heip's Evenness Index}
 \usage{
 heips(X, group = c("FINFISH", "ALL"), metric = c("BIOMASS",
-  "ABUNDANCE"))
+  "ABUNDANCE"), years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{group}{add text here}
+\item{group}{character string indicating which species to include, either
+"ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
+Oceans Canada species codes for the Scotian Shelf. For other regions it may
+be prudent to subsetdata to species groups of interest prior to using the
+function and then choose group = "ALL". Type ?speciesgroups for more
+information.}
 
-\item{metric}{add text here}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate the indicator.}
+
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+Returns a dataframe with 3 columns: "ID", YEAR", and "Heips"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  Heip's Evenness Index (HE) of the community
+This function takes a dataframe of fisheries independent survey
+  data and calculates Heip's Evenness Index (HE) of the community for \eqn{j}
+  areas and \eqn{i} years.
 }
 \details{
-Heip's Evenness Index (HE): \deqn{HE = (exp^(H') - 1)/(S - 1)}
-  where \eqn{H'} is the Shannon Index of Diversity and S is species richness.
+Heip's Evenness Index (HE): \deqn{HE = (exp^{H'} - 1)/(S - 1)} where
+  \eqn{H'} is the Shannon Index of Diversity and \eqn{S} is species richness.
   This index ranges from 0 to 1 and measures how equally the species richness
-  contributes to the total abundance **or biomass?? of the community.
+  contributes to the total abundance or biomass of the community.
 
-  **Recommended data: Fishery independent surveys, fish and invertebrates (NOT in tech report).
+  **Recommended data: Fishery independent surveys, fish and invertebrates
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -38,13 +53,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 \seealso{
 Other biodiversity indicators: \code{\link{hillN1}},
   \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalefSpeciesRichness}},
   \code{\link{margalef}},
   \code{\link{pielouSpeciesEvenness}},
   \code{\link{shannon}}, \code{\link{speciesrichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}

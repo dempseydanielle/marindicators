@@ -4,41 +4,68 @@
 \alias{IVILandings}
 \title{Calculates the intrinsic vulnerability index of the catch}
 \usage{
-IVILandings(land = dat, path = NA)
+IVILandings(land, IVI.table, propland.table, years)
 }
 \arguments{
-\item{land}{add text here}
+\item{land}{dataframe of commercial landings data with columns "YEAR", "ID",
+"ALLCODES" and "CATCH". "ID" is an area code designating where the
+observation was recorded. "ALLCODES" is a numeric commercial species code
+indicating the species landed, and "CATCH" is the corresponding landed
+weight.}
 
-\item{path}{add text}
+\item{IVI.table}{dataframe with two columns: "SPECIES" and "IVI". "SPECIES" is
+the fisheries-independent numeric species code, and "IVI" is the
+corresponding intrinsic vulnerability index.}
+
+\item{propland.table}{dataframe with three columns: "SPECIES", "ALLCODE", and
+"PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
+species code (as in IVI.table), and "ALLCODES" is the corresponding numeric
+commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
+to species that have different SPECIES codes, but the same ALLCODES code.
+For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
+code of 300, while sea ravens are assigned a species code of 320; however
+they are grouped together in the commercial landings data and are both
+assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
+proportion of each species that makes up the commercial landings. In this
+example, longhorn sculpins consist of about 40% of the total sculpin
+landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
+ravens consist of about 60% of the total sculpin landings and are assigned a
+"PROPORTION_OF_LANDINGS" value of 0.6.}
+
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+returns a dataframe with three columns: "ID", "YEAR", and
+ "IVILandings"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  the intrinsic vulnerability index (IVI) of the catch
+This calculates the intrinsic vulnerability index (IVI) of the
+ catch for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 The weighted intrinsic vulnerability index (IVI) of species in the
-  catch was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma(C_j)} where
-  the sum is over all species, j. The vulnerability for each species was
-  determined by considering several traits including maximum length, age at
-  first maturity, longevity, von Bertalanffy growth parameter, natural
-  mortality, fecundity, spatial behaviour and geographic range (e.g. species
-  with larger body size, higher longevity, higher age at maturity, and lower
-  growth rates have higher vulnerability indexes and should be less able to
-  sustain high fishing mortality; Cheung et al. 2005). The index values
-  ranges from 1 to 100, with 100 being the most vulnerable. See Appendix 1
-  from Cheung et al., 2007:
-  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
+ catch was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma C_j} where
+ the sum is over all species, j. The vulnerability for each species was
+ determined by considering several traits including maximum length, age at
+ first maturity, longevity, von Bertalanffy growth parameter, natural
+ mortality, fecundity, spatial behaviour and geographic range (e.g. species
+ with larger body size, higher longevity, higher age at maturity, and lower
+ growth rates have higher vulnerability indexes and should be less able to
+ sustain high fishing mortality; Cheung et al. 2005). The index values ranges
+ from 1 to 100, with 100 being the most vulnerable. See Appendix 1 from
+ Cheung et al., 2007:
+ \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 
-  Recommended data: Commercial fisheries landings, fish
+ Recommended data: Commercial fisheries landings, fish
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  Cheung, William W. L., watson, Reg, Morato, Telmo, Pitcher, Tony J., Pauly,
-  Daniel (2007) Intrinsic vulnerability in the global fish catch. Mar Ecol
-  Prog Ser 333: 1 - 12
+ Cheung, William W. L., watson, Reg, Morato, Telmo, Pitcher, Tony J., Pauly,
+ Daniel (2007) Intrinsic vulnerability in the global fish catch. Mar Ecol
+ Prog Ser 333: 1 - 12
 }
 \seealso{
 Other stability and resistance indicators: \code{\link{biomassPerTL}},
@@ -47,6 +74,6 @@ Other stability and resistance indicators: \code{\link{biomassPerTL}},
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{stability and resistance indicators}

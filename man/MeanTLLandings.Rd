@@ -2,31 +2,78 @@
 % Please edit documentation in R/MeanTLLandings.R
 \name{MeanTLLandings}
 \alias{MeanTLLandings}
-\title{Calculates the mean trophic level of fisheries landings}
+\title{Calculates the mean trophic level or marine trophic index of fisheries
+ landings}
 \usage{
-MeanTLLandings(land = dat, cutoff = 0)
+MeanTLLandings(land, TL.table, propland.table, cutoff = 0)
 }
 \arguments{
-\item{land}{add text here}
+\item{land}{dataframe of commercial landings data with columns "YEAR", "ID",
+"ALLCODES" and "CATCH". "ID" is an area code designating where the
+observation was recorded. "ALLCODES" is a numeric commercial species code
+indicating the species landed, and "CATCH" is the corresponding landed
+weight.}
 
-\item{cutoff}{add text here}
+\item{TL.table}{dataframe with four columns: "SPECIES", "GROUP_NAME", "TL",
+and "LANDED". "SPECIES" is the fishery-independent species code, and
+"GROUP_NAME" and "TL" are the corresponding size-based functional group and
+trophic level, respectively. Note that one SPECIES code may be assigned more
+than one GROUP_NAME if ontogentic shifts occur. For example, on the Scotian
+Shelf small (< 33 cm) and large (>33 cm) haddock both have SPECIES code 11.
+Small haddock are assigend to GROUP_NAME "Haddock<33" with trophic level
+3.38. Large haddock are assigned to GROUP_NAME "Haddock33+" with trophic
+level 3.43. "LANDED" estimates the proportion of the total landings of a
+given species that is represented by GROUP_NAME. Landings of small haddock
+are negligible in this example, and so Haddock<33 is assigned LANDED = 0,
+while Haddock33+ is assigned LANDED = 1.}
+
+\item{propland.table}{dataframe with three columns: "SPECIES", "ALLCODE", and
+"PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
+species code (as in TL.table), and "ALLCODES" is the corresponding numeric
+commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
+to species that have different SPECIES codes, but the same ALLCODES code.
+For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
+code of 300, while sea ravens are assigned a species code of 320; however
+they are grouped together in the commercial landings data and are both
+assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
+proportion of each species that makes up the commercial landings. In this
+example, longhorn sculpins consist of about 40\% of the total sculpin
+landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
+ravens consist of about 60\% of the total sculpin landings and are assigned
+a "PROPORTION_OF_LANDINGS" value of 0.6.}
+
+\item{cutoff}{the minimum trophic level of species to include. Set cutoff = 0
+to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
+calculate the marine trophic index.}
+}
+\value{
+returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
+ 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
- the mean trophic level of fisheries landings
+This function calculates the mean trophic level or marine trophic
+ index of fisheries landings for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Mean trophic level of fisheries landings \eqn{TL_Land}: \deqn{TL_Land
- = \Sigma (TL_i*Y_i)/Y} where \eqn{TL_i} is the trophic level of species i,
- \eqn{Y_i} is the landings of species i, and Y is the total landings of all
- species. Trophic Level of individual species is estimated either through an
- Ecopath model or dietary analysis, or taken from a global database such as
- Fishbase.
+Mean trophic level of fisheries landings \eqn{TL_{Land}}:
+ \deqn{TL_{Land} = \Sigma (TL_i*Y_i)/Y} where \eqn{TL_i} is the trophic level
+ of species \eqn{i}, \eqn{Y_i} is the landings of species \eqn{i}, and
+ \eqn{Y} is the total landings of all species. Trophic Level of individual
+ species is estimated either through an Ecopath model or dietary analysis, or
+ taken from a global database such as Fishbase.
 
  This indicator captures the average trophic level of the species exploited
  in the fishery. In general, this indicator reflects a gradual transition in
  landings from long-lived, high trophic level, piscivorous bottom fish toward
  short-lived, low trophic level invertebrates and planktivorous pelagic fish.
+
+ The marine trophic index is calculated similarly to \eqn{TL_{Land}}, but
+ only includes species with trophic level greater than or equal to an
+ explicitly stated trophic level cutoff. For instance, Pauly and Watson 2005
+ adopted a trophic level cutoff of 3.25 to emphasize changes in the relative
+ abundance of the more threatened high-trophic level fishes. If used is this
+ way, this indicator highlights changes in the relative abundance of the more
+ threatened high-trophic level fishes.
 
  Recommended data: Commercial fisheries landings, fish and invertebrates
 }
@@ -37,15 +84,18 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 
  Pauly D, Christensen V, Dalsgaard J, Froese R, Torres F (1998) Fishing Down
  Marine Food Webs. Science 279:860-863
+
+ Pauly D, Watson R. 2005. Background and interpretation of the “Marine
+ Trophic Index” as a measure of biodiversity. Philos Trans R Soc B Biol Sci
+ 360:415–423
 }
 \seealso{
 Other fishing pressure indicators: \code{\link{FishingPressure}},
   \code{\link{InverseFishingPressure}},
-  \code{\link{LandByGroup}},
-  \code{\link{LandingsDiversity}}
+  \code{\link{LandByGroup}}, \code{\link{speciesrichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{fishing pressure indicators}

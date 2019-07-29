@@ -4,35 +4,48 @@
 \alias{communityFultonK}
 \title{Calculates Fulton's Condition Index for the community}
 \usage{
-communityFultonK(X, metric = "ABUNDANCE", gp = groups, yr = yrs[i],
-  user.defined = F, group = c("FINFISH", "SKATES", "CLUPEIDS",
-  "GROUNDFISH", "FLATFISH", "GADOIDS", "FORAGE", "LBENTHIVORE",
-  "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE"), path = NA)
+communityFultonK(X, group = c("ALL", "FINFISH"), metric = "ABUNDANCE",
+  LenWt.table, years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
+code designating where the observation was recorded (a string). "SPECIES"
+is a numeric code indicating the species sampled. "FLEN" is the length
+class (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
+abundance at length. Species for which there are no length data should be
+assigned FLEN = -99. These observations are removed by the function.}
 
-\item{metric}{add text here}
+\item{group}{character string indicating which group of species to include.
+Note that this subsetting is based on the Fisheries and Oceans Canada
+species codes for the Scotian Shelf. For other regions it may be prudent to
+subsetdata to species groups of interest prior to using the function and
+then choose group = "ALL". Type ?speciesgroups for more information.}
 
-\item{gp}{add text here}
+\item{metric}{character string indicating which metric to use to calculate
+indicator. Default is set to "ABUNDANCE".}
 
-\item{yr}{add text here}
+\item{LenWt.table}{table of annual length at weight data with 5 columns.
+"YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
+length at the corresponding "FWT" (fish weight).}
 
-\item{user.defined}{add text here}
-
-\item{group}{add text here}
-
-\item{path}{add text here}
+\item{years}{vector of years for which to calculate indicator.}
+}
+\value{
+Returns a dataframe with 3 columns. "ID", "YEAR", and
+  "CommunityCondition"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
-  Fulton's Condition Index (K) for the community (weighted by abundance)
+This function takes a dataframe of length-based fisheries
+  independent survey data and calculates Fulton's condition index for \eqn{j}
+  areas and \eqn{i} years.
 }
 \details{
-Fulton's Condition Index (K): \deqn{K = \Sigma(K_j * A_j)/\Sigma(A_j)}
-  where \eqn{A_j} is the abundance of species j, and \deqn{K_j = W_j/L_j^3 x
-  100} where \eqn{W_j} is the mean weight at length (L) for species j
-  
+Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
+  A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
+  the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
+  \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j}.
+
   **Recommended data: Fishery independent surveys, fish.
 }
 \references{
@@ -51,16 +64,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   for ecosystem-based fisheries management? ICES J Mar Sci 62:528–539
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatioInv2Dem}},
-  \code{\link{biomassRatioPel2Dem}},
+Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunityLength}},
   \code{\link{meanTrophicLevelCommunity}},
-  \code{\link{predatoryFish}}, \code{\link{ratioIndicator}}
+  \code{\link{predatoryFish}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}
+  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{ecosystem structure and function indicators}

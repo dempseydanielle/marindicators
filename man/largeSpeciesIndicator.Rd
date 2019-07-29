@@ -4,27 +4,40 @@
 \alias{largeSpeciesIndicator}
 \title{Calculates the Large Species Indicator}
 \usage{
-largeSpeciesIndicator(X, lmax = 85,
-  linf.data.table = "indiseas_max_length", metric = "BIOMASS")
+largeSpeciesIndicator(X, lmax.table, lmax = 85, metric = "BIOMASS",
+  years)
 }
 \arguments{
-\item{X}{add text here}
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+designating where the observation was recorded. "SPECIES" is a numeric code
+indicating the species sampled.}
 
-\item{lmax}{(set to 85)}
+\item{lmax.table}{table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
+recorded length of the corresponding species.}
 
-\item{linf.data.table}{to delete}
+\item{lmax}{threshold for large fish (cm). Default is 85 cm (i.e., large
+species are those with MAXLEN99 >= 85 cm)}
 
-\item{metric}{add text here}
+\item{metric}{character string indicating whether to use "BIOMASS" or
+"ABUNDANCE" to calculate indicator.}
+
+\item{years}{vector of years for which to calculate indicator.}
+}
+\value{
+Returns a dataframe with 3 columns. "ID", "YEAR", and
+ "LargeFishIndicator"
 }
 \description{
-This function takes a dataframe with columns **** and calculates
- the Large Species Indicator (LSI)
+This function takes a dataframe of length-based fisheries
+ independent survey data and calculates the Large Species Indicator (LSI) for
+ \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_max >85
- cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, i, and
- \eqn{L_max} is the maximum asymptotic length (cm; here the default is 85
- cm).
+Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
+ cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
+ and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
+ 85 cm).
 
  Recommended data: Fishery independent surveys, fish.
 }
@@ -35,23 +48,21 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 
  Shephard S, Fung T, Houle JE, Farnsworth KD, Reid DG, Rossberg AG (2012)
  Size-selective fishing drives species composition in the Celtic Sea. ICES J
- Mar Sci 69:223-234 
+ Mar Sci 69:223-234
 
  Houle JE, Farnsworth KD, Rossberg AG, Reid DG (2012) Assessing the
  sensitivity and specificity of fish community indicators to management
  action. Can J Fish Aquat Sci 69:1065-1079
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatioInv2Dem}},
-  \code{\link{biomassRatioPel2Dem}},
+Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{communityFultonK}},
   \code{\link{largeFishIndicator}},
-  \code{\link{meanTrophicLevelCommunityLength}},
   \code{\link{meanTrophicLevelCommunity}},
-  \code{\link{predatoryFish}}, \code{\link{ratioIndicator}}
+  \code{\link{predatoryFish}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{ecosystem structure and function indicators}
