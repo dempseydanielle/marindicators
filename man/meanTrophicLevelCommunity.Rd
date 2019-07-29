@@ -5,25 +5,41 @@
 \title{Calculates the mean trophic level of the community}
 \usage{
 meanTrophicLevelCommunity(X, TL.table, metric = c("ABUNDANCE",
-  "BIOMASS"), years)
+  "BIOMASS"), length.based = FALSE, years)
 }
 \arguments{
 \item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+ "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
+ designating where the observation was recorded. "SPECIES" is a numeric code
+ indicating the species sampled.
+
+ This function can also calculate the mean trophic level of the community
+ from length-based data. To do so, X should be a dataframe with seven
+ columns: "YEAR", "ID", and "SPECIES", are as above. "FLEN" indicates the
+ size class, and "GROUP_NAME" and "TL" are the corresponding size-based
+ functional group and trophic level, respectively. "BIOMASS" is the recorded
+ biomass of the size-based functional groups. Note that one SPECIES code may
+ be assigned more than one GROUP_NAME if ontogentic shifts occur. For
+ example, on the Scotian Shelf small (< 33 cm) and large (>33 cm) haddock
+ both have SPECIES code 11. Small haddock are assigend to GROUP_NAME
+ "Haddock<33" with trophic level 3.38. Large haddock are assigned to
+ GROUP_NAME "Haddock33+" with trophic level 3.43.}
 
 \item{TL.table}{dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level).}
+(trophic level). Set to "NULL" if length.based = TRUE.}
 
 \item{metric}{character string indicating whether to use "BIOMASS" or
 "ABUNDANCE" to calculate indicator.}
+
+\item{length.based}{logical variable. length.based = TRUE indicates that X is
+length-based data. Default is length.based = FALSE}
 
 \item{years}{vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
- "MeanTLCommunity"
+ "MeanTLCommunity" (if length.based = FALSE) or "MeanTLCommunity_Length" if
+ length.based = TRUE
 }
 \description{
 This calculates the mean trophic level of the community weighted

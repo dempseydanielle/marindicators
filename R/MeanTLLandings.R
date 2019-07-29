@@ -77,15 +77,17 @@
 
 MeanTLLandings <- function (land, TL.table, propland.table, cutoff = 0) {
 	
-  land.prop <- merge(land, propland.table)
-  land.TL <- merge(land.prop, TL.table)
+  land.prop <- merge(land, propland.table, by = "ALLCODES")
+  land.TL <- merge(land.prop, TL.table, by = "SPECIES")
 
   land.TL$id <- land.TL$TL >= cutoff                                                         # returns TRUE when TL is >= cutoff
-  land.TL$pp <- land.TL$CATCH * land.TL$LANDED * land.TL$PROPORTION_OF_LANDINGS * land.TL$id #this is for the proprtion of different species
-  land.TL$LL <- land.TL$pp * land.TL$TL * land.TL$id                                       # calculates landings_species.i * TL_species.i
+  land.TL$pp <- land.TL$CATCH * land.TL$LANDED * land.TL$PROPORTION_OF_LANDINGS * land.TL$id # this is for the proportion of different species
+                                                                                             # accounts for the proportion of the same species at different TL
+                                                                                             # and species with two+ RV codes but one commercial code
+  land.TL$LL <- land.TL$pp * land.TL$TL * land.TL$id                                         # calculates landings_species.i * TL_species.i
 
-  ind <- merge(aggregate(LL ~ ID + YEAR, data = land.TL, FUN = sum), 
-               aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))
+  ind <- merge(aggregate(LL ~ ID + YEAR, data = land.TL, FUN = sum),            # sum of landings of species i * TL of species i
+               aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))            # total landings
 	ind$ind <- ind$LL/ind$pp 
 	ind$LL <- NULL
 	ind$pp <- NULL

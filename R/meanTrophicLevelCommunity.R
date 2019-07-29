@@ -14,13 +14,29 @@
 #'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
 #'  designating where the observation was recorded. "SPECIES" is a numeric code
 #'  indicating the species sampled.
+#'
+#'  This function can also calculate the mean trophic level of the community
+#'  from length-based data. To do so, X should be a dataframe with seven
+#'  columns: "YEAR", "ID", and "SPECIES", are as above. "FLEN" indicates the
+#'  size class, and "GROUP_NAME" and "TL" are the corresponding size-based
+#'  functional group and trophic level, respectively. "BIOMASS" is the recorded
+#'  biomass of the size-based functional groups. Note that one SPECIES code may
+#'  be assigned more than one GROUP_NAME if ontogentic shifts occur. For
+#'  example, on the Scotian Shelf small (< 33 cm) and large (>33 cm) haddock
+#'  both have SPECIES code 11. Small haddock are assigend to GROUP_NAME
+#'  "Haddock<33" with trophic level 3.38. Large haddock are assigned to
+#'  GROUP_NAME "Haddock33+" with trophic level 3.43.
+#'
 #'@param TL.table dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level).
+#'  (trophic level). Set to "NULL" if length.based = TRUE.
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
+#'@param length.based logical variable. length.based = TRUE indicates that X is
+#'  length-based data. Default is length.based = FALSE
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MeanTLCommunity"
+#'  "MeanTLCommunity" (if length.based = FALSE) or "MeanTLCommunity_Length" if
+#'  length.based = TRUE
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -40,10 +56,14 @@
 
 
 meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOMASS'), 
-                                      years) {
+                                      length.based = FALSE, years) {
                                         
-  X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
+  if(length.based == FALSE) X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
                                               # Note that the merge function will drop species that do not have a TL
+  if(length.based == TRUE) {
+    inx <- X$FLEN==-99
+    X[inx,'FLEN'] <- 10
+  }
   
   uI = unique(X$ID)                           # extract the spatial scale ID's
   ind <- NULL                                 # initialize dataframe for storing indicator values
@@ -58,15 +78,18 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
       
       ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
+      #ind.i <- aggregate(X.ij[metric]*X.ij['TL'],by=X.ij['ID'],FUN=sum)[,2]/aggregate(X.ij[metric],by=X.ij['ID'],FUN=sum)[,2]
       
-      #ind.i <- aggregate(X.ij[metric]*X.ij['TL'], by = X.ij['ID'], FUN = sum)[,2]/aggregate(X.ij[metric], by = X.ij['ID'], FUN = sum)[,2]
-                
+    
+      
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
  
 		}
   }
-  names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
-  ind                                                # return vector of indicator values for years c(start.year:end.year) 
+  
+  if(length.based == FALSE) names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
+  if(length.based == TRUE)  names(ind) = c("ID", "YEAR", "MeanTLCommunity_Length")
+  ind                                                # return dataframe of indicator values for years c(start.year:end.year) 
   
 }

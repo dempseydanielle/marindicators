@@ -1,4 +1,4 @@
-# July 26, 2019
+# July 29, 2019
 # This script calculates all indicators from Tech Report for ESS and WSS
 
 #Example data folder is stored in R:\Science\Population Ecology Division\Shared\!PED_Staff\DempseyD\indicators_data
@@ -13,6 +13,7 @@ yrs= c(1970:2015)
 # fishery-independent data
 RV <- read.csv(paste(path, "/RV/NotLengthBased/esswss_adjbiomass.csv", sep = ""), head = TRUE, sep = ",")
 RV_length <- read.csv(paste(path, "/RV/LengthBased/esswss_adjbiomass_Length.csv", sep = ""), head = TRUE, sep = ",")
+RV_length_TL <- read.csv(paste(path, "/RV/LengthBased/esswss_adjbiomass_Length_TL.csv", sep = ""), head = TRUE, sep = ",")
 
 # commercial landings data
 land_all <- read.csv(paste(path, "/Commercial/esswss_landings.csv", sep = ""), head = TRUE, sep = ",")
@@ -83,10 +84,12 @@ LSI = largeSpeciesIndicator(RV, lmax.table = maxL.table, lmax=85,  metric = "BIO
 propPred = predatoryFish(RV, pred.spp, metric = "BIOMASS", years = yrs)
 
 # Mean trophic level of community
-TL = meanTrophicLevelCommunity(RV, TL.table = TL.table.simple, metric = "BIOMASS", years = yrs)
+TL = meanTrophicLevelCommunity(RV, TL.table = TL.table.simple, 
+                               metric = "BIOMASS", length.based = FALSE, years = yrs)
 
 # # Mean trophic level of community: LENGTH
-# TL_length = meanTrophicLevelCommunity(RV_length, TL.table = TL.table.length, metric = "BIOMASS", years = yrs)
+TL_length = meanTrophicLevelCommunity(RV_length_TL, TL.table = NULL, 
+                                      metric = "BIOMASS", length.based= TRUE, years = yrs)
 
 # Mean length of community
 ML_bio = meanLengthCommunity(RV_length, metric = "BIOMASS", years = yrs)
