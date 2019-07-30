@@ -62,6 +62,7 @@ meanLengthCommunity <- function(X, metric=c('BIOMASS','ABUNDANCE'), years) {
   
   ind.name <- paste("MeanLength", metric, sep = "")
   names(ind) <- c("ID", "YEAR", ind.name)                # name the ind dataframe
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                   # return ind 
 }
  
