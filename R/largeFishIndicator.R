@@ -66,6 +66,7 @@ largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'),
   }
   
   names(ind) = c("ID", "YEAR", "LargeFishIndicator")    # name the ind dataframe
+  ind <- ind[order(ind$ID), ]                           # order by ID to be consistent with other functions
   ind                                                   # return ind 
 }
 
