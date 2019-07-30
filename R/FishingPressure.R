@@ -27,7 +27,9 @@
 #'  landings. Should match one of the column names of land. If group = "ALL" the
 #'  fishing pressure on the whole community will be calculated.
 #'@param years vector of years for which to calculate indicator
-#'@return returns a dataframe with three columns: "ID", "YEAR", and "FP_group"
+#'@return returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
+#'  Note that if landings of group are zero, fishing pressure will be set to
+#'  zero as well (even if biomass of the group is NA).
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -48,9 +50,11 @@ FishingPressure <- function(X, land, group, years){
   
   ind <- merge(Y, B, by = c('YEAR','ID'), all.x = T)
 
-  ind$FP <- ind[,3]/ind[,4]                                         # calculate fishing pressure
-  ind[,3] <- NULL
-  ind[,3] <- NULL
+  ind$FP <- ind[,3]/ind[,4]                            # calculate fishing pressure
+  index_zero <- which(ind[,3] == 0)                    # index of where landings is zero
+  ind$FP[index_zero] <- 0                              # set fishing pressure to zero wherever there are no landings (even if biomass = NA)
+  ind[,3] <- NULL                                      # remove landings column
+  ind[,3] <- NULL                                      # remove biomass column
   
   ind <- ind[order(ind$ID), ]
   ind.name <- paste("FP", "_", group, sep ="")                  # name indicator: FP_group
