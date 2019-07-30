@@ -68,21 +68,26 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
       year.i = years[i]                                  # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, ]                   # subset biomass and abundance data to include only current year
       len_wgt.ij = len_wgt.j[len_wgt.j$YEAR == year.i, ] # subset length-weight data to include only current year
-    
-      W <- aggregate(FWT ~ FLEN + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
       
-      if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . . 
-        Z <- merge(X.ij, W, by = c('ID', 'SPECIES','FLEN'), all.y = T)         # merge them
-        Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
+      if(nrow(X.ij) > 0 & nrow(len_wgt.ij) > 0){  
         
-        Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
-        ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
-    
-        ind.i = data.frame(uI[j], year.i, ind.i[,2])          # create a dataframe with spatial scale ID, year, and indicator value
-        ind = rbind(ind, ind.i)                               # bind ind.i to ind dataframe
+        W <- aggregate(FWT ~ FLEN + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
+        
+        if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . . 
+          Z <- merge(X.ij, W, by = c('ID', 'SPECIES','FLEN'), all.y = T)         # merge them
+          Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
+          
+          Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
+          ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
+          ind.i  <- ind.i[,2]
+          }   
+        } else ind.i <- NA
+          
+          ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
+          ind = rbind(ind, ind.i)                               # bind ind.i to ind dataframe
       }
     }
-    }
+    
   names(ind) = c("ID", "YEAR", "CommunityCondition")    # name the ind dataframe
   ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                   # return ind 
