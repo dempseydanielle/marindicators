@@ -85,6 +85,7 @@ IVILandings <- function(land, IVI.table, propland.table, years) {
   }
   
   names(ind) = c("ID", "YEAR", "IVILandings")          # name the ind dataframe
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                  # return dataframe for years c(start.year:end.year) 
   
 }

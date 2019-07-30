@@ -64,6 +64,7 @@ meanMaxL <- function(X, lmax.table, metric=c('BIOMASS','ABUNDANCE'), years) {
   
   ind.name = paste("MMLength", metric, sep = "")
   names(ind) = c("ID", "YEAR", ind.name)          # name the ind dataframe
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                             # return vector of indicator values for years c(start.year:end.year) 
   
 }

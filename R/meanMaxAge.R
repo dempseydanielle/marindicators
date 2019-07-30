@@ -54,6 +54,7 @@
 		  }
 		}
 		names(ind) = c("ID", "YEAR", "MeanLifespan")    # name the ind dataframe
+		ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
 		ind                                             # return vector of indicator values for years c(start.year:end.year) 
 		
 	}

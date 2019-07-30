@@ -80,8 +80,6 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
       ind.i <- sum(X.ij[metric]*X.ij['TL'])/sum(X.ij[metric]) # calculate mean trophic level weighted by metric
       #ind.i <- aggregate(X.ij[metric]*X.ij['TL'],by=X.ij['ID'],FUN=sum)[,2]/aggregate(X.ij[metric],by=X.ij['ID'],FUN=sum)[,2]
       
-    
-      
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
  
@@ -90,6 +88,7 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
   
   if(length.based == FALSE) names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
   if(length.based == TRUE)  names(ind) = c("ID", "YEAR", "MeanTLCommunity_Length")
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                # return dataframe of indicator values for years c(start.year:end.year) 
   
 }

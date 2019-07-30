@@ -74,9 +74,6 @@ kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75),
       year.i = years[i]                             # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
   
-      #S <- speciesrichness(X = X.ij, group = group, metric = metric, years = year.i) # calculate species richness
-      #S <- S[,3]                                                                     # extract number of species for spatila scale j and area i
-      
       Y <- X.ij[order(X.ij[metric]),metric]        # set Y to metric ORDERED FROM SMALLEST TO LARGEST
       S <- length(Y)                               # number of species recorded (simpler than speciesrichness function)
       
@@ -93,8 +90,10 @@ kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75),
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
       
     }
-    }
+  }
+  
   names(ind) = c("ID", "YEAR", "KemptonQ")    # name the ind dataframe
-  ind                                                # return vector of indicator values for years c(start.year:end.year) 
+  ind <- ind[order(ind$ID), ]                 # order by ID to be consistent with other functions
+  ind                                         # return vector of indicator values for years c(start.year:end.year) 
   
 }
