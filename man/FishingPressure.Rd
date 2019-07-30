@@ -27,7 +27,9 @@ fishing pressure on the whole community will be calculated.}
 \item{years}{vector of years for which to calculate indicator}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and "FP_group"
+returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
+ Note that if landings of group are zero, fishing pressure will be set to
+ zero as well (even if biomass of the group is NA).
 }
 \description{
 This function calculates fishing pressure on a fished group for

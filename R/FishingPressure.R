@@ -56,9 +56,9 @@ FishingPressure <- function(X, land, group, years){
   ind[,3] <- NULL                                      # remove landings column
   ind[,3] <- NULL                                      # remove biomass column
   
-  ind <- ind[order(ind$ID), ]
-  ind.name <- paste("FP", "_", group, sep ="")                  # name indicator: FP_group
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
+  ind.name <- paste("FP", "_", group, sep ="")         # name indicator: FP_group
   names(ind) <- c("ID", "YEAR", ind.name)
-  ind                                                           # return indicator dataframe
+  ind                                                  # return indicator dataframe
   
 }
