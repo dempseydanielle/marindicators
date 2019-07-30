@@ -7,7 +7,7 @@
 predatoryFish(X, pred.species, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{X dataframe of fishery independent survey data with columns "YEAR",
+\item{X}{dataframe of fishery independent survey data with columns "YEAR",
 "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
 designating where the observation was recorded. "SPECIES" is a numeric code
 indicating the species sampled.}
@@ -21,7 +21,9 @@ indicating the species sampled.}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and
- "PropPredatoryFish"
+ "PropPredatoryFish". Note: if there are no observations in X for total
+ biomass or predatory fish biomass in year i and spatial scale j, indicator
+ value is set to NA.
 }
 \description{
 This function calculates the proportion of predatory fish in the

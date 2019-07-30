@@ -15,7 +15,7 @@
 #'  independent surveys, predatory fish.
 #'
 #'  Recommended data: Fishery independent surveys, fish and invertebrates.
-#'@param X X dataframe of fishery independent survey data with columns "YEAR",
+#'@param X dataframe of fishery independent survey data with columns "YEAR",
 #'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
 #'  designating where the observation was recorded. "SPECIES" is a numeric code
 #'  indicating the species sampled.
@@ -24,7 +24,9 @@
 #'  "ABUNDANCE" to calculate the indicator. Default is "BIOMASS".
 #'@param years vector of years for which to calculate indicator
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and
-#'  "PropPredatoryFish"
+#'  "PropPredatoryFish". Note: if there are no observations in X for total
+#'  biomass or predatory fish biomass in year i and spatial scale j, indicator
+#'  value is set to NA.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -54,17 +56,19 @@ predatoryFish <- function(X, pred.species, metric = 'BIOMASS',  years) {
 		    X.ij = X.j[X.j$YEAR == year.i, ]      # subset data to year i
 		    Xpred <- X.ij[X.ij$SPECIES %in% pred.species,]  # create a table with only predatory species
 		    
-		    A.i <- sum(Xpred[metric])             # sum the metric of predatory species
-		    B.i <- sum(X.ij[metric])              # sum the metric of all species
+		    if(nrow(X.ij) > 0 | nrow(Xpred) > 0){   # if there are no observations in X.ij or Xpred, ind.i is set is to NA
+		      A.i <- sum(Xpred[metric])             # sum the metric of predatory species
+		      B.i <- sum(X.ij[metric])              # sum the metric of all species
+		      ind.i <- A.i/B.i                      # calculate the proportion of predatory species
+		    } else ind.i <- NA
 		    
-		    ind.i <- A.i/B.i                      # calculate the proportion of predatory species
-			
 		    ind.i = data.frame(uI[j], year.i, ind.i)    # create a dataframe with spatial scale ID, year, and indicator value
 		    ind = rbind(ind, ind.i)                     # bind ind.i to ind dataframe
 		  }
 		}
 		
 		names(ind) = c("ID", "YEAR", "PropPredatoryFish")    # name the ind dataframe
+		ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
 		ind                                                  # return ind
 		
 		}
