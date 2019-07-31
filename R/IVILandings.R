@@ -74,10 +74,12 @@ IVILandings <- function(land, IVI.table, propland.table, years) {
       year.i = years[i]                             # set years.i to current year  
       land.ij = land.j[land.j$YEAR == year.i, ]     # subset data to include only current year
       
-      ind.i <- merge(aggregate(IV_num ~ YEAR + ID, data = land.ij, FUN = sum), # calculate sum over all species of C*IVI
-               aggregate(CATCH ~ YEAR + ID, data = land.ij, FUN=sum))          # calculate sum over all species of C
-      
-      ind.i <- ind.i[,3]/ind.i[,4]                                             # calculate IVI of landings
+      if(nrow(land.ij) > 0){                                                     # set ind.i to NA if there are no observations in land.ij 
+        ind.i <- merge(aggregate(IV_num ~ YEAR + ID, data = land.ij, FUN = sum), # calculate sum over all species of C*IVI
+               aggregate(CATCH ~ YEAR + ID, data = land.ij, FUN=sum))            # calculate sum over all species of C
+        
+        ind.i <- ind.i[,3]/ind.i[,4]                                             # calculate IVI of landings
+      } else ind.i <- NA
       
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
