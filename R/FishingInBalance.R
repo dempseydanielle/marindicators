@@ -102,18 +102,21 @@ FishingInBalance<- function (land, TL.table, propland.table,
 
 	  for (i in 1:length(years)){                     # loop over each year
 	    
-	    year.i = years[i]                             # set years.i to current year  
-	    mTL.ij = mTL.j[mTL.j$YEAR == year.i, ]               # subset mean trophic level data to year i
+	    year.i = years[i]                                                # set years.i to current year  
+	    mTL.ij = mTL.j[mTL.j$YEAR == year.i, ]                           # subset mean trophic level data to year i
 	    land.total.ij = land.total.j[land.total.j$YEAR == year.i, ]      # subset total landings data to year i
 	    
-	    ind.i <- (log(land.total.ij$CATCH*(1/TE)^mTL.ij$MeanTL.Landings) 
+	    if(nrow(mTL.ij) > 0 & nrow(land.total.ij) > 0){   # if there are no observations in mTL.ij or land.total.ij, ind.i is set is to NA
+	      ind.i <- (log(land.total.ij$CATCH*(1/TE)^mTL.ij$MeanTL.Landings) 
 	              - log(land.0.j$CATCH*(1/TE)^mTL.0.j$MeanTL.Landings)) # calculate fishing in balance
+	    }else ind.i <- NA
 	  
 	    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
 	    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
 	  }
 	}
 	names(ind) = c("ID", "YEAR", "FishinginBalance")    # name the ind dataframe
+	ind <- ind[order(ind$ID), ] 
 	ind                                                 # return vector of indicator values for years c(start.year:end.year) 
 	
 }
