@@ -69,7 +69,7 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
       X.ij = X.j[X.j$YEAR == year.i, ]                   # subset biomass and abundance data to include only current year
       len_wgt.ij = len_wgt.j[len_wgt.j$YEAR == year.i, ] # subset length-weight data to include only current year
       
-      if(nrow(X.ij) > 0 & nrow(len_wgt.ij) > 0){  
+      if(nrow(X.ij) > 0 & nrow(len_wgt.ij) > 0){         # if there are no observations in X.ij or len_wgt.ij, ind.i is set is to NA
         
         W <- aggregate(FWT ~ FLEN + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
         
@@ -84,7 +84,7 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
         } else ind.i <- NA
           
           ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
-          ind = rbind(ind, ind.i)                               # bind ind.i to ind dataframe
+          ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
       }
     }
     
