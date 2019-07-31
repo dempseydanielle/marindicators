@@ -14,6 +14,9 @@
 #'   observation was recorded. "SPECIES" is a numeric code indicating the
 #'   species sampled.
 #' @param window window for the moving averge. Default is 5 years.
+#' @param years vector of years for which to calculate indicator
+#' @return returns a dataframe with three columns: "ID", "YEAR", and
+#'   "invCVbiomass". Years with missing data are assigned NA.
 #' @family stability and resistance indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -31,10 +34,12 @@
 #' @export
 
 
-	invCVBiomass <- function(X, window = 5){
+	invCVBiomass <- function(X, window = 5, years){
 	  
 	  uI = unique(X$ID)                      # extract the spatial scale ID's
 	  ind <- NULL                            # initialize dataframe for storing indicator values
+	  years <- data.frame(years)
+	  names(years) = "YEAR"
 
 	  for (j in 1:length(uI)){               # loop over all spatal scales
 
@@ -49,6 +54,7 @@
 	      max_year <- max(ind.j$YEAR)        # maximum year
 	      
 	      ind.j[ind.j$YEAR %in% c(min_year, min_year + 1, max_year - 1, max_year), "BIOMASS"] <- NA   # set the first and last two years to NA 
+	      ind.j <- merge(years, ind.j, all.x = T)
 	   
 	      ind.j= data.frame(rep(uI[j], nrow(ind.j)), ind.j)     # create a dataframe with spatial scale ID, year, and indicator value
 	      names(ind.j) <- c("ID", "YEAR", "invCVbiomass")
@@ -57,7 +63,8 @@
 	    }
 	    
 	    }
-	  
+
+	  ind <- ind[order(ind$ID), ] 
 	  ind
 	 
 	  }

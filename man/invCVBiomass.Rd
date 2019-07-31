@@ -4,7 +4,7 @@
 \alias{invCVBiomass}
 \title{Calculates the inverse of the coefficient of variation of the biomass}
 \usage{
-invCVBiomass(X, window = 5)
+invCVBiomass(X, window = 5, years)
 }
 \arguments{
 \item{X}{dataframe of fishery independent survey data with columns "YEAR",
@@ -13,6 +13,12 @@ observation was recorded. "SPECIES" is a numeric code indicating the
 species sampled.}
 
 \item{window}{window for the moving averge. Default is 5 years.}
+
+\item{years}{vector of years for which to calculate indicator}
+}
+\value{
+returns a dataframe with three columns: "ID", "YEAR", and
+  "invCVbiomass". Years with missing data are assigned NA.
 }
 \description{
 This calculates the inverse of the coefficient of variation of
