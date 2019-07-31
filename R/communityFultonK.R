@@ -27,7 +27,7 @@
 #'   length at the corresponding "FWT" (fish weight). 
 #' @param years vector of years for which to calculate indicator.
 #' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'   "CommunityCondition"
+#'   "CommunityCondition_group"
 #' @family ecosystem structure and function indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -54,7 +54,9 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
   
   if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
   
-  X <- X[-which(X$FLEN == -99), ]                        # remove rows that do not contain length data
+  inx99 <- which(X$FLEN == -99)                         # index of rows that do not contain length data               
+  if(length(inx99 > 0)) X <- X[-which(X$FLEN == -99), ]  # remove rows that do not contain length data
+  
   uI = unique(X$ID)                                      # extract the spatial scale ID's
   ind <- NULL                                            # initialize dataframe for storing indicator values
   
@@ -80,7 +82,7 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
           Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
           ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
           ind.i  <- ind.i[,2]
-          }   
+          }   else ind.i <- NA
         } else ind.i <- NA
           
           ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
@@ -88,7 +90,8 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
       }
     }
     
-  names(ind) = c("ID", "YEAR", "CommunityCondition")    # name the ind dataframe
+  name.ind <- paste("CommunityCondition_", group, sep = "")  # name indicator metric_TL.i
+  names(ind) = c("ID", "YEAR", name.ind)    # name the ind dataframe
   ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                   # return ind 
 }
