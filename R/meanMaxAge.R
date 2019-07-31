@@ -46,9 +46,11 @@
 		    
 		    year.i = years[i]                             # set years.i to current year  
 		    X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
-		  
-		    ind.i <- sum(X.ij[metric]*X.ij['MAXAGE'])/sum(X.ij[metric])	 # make sure this does what it should!
-	
+		    
+		    if(nrow(X.ij) > 0){                           # set ind.i to NA if there are no observations in X.ij 
+		      ind.i <- sum(X.ij[metric]*X.ij['MAXAGE'])/sum(X.ij[metric])	 # make sure this does what it should!
+		    } else ind.i <- NA
+		    
 		    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
 		    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
 		  }
