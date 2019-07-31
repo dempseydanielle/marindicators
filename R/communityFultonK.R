@@ -9,7 +9,7 @@
 #'
 #'   **Recommended data: Fishery independent surveys, fish.
 #' @param X dataframe of fishery independent survey data with columns "YEAR",
-#'   "ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
+#'   "ID", "SPECIES", "FLEN", and "ABUNDANCE". "ID" is an area
 #'   code designating where the observation was recorded (a string). "SPECIES"
 #'   is a numeric code indicating the species sampled. "FLEN" is the length
 #'   class (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
@@ -20,8 +20,6 @@
 #'   species codes for the Scotian Shelf. For other regions it may be prudent to
 #'   subsetdata to species groups of interest prior to using the function and
 #'   then choose group = "ALL". Type ?speciesgroups for more information.
-#' @param metric character string indicating which metric to use to calculate
-#'   indicator. Default is set to "ABUNDANCE".
 #' @param LenWt.table table of annual length at weight data with 5 columns.
 #'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
 #'   length at the corresponding "FWT" (fish weight). 
@@ -48,9 +46,7 @@
 #' @export
 
 
-communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
-                             metric ='ABUNDANCE', LenWt.table,
-                             years) {
+communityFultonK <- function(X, group, LenWt.table, years) {
   
   if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
   
@@ -63,7 +59,7 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
   for (j in 1:length(uI)){                               # loop over all spatal scales
     
     X.j = X[X$ID == uI[j], ]                             # subset biomass and abundance data to spatial scale j
-    len_wgt.j = LenWt.table[LenWt.table$ID == uI[j], ]           # subset length-weight data to spatial scale j
+    len_wgt.j = LenWt.table[LenWt.table$ID == uI[j], ]   # subset length-weight data to spatial scale j
     
     for (i in 1:length(years)){                          # loop over each year
       
@@ -77,11 +73,17 @@ communityFultonK <- function(X, group=c('ALL', 'FINFISH'),
         
         if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . . 
           Z <- merge(X.ij, W, by = c('ID', 'SPECIES','FLEN'), all.y = T)         # merge them
-          Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
           
-          Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
-          ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
-          ind.i  <- ind.i[,2]
+          inx.na <- which(is.na(Z$ABUNDANCE))  # index of where Z$metric is zero
+          
+          if(nrow(Z) > length(inx.na)){        # if all of the rows of Z$metric are NA, then set ind.i to NA
+           
+             Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
+            Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species
+            ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
+            ind.i  <- ind.i[,2]
+            
+            }   else ind.i <- NA
           }   else ind.i <- NA
         } else ind.i <- NA
           
