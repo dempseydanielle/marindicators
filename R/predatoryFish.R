@@ -56,11 +56,11 @@ predatoryFish <- function(X, pred.species, metric = 'BIOMASS',  years) {
 		    X.ij = X.j[X.j$YEAR == year.i, ]      # subset data to year i
 		    Xpred <- X.ij[X.ij$SPECIES %in% pred.species,]  # create a table with only predatory species
 		    
-		    if(nrow(X.ij) > 0 & nrow(Xpred) > 0){   # if there are no observations in X.ij or Xpred, ind.i is set is to NA
+		    #if(nrow(X.ij) > 0 & nrow(Xpred) > 0){   # if there are no observations in X.ij or Xpred, ind.i is set is to NA
 		      A.i <- sum(Xpred[metric])             # sum the metric of predatory species
 		      B.i <- sum(X.ij[metric])              # sum the metric of all species
 		      ind.i <- A.i/B.i                      # calculate the proportion of predatory species
-		    } else ind.i <- NA
+		  #  } else ind.i <- NA
 		    
 		    ind.i = data.frame(uI[j], year.i, ind.i)    # create a dataframe with spatial scale ID, year, and indicator value
 		    ind = rbind(ind, ind.i)                     # bind ind.i to ind dataframe

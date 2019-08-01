@@ -21,7 +21,10 @@
 #' @param metric character string indicating whether to use "BIOMASS" or
 #'   "ABUNDANCE" to calculate the indicator.
 #' @param years vector of years for which to calculate indicator
-#' @return Returns a dataframe with 3 columns: "ID", YEAR", and "Heips"
+#' @return Returns a dataframe with 3 columns: "ID", YEAR", and "Heips".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   values is assigned NA.
 #' @family biodiversity indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -46,5 +49,6 @@ heips <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE
   
   ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
   names(ind) = c("ID", "YEAR", "Heips")            # name the ind dataframe
+  ind <- ind[order(ind$ID), ]
   ind      
 }

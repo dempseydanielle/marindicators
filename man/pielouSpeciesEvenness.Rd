@@ -26,7 +26,10 @@ information.}
 \item{years}{vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness"
+Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
 This function takes a dataframe of fisheries independent survey
@@ -49,7 +52,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 
  Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
  fish community: identifying reference levels for an ecosystem approach to
- management. ICES J Mar Sci J du Cons 63:573–593
+ management. ICES J Mar Sci J du Cons 63:573 593
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},

@@ -38,6 +38,9 @@
 #' @return Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
 #'   "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If
 #'   metrc = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   values is assigned NA.
 #' @family biodiversity indicators
 #' @family fishing pressure indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -71,8 +74,10 @@ speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS',
 	    year.i = years[i]                             # set years.i to current year  
 	    X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
 	    
-	    if(metric == "BIOMASS" || metric == "ABUNDANCE")  ind.i <- length(unique(X.ij$SPECIES))         # count the number of species recorded and store value
-	    if(metric == "CATCH")  ind.i <- length(unique(X.ij$ALLCODES))   
+	   if(nrow(X.ij) > 0){ 
+	      if(metric == "BIOMASS" || metric == "ABUNDANCE")  ind.i <- length(unique(X.ij$SPECIES))         # count the number of species recorded and store value
+	      if(metric == "CATCH")  ind.i <- length(unique(X.ij$ALLCODES))   
+	   } else ind.i <- NA
 	    
 	    ind.i = data.frame(uI[j], year.i, ind.i)      # create a dataframe with spatial scale ID, year, and indicator value
 	    ind = rbind(ind, ind.i)                       # bind ind.i to ind dataframe
@@ -81,6 +86,7 @@ speciesrichness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS',
 	
 	if(metric == "BIOMASS" || metric == "ABUNDANCE") names(ind) = c("ID", "YEAR", "SpeciesRichness")    # name the ind dataframe
 	if(metric == "CATCH") names(ind) = c("ID", "YEAR", "DiversityTargetSpp")    # name the ind dataframe
+	ind <- ind[order(ind$ID), ] 
 	ind                                                                         # return vector of indicator values for years c(start.year:end.year) 
 	
 }

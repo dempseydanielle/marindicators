@@ -26,7 +26,10 @@ information.}
 \item{years}{vector of years for which to calculate indicator}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity"
+Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity".
+ 
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
 This function takes a dataframe of fisheries independent survey

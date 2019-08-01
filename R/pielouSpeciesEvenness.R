@@ -23,7 +23,10 @@
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate the indicator.
 #'@param years vector of years for which to calculate indicator.
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness"
+#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  values is assigned NA.
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -31,12 +34,12 @@
 #'
 #'  Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
 #'  fish community: identifying reference levels for an ecosystem approach to
-#'  management. ICES J Mar Sci J du Cons 63:573–593
+#'  management. ICES J Mar Sci J du Cons 63:573 593
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
 #'@export
 
-# add a warning for if there is 0 biomass
+
 pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
                                   years)  {
 
@@ -49,5 +52,6 @@ pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIO
   ind <- H
   ind$ShannonDiversity <- NULL                      # remove Shannon's diversity from ind
   names(ind) = c("ID", "YEAR", "PielouEvenness")    # name the ind dataframe
+  ind <- ind[order(ind$ID), ] 
   ind
 }

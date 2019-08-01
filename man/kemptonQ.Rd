@@ -35,7 +35,10 @@ information.}
 \item{years}{vector of years for which to calculate indicator}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ"
+Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
 This function takes a dataframe of fisheries independent survey
@@ -57,21 +60,21 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
 }
 \references{
 (Alida - this ref was not in tech report. Could be this one or the
-one below) Ainsworth, C, Pitcher, T (2006) Modifying Kempton's species
-diversity index for use with ecosystem simulation models. Ecological
-Indicators. 6. 623-630. 10.1016/j.ecolind.2005.08.024.
+ one below) Ainsworth, C, Pitcher, T (2006) Modifying Kempton's species
+ diversity index for use with ecosystem simulation models. Ecological
+ Indicators. 6. 623-630. 10.1016/j.ecolind.2005.08.024.
 
-Ainsworth, C, Varkey, D, Pitcher, TJ  (2006)  Preliminary ecosystem simulation
-models for the Bird’s Head Seascape, Papua.  Mid-term narrative technical
-report.  Birds Head Seascape Ecosystem-Based Management Project. University of
-British Columbia Fisheries Centre.  December, 2006, 274 pp.
+ Ainsworth, C, Varkey, D, Pitcher, TJ  (2006)  Preliminary ecosystem
+ simulation models for the Bird’s Head Seascape, Papua.  Mid-term narrative
+ technical report.  Birds Head Seascape Ecosystem-Based Management Project.
+ University of British Columbia Fisheries Centre.  December, 2006, 274 pp.
 
-Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
-evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232:
-xii + 212 p.
+ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
+ evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232:
+ xii + 212 p.
 
-Kempton R, Taylor L (1976) Models and statistics for species diversity. Nature
-262:818-820
+ Kempton R, Taylor L (1976) Models and statistics for species diversity.
+ Nature 262:818-820
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},

@@ -27,7 +27,10 @@ information.}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and
- "ShannonDiversity"
+ "ShannonDiversity".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
 This function calculates Shannon's index of diversity for \eqn{j}

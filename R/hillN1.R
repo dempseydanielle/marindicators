@@ -23,7 +23,10 @@
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate the indicator.
 #'@param years vector of years for which to calculate indicator
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity"
+#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity".
+#'  
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  values is assigned NA.
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -47,7 +50,9 @@ hillN1 <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANC
   
   ind <- H
 	ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
+	
 	names(ind) = c("ID", "YEAR", "HillDiversity")    # name the ind dataframe
+	ind <- ind[order(ind$ID), ]
 	ind                                              # return Hill's index of diversity
 	
 	}

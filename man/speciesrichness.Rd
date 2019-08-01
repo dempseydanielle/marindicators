@@ -38,6 +38,9 @@ metric = "BIOMASS" or metric = "ABUNDANCE", indicator will be named
 Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
   "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If
   metrc = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
+
+  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+  values is assigned NA.
 }
 \description{
 This function counts the number of species recorded in fishery

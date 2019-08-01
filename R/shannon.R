@@ -21,7 +21,10 @@
 #'  "ABUNDANCE" to calculate the indicator.
 #'@param years vector of years for which to calculate indicator
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and
-#'  "ShannonDiversity"
+#'  "ShannonDiversity".
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  values is assigned NA.
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -52,15 +55,18 @@ shannon <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDAN
       year.i = years[i]                           # set years.i to current year  
       X.ij = X.j[X.j$YEAR == year.i, metric]      # subset data to include only current year
       
-      p <- X.ij/sum(X.ij)                          # calculate the proportion of each species by metric
-      ind.i <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
+      if(length(X.ij) > 0){                          # if there are no obs in X.ij,  set ind.i to NA
+        p <- X.ij/sum(X.ij)                          # calculate the proportion of each species by metric
+        ind.i <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
+      } else ind.i <- NA
       
-      ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
-      ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
+      ind.i = data.frame(uI[j], year.i, ind.i)       # create a dataframe with spatial scale ID, year, and indicator value
+      ind = rbind(ind, ind.i)                        # bind ind.i to ind dataframe
     }
   }
   
   names(ind) = c("ID", "YEAR", "ShannonDiversity")    # name the ind dataframe
+  ind <- ind[order(ind$ID), ] 
   ind                                                  # return ind 
 }
   
