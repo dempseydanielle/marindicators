@@ -53,7 +53,10 @@
 #'@param base.end end of baseline period
 #'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
-#'  "FishinginBalance"
+#'  "FishinginBalance".
+#'
+#'  If there are no observations in land for spatial scale \eqn{j} and year
+#'  \eqn{i}, indicator value is set to NA.
 #'@importFrom stats aggregate
 #'@family resource potential indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -66,11 +69,11 @@
 #'  Fu C, Gaichas S, Link JS, Bundy A, Boldt JL, Cook AM, Gamble R, Utne KR, Liu
 #'  H, Friedland KD. 2012. Relative importance of fisheries, trophodynamic and
 #'  environmental drivers in a series of marine ecosystems. Mar Ecol Prog Ser
-#'  459:169–184
+#'  459:169 184
 #'
 #'  Pauly D, Christensen V, Walters C. 2000. Ecopath, Ecosim, and Ecospace as
-#'  tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci
-#'  57:697–706
+#'  tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci 57:697
+#'  706
 #'
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
@@ -79,28 +82,31 @@
 FishingInBalance<- function (land, TL.table, propland.table,
                              cutoff = 0, TE = 0.1,   
                              base.start, base.end, years) {
-
-  mTL <- MeanTLLandings(land = land, TL.table = TL.table, 
-                        propland.table = propland.table, cutoff = 0) 
-  land.total <- stats::aggregate(CATCH ~ YEAR + ID, data = land, FUN=sum) #  I think this is just total landings for each year
+  
+  mTL <- MeanTLLandings(land = land, TL.table = TL.table,                  # calculate mean trophic level of landings
+                        propland.table = propland.table,                   # from base.start to the end of years
+                        cutoff = 0, years = c(base.start:years[length(years)])) 
+  land.total <- stats::aggregate(CATCH ~ YEAR + ID, data = land, FUN=sum)  #  calculate total landings for each spatial scale and year
 	
-  mTL.0 <- aggregate(MeanTL.Landings ~ ID,
-                     data = mTL[mTL$YEAR %in% base.start:base.end,], FUN = mean)         # BASELINE Mean trophic level
-	land.0 <- aggregate(CATCH ~ ID, 
-	                    data= land.total[land.total$YEAR %in% base.start:base.end,], FUN = mean) # BASELINE catch
+  mTL.0 <- aggregate(MeanTL.Landings ~ ID,                                 # calculate BASELINE Mean trophic level
+                     data = mTL[mTL$YEAR %in% base.start:base.end,], 
+                     FUN = mean)       
+	land.0 <- aggregate(CATCH ~ ID,                                          # calculate BASELINE landings
+	                    data= land.total[land.total$YEAR %in% base.start:base.end,], 
+	                    FUN = mean) 
 
 	uI = unique(land$ID)                   # extract the spatial scale ID's
-	ind <- NULL                         # initialize dataframe for storing indicator values
+	ind <- NULL                            # initialize dataframe for storing indicator values
 	
-	for (j in 1:length(uI)){            # loop over all spatal scales
+	for (j in 1:length(uI)){               # loop over all spatal scales
 	  
-	  mTL.j = mTL[mTL$ID == uI[j], ]                   # subset mean trophic level data to spatial scale j
+	  mTL.j = mTL[mTL$ID == uI[j], ]                           # subset mean trophic level data to spatial scale j
 	  land.total.j = land.total[land.total$ID == uI[j], ]      # subset total landings data to spatial scale j
 	  
 	  mTL.0.j = mTL.0[mTL.0$ID == uI[j], ]                 # subset baseline mean trophic level to spatial scale j
 	  land.0.j = land.0[land.0$ID == uI[j], ]              # subset baselinelandings data to spatial scale j
 
-	  for (i in 1:length(years)){                     # loop over each year
+	  for (i in 1:length(years)){                          # loop over each year
 	    
 	    year.i = years[i]                                                # set years.i to current year  
 	    mTL.ij = mTL.j[mTL.j$YEAR == year.i, ]                           # subset mean trophic level data to year i
@@ -108,7 +114,7 @@ FishingInBalance<- function (land, TL.table, propland.table,
 	    
 	    if(nrow(mTL.ij) > 0 & nrow(land.total.ij) > 0){   # if there are no observations in mTL.ij or land.total.ij, ind.i is set is to NA
 	      ind.i <- (log(land.total.ij$CATCH*(1/TE)^mTL.ij$MeanTL.Landings) 
-	              - log(land.0.j$CATCH*(1/TE)^mTL.0.j$MeanTL.Landings)) # calculate fishing in balance
+	              - log(land.0.j$CATCH*(1/TE)^mTL.0.j$MeanTL.Landings))         # calculate fishing in balance
 	    }else ind.i <- NA
 	  
 	    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value

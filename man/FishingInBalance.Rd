@@ -54,7 +54,10 @@ a "PROPORTION_OF_LANDINGS" value of 0.6.}
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and
- "FishinginBalance"
+ "FishinginBalance".
+
+ If there are no observations in land for spatial scale \eqn{j} and year
+ \eqn{i}, indicator value is set to NA.
 }
 \description{
 This function calculates the Fishing-in-Balance (FiB) Index of
@@ -88,11 +91,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Fu C, Gaichas S, Link JS, Bundy A, Boldt JL, Cook AM, Gamble R, Utne KR, Liu
  H, Friedland KD. 2012. Relative importance of fisheries, trophodynamic and
  environmental drivers in a series of marine ecosystems. Mar Ecol Prog Ser
- 459:169–184
+ 459:169 184
 
  Pauly D, Christensen V, Walters C. 2000. Ecopath, Ecosim, and Ecospace as
- tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci
- 57:697–706
+ tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci 57:697
+ 706
 }
 \seealso{
 Other resource potential indicators: \code{\link{resourcePotential}}

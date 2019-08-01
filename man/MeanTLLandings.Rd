@@ -5,7 +5,7 @@
 \title{Calculates the mean trophic level or marine trophic index of fisheries
  landings}
 \usage{
-MeanTLLandings(land, TL.table, propland.table, cutoff = 0)
+MeanTLLandings(land, TL.table, propland.table, cutoff = 0, years)
 }
 \arguments{
 \item{land}{dataframe of commercial landings data with columns "YEAR", "ID",
@@ -44,11 +44,17 @@ a "PROPORTION_OF_LANDINGS" value of 0.6.}
 
 \item{cutoff}{the minimum trophic level of species to include. Set cutoff = 0
 to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
-calculate the marine trophic index.}
+calculate the marine trophic index. '@param years vector of years for which
+to calculate indicator}
+
+\item{years}{vector of years for which to calculate indicator}
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
- 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
+ 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings".
+
+ If there are no observations in land for spatial scale \eqn{j} in year
+ \eqn{i}, indicator value is set to NA.
 }
 \description{
 This function calculates the mean trophic level or marine trophic
@@ -85,9 +91,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Pauly D, Christensen V, Dalsgaard J, Froese R, Torres F (1998) Fishing Down
  Marine Food Webs. Science 279:860-863
 
- Pauly D, Watson R. 2005. Background and interpretation of the “Marine
- Trophic Index” as a measure of biodiversity. Philos Trans R Soc B Biol Sci
- 360:415–423
+ Pauly D, Watson R. 2005. Background and interpretation of the Marine Trophic
+ Index as a measure of biodiversity. Philos Trans R Soc B Biol Sci 360:415
+ 423
 }
 \seealso{
 Other fishing pressure indicators: \code{\link{FishingPressure}},

@@ -56,9 +56,14 @@
 #'  a "PROPORTION_OF_LANDINGS" value of 0.6.
 #'@param cutoff the minimum trophic level of species to include. Set cutoff = 0
 #'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
-#'  calculate the marine trophic index.
+#'  calculate the marine trophic index. '@param years vector of years for which
+#'  to calculate indicator
+#'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
-#'  0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings"
+#'  0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings".
+#'
+#'  If there are no observations in land for spatial scale \eqn{j} in year
+#'  \eqn{i}, indicator value is set to NA.
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -67,16 +72,25 @@
 #'  Pauly D, Christensen V, Dalsgaard J, Froese R, Torres F (1998) Fishing Down
 #'  Marine Food Webs. Science 279:860-863
 #'
-#'  Pauly D, Watson R. 2005. Background and interpretation of the “Marine
-#'  Trophic Index” as a measure of biodiversity. Philos Trans R Soc B Biol Sci
-#'  360:415–423
+#'  Pauly D, Watson R. 2005. Background and interpretation of the Marine Trophic
+#'  Index as a measure of biodiversity. Philos Trans R Soc B Biol Sci 360:415
+#'  423
 #'
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-MeanTLLandings <- function (land, TL.table, propland.table, cutoff = 0) {
-	
+MeanTLLandings <- function (land, TL.table, propland.table, cutoff = 0, years) {
+  
+  uI <- unique(land$ID) # extract the spatial scale ID's
+  df <- NULL            # create empty dataframe 
+  for(j in 1:length(uI)){                       # create a dataframe with all years for each ID
+    ID.j <- rep(uI[j], times = length(years))
+    df.j <- data.frame(ID.j, years)
+    df <- rbind(df, df.j)                       # a dataframe with two columns ("YEAR" and "ID")
+  }
+  names(df) <- c("ID", "YEAR")
+  
   land.prop <- merge(land, propland.table, by = "ALLCODES")
   land.TL <- merge(land.prop, TL.table, by = "SPECIES")
 
@@ -86,14 +100,18 @@ MeanTLLandings <- function (land, TL.table, propland.table, cutoff = 0) {
                                                                                              # and species with two+ RV codes but one commercial code
   land.TL$LL <- land.TL$pp * land.TL$TL * land.TL$id                                         # calculates landings_species.i * TL_species.i
 
-  ind <- merge(aggregate(LL ~ ID + YEAR, data = land.TL, FUN = sum),            # sum of landings of species i * TL of species i
-               aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))            # total landings
-	ind$ind <- ind$LL/ind$pp 
-	ind$LL <- NULL
-	ind$pp <- NULL
-
+  ind <- merge(aggregate(LL ~ ID + YEAR, data = land.TL, FUN = sum),   # sum of landings of species i * TL of species i
+               aggregate(pp ~ ID + YEAR, data = land.TL, FUN = sum))   # total landings
+	ind$ind <- ind$LL/ind$pp                                             # calculate mean trophic level of landings weighted by species landed                                     
+	ind$LL <- NULL                                                       # rm col LL
+	ind$pp <- NULL                                                       # rm col pp
+	 
+	ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)               # merge ind with df so that years without data will be set to NA 
+	
 	if(cutoff == 0)	names(ind) <- c("ID", "YEAR", "MeanTL.Landings")
 	if(cutoff >0) names(ind) <- c("ID", "YEAR", "MarineTophicIndex.Landings")
+	
+	ind <- ind[order(ind$ID), ]
 	ind
 
 }
