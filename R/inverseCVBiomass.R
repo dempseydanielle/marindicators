@@ -54,7 +54,7 @@
 	      max_year <- max(ind.j$YEAR)        # maximum year
 	      
 	      ind.j[ind.j$YEAR %in% c(min_year, min_year + 1, max_year - 1, max_year), "BIOMASS"] <- NA   # set the first and last two years to NA 
-	      ind.j <- merge(years, ind.j, all.x = T)
+	      #ind.j <- merge(years, ind.j, all.x = T)
 	   
 	      ind.j= data.frame(rep(uI[j], nrow(ind.j)), ind.j)     # create a dataframe with spatial scale ID, year, and indicator value
 	      names(ind.j) <- c("ID", "YEAR", "invCVbiomass")

@@ -39,7 +39,10 @@ length-based data. Default is length.based = FALSE}
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
  "MeanTLCommunity" (if length.based = FALSE) or "MeanTLCommunity_Length" if
- length.based = TRUE
+ length.based = TRUE.
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
 This calculates the mean trophic level of the community weighted

@@ -21,9 +21,10 @@ indicating the species sampled.}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and
- "PropPredatoryFish". Note: if there are no observations in X for total
- biomass or predatory fish biomass in year i and spatial scale j, indicator
- value is set to NA.
+ "PropPredatoryFish".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
 This function calculates the proportion of predatory fish in the

@@ -17,7 +17,11 @@
 #' @param metric character string indicating which metric to use to calculate
 #'   indicator.
 #' @param years vector of years for which to calculate indicator
-#' @return Returns a dataframe with 3 columns. "ID", "YEAR", and "group12group2"
+#' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
+#'   "group12group2".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   values is assigned NA.
 #' @family ecosystem structure and function indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -26,7 +30,7 @@
 #'   Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
 #'   fish: A comparative exploration of variations in the theme of stock
 #'   collapse and ecosystem change in four Northwest Atlantic ecosystems. Prog
-#'   Oceanogr 81:188–206
+#'   Oceanogr 81:188 206
 #' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
@@ -44,6 +48,7 @@ biomassratio <- function(X, group1 = c('INVERTEBRATES', 'PELAGIC'), group2 = c('
   
   name.ind <- paste(group1, "2", group2, sep = "")
   names(num) = c("ID", "YEAR", name.ind)             # name the ind dataframe
+  num <- num[order(num$ID), ]
   num                                                # return dataframe of indicator values for years c(start.year:end.year) 
 
 }

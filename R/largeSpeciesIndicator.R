@@ -20,7 +20,10 @@
 #'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "LargeFishIndicator"
+#'  "LargeSpeciesIndicator".
+#'
+#'  If there are no observations of large species or no observations in X for
+#'  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -55,9 +58,11 @@ largeSpeciesIndicator <- function(X, lmax.table, lmax = 85,  metric = 'BIOMASS',
       year.i = years[i]                  # set year.i to year i
       X.ij = X.j[X.j$YEAR == year.i, ]   # subset data to year i
       
-      A.i <- sum(X.ij[X.ij$SPECIES %in% largespecies, metric])  # sum of biomass of all large species
-      B.i <- sum(X.ij[, metric])                                # sum of biomass of all species
-      ind.i = A.i/B.i                                           # fraction of large species in community (by biomass)
+      if(nrow(X.ij) > 0){
+        A.i <- sum(X.ij[X.ij$SPECIES %in% largespecies, metric])  # sum of biomass of all large species
+        B.i <- sum(X.ij[, metric])                                # sum of biomass of all species
+        ind.i = A.i/B.i                                           # fraction of large species in community (by biomass)
+      } else ind.i <- NA
       
       ind.i = data.frame(uI[j], year.i, ind.i)                  # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                                   # bind ind.i to ind dataframe
@@ -65,6 +70,11 @@ largeSpeciesIndicator <- function(X, lmax.table, lmax = 85,  metric = 'BIOMASS',
   }
   
   names(ind) = c("ID", "YEAR", "LargeSpeciesIndicator")    # name the ind dataframe
+  ind <- ind[order(ind$ID), ]                           # order by ID to be consistent with other functions
+  inx <- which(ind$LargeSpeciesIndicator == 0)             # index of where LargeSpeciesIndicator is 0       
+  ind$LargeSpeciesIndicator[inx] <- NA                     # set values of 0 to NA
+  
+  
   ind                                                      # return ind
 }
   

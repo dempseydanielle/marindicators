@@ -24,7 +24,7 @@
 #' @return Returns a dataframe with 3 columns: "ID", YEAR", and "Heips".
 #'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'   values is assigned NA.
+#'   value is assigned NA.
 #' @family biodiversity indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

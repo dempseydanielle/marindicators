@@ -22,7 +22,10 @@ assigned FLEN = -99. These observations are removed by the function.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
- "MeanLength_metric"
+ "MeanLength_metric".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
 This function calculates the mean length of the community

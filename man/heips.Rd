@@ -29,7 +29,7 @@ information.}
 Returns a dataframe with 3 columns: "ID", YEAR", and "Heips".
 
   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  values is assigned NA.
+  value is assigned NA.
 }
 \description{
 This function takes a dataframe of fisheries independent survey

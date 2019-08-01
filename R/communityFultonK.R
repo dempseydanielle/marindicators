@@ -9,12 +9,12 @@
 #'
 #'   **Recommended data: Fishery independent surveys, fish.
 #' @param X dataframe of fishery independent survey data with columns "YEAR",
-#'   "ID", "SPECIES", "FLEN", and "ABUNDANCE". "ID" is an area
-#'   code designating where the observation was recorded (a string). "SPECIES"
-#'   is a numeric code indicating the species sampled. "FLEN" is the length
-#'   class (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
-#'   abundance at length. Species for which there are no length data should be
-#'   assigned FLEN = -99. These observations are removed by the function.
+#'   "ID", "SPECIES", "FLEN", and "ABUNDANCE". "ID" is an area code designating
+#'   where the observation was recorded (a string). "SPECIES" is a numeric code
+#'   indicating the species sampled. "FLEN" is the length class (cm) and
+#'   "BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
+#'   length. Species for which there are no length data should be assigned FLEN
+#'   = -99. These observations are removed by the function.
 #' @param group character string indicating which group of species to include.
 #'   Note that this subsetting is based on the Fisheries and Oceans Canada
 #'   species codes for the Scotian Shelf. For other regions it may be prudent to
@@ -22,10 +22,13 @@
 #'   then choose group = "ALL". Type ?speciesgroups for more information.
 #' @param LenWt.table table of annual length at weight data with 5 columns.
 #'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
-#'   length at the corresponding "FWT" (fish weight). 
+#'   length at the corresponding "FWT" (fish weight).
 #' @param years vector of years for which to calculate indicator.
 #' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'   "CommunityCondition_group"
+#'   "CommunityCondition_group".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   value is assigned NA.
 #' @family ecosystem structure and function indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -76,7 +79,7 @@ communityFultonK <- function(X, group, LenWt.table, years) {
           
           inx.na <- which(is.na(Z$ABUNDANCE))  # index of where Z$metric is zero
           
-          if(nrow(Z) > length(inx.na)){        # if all of the rows of Z$metric are NA, then set ind.i to NA
+         if(nrow(Z) > length(inx.na)){        # if all of the rows of Z$metric are NA, then set ind.i to NA
            
              Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
             Z$K <- Z$FWT / Z$FLEN^3*100                                               # calculate K for each species

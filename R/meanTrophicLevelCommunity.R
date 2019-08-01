@@ -36,7 +36,10 @@
 #'  length-based data. Default is length.based = FALSE
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MeanTLCommunity" (if length.based = FALSE) or "MeanTLCommunity_Length" if
-#'  length.based = TRUE
+#'  length.based = TRUE.
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  value is assigned NA.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

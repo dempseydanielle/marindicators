@@ -23,7 +23,10 @@
 #'  fish are those with X$FLEN >= 35 cm)
 #'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "LargeFishIndicator"
+#'  "LargeFishIndicator".
+#'
+#'  If there are no observations of large fish or no observations in X for
+#'  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -56,8 +59,10 @@ largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'),
       year.i = years[i]                  # set year.i to year i
       X.ij <- X.j[X.j$YEAR == year.i, ]  # subset data to year i
       
-      LF <- X.ij$FLEN >= large.fish                     # returns TRUE when fish length is >= large.fish   
-      ind.i <- sum(X.ij[LF, metric])/sum(X.ij[,metric]) # calculate the large fish indicator
+      if(nrow(X.ij) > 0){
+        LF <- X.ij$FLEN >= large.fish                     # returns TRUE when fish length is >= large.fish   
+        ind.i <- sum(X.ij[LF, metric])/sum(X.ij[,metric]) # calculate the large fish indicator
+      } else ind.i <- NA
       
       ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
@@ -66,6 +71,9 @@ largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'),
   }
   
   names(ind) = c("ID", "YEAR", "LargeFishIndicator")    # name the ind dataframe
+  inx <- which(ind$LargeFishIndicator == 0)             # index of where LargeFishIndicator is 0       
+  ind$LargeFishIndicator[inx] <- NA                     # set values of 0 to NA
+  
   ind <- ind[order(ind$ID), ]                           # order by ID to be consistent with other functions
   ind                                                   # return ind 
 }

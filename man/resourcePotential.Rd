@@ -34,8 +34,8 @@ then choose group = "ALL". Type ?speciesgroups for more information.}
 Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
 
  If there is no data for a given year, the indicator value will be "NA" for
- that year. If biomass of species “x” was not captured in the survey, species
- “x” is still likely to present, just not detected or perhaps not recorded.
+ that year. If biomass of species X was not captured in the survey, species
+ X is still likely to be present, just not detected or perhaps not recorded.
  Replacing with zero would have an impact on trends, whereas treating as NA
  does not.
 }

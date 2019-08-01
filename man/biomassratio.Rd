@@ -25,7 +25,11 @@ indicator.}
 \item{years}{vector of years for which to calculate indicator}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and "group12group2"
+Returns a dataframe with 3 columns. "ID", "YEAR", and
+  "group12group2".
+
+  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+  values is assigned NA.
 }
 \description{
 This function calculates the biomass ration between two
@@ -45,7 +49,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
   fish: A comparative exploration of variations in the theme of stock
   collapse and ecosystem change in four Northwest Atlantic ecosystems. Prog
-  Oceanogr 81:188–206
+  Oceanogr 81:188 206
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{communityFultonK}},

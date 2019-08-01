@@ -4,26 +4,22 @@
 \alias{communityFultonK}
 \title{Calculates Fulton's Condition Index for the community}
 \usage{
-communityFultonK(X, group = c("ALL", "FINFISH"), metric = "ABUNDANCE",
-  LenWt.table, years)
+communityFultonK(X, group, LenWt.table, years)
 }
 \arguments{
 \item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
-code designating where the observation was recorded (a string). "SPECIES"
-is a numeric code indicating the species sampled. "FLEN" is the length
-class (cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
-abundance at length. Species for which there are no length data should be
-assigned FLEN = -99. These observations are removed by the function.}
+"ID", "SPECIES", "FLEN", and "ABUNDANCE". "ID" is an area code designating
+where the observation was recorded (a string). "SPECIES" is a numeric code
+indicating the species sampled. "FLEN" is the length class (cm) and
+"BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
+length. Species for which there are no length data should be assigned FLEN
+= -99. These observations are removed by the function.}
 
 \item{group}{character string indicating which group of species to include.
 Note that this subsetting is based on the Fisheries and Oceans Canada
 species codes for the Scotian Shelf. For other regions it may be prudent to
 subsetdata to species groups of interest prior to using the function and
 then choose group = "ALL". Type ?speciesgroups for more information.}
-
-\item{metric}{character string indicating which metric to use to calculate
-indicator. Default is set to "ABUNDANCE".}
 
 \item{LenWt.table}{table of annual length at weight data with 5 columns.
 "YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
@@ -33,7 +29,10 @@ length at the corresponding "FWT" (fish weight).}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
-  "CommunityCondition"
+  "CommunityCondition_group".
+
+  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+  value is assigned NA.
 }
 \description{
 This function takes a dataframe of length-based fisheries

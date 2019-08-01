@@ -18,7 +18,10 @@
 #'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MeanLength_metric"
+#'  "MeanLength_metric".
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  value is assigned NA.
 #'@importFrom stats aggregate
 #'@family structure and functioning indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -53,7 +56,9 @@ meanLengthCommunity <- function(X, metric=c('BIOMASS','ABUNDANCE'), years) {
       year.i = years[i]                  # set year.i to year i
       X.ij <- X.j[X.j$YEAR == year.i, ]  # subset data to year i
       
-      ind.i <- sum(X.ij[, 'FLEN']* X.ij[, metric])/sum(X.ij[, metric])
+      if(nrow(X.ij) > 0){
+        ind.i <- sum(X.ij[, 'FLEN']* X.ij[, metric])/sum(X.ij[, metric])
+      } else ind.i <- NA
       
       ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
       ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe

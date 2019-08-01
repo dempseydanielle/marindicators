@@ -26,7 +26,10 @@ fish are those with X$FLEN >= 35 cm)}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
- "LargeFishIndicator"
+ "LargeFishIndicator".
+
+ If there are no observations of large fish or no observations in X for
+ spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
 This function takes a dataframe of length-based fisheries

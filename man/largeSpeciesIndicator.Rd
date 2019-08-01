@@ -26,7 +26,10 @@ species are those with MAXLEN99 >= 85 cm)}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
- "LargeFishIndicator"
+ "LargeSpeciesIndicator".
+
+ If there are no observations of large species or no observations in X for
+ spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
 This function takes a dataframe of length-based fisheries
