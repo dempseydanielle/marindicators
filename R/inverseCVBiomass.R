@@ -16,15 +16,18 @@
 #' @param window window for the moving averge. Default is 5 years.
 #' @param years vector of years for which to calculate indicator
 #' @return returns a dataframe with three columns: "ID", "YEAR", and
-#'   "invCVbiomass". Years with missing data are assigned NA.
+#'   "invCVbiomass".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   value is assigned NA.
 #' @family stability and resistance indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'   Aquat. Sci. 3232: xii + 212 p.
 #'
 #'   Blanchard, F, Boucher, J (2001) Temporal variability of total biomass in
-#'   harvested communities of demersal fishes. Fisheries Research. 49. 283–293.
-#'   10.1016/S0165-7836(00)00203-4. (not in Tech refs)
+#'   harvested communities of demersal fishes. Fisheries Research. 49.
+#'   283–293. 10.1016/S0165-7836(00)00203-4. (not in Tech refs)
 #'
 #'   Shin YJ, Shannon LJ (2010) Using indicators for evaluating, comparing, and
 #'   communicating the ecological status of exploited marine ecosystems. 1. the
@@ -54,7 +57,7 @@
 	      max_year <- max(ind.j$YEAR)        # maximum year
 	      
 	      ind.j[ind.j$YEAR %in% c(min_year, min_year + 1, max_year - 1, max_year), "BIOMASS"] <- NA   # set the first and last two years to NA 
-	      #ind.j <- merge(years, ind.j, all.x = T)
+	      ind.j <- merge(years, ind.j, all.x = T)
 	   
 	      ind.j= data.frame(rep(uI[j], nrow(ind.j)), ind.j)     # create a dataframe with spatial scale ID, year, and indicator value
 	      names(ind.j) <- c("ID", "YEAR", "invCVbiomass")

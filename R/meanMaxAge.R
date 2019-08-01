@@ -18,7 +18,10 @@
 #'@param metric character string indicating whether to use "BIOMASS" or
 #'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan"
+#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan".
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  value is assigned NA.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -47,9 +50,9 @@
 		    year.i = years[i]                             # set years.i to current year  
 		    X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
 		    
-		    if(nrow(X.ij) > 0){                           # set ind.i to NA if there are no observations in X.ij 
+		   if(nrow(X.ij) > 0){                           # set ind.i to NA if there are no observations in X.ij 
 		      ind.i <- sum(X.ij[metric]*X.ij['MAXAGE'])/sum(X.ij[metric])	 # make sure this does what it should!
-		    } else ind.i <- NA
+		   } else ind.i <- NA
 		    
 		    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
 		    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe

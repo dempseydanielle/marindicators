@@ -36,7 +36,10 @@ ravens consist of about 60% of the total sculpin landings and are assigned a
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and
- "IVILandings"
+ "IVILandings".
+
+ If there are no observations in land for spatial scale \eqn{j} in year
+ \eqn{i}, indicator value is assigned NA.
 }
 \description{
 This calculates the intrinsic vulnerability index (IVI) of the

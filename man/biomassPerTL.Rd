@@ -28,7 +28,10 @@ abundance) is aggregated over discrete trophic levels.}
 \value{
 Returns a dataframe with columns "ID", "YEAR", and the corresponding
   biomass for each trophic level grouping, e.g., "BIOMASS_TL2",
-  "BIOMASS_TL3", "BIOMASS_TL4"
+  "BIOMASS_TL3", "BIOMASS_TL4".
+
+  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+  value is assigned NA.
 }
 \description{
 This function calculates the biomass or abundance per discrete

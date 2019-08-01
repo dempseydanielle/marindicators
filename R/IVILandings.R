@@ -39,7 +39,10 @@
 #'  "PROPORTION_OF_LANDINGS" value of 0.6.
 #'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
-#'  "IVILandings"
+#'  "IVILandings".
+#'
+#'  If there are no observations in land for spatial scale \eqn{j} in year
+#'  \eqn{i}, indicator value is assigned NA.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

@@ -18,7 +18,10 @@ species sampled.}
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and
-  "invCVbiomass". Years with missing data are assigned NA.
+  "invCVbiomass".
+
+  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+  value is assigned NA.
 }
 \description{
 This calculates the inverse of the coefficient of variation of
@@ -40,8 +43,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   Aquat. Sci. 3232: xii + 212 p.
 
   Blanchard, F, Boucher, J (2001) Temporal variability of total biomass in
-  harvested communities of demersal fishes. Fisheries Research. 49. 283–293.
-  10.1016/S0165-7836(00)00203-4. (not in Tech refs)
+  harvested communities of demersal fishes. Fisheries Research. 49.
+  283–293. 10.1016/S0165-7836(00)00203-4. (not in Tech refs)
 
   Shin YJ, Shannon LJ (2010) Using indicators for evaluating, comparing, and
   communicating the ecological status of exploited marine ecosystems. 1. the

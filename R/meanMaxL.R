@@ -21,7 +21,10 @@
 #'  "ABUNDANCE" to calculate indicator.
 #'@param years vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MMlength_metric"
+#'  "MMlength_metric".
+#'
+#'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'  value is assigned NA.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

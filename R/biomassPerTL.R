@@ -17,7 +17,10 @@
 #' @param years vector of years for which to calculate indicator.
 #' @return Returns a dataframe with columns "ID", "YEAR", and the corresponding
 #'   biomass for each trophic level grouping, e.g., "BIOMASS_TL2",
-#'   "BIOMASS_TL3", "BIOMASS_TL4"
+#'   "BIOMASS_TL3", "BIOMASS_TL4".
+#'
+#'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+#'   value is assigned NA.
 #' @importFrom stats aggregate
 #' @family stability and resistance indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -46,7 +49,6 @@ biomassPerTL <- function(X, TL.table,
   
   ind <- stats::aggregate(X[metric], by= X[c('ID', 'YEAR', 'TL')], FUN = sum) # calculate total biomass per TL
   
-
 # Extract biomass at each TL ----------------------------------------------
 
   years <- data.frame(years) # dataframe of all years

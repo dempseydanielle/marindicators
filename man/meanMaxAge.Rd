@@ -21,7 +21,10 @@ recorded age of the corresponding species.}
 \item{years}{vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan"
+Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
 This function calculates the mean maximum age (MMA) of fish in

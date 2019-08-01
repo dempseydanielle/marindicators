@@ -25,7 +25,10 @@ recorded length of the corresponding species.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
- "MMlength_metric"
+ "MMlength_metric".
+
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
 This function calculates the mean maximum length (MML) of fish in
