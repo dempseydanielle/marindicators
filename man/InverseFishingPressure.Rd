@@ -28,7 +28,11 @@ fishing pressure on the whole community will be calculated.}
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and
- "invFP_group"
+ "invFP_group".
+
+ If fishing pressure of group is zero, inverse fishing pressure is set to
+ zero (rather than inf). If biomass of group is NA, inverse fishing pressure
+ is set to NA.
 }
 \description{
 This function calculates the inverse fishing pressure on a fished
@@ -50,7 +54,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
  D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
  and reliable? Using ecological indicators to represent and compare the
- states of marine ecosystems. ICES J Mar Sci 67:717–731
+ states of marine ecosystems. ICES J Mar Sci 67:717 731
 }
 \seealso{
 Other fishing pressure indicators: \code{\link{FishingPressure}},

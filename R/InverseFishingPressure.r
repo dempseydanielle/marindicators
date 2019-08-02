@@ -23,7 +23,11 @@
 #'  fishing pressure on the whole community will be calculated.
 #'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
-#'  "invFP_group"
+#'  "invFP_group".
+#'
+#'  If fishing pressure of group is zero, inverse fishing pressure is set to
+#'  zero (rather than inf). If biomass of group is NA, inverse fishing pressure
+#'  is set to NA.
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -32,7 +36,7 @@
 #'  Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
 #'  D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
 #'  and reliable? Using ecological indicators to represent and compare the
-#'  states of marine ecosystems. ICES J Mar Sci 67:717–731
+#'  states of marine ecosystems. ICES J Mar Sci 67:717 731
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
@@ -43,12 +47,13 @@ InverseFishingPressure <- function(X, land, group, years) {
   FP$invFP <- 1/FP[,3]                                        # calculate inverse fishing pressure
   
   index <- which(FP$invFP == Inf)                                # index NAs
-  FP[index, 'invFP'] <- 0                                            # replace NA with 0
+  FP[index, 'invFP'] <- 0                                        # replace inf with 0
   
   ind.name <- paste("invFP", "_", group, sep = "")            # name indicator: invFP_group
   names(FP) <- c("ID", "YEAR", "FP", ind.name)                # name FP columns 
   ind <- FP                                                   # set ind equal to FP
-  ind$FP <- NULL                                             # remove FP column
+  ind$FP <- NULL                                              # remove FP column
+  ind <- ind[order(ind$ID), ]
   ind                                            
 	
 }

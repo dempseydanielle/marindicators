@@ -52,13 +52,13 @@ LandByGroup <- function(land,
   
   ind <- aggregate(CATCH ~ ID + YEAR, data = land, FUN = sum)   # sum over years and spatial scales 
   ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
-  ind <- ind[order(ind$ID), ]                                   # order by "ID" to be consistent with other functions
-  
+
   index <- which(is.na(ind[,3]))                                # index NAs
   ind[index, 3] <- 0                                            # replace NA with 0
   
   ind.name <- paste(group, "_", "landings", sep ="")            # name indicator: metric_group
   names(ind) <- c("ID", "YEAR", ind.name)
+  ind <- ind[order(ind$ID), ]                                   # order by "ID" to be consistent with other functions
   ind
   
 }

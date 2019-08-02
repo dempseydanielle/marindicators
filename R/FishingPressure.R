@@ -28,8 +28,11 @@
 #'  fishing pressure on the whole community will be calculated.
 #'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
-#'  Note that if landings of group are zero, fishing pressure will be set to
-#'  zero as well (even if biomass of the group is NA).
+#'
+#'  If biomass of group is NA and landings of group are zero, fishing pressure
+#'  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
+#'  set to NA.
+#'
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -48,7 +51,7 @@ FishingPressure <- function(X, land, group, years){
   B <- resourcePotential(X, metric = "BIOMASS", group = group, years = years)  # calculate the biomass of "group" in the community
   Y <- LandByGroup(land, group = group, years = years)                         # calculate the landings of "group"
   
-  ind <- merge(Y, B, by = c('YEAR','ID'), all.x = T)
+  ind <- merge(Y, B, by = c("ID", "YEAR"), all.x = T)
 
   ind$FP <- ind[,3]/ind[,4]                            # calculate fishing pressure
   index_zero <- which(ind[,3] == 0)                    # index of where landings is zero
@@ -56,9 +59,9 @@ FishingPressure <- function(X, land, group, years){
   ind[,3] <- NULL                                      # remove landings column
   ind[,3] <- NULL                                      # remove biomass column
   
-  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind.name <- paste("FP", "_", group, sep ="")         # name indicator: FP_group
   names(ind) <- c("ID", "YEAR", ind.name)
+  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                  # return indicator dataframe
   
 }
