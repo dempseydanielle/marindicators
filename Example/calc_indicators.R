@@ -97,9 +97,23 @@ ML_bio = meanLengthCommunity(RV_length, metric = "BIOMASS", years = yrs)
 ML_abund = meanLengthCommunity(RV_length, metric = "ABUNDANCE", years = yrs)
 
 # Community Condition
-FultonK = communityFultonK(RV_length, LenWt.table = Length_Weight, metric = "ABUNDANCE",  
-                           years = yrs,
-                           group = "FINFISH")
+FultonK = communityFultonK(RV_length, LenWt.table = Length_Weight,  
+                           years = yrs, group = "FINFISH")
+
+K_Lbenth = communityFultonK(RV_length, LenWt.table = Length_Weight,
+                            years = yrs, group = "LBENTHIVORE")
+
+K_Mbenth = communityFultonK(RV_length, LenWt.table = Length_Weight,  
+                            years = yrs, group = "MBENTHIVORE")
+
+K_pisc = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                          years = yrs, group = "PISCIVORE")
+
+K_plank = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                           years = yrs, group = "PLANKTIVORE")
+
+K_zoo = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                         years = yrs, group = "ZOOPISCIVORE")
 
 # inv2dem
 inv_dem = biomassratio(RV[RV$YEAR>=1999,], group1 = "INVERTEBRATES", group2 = "GROUNDFISH", 
@@ -156,7 +170,7 @@ IVI = IVILandings(land_dat, IVI.table = IVI.table, propland.table = prop.land.ta
 bio_TL = biomassPerTL(RV, TL.table = TL.table.simple, metric = "BIOMASS", TL.grouping = 1, years = yrs)
 
 # inverse CV biomass
-invCV_bio = invCVBiomass(RV)
+invCV_bio = invCVBiomass(RV, window = 5, years = yrs)
 
 # Resource Potential Indicators -------------------------------------------
 
@@ -190,11 +204,11 @@ bio_skate = resourcePotential(RV, metric = "BIOMASS", group = "SKATES", years = 
 
 # Mean Trophic Level Landings 
 MTLL = MeanTLLandings(land_dat, TL.table = TL.table.length, propland.table = prop.land.table,
-                      cutoff = 0)
+                      cutoff = 0, years = yrs)
 
 # Marine Trophic Index Landings 
 MTI = MeanTLLandings(land_dat, TL.table = TL.table.length, propland.table = prop.land.table,
-                     cutoff = 3.25)
+                     cutoff = 3.25, years = yrs)
 
 # Diversity of target species
 SR.L = speciesrichness(land_dat, metric = "CATCH", group = "ALL", years = yrs)

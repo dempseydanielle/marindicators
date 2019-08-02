@@ -91,42 +91,6 @@ all.equal(TARGET$KemptonQ, Q$KemptonQ)
 
 
 # Structure and Functioning Indicators ------------------------------------
-
-# Large fish indicator
-LFI = indicators::largeFishIndicator(RV_length, metric = "BIOMASS", years = yrs)
-all.equal(TARGET$LargeFishIndicator, LFI$LargeFishIndicator)
-
-# Large species indicator
-LSI = largeSpeciesIndicator(RV, lmax.table = maxL.table, lmax=85,  metric = "BIOMASS", years = yrs)
-all.equal(TARGET$LargeSpeciesIndicator, LSI$LargeSpeciesIndicator)
-
-# Proportion of predatory species
-propPred = predatoryFish(RV, pred.spp, metric = "BIOMASS", years = yrs)
-all.equal(TARGET$PropPredatoryFish, propPred$PropPredatoryFish)
-
-# Mean trophic level of community
-TL = meanTrophicLevelCommunity(RV, TL.table = TL.table.simple, 
-                               metric = "BIOMASS", length.based = FALSE, years = yrs)
-all.equal(TARGET$MeanTrophicLevel, TL$MeanTLCommunity)
-
-# Mean trophic level of community: LENGTH
-TL_length = meanTrophicLevelCommunity(RV_length_TL, TL.table = NULL, 
-                                      metric = "BIOMASS", length.based = TRUE, years = yrs)
-all.equal(TARGET$MeanTrophicLevelStanza, TL_length$MeanTLCommunity)
-
-# Mean length of community
-ML_bio = meanLengthCommunity(RV_length, metric = "BIOMASS", years = yrs)
-all.equal(TARGET$MeanLengthBiomass, ML_bio$MeanLengthBIOMASS)
-
-ML_abund = meanLengthCommunity(RV_length, metric = "ABUNDANCE", years = yrs)
-all.equal(TARGET$MeanLengthAbundance, ML_abund$MeanLengthABUNDANCE)
-
-# Community Condition
-FultonK = communityFultonK(RV_length, LenWt.table = Length_Weight, metric = "ABUNDANCE",  
-                           years = yrs,
-                           group = "FINFISH")
-all.equal(TARGET$CommunityCondition, FultonK$CommunityCondition)
-
 # inv2dem
 inv_dem = biomassratio(RV[RV$YEAR>=1999,], group1 = "INVERTEBRATES", group2 = "GROUNDFISH", 
                        metric = "BIOMASS", years = yrs)
@@ -138,33 +102,6 @@ pel_dem = biomassratio(RV, group1 = "PELAGIC", group2 = "GROUNDFISH",
 all.equal(TARGET$BPelagicToDemersal, pel_dem$PELAGIC2GROUNDFISH)
 
 # Biomass of trophic guilds
-bio = resourcePotential(RV, metric = "BIOMASS", group = "ALL", years = yrs)
-all.equal(TARGET$Biomass, bio$BIOMASS_ALL)
-
-bio_clup = resourcePotential(RV, metric = "BIOMASS", group = "CLUPEIDS", years = yrs)
-all.equal(TARGET$BiomassClupeids, bio_clup$BIOMASS_CLUPEIDS)
-
-bio_fin = resourcePotential(RV, metric = "BIOMASS", group = "FINFISH", years = yrs)
-all.equal(TARGET$BiomassFinfish, bio_fin$BIOMASS_FINFISH)
-
-bio_flat = resourcePotential(RV, metric = "BIOMASS", group = "FLATFISH", years = yrs)
-all.equal(TARGET$BiomassFlatfish, bio_flat$BIOMASS_FLATFISH)
-
-bio_for = resourcePotential(RV, metric = "BIOMASS", group = "FORAGE", years = yrs)
-all.equal(TARGET$BiomassForage, bio_for$BIOMASS_FORAGE)
-
-bio_gad = resourcePotential(RV, metric = "BIOMASS", group = "GADOIDS", years = yrs)
-all.equal(TARGET$BiomassGadoids, bio_gad$BIOMASS_GADOIDS)
-
-bio_ground = resourcePotential(RV, metric = "BIOMASS", group = "GROUNDFISH", years = yrs)
-all.equal(TARGET$BiomassGroundfish, bio_ground$BIOMASS_GROUNDFISH)
-
-bio_pel = resourcePotential(RV, metric = "BIOMASS", group = "PELAGIC", years = yrs)
-all.equal(TARGET$BiomassPelagic, bio_pel$BIOMASS_PELAGIC)
-
-bio_invert = resourcePotential(RV[RV$YEAR>=1999,], metric = "BIOMASS", group = "INVERTEBRATES", years = yrs)
-all.equal(TARGET$BiomassInvertebrates, bio_invert$BIOMASS_INVERTEBRATES)
-
 bio_Lbenth = resourcePotential(RV, metric = "BIOMASS", group = "LBENTHIVORE", years = yrs)
 all.equal(TARGET$BTGLargeBenthivore, bio_Lbenth$BIOMASS_LBENTHIVORE)
 
@@ -180,6 +117,59 @@ all.equal(TARGET$BTGPlanktivore, bio_plank$BIOMASS_PLANKTIVORE)
 bio_zoo = resourcePotential(RV, metric = "BIOMASS", group = "ZOOPISCIVORE", years = yrs)
 all.equal(TARGET$BTGZoopiscivore, bio_zoo$BIOMASS_ZOOPISCIVORE)
 
+# Community Condition
+FultonK = communityFultonK(RV_length, LenWt.table = Length_Weight,  
+                           years = yrs, group = "FINFISH")
+all.equal(TARGET$CommunityCondition, FultonK$CommunityCondition_FINFISH)
+
+K_Lbenth = communityFultonK(RV_length, LenWt.table = Length_Weight,
+                            years = yrs, group = "LBENTHIVORE")
+all.equal(TARGET$CCLargeBenthivore, K_Lbenth$CommunityCondition_LBENTHIVORE)
+
+K_Mbenth = communityFultonK(RV_length, LenWt.table = Length_Weight,  
+                            years = yrs, group = "MBENTHIVORE")
+all.equal(TARGET$CCMediumBenthivore, K_Mbenth$CommunityCondition_MBENTHIVORE)
+
+K_pisc = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                          years = yrs, group = "PISCIVORE")
+all.equal(TARGET$CCPiscivore, K_pisc$CommunityCondition_PISCIVORE)
+
+K_plank = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                           years = yrs, group = "PLANKTIVORE")
+all.equal(TARGET$CCPlanktivore, K_plank$CommunityCondition_PLANKTIVORE)
+
+K_zoo = communityFultonK(RV_length, LenWt.table = Length_Weight, 
+                         years = yrs, group = "ZOOPISCIVORE")
+all.equal(TARGET$CCZoopiscivore, K_zoo$CommunityCondition_ZOOPISCIVORE)
+
+# Large fish indicator
+LFI = indicators::largeFishIndicator(RV_length, metric = "BIOMASS", years = yrs)
+all.equal(TARGET$LargeFishIndicator, LFI$LargeFishIndicator)
+
+# Large species indicator
+LSI = largeSpeciesIndicator(RV, lmax.table = maxL.table, lmax=85,  metric = "BIOMASS", years = yrs)
+all.equal(TARGET$LargeSpeciesIndicator, LSI$LargeSpeciesIndicator)
+
+# Mean length of community
+ML_bio = meanLengthCommunity(RV_length, metric = "BIOMASS", years = yrs)
+all.equal(TARGET$MeanLengthBiomass, ML_bio$MeanLengthBIOMASS)
+
+ML_abund = meanLengthCommunity(RV_length, metric = "ABUNDANCE", years = yrs)
+all.equal(TARGET$MeanLengthAbundance, ML_abund$MeanLengthABUNDANCE)
+
+# Mean trophic level of community
+TL = meanTrophicLevelCommunity(RV, TL.table = TL.table.simple, 
+                               metric = "BIOMASS", length.based = FALSE, years = yrs)
+all.equal(TARGET$MeanTrophicLevel, TL$MeanTLCommunity)
+
+# Mean trophic level of community: LENGTH
+TL_length = meanTrophicLevelCommunity(RV_length_TL, TL.table = NULL, 
+                                      metric = "BIOMASS", length.based = TRUE, years = yrs)
+all.equal(TARGET$MeanTrophicLevelStanza, TL_length$MeanTLCommunity_Length)
+
+# Proportion of predatory species
+propPred = predatoryFish(RV, pred.spp, metric = "BIOMASS", years = yrs)
+all.equal(TARGET$PropPredatoryFish, propPred$PropPredatoryFish)
 
 # Stability and Resistance Indicators -------------------------------------
 
@@ -207,16 +197,15 @@ all.equal(TARGET$BiomassTL3, bio_TL$BIOMASS_TL3)
 all.equal(TARGET$BiomassTL4, bio_TL$BIOMASS_TL4)
 
 # inverse CV biomass
-invCV_bio = invCVBiomass(RV)
+invCV_bio = invCVBiomass(RV, window = 5, years = yrs)
 all.equal(TARGET$InverseCVBiomass, invCV_bio$invCVbiomass)
 
 
 # Resource Potential Indicators -------------------------------------------
 
-# Fishing in Balance
-FIB = FishingInBalance(land_all, TE = 0.1,  base.start = 1968, base.end = 1970, years = yrs,
-                       TL.table = TL.table.length, propland.table = prop.land.table, cutoff = 0)
-all.equal(TARGET$FishinginBalance.L, FIB$FishinginBalance)
+# Abundance
+abund = resourcePotential(RV, metric = "ABUNDANCE", group = "ALL", years = yrs)
+all.equal(TARGET$Abundance, abund$ABUNDANCE_ALL)
 
 # Biomass 
 bio = resourcePotential(RV, metric = "BIOMASS", group = "ALL", years = yrs)
@@ -244,52 +233,65 @@ all.equal(TARGET$BiomassGroundfish, bio_ground$BIOMASS_GROUNDFISH)
 bio_invert = resourcePotential(RV[RV$YEAR >= 1999,], metric = "BIOMASS", group = "INVERTEBRATES", years = c(1999:2015))
 all.equal(TARGET[TARGET$YEAR >=1999, "BiomassInvertebrates"], bio_invert$BIOMASS_INVERTEBRATES)
 
+bio_pel = resourcePotential(RV, metric = "BIOMASS", group = "PELAGIC", years = yrs)
+all.equal(TARGET$BiomassPelagic, bio_pel$BIOMASS_PELAGIC)
+
 # Biomass of skates
 bio_skate = resourcePotential(RV, metric = "BIOMASS", group = "SKATES", years = yrs)
 all.equal(TARGET$BiomassSkates, bio_skate$BIOMASS_SKATES)
 
+# Fishing in Balance
+FIB = FishingInBalance(land_all, TE = 0.1,  base.start = 1968, base.end = 1970, years = yrs,
+                       TL.table = TL.table.length, propland.table = prop.land.table, cutoff = 0)
+all.equal(TARGET$FishinginBalance.L, FIB$FishinginBalance)
+
 
 # Fishing Pressure Indicators ---------------------------------------------
-
-# Mean Trophic Level Landings 
-MTLL = MeanTLLandings(land_dat, TL.table = TL.table.length, propland.table = prop.land.table, cutoff = 0)
-all.equal(TARGET$MeanTrophicLevel.L, MTLL$MeanTL.Landings)
-
-# Marine Trophic Index Landings 
-MTI = MeanTLLandings(land_dat, TL.table = TL.table.length, propland.table = prop.land.table, cutoff = 3.25)
-all.equal(TARGET$MarineTrophicIndex.L, MTI$MarineTophicIndex.Landings)
 
 # Diversity of target species
 SR.L = speciesrichness(land_dat, metric = "CATCH", group = "ALL", years = yrs)
 all.equal(TARGET$DiversityTargetSpp.L, SR.L$DiversityTargetSpp)
 
+# Mean Trophic Level Landings 
+MTLL = MeanTLLandings(land_dat, TL.table = TL.table.length, 
+                      propland.table = prop.land.table, cutoff = 0, years = yrs)
+all.equal(TARGET$MeanTrophicLevel.L, MTLL$MeanTL.Landings)
+
+# Marine Trophic Index Landings 
+MTI = MeanTLLandings(land_dat, TL.table = TL.table.length, 
+                     propland.table = prop.land.table, cutoff = 3.25, years = yrs)
+all.equal(TARGET$MarineTrophicIndex.L, MTI$MarineTophicIndex.Landings)
+
 # landings by group
 land_all = LandByGroup(land_dat, group = "ALL", years = yrs)
 all.equal(TARGET$Landings.L,land_all$ALL_landings)
 
-land_fin = LandByGroup(land_dat, group = "FINFISH", years = yrs)
-all.equal(TARGET$LFinfish.L,land_fin$FINFISH_landings)
-
 land_clup = LandByGroup(land_dat, group = "CLUPEIDS", years = yrs)
 all.equal(TARGET$LClupeids.L,land_clup$CLUPEIDS)
 
-land_ground = LandByGroup(land_dat, group = "GROUNDFISH", years = yrs)
-all.equal(TARGET$LGroundfish.L,land_ground$GROUNDFISH_landings)
+land_fin = LandByGroup(land_dat, group = "FINFISH", years = yrs)
+all.equal(TARGET$LFinfish.L,land_fin$FINFISH_landings)
 
 land_flat = LandByGroup(land_dat, group = "FLATFISH", years = yrs)
 all.equal(TARGET$LFlatfish.L,land_flat$FLATFISH_landings)
 
+land_for = LandByGroup(land_dat, group = "FORAGE", years = yrs)
+all.equal(TARGET$LForageFish.L,land_for$FORAGE_landings)
+
 land_gad = LandByGroup(land_dat, group = "GADOIDS", years = yrs)
 all.equal(TARGET$LGadoids.L,land_gad$GADOIDS_landings)
 
-land_for = LandByGroup(land_dat, group = "FORAGE", years = yrs)
-all.equal(TARGET$LForageFish.L,land_for$FORAGE_landings)
+land_ground = LandByGroup(land_dat, group = "GROUNDFISH", years = yrs)
+all.equal(TARGET$LGroundfish.L,land_ground$GROUNDFISH_landings)
 
 land_invert = LandByGroup(land_dat, group = "INVERTEBRATES", years = yrs)
 all.equal(TARGET$LInvertebrates.L,land_invert$INVERTEBRATES_landings)
 
 land_pel = LandByGroup(land_dat, group = "LARGE_PELAGIC", years = yrs)
 all.equal(TARGET$LLargePelagic.L,land_pel$LARGE_PELAGIC_landings)
+
+land_skate = LandByGroup(land_dat, group = "SKATES", years = yrs)
+all.equal(TARGET$LSkates.L,land_skate$SKATES_landings)
 
 # fishing pressure by group
 FP_all = FishingPressure(X = RV, land = land_dat, group = "ALL", years = yrs)
