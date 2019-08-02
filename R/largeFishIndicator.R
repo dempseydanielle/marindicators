@@ -43,8 +43,7 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-largeFishIndicator <- function(X, metric=c('BIOMASS','ABUNDANCE'), 
-                               large.fish = 35, years) {
+largeFishIndicator <- function(X, metric, large.fish = 35, years) {
   
   uI = unique(X$ID)                   # extract the spatial scale ID's
   X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data

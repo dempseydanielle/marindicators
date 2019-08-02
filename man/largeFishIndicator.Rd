@@ -4,8 +4,7 @@
 \alias{largeFishIndicator}
 \title{Calculates the Large Fish Indicator}
 \usage{
-largeFishIndicator(X, metric = c("BIOMASS", "ABUNDANCE"),
-  large.fish = 35, years)
+largeFishIndicator(X, metric, large.fish = 35, years)
 }
 \arguments{
 \item{X}{dataframe of fishery independent survey data with columns "YEAR",

@@ -40,7 +40,7 @@
 #'  given species that is represented by GROUP_NAME. Landings of small haddock
 #'  are negligible in this example, and so Haddock<33 is assigned LANDED = 0,
 #'  while Haddock33+ is assigned LANDED = 1.
-#'@param propland.table dataframe with three columns: "SPECIES", "ALLCODE", and
+#'@param propland.table dataframe with three columns: "SPECIES", "ALLCODES", and
 #'  "PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
 #'  species code (as in TL.table), and "ALLCODES" is the corresponding numeric
 #'  commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
@@ -48,7 +48,7 @@
 #'  For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
 #'  code of 300, while sea ravens are assigned a species code of 320; however
 #'  they are grouped together in the commercial landings data and are both
-#'  assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
+#'  assigned ALLCODES 174. The "PROPORTION_OF_LANDINGS" column estimates the
 #'  proportion of each species that makes up the commercial landings. In this
 #'  example, longhorn sculpins consist of about 40\% of the total sculpin
 #'  landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
