@@ -9,20 +9,7 @@
 #'  and represents a measure of evenness of the community.
 #'
 #'  **Recommended data: Fishery independent surveys, fish and invertebrates.
-#'
-#'@param X dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'  designating where the observation was recorded (a string). "SPECIES" is a
-#'  numeric code indicating the species sampled.
-#'@param group character string indicating which species to include, either
-#'  "ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
-#'  Oceans Canada species codes for the Scotian Shelf. For other regions it may
-#'  be prudent to subsetdata to species groups of interest prior to using the
-#'  function and then choose group = "ALL". Type ?speciesgroups for more
-#'  information.
-#'@param metric character string indicating whether to use "BIOMASS" or
-#'  "ABUNDANCE" to calculate the indicator.
-#'@param years vector of years for which to calculate indicator.
+#' @inheritParams shannon
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
@@ -40,12 +27,13 @@
 #'@export
 
 
-pielouSpeciesEvenness <- function(X, group = c('FINFISH','ALL'), metric = c('BIOMASS','ABUNDANCE'),
-                                  years)  {
+pielouSpeciesEvenness <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
 
 
-  H <-shannon(X, group = group, metric = metric, years = years) # calculate Shannon's diversity for each year
-  S <- speciesrichness(X, group = group, metric = metric, years = years) # calculate species richness for each year
+  H <-shannon(X, group = group, species.table = species.table, 
+              metric = metric, years = years)           # calculate Shannon's diversity for each year
+  S <- speciesrichness(X, group = group, species.table = species.table,
+                       metric = metric, years = years)  # calculate species richness for each year
 
   H$Pielous = H$ShannonDiversity/log(S$SpeciesRichness) # calculate Pielou's species evenness
   

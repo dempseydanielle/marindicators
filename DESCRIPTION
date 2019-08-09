@@ -2,14 +2,13 @@ Package: indicators
 Title: Marine Ecosystem Indicators Package
 Version: 0.0.0.9001
 Date: 2019.07.04
-Authors: Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon, Catalina Gomez
-Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role=c("aut", "cre")),
-           person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= "aut"),
-           person("Adam", "Cook", email="Adam.Cook@dfo-mpo.gc.ca", role= "aut"),
-           person("Mike", "McMahon", email="Mike.McMahon@dfo-mpo.gc.ca", role= "aut"),
-           person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"))
+Authors: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
+Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role="aut"),
+           person("Adam", "Cook", email="Adam.Cook@dfo-mpo.gc.ca", role= c("aut", "cre")),
+           person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"),
+           person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= c("aut")))
 Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
-Description: This package calculates a suite of ecosystem indicators.
+Description: This package calculates a suite of ecosystem indicators.Can write a whole paragrpah here.
 Depends:
     R (>= 3.6.0)
 Imports:

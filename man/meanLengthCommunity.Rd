@@ -2,23 +2,26 @@
 % Please edit documentation in R/meanLengthCommunity.R
 \name{meanLengthCommunity}
 \alias{meanLengthCommunity}
-\title{Calculates the mean length of the community weighted by biomass or}
+\title{Calculates the mean length of the community weighted by biomass or
+ abundance (Shin et al., 2010)}
 \usage{
-meanLengthCommunity(X, metric = c("BIOMASS", "ABUNDANCE"), years)
+meanLengthCommunity(X, metric, years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
-code designating where the observation was recorded (a string). "SPECIES" is
-a numeric code indicating the species sampled. "FLEN" is the length class
-(cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
-abundance at length. Species for which there are no length data should be
-assigned FLEN = -99. These observations are removed by the function.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", "LENGTH", "ABUNDANCE", and/or "BIOMASS". "YEAR" indicates
+the year the observation was recorded, "ID" is an area code indicating where
+the observation was recorded, and "SPECIES" is a numeric code indicating the
+species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" and
+"BIOMASS" are the corresponding abundance and biomass at length (stratified
+and corrected for catchability as required). Species for which there are no
+length data should be assigned LENGTH = -99. These observations are removed
+by the function.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
@@ -37,24 +40,24 @@ This function calculates the mean length of the community
  \eqn{B_i} is the biomass or abundance of species \eqn{i} and \eqn{metric_j}
  is the total biomass or abundance of the community.
 
- **Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent survey data or model output; fish and
+ invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Houle JE, Farnsworth KD, Rossberg AG, Reid DG. 2012. Assessing the
- sensitivity and specificity of fish community indicators to management
- action. Can J Fish Aquat Sci 69:1065–1079
-
- Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
- D, Ojaveer H, MacKinson S, Heymans JJ, Raid T. 2010. Can simple be useful
- and reliable? Using ecological indicators to represent and compare the
- states of marine ecosystems. ICES J Mar Sci 67:717–731
+ Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+ MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+ Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+ Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+ Using indicators for evaluating, comparing and communicating the ecological
+ status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+ Journal of Marine Science, 67: 692-716
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{structure and functioning indicators}

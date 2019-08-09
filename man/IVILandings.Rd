@@ -4,35 +4,24 @@
 \alias{IVILandings}
 \title{Calculates the intrinsic vulnerability index of the catch}
 \usage{
-IVILandings(land, IVI.table, propland.table, years)
+IVILandings(land, IVI.table, negative = FALSE, years)
 }
 \arguments{
-\item{land}{dataframe of commercial landings data with columns "YEAR", "ID",
-"ALLCODES" and "CATCH". "ID" is an area code designating where the
-observation was recorded. "ALLCODES" is a numeric commercial species code
-indicating the species landed, and "CATCH" is the corresponding landed
-weight.}
+\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
+"SPECIES" and "CATCH". "YEAR" indicates the year the landing
+was recorded, "ID" is an area code indicating where the landing was
+recorded, "SPECIES" is a numeric code indicating the species landed, and
+"CATCH" is the corresponding landed weight.}
 
 \item{IVI.table}{dataframe with two columns: "SPECIES" and "IVI". "SPECIES" is
 the fisheries-independent numeric species code, and "IVI" is the
 corresponding intrinsic vulnerability index.}
 
-\item{propland.table}{dataframe with three columns: "SPECIES", "ALLCODE", and
-"PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
-species code (as in IVI.table), and "ALLCODES" is the corresponding numeric
-commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
-to species that have different SPECIES codes, but the same ALLCODES code.
-For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
-code of 300, while sea ravens are assigned a species code of 320; however
-they are grouped together in the commercial landings data and are both
-assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
-proportion of each species that makes up the commercial landings. In this
-example, longhorn sculpins consist of about 40% of the total sculpin
-landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
-ravens consist of about 60% of the total sculpin landings and are assigned a
-"PROPORTION_OF_LANDINGS" value of 0.6.}
+\item{negative}{If negative = TRUE, the indicator will be multipled by -1 so
+that the expected response is to decrease with increasing fishing pressure.
+Default is negative = FALSE.}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 returns a dataframe with three columns: "ID", "YEAR", and
@@ -71,9 +60,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Prog Ser 333: 1 - 12
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{biomassPerTL}},
-  \code{\link{invCVBiomass}}, \code{\link{meanMaxAge}},
-  \code{\link{meanMaxL}}
+Other stability and resistance indicators: \code{\link{CVBiomass}},
+  \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}},
+  \code{\link{meanMaxLength}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,

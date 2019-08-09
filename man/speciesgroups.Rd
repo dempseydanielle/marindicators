@@ -4,34 +4,32 @@
 \alias{speciesgroups}
 \title{Assigns species to species groups}
 \usage{
-speciesgroups(X, group = c("ALL", "FINFISH", "SKATES", "CLUPEIDS",
-  "GROUNDFISH", "FLATFISH", "GADOIDS", "FORAGE", "LBENTHIVORE",
-  "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE"))
+speciesgroups(X, species.table = NULL, group)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"ABUNDANCE" is the corresponding abundance (stratified and corrected for
+catchability as required).}
 
-\item{group}{character string indicating which group of species to include.
-Note that this subsetting is based on the Fisheries and Oceans Canada
-species codes for the Scotian Shelf. For other regions it may be prudent to
-subsetdata to species groups of interest prior to using the function and
-then choose group = "ALL". Type ?speciesgroups for more information.}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
+
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 }
 \value{
 text here
 }
 \description{
-This function assigns species into groups
- 'FINFISH','SKATES','CLUPEIDS','GROUNDFISH',
- FLATFISH','GADOIDS','FORAGE','LBENTHIVORE',
- MBENTHIVORE','PISCIVORE','PLANKTIVORE', and 'ZOOPISCIVORE'
-}
-\details{
-Will need text here explaining that specific to Scotian Shelf AND
- how to find out which species are in each group
+Text here
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -39,6 +37,6 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }

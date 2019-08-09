@@ -96,9 +96,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  423
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{FishingPressure}},
-  \code{\link{InverseFishingPressure}},
-  \code{\link{LandByGroup}}, \code{\link{speciesrichness}}
+Other fishing pressure indicators: \code{\link{fishingPressure}},
+  \code{\link{landings}}, \code{\link{speciesrichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,

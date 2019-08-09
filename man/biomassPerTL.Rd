@@ -2,62 +2,66 @@
 % Please edit documentation in R/biomassPerTL.R
 \name{biomassPerTL}
 \alias{biomassPerTL}
-\title{Calculates the biomass or abundance per discrete trophic level}
+\title{Calculates the biomass per discrete trophic level (Coll et al., 2006)}
 \usage{
-biomassPerTL(X, TL.table, metric = c("BIOMASS", "ABUNDANCE"),
-  TL.grouping = 1, years)
+biomassPerTL(X, TL.table, metric = "BIOMASS", TL.grouping = 1, years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{TL.table}{dataframe with columns "SPECIES" and the corresponding "TL"
+\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
 (trophic level).}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
-\item{TL.grouping}{size of the trophic level bin for which to aggregrate
-biomass (or abundance). Default is "TL.grouping = 1" so that biomass (or
-abundance) is aggregated over discrete trophic levels.}
+\item{TL.grouping}{Size of the trophic level bin for which to aggregrate
+biomass. Default is "TL.grouping = 1" so that biomass is aggregated over
+discrete trophic levels.}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with columns "ID", "YEAR", and the corresponding
-  biomass for each trophic level grouping, e.g., "BIOMASS_TL2",
-  "BIOMASS_TL3", "BIOMASS_TL4".
+ biomass for each trophic level grouping. For example: for TL.grouping = 1,
+ function will return columns "BIOMASS_TL2", "BIOMASS_TL3", "BIOMASS_TL4".
+ For TL.grouping = 0.5, function will return columns "BIOMASS_TL2",
+ "BIOMASS_TL2.5", "BIOMASS_TL3", "BIOMASS_TL3.5", "BIOMASS_TL4",
+ "BIOMASS_TL4.5".
 
-  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  value is assigned NA.
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned NA.
 }
 \description{
-This function calculates the biomass or abundance per discrete
-  trophic level for \eqn{j} areas and \eqn{i} years.
+This function calculates the biomass per discrete trophic level
+ for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-**Recommended data: Fishery independent surveys, fish and
-  invertebrates.
+Recommended data: Fishery independent survey data or model output;
+ fish and invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  (Alida: this was not in Tech Report references!) Coll M, Shannon LJ,
-  Moloney CL, Palomera I, Tudela S, 2006. Comparing trophic flows and fishing
-  impacts of a NW Mediterranean ecosystem with coastal upwellings by means of
-  standardized ecological models and indicators. Ecol. Model. 198, 53-70.
+ Coll M, Shannon LJ, Moloney CL, Palomera I, Tudela S, 2006. Comparing
+ trophic flows and fishing impacts of a NW Mediterranean ecosystem with
+ coastal upwellings by means of standardized ecological models and
+ indicators. Ecol. Model. 198, 53-70.
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{IVILandings}},
-  \code{\link{invCVBiomass}}, \code{\link{meanMaxAge}},
-  \code{\link{meanMaxL}}
+Other stability and resistance indicators: \code{\link{CVBiomass}},
+  \code{\link{IVILandings}}, \code{\link{meanMaxAge}},
+  \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{stability and resistance indicators}

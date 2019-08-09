@@ -1,24 +1,17 @@
-#'@title Calculates the Large Species Indicator
-#'@description This function takes a dataframe of length-based fisheries
-#'  independent survey data and calculates the Large Species Indicator (LSI) for
+#'@title Calculates the Large Species Indicator (Shin et al., 2010)
+#'@description This function calculates the Large Species Indicator (LSI) for
 #'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
 #'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
 #'  and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
 #'  85 cm).
 #'
-#'  Recommended data: Fishery independent surveys, fish.
-#'@param X dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'  designating where the observation was recorded. "SPECIES" is a numeric code
-#'  indicating the species sampled.
-#'@param lmax.table table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
-#'  recorded length of the corresponding species.
-#'@param lmax threshold for large fish (cm). Default is 85 cm (i.e., large
-#'  species are those with MAXLEN99 >= 85 cm)
-#'@param metric character string indicating whether to use "BIOMASS" or
-#'  "ABUNDANCE" to calculate indicator.
-#'@param years vector of years for which to calculate indicator.
+#'  Recommended data: Fishery independent survey data or model output; fish.
+#'@inheritParams resourcePotential
+#'@param lmax.table A table with 2 columns: "SPECIES" and "MAXLENGTH", the
+#'  maximum recorded length of the corresponding species.
+#'@param lmax The threshold for large fish (cm). Default is 85 cm (i.e., large
+#'  species are those with MAXLENGTH >= 85 cm)
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "LargeSpeciesIndicator".
 #'
@@ -33,18 +26,23 @@
 #'  Size-selective fishing drives species composition in the Celtic Sea. ICES J
 #'  Mar Sci 69:223-234
 #'
-#'  Houle JE, Farnsworth KD, Rossberg AG, Reid DG (2012) Assessing the
-#'  sensitivity and specificity of fish community indicators to management
-#'  action. Can J Fish Aquat Sci 69:1065-1079
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+#'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+#'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Using indicators for evaluating, comparing and communicating the ecological
+#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+#'  Journal of Marine Science, 67: 692-716
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 
-largeSpeciesIndicator <- function(X, lmax.table, lmax = 85,  metric = 'BIOMASS',
-                                  years) {
+largeSpeciesIndicator <- function(X, group, species.table = NULL,
+                                  lmax.table, lmax = 85,  metric = "BIOMASS", years) {
   
-  largespecies <- lmax.table$SPECIES[lmax.table$MAXLEN99 > lmax]
+  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  largespecies <- lmax.table$SPECIES[lmax.table$MAXLENGTH > lmax]
  
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

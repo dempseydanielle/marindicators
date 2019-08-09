@@ -2,30 +2,37 @@
 % Please edit documentation in R/communityFultonK.R
 \name{communityFultonK}
 \alias{communityFultonK}
-\title{Calculates Fulton's Condition Index for the community}
+\title{Calculates Fulton's Condition Index for the community (reference)}
 \usage{
-communityFultonK(X, group, LenWt.table, years)
+communityFultonK(X, group, species.table = NULL, LenWt.table, years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "FLEN", and "ABUNDANCE". "ID" is an area code designating
-where the observation was recorded (a string). "SPECIES" is a numeric code
-indicating the species sampled. "FLEN" is the length class (cm) and
-"BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
-length. Species for which there are no length data should be assigned FLEN
-= -99. These observations are removed by the function.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
+observation was recorded, "ID" is an area code indicating where the
+observation was recorded, and "SPECIES" is a numeric code indicating the
+species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+corresponding abundance at length (stratified and corrected for
+catchability as required). Species for which there are no length data
+should be assigned LENGTH = -99. These observations are removed by the
+function.}
 
-\item{group}{character string indicating which group of species to include.
-Note that this subsetting is based on the Fisheries and Oceans Canada
-species codes for the Scotian Shelf. For other regions it may be prudent to
-subsetdata to species groups of interest prior to using the function and
-then choose group = "ALL". Type ?speciesgroups for more information.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{LenWt.table}{table of annual length at weight data with 5 columns.
-"YEAR", "ID", "SPECIES" correspond with those columns in X. "FLEN" is fish
-length at the corresponding "FWT" (fish weight).}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{LenWt.table}{A table of annual length at weight data with 5 columns.
+"YEAR", "ID", "SPECIES" correspond with those columns in X. "LENGTH" is
+fish length at the corresponding "WEIGHT" (fish weight).}
+
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
@@ -35,8 +42,7 @@ Returns a dataframe with 3 columns. "ID", "YEAR", and
   value is assigned NA.
 }
 \description{
-This function takes a dataframe of length-based fisheries
-  independent survey data and calculates Fulton's condition index for \eqn{j}
+This function calculates Fulton's condition index for \eqn{j}
   areas and \eqn{i} years.
 }
 \details{
@@ -45,32 +51,29 @@ Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
   the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
   \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j}.
 
-  **Recommended data: Fishery independent surveys, fish.
+  Recommended data: Fishery independent survey data or model output; fish.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
   Aquat. Sci. 3232: xii + 212 p.
 
-  DFO (2003) State of the Eastern Scotian Shelf ecosystem. Dartmouth, Nova
+  DFO. 2003. State of the Eastern Scotian Shelf ecosystem. Dartmouth, Nova
   Scotia
 
-  Choi JS, Frank KT, Petrie BD, Leggett WC (2005) Integrated Assessment of a
+  Choi JS, Frank KT, Petrie BD, Leggett WC. 2005. Integrated Assessment of a
   Large Marine Ecosystem: a case study of the devolution of the Eastern
   Scotian Shelf, Canada. Oceanogr Mar Biol An Annu Rev 43:47–67
-
-  Rochet M, Rice JC (2005) Do explicit criteria help in selecting indicators
-  for ecosystem-based fisheries management? ICES J Mar Sci 62:528–539
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunity}},
+  \code{\link{meanTLCommunity}},
   \code{\link{predatoryFish}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

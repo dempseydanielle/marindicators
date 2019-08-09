@@ -2,23 +2,26 @@
 % Please edit documentation in R/meanMaxAge.R
 \name{meanMaxAge}
 \alias{meanMaxAge}
-\title{Calculates the mean maximum age of fish in the community}
+\title{Calculates the mean maximum age of fish in the community (Shin et al.,
+ 2010)}
 \usage{
-meanMaxAge(X, age.table, metric = c("BIOMASS", "ABUNDANCE"), years)
+meanMaxAge(X, age.table, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{age.table}{table with 2 columns: "SPECIES" and "MAXAGE", the maximum
+\item{age.table}{A table with 2 columns: "SPECIES" and "MAXAGE", the maximum
 recorded age of the corresponding species.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan".
@@ -34,29 +37,34 @@ This function calculates the mean maximum age (MMA) of fish in
 Mean Maximum Age (MMA): \deqn{MMA = \Sigma (age_{max,i}*B_i)/\Sigma
  B_i} where the sum is over all species \eqn{i}, and \eqn{B_i} is biomass of
  species \eqn{i}. The mean lifespan or longevity is considered to be a fixed
- parameter per species. Lifespan may vary under fishing pressure, so IndiSeas
- adopted the maximum longevity observed for each species (\eqn{age_{max,i}}).
- The variation of this indicator captures changes in species composition.
+ parameter per species. Lifespan may vary under fishing pressure, so Shin et
+ al. (2010) adopted the maximum longevity observed for each species
+ (\eqn{age_{max,i}}). The variation of this indicator captures changes in
+ species composition.
 
- Recommended data: Fishery independent surveys, finfish and squid.
+ Recommended data: Fishery independent survey data or model output, finfish
+ and squid.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
- D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
- and reliable? Using ecological indicators to represent and compare the
- states of marine ecosystems. ICES J Mar Sci 67:717-731
+ Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+ MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+ Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+ Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+ Using indicators for evaluating, comparing and communicating the ecological
+ status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+ Journal of Marine Science, 67: 692-716
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{IVILandings}},
-  \code{\link{biomassPerTL}}, \code{\link{invCVBiomass}},
-  \code{\link{meanMaxL}}
+Other stability and resistance indicators: \code{\link{CVBiomass}},
+  \code{\link{IVILandings}}, \code{\link{biomassPerTL}},
+  \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

@@ -1,6 +1,6 @@
-#'@title Calculates the mean trophic level of the community
-#'@description This calculates the mean trophic level of the community weighted
-#'  by biomass for \eqn{j} areas and \eqn{i} years.
+#'@title Calculates the mean trophic level of the community (Christensen, 1998)
+#'@description This function calculates the mean trophic level of the community
+#'  weighted by biomass for \eqn{j} areas and \eqn{i} years.
 #'@details Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
 #'  \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
 #'  of species \eqn{i}.
@@ -9,34 +9,13 @@
 #'  biomass time series, weighted by annual species-specific biomass, to reflect
 #'  the structure of the community.
 #'
-#'  Recommended data: Fishery independent surveys, fish and invertebrates.
-#'@param X dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'  designating where the observation was recorded. "SPECIES" is a numeric code
-#'  indicating the species sampled.
-#'
-#'  This function can also calculate the mean trophic level of the community
-#'  from length-based data. To do so, X should be a dataframe with seven
-#'  columns: "YEAR", "ID", and "SPECIES", are as above. "FLEN" indicates the
-#'  size class, and "GROUP_NAME" and "TL" are the corresponding size-based
-#'  functional group and trophic level, respectively. "BIOMASS" is the recorded
-#'  biomass of the size-based functional groups. Note that one SPECIES code may
-#'  be assigned more than one GROUP_NAME if ontogentic shifts occur. For
-#'  example, on the Scotian Shelf small (< 33 cm) and large (>33 cm) haddock
-#'  both have SPECIES code 11. Small haddock are assigend to GROUP_NAME
-#'  "Haddock<33" with trophic level 3.38. Large haddock are assigned to
-#'  GROUP_NAME "Haddock33+" with trophic level 3.43.
-#'
+#'  Recommended data: Fishery independent survey data or model output; fish and
+#'  invertebrates.
+#'@inheritParams biomassPerTL
 #'@param TL.table dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level). Set to "NULL" if length.based = TRUE.
-#'@param metric character string indicating whether to use "BIOMASS" or
-#'  "ABUNDANCE" to calculate indicator.
-#'@param years vector of years for which to calculate indicator.
-#'@param length.based logical variable. length.based = TRUE indicates that X is
-#'  length-based data. Default is length.based = FALSE
+#'  (trophic level).
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MeanTLCommunity" (if length.based = FALSE) or "MeanTLCommunity_Length" if
-#'  length.based = TRUE.
+#'  "MeanTLCommunity".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  value is assigned NA.
@@ -46,28 +25,23 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
 #'  Christensen V. 1998. Fishery-induced changes in a marine ecosystem: insight
-#'  frommodels of the Gulf of Thailand. J. Fish Bio. 53:128-142. Article No.
+#'  from models of the Gulf of Thailand. J. Fish Bio. 53:128-142. Article No.
 #'  jb980809
 #'
 #'  Shannon L, Coll M, Bundy A, Gascuel D, Heymans JJ, Kleisner K, Lynam CP,
 #'  Piroddi C, Tam J, Travers-Trolet M, Shin Y. 2014. Trophic level-based
 #'  indicators to track fishing impacts across marine ecosystems. Mar. Ecol.
 #'  Prog. Ser. 512, 115–140.
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 
-meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOMASS'), 
-                                      length.based = FALSE, years) {
+meanTLCommunity <- function(X, TL.table, metric= "BIOMASS", years) {
                                         
-  if(length.based == FALSE) X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
+  X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
                                               # Note that the merge function will drop species that do not have a TL
-  if(length.based == TRUE) {
-    inx <- X$FLEN==-99
-    X[inx,'FLEN'] <- 10
-  }
-  
+
   uI = unique(X$ID)                           # extract the spatial scale ID's
   ind <- NULL                                 # initialize dataframe for storing indicator values
   
@@ -90,8 +64,7 @@ meanTrophicLevelCommunity <- function(X,  TL.table, metric= c('ABUNDANCE', 'BIOM
 		}
   }
   
-  if(length.based == FALSE) names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
-  if(length.based == TRUE)  names(ind) = c("ID", "YEAR", "MeanTLCommunity_Length")
+  names(ind) = c("ID", "YEAR", "MeanTLCommunity")    # name the ind dataframe
   ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                  # return dataframe of indicator values for years c(start.year:end.year) 
   

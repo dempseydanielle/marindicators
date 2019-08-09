@@ -5,22 +5,16 @@
 #'@details Calculates the total landings of predefined species groups.
 #'
 #'  Recommended data: commercial fisheries landings
-#'@param land dataframe of commercial landings data with columns "YEAR", "ID",
-#'  "ALLCODES" and "CATCH". "ID" is an area code designating where the
-#'  observation was recorded. "ALLCODES" is a numeric commercial species code
-#'  indicating the species landed, and "CATCH" is the corresponding landed
-#'  weight. Additional columns are required for each species group of interest.
-#'  These columns have value of "1" in the rows of species included in the group
-#'  and "NA" in all other rows.
-#'@param group string indicating the species group for which to calculate the
-#'  landings. Should match one of the column names of land. If group = "ALL" the
-#'  total landings of all species will be calculated.
-#'@param years vector of years for which to calculate indicator
+#'@inheritParams resourcePotential
+#'@param land A dataframe of commercial landings data with columns "YEAR", "ID",
+#'  "SPECIES" and "CATCH". "YEAR" indicates the year the landing
+#'  was recorded, "ID" is an area code indicating where the landing was
+#'  recorded, "SPECIES" is a numeric code indicating the species landed, and
+#'  "CATCH" is the corresponding landed weight.
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
 #'  "group_Landings".
 #'
 #'  If there is no data for a given year, the indicator value is set to 0.
-#'
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -34,9 +28,7 @@
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #'@export
 
-LandByGroup <- function(land, 
-                        group=c('FINFISH','CLUPEIDS','GROUNDFISH','FLATFISH','GADOIDS','FORAGE',
-                                'INVERTEBRATES','ALL','LARGE_PELAGIC'), years) {
+landings <- function(land, group, species.table = NULL, years) {
   
   # make a dataframe with "ID" and "YEAR" for all spatial scales and years
   df <- NULL
@@ -48,7 +40,9 @@ LandByGroup <- function(land,
   }
   names(df) <- c("ID", "YEAR")
   
-  if(group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
+ # if(group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
+  land <- speciesgroups(X = land, group = group, species.table = species.table) # subset land to the species group of interest
+  
   
   ind <- aggregate(CATCH ~ ID + YEAR, data = land, FUN = sum)   # sum over years and spatial scales 
   ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data

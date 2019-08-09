@@ -4,26 +4,32 @@
 \alias{pielouSpeciesEvenness}
 \title{Calculates Pielou's Species Evenness}
 \usage{
-pielouSpeciesEvenness(X, group = c("FINFISH", "ALL"),
-  metric = c("BIOMASS", "ABUNDANCE"), years)
+pielouSpeciesEvenness(X, group, species.table = NULL,
+  metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded (a string). "SPECIES" is a
-numeric code indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"ABUNDANCE" is the corresponding abundance (stratified and corrected for
+catchability as required).}
 
-\item{group}{character string indicating which species to include, either
-"ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
-Oceans Canada species codes for the Scotian Shelf. For other regions it may
-be prudent to subsetdata to species groups of interest prior to using the
-function and then choose group = "ALL". Type ?speciesgroups for more
-information.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate the indicator.}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "ABUNDANCE".}
+
+\item{years}{A vector of years for which to calculate indicator}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".

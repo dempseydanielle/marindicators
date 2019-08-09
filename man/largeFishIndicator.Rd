@@ -2,26 +2,39 @@
 % Please edit documentation in R/largeFishIndicator.R
 \name{largeFishIndicator}
 \alias{largeFishIndicator}
-\title{Calculates the Large Fish Indicator}
+\title{Calculates the Large Fish Indicator (Greenstreet and Rogers, 2006)}
 \usage{
-largeFishIndicator(X, metric, large.fish = 35, years)
+largeFishIndicator(X, group, species.table = NULL, metric = "BIOMASS",
+  large.fish = 35, years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "FLEN", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area
-code designating where the observation was recorded (a string). "SPECIES" is
-a numeric code indicating the species sampled. "FLEN" is the length class
-(cm) and "BIOMASS" and "ABUNDANCE" are the corresponding biomass and
-abundance at length. Species for which there are no length data should be
-assigned FLEN = -99. These observations are removed by the function.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
+observation was recorded, "ID" is an area code indicating where the
+observation was recorded, and "SPECIES" is a numeric code indicating the
+species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+corresponding abundance at length (stratified and corrected for catchability
+as required). Species for which there are no length data should be assigned
+LENGTH = -99. These observations are removed by the function.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
+
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
+
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
 \item{large.fish}{threshold for large fish (cm). Default is 35 cm (i.e., large
-fish are those with X$FLEN >= 35 cm)}
+fish are those with X$LENGTH >= 35 cm)}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
@@ -31,8 +44,7 @@ Returns a dataframe with 3 columns. "ID", "YEAR", and
  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
-This function takes a dataframe of length-based fisheries
- independent survey data and calculates the Large Fish Indicator (LFI) for
+This function calculates the Large Fish Indicator (LFI) for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
@@ -40,33 +52,32 @@ Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >50 cm)/\Sigma
  B_m} \eqn{B_m} is biomass of individuals in a body size class centred at
  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
  describes the proportion (by weight) of the fish community that is larger
- than some length threshold (default here is 35 cm, **check this: i.e., the
- proportion of biomass occupying the top predator trophic level).
+ than some length threshold (default here is 35 cm, i.e., the proportion of
+ biomass occupying the top predator trophic level).
 
- Recommended data: Fishery independent surveys, fish.
+ Recommended data: Fishery independent survey data or model output; fish.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
- (2012) Redundancy in metrics describing the composition, structure, and
- functioning of the North Sea demersal fish community. ICES J Mar Sci 69:8-22
+ Greenstreet SPR and Rogers SI. 2006. Indicators of the health of the fish
+ community of the North Sea: identifying reference levels for an Ecosystem
+ Approach to Management. ICES J. Mar. Sci., 63: 573–593.
 
- Houle JE, Farnsworth KD, Rossberg AG, Reid DG (2012) Assessing the
- sensitivity and specificity of fish community indicators to management
- action. Can J Fish Aquat Sci 69:1065-1079
+ ICES. 2006. Report of the Working Group on Ecosystem Effects of Fishing
+ Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{communityFultonK}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunity}},
+  \code{\link{meanTLCommunity}},
   \code{\link{predatoryFish}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca}, Catalina
+ Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

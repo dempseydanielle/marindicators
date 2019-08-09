@@ -15,29 +15,11 @@
 #'  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 #'
 #'  Recommended data: Commercial fisheries landings, fish
-#'@param land dataframe of commercial landings data with columns "YEAR", "ID",
-#'  "ALLCODES" and "CATCH". "ID" is an area code designating where the
-#'  observation was recorded. "ALLCODES" is a numeric commercial species code
-#'  indicating the species landed, and "CATCH" is the corresponding landed
-#'  weight.
+#' @inheritParams landings
+#' @inheritParams CVBiomass
 #'@param IVI.table dataframe with two columns: "SPECIES" and "IVI". "SPECIES" is
 #'  the fisheries-independent numeric species code, and "IVI" is the
 #'  corresponding intrinsic vulnerability index.
-#'@param propland.table dataframe with three columns: "SPECIES", "ALLCODE", and
-#'  "PROPORTION_OF_LANDINGS". "SPECIES" is is the fisheries-independent numeric
-#'  species code (as in IVI.table), and "ALLCODES" is the corresponding numeric
-#'  commercial species code (as in land). "PROPORTION_OF_LANDINGS" is relevant
-#'  to species that have different SPECIES codes, but the same ALLCODES code.
-#'  For example, on the Scotian Shelf, longhorn sculpins are assigned a SPECIES
-#'  code of 300, while sea ravens are assigned a species code of 320; however
-#'  they are grouped together in the commercial landings data and are both
-#'  assigned ALLCODE 174. The "PROPORTION_OF_LANDINGS" column estimates the
-#'  proportion of each species that makes up the commercial landings. In this
-#'  example, longhorn sculpins consist of about 40% of the total sculpin
-#'  landings and are assigned a "PROPORTION_OF_LANDINGS" value of 0.4. Sea
-#'  ravens consist of about 60% of the total sculpin landings and are assigned a
-#'  "PROPORTION_OF_LANDINGS" value of 0.6.
-#'@param years vector of years for which to calculate indicator
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
 #'  "IVILandings".
 #'
@@ -56,13 +38,9 @@
 #'@export
 
         
-IVILandings <- function(land, IVI.table, propland.table, years) {
+IVILandings <- function(land, IVI.table, negative = FALSE, years) {
  
-  land<- merge(land, propland.table)
   land<- merge(land, IVI.table)
-
-  land$CATCH <- land$CATCH * land$PROPORTION_OF_LANDINGS  # multiply catch by proportion of landings
-  
   land$IV_num <- land$CATCH * land$IVI                    # multiply catch by IVI (for numerator)
   
   uI = unique(land$ID)                   # extract the spatial scale ID's
@@ -90,6 +68,7 @@ IVILandings <- function(land, IVI.table, propland.table, years) {
   }
   
   names(ind) = c("ID", "YEAR", "IVILandings")          # name the ind dataframe
+  if(negative == TRUE) ind$IVILandings <- ind$IVILandings * (-1) # multiply indicator by -1
   ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                  # return dataframe for years c(start.year:end.year) 
   

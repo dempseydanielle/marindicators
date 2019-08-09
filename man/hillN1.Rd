@@ -2,32 +2,37 @@
 % Please edit documentation in R/hillN1.R
 \name{hillN1}
 \alias{hillN1}
-\title{Calculates Hill's index of diversity}
+\title{Calculates Hill's index of diversity (Hill, 1973)}
 \usage{
-hillN1(X, group = c("FINFISH", "ALL"), metric = c("BIOMASS",
-  "ABUNDANCE"), years)
+hillN1(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded (a string). "SPECIES" is a
-numeric code indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"ABUNDANCE" is the corresponding abundance (stratified and corrected for
+catchability as required).}
 
-\item{group}{character string indicating which species to include, either
-"ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
-Oceans Canada species codes for the Scotian Shelf. For other regions it may
-be prudent to subsetdata to species groups of interest prior to using the
-function and then choose group = "ALL". Type ?speciesgroups for more
-information.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate the indicator.}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "ABUNDANCE".}
+
+\item{years}{A vector of years for which to calculate indicator}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity".
- 
+
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned NA.
 }
@@ -43,16 +48,20 @@ Hill's N1 diversity index is the exponential of the Shannon-Weiner
  number of species recorded in the sample. This index is sensitive to the
  number of species recorded in the sample.
 
- **Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent surveys or model output; fish and
+ invertebrates
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
+ Greenstreet SP, Rogers SI. 2006. Indicators of the health of the North Sea
  fish community: identifying reference levels for an ecosystem approach to
  management. ICES J Mar Sci J du Cons 63:573-593
+
+ Hill MO. 1973. Diversity and evenness: a unifying notation and its
+ consequences. Ecology 54: 427-431.
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},
@@ -62,7 +71,7 @@ Other biodiversity indicators: \code{\link{heips}},
   \code{\link{shannon}}, \code{\link{speciesrichness}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
+Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}

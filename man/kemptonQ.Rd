@@ -2,16 +2,18 @@
 % Please edit documentation in R/kemptonQ.R
 \name{kemptonQ}
 \alias{kemptonQ}
-\title{Calculates Kempton's Biodiversity Index}
+\title{Calculates Kempton's Biodiversity Index (Kempton and Taylor, 1976)}
 \usage{
-kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 3,
-  group = "ALL", metric = c("BIOMASS", "ABUNDANCE"), years)
+kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 3, group,
+  species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"ABUNDANCE" is the corresponding abundance (stratified and corrected for
+catchability as required).}
 
 \item{TL.table}{table with columns "SPECIES" and "TL", where the "SPECIES"
 codes match those in X, and "TL" is the corresponding trophic level.}
@@ -22,17 +24,21 @@ percentiles = c(0.25, 0.75).}
 \item{minTL}{minimum trophic level for species included in the calculation.
 Default is minTL = 3.}
 
-\item{group}{character string indicating which species to include, either
-"ALL" or "FINFISH". Note that this subsetting is based on the Fisheries and
-Oceans Canada species codes for the Scotian Shelf. For other regions it may
-be prudent to subsetdata to species groups of interest prior to using the
-function and then choose group = "ALL". Type ?speciesgroups for more
-information.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate the indicator.}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "ABUNDANCE".}
+
+\item{years}{A vector of years for which to calculate indicator}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
@@ -41,9 +47,8 @@ Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
  values is assigned NA.
 }
 \description{
-This function takes a dataframe of fisheries independent survey
- data and calculates Kempton's Biodiversity index (Q) for \eqn{j} areas and
- \eqn{i} years.
+This function calculates Kempton's Biodiversity index (Q) for
+ \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
@@ -56,24 +61,19 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
  quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2} are
  defaulted to 0.25 and 0.75, respectively.
 
- **Recommended data: Fishery independent surveys, fish and invertebrates
+ Recommended data: Fishery independent surveys or model output; fish and
+ invertebrates
 }
 \references{
-(Alida - this ref was not in tech report. Could be this one or the
- one below) Ainsworth, C, Pitcher, T (2006) Modifying Kempton's species
+Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
  diversity index for use with ecosystem simulation models. Ecological
  Indicators. 6. 623-630. 10.1016/j.ecolind.2005.08.024.
-
- Ainsworth, C, Varkey, D, Pitcher, TJ  (2006)  Preliminary ecosystem
- simulation models for the Bird’s Head Seascape, Papua.  Mid-term narrative
- technical report.  Birds Head Seascape Ecosystem-Based Management Project.
- University of British Columbia Fisheries Centre.  December, 2006, 274 pp.
 
  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and
  evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232:
  xii + 212 p.
 
- Kempton R, Taylor L (1976) Models and statistics for species diversity.
+ Kempton R, Taylor L. 1976. Models and statistics for species diversity.
  Nature 262:818-820
 }
 \seealso{
@@ -84,7 +84,7 @@ Other biodiversity indicators: \code{\link{heips}},
   \code{\link{shannon}}, \code{\link{speciesrichness}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
+Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}

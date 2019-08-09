@@ -2,40 +2,41 @@
 % Please edit documentation in R/resourcePotential.R
 \name{resourcePotential}
 \alias{resourcePotential}
-\title{Calculates the resource potential of pre-defined species groups}
+\title{Calculates the resource potential of species groups}
 \usage{
-resourcePotential(X, user.defined = F, group = c("FINFISH", "ALL",
-  "SKATES", "CLUPEIDS", "GROUNDFISH", "FLATFISH", "GADOIDS",
-  "INVERTEBRATES", "FORAGE", "PELAGIC", "LBENTHIVORE", "MBENTHIVORE",
-  "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE"), metric = c("BIOMASS",
-  "ABUNDANCE"), years)
+resourcePotential(X, group, species.table = NULL, metric = "BIOMASS",
+  years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{user.defined}{for a user-defined group of species, put a vector of
-species codes to include here. Default is "FALSE"}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{group}{character string indicating which group of species to include.
-Note that this subsetting is based on the Fisheries and Oceans Canada
-species codes for the Scotian Shelf. For other regions it may be prudent to
-subsetdata to species groups of interest prior to using the function and
-then choose group = "ALL". Type ?speciesgroups for more information.}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
 
  If there is no data for a given year, the indicator value will be "NA" for
- that year. If biomass of species X was not captured in the survey, species
- X is still likely to be present, just not detected or perhaps not recorded.
+ that year. If biomass of species X was not captured in the survey, species X
+ is still likely to be present, just not detected or perhaps not recorded.
  Replacing with zero would have an impact on trends, whereas treating as NA
  does not.
 }
@@ -44,9 +45,10 @@ This function calculates the biomass or abundance of a
  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This indicator reflects temporal dynamics species groups.
+This indicator reflects temporal dynamics of species groups.
 
- Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent survey data or model output; fish and
+ invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -57,8 +59,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 Other resource potential indicators: \code{\link{FishingInBalance}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and functioning indicators}
 \concept{resource potential indicators}

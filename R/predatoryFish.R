@@ -1,4 +1,5 @@
-#'@title Calculates the proportion of predatory fish in the community
+#'@title Calculates the proportion of predatory fish in the community (Shin et
+#'  al., 2010)
 #'@description This function calculates the proportion of predatory fish in the
 #'  community for \eqn{j} areas and \eqn{i} years.
 #'@details Proportion of predatory fish in the community is estimated by:
@@ -7,22 +8,16 @@
 #'  largely planktivorous (i.e. phytoplankton and zooplankton feeders should be
 #'  excluded; Shin et al. 2010). A fish species is classified as predatory if it
 #'  is piscivorous, or if it feeds on invertebrates that are larger than the
-#'  macrozooplankton category (.2 cm). Detritivores should not be classified as
+#'  macrozooplankton category (0.2 cm). Detritivores should not be classified as
 #'  predatory fish.
 #'
 #'  This indicator captures changes in the trophic structure and changes in the
-#'  functional diversity of fish in the ecosystem. Data used: Fishery
-#'  independent surveys, predatory fish.
+#'  functional diversity of fish in the ecosystem.
 #'
-#'  Recommended data: Fishery independent surveys, fish and invertebrates.
-#'@param X dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'  designating where the observation was recorded. "SPECIES" is a numeric code
-#'  indicating the species sampled.
-#'@param pred.species vector of species codes for predatory fish
-#'@param metric character string indicating whether to use "BIOMASS" or
-#'  "ABUNDANCE" to calculate the indicator. Default is "BIOMASS".
-#'@param years vector of years for which to calculate indicator
+#'  Recommended data: Fishery independent survey data or model output; fish and
+#'  invertebrates.
+#'@inheritParams biomassPerTL
+#'@param pred.species A vector of species codes for predatory fish
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and
 #'  "PropPredatoryFish".
 #'
@@ -33,16 +28,19 @@
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
-#'  D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
-#'  and reliable? Using ecological indicators to represent and compare the
-#'  states of marine ecosystems. ICES J Mar Sci 67:717-731
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+#'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+#'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Using indicators for evaluating, comparing and communicating the ecological
+#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+#'  Journal of Marine Science, 67: 692-716
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 
-predatoryFish <- function(X, pred.species, metric = 'BIOMASS',  years) {
+predatoryFish <- function(X, pred.species, metric = "BIOMASS",  years) {
   
   uI = unique(X$ID)                           # extract the spatial scale ID's
   ind <- NULL                                 # initialize dataframe for storing indicator values

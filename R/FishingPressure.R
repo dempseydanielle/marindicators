@@ -10,23 +10,19 @@
 #'  \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change
 #'  in the same direction, exploitation rate may not change.
 #'
-#'  Recommended data: \eqn{B_{FG}}: fishery independent surveys, \eqn{Y_{FG}}:
+#'  Recommended data: \eqn{B_{FG}}: fishery independent survey data, \eqn{Y_{FG}}:
 #'  commercial fisheries landings
-#'@param X dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS". "ID" is an area code designating where the
-#'  observation was recorded (a string). "SPECIES" is a numeric code indicating
-#'  the species sampled.
-#'@param land dataframe of commercial landings data with columns "YEAR", "ID",
-#'  "ALLCODES" and "CATCH". "ID" is an area code designating where the
-#'  observation was recorded. "ALLCODES" is a numeric commercial species code
-#'  indicating the species landed, and "CATCH" is the corresponding landed
-#'  weight. Additional columns are required for each species group of interest.
-#'  These columns have value of "1" in the rows of species included in the group
-#'  and "NA" in all other rows.
-#'@param group string indicating the species group for which to calculate the
-#'  landings. Should match one of the column names of land. If group = "ALL" the
-#'  fishing pressure on the whole community will be calculated.
-#'@param years vector of years for which to calculate indicator
+#'@inheritParams landings
+#'@param X A dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+#'  was recorded, "ID" is an area code indicating where the observation was
+#'  recorded, "SPECIES" is a numeric code indicating the species sampled, and
+#'  "BIOMASS" is the corresponding biomass (stratified and corrected for
+#'  catchability as required).
+#'@param group.X A character string indicating which species to include in the
+#'  denominator. Must match the name of a column in species.table.
+#'@param group.land A character string indicating which species to include in the
+#'  numerator. Must match the name of a column in species.table.
 #'@return returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
 #'
 #'  If biomass of group is NA and landings of group are zero, fishing pressure
@@ -38,18 +34,22 @@
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
-#'  D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
-#'  and reliable? Using ecological indicators to represent and compare the
-#'  states of marine ecosystems. ICES J Mar Sci 67:717–731
+#'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+#'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+#'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Using indicators for evaluating, comparing and communicating the ecological
+#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+#'  Journal of Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
 #'  \email{Mike.McMahon@@dfo-mpo.gc.ca} Cataline Gomez
 #'@export
 
-FishingPressure <- function(X, land, group, years){
+fishingPressure <- function(X, land, group.X, group.land, species.table = NULL, years){
                             
-  B <- resourcePotential(X, metric = "BIOMASS", group = group, years = years)  # calculate the biomass of "group" in the community
-  Y <- LandByGroup(land, group = group, years = years)                         # calculate the landings of "group"
+  B <- resourcePotential(X, metric = "BIOMASS", group = group.X, 
+                         species.table = species.table, years = years)  # calculate the biomass of "group" in the community
+  Y <- landings(land, group = group.land, species.table = species.table, years = years)                         # calculate the landings of "group"
   
   ind <- merge(Y, B, by = c("ID", "YEAR"), all.x = T)
 
@@ -59,7 +59,7 @@ FishingPressure <- function(X, land, group, years){
   ind[,3] <- NULL                                      # remove landings column
   ind[,3] <- NULL                                      # remove biomass column
   
-  ind.name <- paste("FP", "_", group, sep ="")         # name indicator: FP_group
+  ind.name <- paste("FP", "_", group.X, sep ="")         # name indicator: FP_group
   names(ind) <- c("ID", "YEAR", ind.name)
   ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
   ind                                                  # return indicator dataframe

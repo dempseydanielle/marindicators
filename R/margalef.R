@@ -1,27 +1,14 @@
-#' @title Calculates Margalef's species richness
-#' @description This function takes a dataframe of fisheries independent survey
-#'   data and calculates Margalef's species richness for \eqn{j} areas and
-#'   \eqn{i} years.
+#' @title Calculates Margalef's species richness (Margalef, 1958)
+#' @description This function calculates Margalef's species richness for \eqn{j}
+#'   areas and \eqn{i} years.
 #' @details Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
 #'   \eqn{S_y} is the count of the number of species recorded in all trawl
 #'   catches collected in year \eqn{y}. \eqn{F} is the total count of all
 #'   individuals caught in year \eqn{y}.
 #'
-#'   **Recommended data: Fishery independent surveys, fish and invertebrates.
-#'
-#' @param X dataframe of fishery independent survey data with columns "YEAR",
-#'   "ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-#'   designating where the observation was recorded. "SPECIES" is a numeric code
-#'   indicating the species sampled.
-#' @param group character string indicating which species to include, either
-#'   "ALL", "FINFISH" or "GROUNDFISH". Note that this subsetting is based on the
-#'   Fisheries and Oceans Canada species codes for the Scotian Shelf. For other
-#'   regions it may be prudent to subsetdata to species groups of interest prior
-#'   to using the function and then choose group = "ALL". Type ?speciesgroups
-#'   for more information.
-#' @param metric character string indicating whether to use "BIOMASS" or
-#'   "ABUNDANCE" to calculate the indicator.
-#' @param years vector of years for which to calculate indicator
+#'   Recommended data: Fishery independent surveys or model output; fish and
+#'   invertebrates.
+#' @inheritParams shannon
 #' @return Returns a dataframe with 3 columns: "ID", YEAR", and
 #'   "MargalefRichness_group".
 #'
@@ -32,21 +19,22 @@
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'   Aquat. Sci. 3232: xii + 212 p.
 #'
-#'   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
-#'   (2012) Redundancy in metrics describing the composition, structure, and
+#'   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK.
+#'   2012. Redundancy in metrics describing the composition, structure, and
 #'   functioning of the North Sea demersal fish community. ICES J Mar Sci
 #'   69:8-22
-#' @author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
+#'
+#'   Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
+#' @author  Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
 #'   \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
 #' @export
 
-margalef <- function(X, group=c('ALL', 'FINFISH', 'GROUNDFISH'), 
-                     metric=c('BIOMASS','ABUNDANCE'),
-                     years)  {
+margalef <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
 
-  if(group != "ALL") X <- speciesgroups(X = X, group = group) # subset X to the species of interest
-
-  S <- speciesrichness(X = X, group = group, metric = metric, years = years) # calculate species richness for each year
+  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  
+  S <- speciesrichness(X = X, group = group, species.table = species.table, 
+                       metric = metric, years = years)                    # calculate species richness for each year
   
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

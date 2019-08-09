@@ -2,11 +2,10 @@
 % Please edit documentation in R/speciesrichness.R
 \name{speciesrichness}
 \alias{speciesrichness}
-\title{Calculates species richness of the community or the diversity of
-  target species}
+\title{Calculates species richness of the community or the diversity of target
+ species}
 \usage{
-speciesrichness(X, group = c("FINFISH", "ALL"), metric = c("BIOMASS",
-  "ABUNDANCE", "CATCH"), years)
+speciesrichness(X, group, species.table = NULL, metric, years)
 }
 \arguments{
 \item{X}{dataframe of fishery independent survey data OR commercial landings
@@ -14,60 +13,64 @@ data. Fishery independent survey data will have columns "YEAR", "ID",
 "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
 designating where the observation was recorded. "SPECIES" is a numeric code
 indicating the species sampled. Commercial landings data will have columns
-"YEAR", "ID", "ALLCODES" and "CATCH". "ID" is an area code designating
-where the observation was recorded. "ALLCODES" is a numeric commercial
-species code indicating the species landed, and "CATCH" is the
-corresponding landed weight. Additional columns are required for each
-species group of interest. These columns have value of "1" in the rows
-species included in the group and "NA" in all other rows.}
+"YEAR", "ID", "ALLCODES" and "CATCH". "ID" is an area code designating where
+the observation was recorded. "ALLCODES" is a numeric commercial species
+code indicating the species landed, and "CATCH" is the corresponding landed
+weight. Additional columns are required for each species group of interest.
+These columns have value of "1" in the rows species included in the group
+and "NA" in all other rows.}
 
-\item{group}{character string indicating which species to include (Only
-applicable when X is research vessel survey data). Type ?speciesgroups for
-more information on species groups.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group shold match a column name in species.table.}
+
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
 \item{metric}{character string indicating whether X is fishery independent
 survey data or commercial landings data. "BIOMASS" and "ABUNDANCE" indicate
-fishery independent data. "CATCH" indicates commercial landings data. If
-metric = "BIOMASS" or metric = "ABUNDANCE", indicator will be named
-"SpeciesRichness". If metrc = "CATCH", indicator will be named
-"DiversityTargetSpp".}
+fishery independent data. "CATCH" indicates commercial landings data.}
 
 \item{years}{vector of years for which to calculate indicator}
 }
 \value{
 Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
-  "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If
-  metrc = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
+ "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If metrc
+ = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
 
-  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  values is assigned NA.
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
 This function counts the number of species recorded in fishery
-  independent survey data or commercial landings data for \eqn{i} years and
-  \eqn{j} areas.
+ independent survey data or commercial landings data for \eqn{i} years and
+ \eqn{j} areas.
 }
 \details{
 Species richness (\eqn{S_y}) is the count of the number of species
-  recorded in all research vessel trawl surveys collected year \eqn{y}.
+ recorded in all research vessel trawl surveys collected year \eqn{y}.
 
-  Recommended data: Fishery independent surveys, fish and invertebrates
+ Recommended data: Fishery independent surveys or model output, fish and
+ invertebrates
 
-  The diversity of the target species for year y (\eqn{TS_y}) is the count of
-  the number of target species recorded in all trawl catches collected in
-  that year.
+ The diversity of the target species for year y (\eqn{TS_y}) is the count of
+ the number of target species recorded in all trawl catches collected in that
+ year.
 
-  Recommended data: commercial fisheries landings, fish and invertebrates
+ Recommended data: commercial fisheries landings, fish and invertebrates
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
-  (2012) Redundancy in metrics describing the composition, structure, and
-  functioning of the North Sea demersal fish community. ICES J Mar Sci
-  69:8-22
+ Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK
+ (2012) Redundancy in metrics describing the composition, structure, and
+ functioning of the North Sea demersal fish community. ICES J Mar Sci 69:8-22
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},
@@ -76,13 +79,12 @@ Other biodiversity indicators: \code{\link{heips}},
   \code{\link{pielouSpeciesEvenness}},
   \code{\link{shannon}}
 
-Other fishing pressure indicators: \code{\link{FishingPressure}},
-  \code{\link{InverseFishingPressure}},
-  \code{\link{LandByGroup}}, \code{\link{MeanTLLandings}}
+Other fishing pressure indicators: \code{\link{MeanTLLandings}},
+  \code{\link{fishingPressure}}, \code{\link{landings}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{biodiversity indicators}
 \concept{fishing pressure indicators}

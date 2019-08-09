@@ -2,27 +2,40 @@
 % Please edit documentation in R/largeSpeciesIndicator.R
 \name{largeSpeciesIndicator}
 \alias{largeSpeciesIndicator}
-\title{Calculates the Large Species Indicator}
+\title{Calculates the Large Species Indicator (Shin et al., 2010)}
 \usage{
-largeSpeciesIndicator(X, lmax.table, lmax = 85, metric = "BIOMASS",
-  years)
+largeSpeciesIndicator(X, group, species.table = NULL, lmax.table,
+  lmax = 85, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{lmax.table}{table with 2 columns: "SPECIES" and "MAXLEN99", the maximum
-recorded length of the corresponding species.}
+\item{group}{A character string indicating which species to include in the
+indicator calculation. If group = "ALL", all species will be included;
+otherwise, group should match a column name in species.table.}
 
-\item{lmax}{threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with MAXLEN99 >= 85 cm)}
+\item{species.table}{A table with default species.table = NULL. If group =
+"ALL", this table is not required. If group does not equal "ALL",
+species.table is a table with at least one column, where the column name is
+the same as group, and the column  entries are the species codes indicating
+the species to be included in the calculation. species.table may also
+include columns for different species groups; these will be ignored.}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate indicator.}
+\item{lmax.table}{A table with 2 columns: "SPECIES" and "MAXLENGTH", the
+maximum recorded length of the corresponding species.}
 
-\item{years}{vector of years for which to calculate indicator.}
+\item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
+species are those with MAXLENGTH >= 85 cm)}
+
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
+
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. "ID", "YEAR", and
@@ -32,8 +45,7 @@ Returns a dataframe with 3 columns. "ID", "YEAR", and
  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
-This function takes a dataframe of length-based fisheries
- independent survey data and calculates the Large Species Indicator (LSI) for
+This function calculates the Large Species Indicator (LSI) for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
@@ -42,7 +54,7 @@ Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
  and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
  85 cm).
 
- Recommended data: Fishery independent surveys, fish.
+ Recommended data: Fishery independent survey data or model output; fish.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -53,19 +65,23 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Size-selective fishing drives species composition in the Celtic Sea. ICES J
  Mar Sci 69:223-234
 
- Houle JE, Farnsworth KD, Rossberg AG, Reid DG (2012) Assessing the
- sensitivity and specificity of fish community indicators to management
- action. Can J Fish Aquat Sci 69:1065-1079
+ Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+ MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+ Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+ Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+ Using indicators for evaluating, comparing and communicating the ecological
+ status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+ Journal of Marine Science, 67: 692-716
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{communityFultonK}},
   \code{\link{largeFishIndicator}},
-  \code{\link{meanTrophicLevelCommunity}},
+  \code{\link{meanTLCommunity}},
   \code{\link{predatoryFish}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

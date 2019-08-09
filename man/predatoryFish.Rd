@@ -2,22 +2,25 @@
 % Please edit documentation in R/predatoryFish.R
 \name{predatoryFish}
 \alias{predatoryFish}
-\title{Calculates the proportion of predatory fish in the community}
+\title{Calculates the proportion of predatory fish in the community (Shin et
+ al., 2010)}
 \usage{
 predatoryFish(X, pred.species, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{pred.species}{vector of species codes for predatory fish}
+\item{pred.species}{A vector of species codes for predatory fish}
 
-\item{metric}{character string indicating whether to use "BIOMASS" or
-"ABUNDANCE" to calculate the indicator. Default is "BIOMASS".}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns: "ID", YEAR", and
@@ -37,34 +40,37 @@ Proportion of predatory fish in the community is estimated by:
  largely planktivorous (i.e. phytoplankton and zooplankton feeders should be
  excluded; Shin et al. 2010). A fish species is classified as predatory if it
  is piscivorous, or if it feeds on invertebrates that are larger than the
- macrozooplankton category (.2 cm). Detritivores should not be classified as
+ macrozooplankton category (0.2 cm). Detritivores should not be classified as
  predatory fish.
 
  This indicator captures changes in the trophic structure and changes in the
- functional diversity of fish in the ecosystem. Data used: Fishery
- independent surveys, predatory fish.
+ functional diversity of fish in the ecosystem.
 
- Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent survey data or model output; fish and
+ invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Shin YJ, Bundy A, Shannon LJ, Simier M, Coll M, Fulton EA, Link JS, Jouffre
- D, Ojaveer H, MacKinson S, Heymans JJ, Raid T (2010) Can simple be useful
- and reliable? Using ecological indicators to represent and compare the
- states of marine ecosystems. ICES J Mar Sci 67:717-731
+ Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+ MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+ Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+ Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+ Using indicators for evaluating, comparing and communicating the ecological
+ status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+ Journal of Marine Science, 67: 692-716
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{biomassratio}},
   \code{\link{communityFultonK}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunity}}
+  \code{\link{meanTLCommunity}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

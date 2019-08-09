@@ -2,64 +2,72 @@
 % Please edit documentation in R/biomassratio.R
 \name{biomassratio}
 \alias{biomassratio}
-\title{Calculates the biomass (or abundance) ratio between two species groups}
+\title{Calculates the biomass ratio between two species groups}
 \usage{
-biomassratio(X, group1 = c("INVERTEBRATES", "PELAGIC"),
-  group2 = c("GROUNDFISH"), metric = "BIOMASS", years)
+biomassratio(X, group1, group2, species.table, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS" and/or "ABUNDANCE". "ID" is an area code
-designating where the observation was recorded. "SPECIES" is a numeric code
-indicating the species sampled.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
-\item{group1}{species group for the numerator (string), as defined in
-functions "resourcePotential" and "speciesgroups"}
+\item{group1}{A character string indicating which species to include in the
+numerator. Must match the name of a column in species.table.}
 
-\item{group2}{species group for the denominator (string), as defined in
-functions "resourcePotential" and "speciesgroups"}
+\item{group2}{A character string indicating which species to include in the
+denominator. Must match the name of a column in species.table.}
 
-\item{metric}{character string indicating which metric to use to calculate
-indicator.}
+\item{species.table}{A table with at least two columns, named after the
+strings in group1 and group2. The entries in column group1 are the species
+codes for the species included in this group. The entries in column group2
+are the species codes for the species included in this group. species.table
+may also include columns for different species groups; these will be
+ignored.}
 
-\item{years}{vector of years for which to calculate indicator}
+\item{metric}{A character string indicating which column in X to use to
+calculate indicator. Default is "BIOMASS".}
+
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and
-  "group12group2".
+Returns a dataframe with 3 columns. "ID", "YEAR", and "group1_group2".
 
-  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  values is assigned NA.
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned NA.
 }
 \description{
-This function calculates the biomass ration between two
-  pre-defined species groups for \eqn{j} areas and \eqn{i} years.
+This function calculates the biomass ratio between two
+ pre-defined species groups for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Useful biomass ratio indicators include:
-  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
+Useful biomass \eqn{(B)} ratio indicators include:
+ \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 
-  **Recommended data: Fishery independent surveys, fish and invertebrates.
+ Recommended data: Fishery independent survey data or model output, fish and
+ invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
-  fish: A comparative exploration of variations in the theme of stock
-  collapse and ecosystem change in four Northwest Atlantic ecosystems. Prog
-  Oceanogr 81:188 206
+ Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
+ fish: A comparative exploration of variations in the theme of stock collapse
+ and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
+ 81:188 206
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{communityFultonK}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTrophicLevelCommunity}},
+  \code{\link{meanTLCommunity}},
   \code{\link{predatoryFish}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-  \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+ \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
 }
 \concept{ecosystem structure and function indicators}
