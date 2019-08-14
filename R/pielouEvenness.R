@@ -27,12 +27,11 @@
 #'@export
 
 
-pielouSpeciesEvenness <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
-
+pielouEvenness <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
 
   H <-shannon(X, group = group, species.table = species.table, 
               metric = metric, years = years)           # calculate Shannon's diversity for each year
-  S <- speciesrichness(X, group = group, species.table = species.table,
+  S <- speciesRichness(X, group = group, species.table = species.table,
                        metric = metric, years = years)  # calculate species richness for each year
 
   H$Pielous = H$ShannonDiversity/log(S$SpeciesRichness) # calculate Pielou's species evenness

@@ -74,11 +74,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Journal of Marine Science, 67: 692-716
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassratio}},
-  \code{\link{communityFultonK}},
+Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+  \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
-  \code{\link{meanTLCommunity}},
-  \code{\link{predatoryFish}}
+  \code{\link{meanTLCommunity}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

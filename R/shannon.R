@@ -49,7 +49,7 @@
 
 shannon <- function(X,  group, species.table = NULL, metric = "ABUNDANCE", years) {
   
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
 
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

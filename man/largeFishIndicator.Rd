@@ -70,11 +70,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassratio}},
-  \code{\link{communityFultonK}},
+Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+  \code{\link{communityCondition}},
   \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTLCommunity}},
-  \code{\link{predatoryFish}}
+  \code{\link{meanTLCommunity}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca}, Catalina

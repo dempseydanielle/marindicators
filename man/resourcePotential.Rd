@@ -56,7 +56,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other resource potential indicators: \code{\link{FishingInBalance}}
+Other resource potential indicators: \code{\link{fishingInBalance}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

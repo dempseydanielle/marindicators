@@ -32,7 +32,7 @@ heips <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  
   
   H <-shannon(X = X, group = group, species.table = species.table,
               metric = metric, years = years)            # calculate Shannon's diversity for each year
-  S <- speciesrichness(X = X, group = group, species.table = species.table,
+  S <- speciesRichness(X = X, group = group, species.table = species.table,
                        metric = metric, years = years)   # calculate species richness for each year
   
   H$heips = (exp(H$ShannonDiversity)-1)/(S$SpeciesRichness-1)

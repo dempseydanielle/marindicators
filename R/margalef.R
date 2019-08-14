@@ -31,9 +31,9 @@
 
 margalef <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
 
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   
-  S <- speciesrichness(X = X, group = group, species.table = species.table, 
+  S <- speciesRichness(X = X, group = group, species.table = species.table, 
                        metric = metric, years = years)                    # calculate species richness for each year
   
   uI = unique(X$ID)                   # extract the spatial scale ID's

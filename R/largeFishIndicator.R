@@ -43,7 +43,7 @@
 largeFishIndicator <- function(X, group, species.table = NULL, 
                                metric = "BIOMASS", large.fish = 35, years) {
   
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
   
   uI = unique(X$ID)                   # extract the spatial scale ID's

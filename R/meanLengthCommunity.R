@@ -45,7 +45,7 @@
 meanLengthCommunity <- function(X, metric, years) {
 	
   uI = unique(X$ID)                   # extract the spatial scale ID's
-  X <- X[-which(X$FLEN == -99), ]     # remove rows that do not contain length data
+  X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
   ind <- NULL                         # initialize dataframe for storing indicator values
   
   for (j in 1:length(uI)){            # loop over all spatal scales
@@ -58,7 +58,7 @@ meanLengthCommunity <- function(X, metric, years) {
       X.ij <- X.j[X.j$YEAR == year.i, ]  # subset data to year i
       
       if(nrow(X.ij) > 0){
-        ind.i <- sum(X.ij[, 'FLEN']* X.ij[, metric])/sum(X.ij[, metric])
+        ind.i <- sum(X.ij[, "LENGTH"]* X.ij[, metric])/sum(X.ij[, metric])
       } else ind.i <- NA
       
       ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value

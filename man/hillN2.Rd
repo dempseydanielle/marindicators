@@ -65,9 +65,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},
   \code{\link{hillN1}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}},
-  \code{\link{pielouSpeciesEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesrichness}}
+  \code{\link{margalef}}, \code{\link{pielouEvenness}},
+  \code{\link{shannon}}, \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,

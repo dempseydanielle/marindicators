@@ -30,22 +30,13 @@
 
 landings <- function(land, group, species.table = NULL, years) {
   
-  # make a dataframe with "ID" and "YEAR" for all spatial scales and years
-  df <- NULL
   uI <- unique(land$ID)
-  for(j in 1:length(uI)){
-    ID.j <- rep(uI[j], times = length(years))
-    df.j <- data.frame(ID.j, years)
-    df <- rbind(df, df.j)
-  }
-  names(df) <- c("ID", "YEAR")
-  
- # if(group !='ALL') land <- land[which(land[group] == 1),]      # subset to species in "GROUP"
-  land <- speciesgroups(X = land, group = group, species.table = species.table) # subset land to the species group of interest
-  
+  DF <- createDataframe(uI = uI, years = years)  # create a dataframe that matches each area ID to each year
+
+  land <- speciesGroups(X = land, group = group, species.table = species.table) # subset land to the species group of interest
   
   ind <- aggregate(CATCH ~ ID + YEAR, data = land, FUN = sum)   # sum over years and spatial scales 
-  ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
+  ind <- merge(DF, ind, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
 
   index <- which(is.na(ind[,3]))                                # index NAs
   ind[index, 3] <- 0                                            # replace NA with 0

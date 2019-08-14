@@ -38,7 +38,8 @@
 
 meanMaxLength <- function(X, group, species.table = NULL, lmax.table, metric, years) {
 
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  lmax.table <- na.omit(lmax.table[, c("SPECIES", "MAXLENGTH")])
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   
   X <- merge(X, lmax.table, by = "SPECIES")
   X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data

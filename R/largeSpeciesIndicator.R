@@ -41,7 +41,7 @@
 largeSpeciesIndicator <- function(X, group, species.table = NULL,
                                   lmax.table, lmax = 85,  metric = "BIOMASS", years) {
   
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   largespecies <- lmax.table$SPECIES[lmax.table$MAXLENGTH > lmax]
  
   uI = unique(X$ID)                   # extract the spatial scale ID's

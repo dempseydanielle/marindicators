@@ -12,7 +12,7 @@
 #'  Recommended data: Fishery independent survey data or model output; fish and
 #'  invertebrates.
 #'@inheritParams biomassPerTL
-#'@param TL.table dataframe with columns "SPECIES" and the corresponding "TL"
+#'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
 #'  (trophic level).
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MeanTLCommunity".
@@ -38,7 +38,8 @@
 
 
 meanTLCommunity <- function(X, TL.table, metric= "BIOMASS", years) {
-                                        
+     
+  TL.table <- na.omit(TL.table[, c("SPECIES", "TL")])                                   
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
                                               # Note that the merge function will drop species that do not have a TL
 

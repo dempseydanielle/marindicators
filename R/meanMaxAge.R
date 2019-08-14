@@ -37,6 +37,7 @@
 
 	meanMaxAge <- function(X, age.table, metric = "BIOMASS", years) {
 		
+	  age.table <- na.omit(age.table[, c("SPECIES", "MAXAGE")])
 		X <- merge(X, age.table, by = "SPECIES")
 		uI = unique(X$ID)                   # extract the spatial scale ID's
 		ind <- NULL                         # initialize dataframe for storing indicator values

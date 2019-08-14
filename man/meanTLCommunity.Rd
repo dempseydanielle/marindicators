@@ -14,7 +14,7 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 "BIOMASS" is the corresponding biomass (stratified and corrected for
 catchability as required).}
 
-\item{TL.table}{dataframe with columns "SPECIES" and the corresponding "TL"
+\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
 (trophic level).}
 
 \item{metric}{A character string indicating which column in X to use to
@@ -60,11 +60,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Prog. Ser. 512, 115–140.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassratio}},
-  \code{\link{communityFultonK}},
+Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+  \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
-  \code{\link{largeSpeciesIndicator}},
-  \code{\link{predatoryFish}}
+  \code{\link{largeSpeciesIndicator}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

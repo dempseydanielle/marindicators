@@ -1,10 +1,21 @@
 #'@title Calculates the biomass ratio between two species groups
 #'@description This function calculates the biomass ratio between two
 #'  pre-defined species groups for \eqn{j} areas and \eqn{i} years.
-#'@details Useful biomass \eqn{(B)} ratio indicators include:
+#'@details One useful biomass ratio is the proportion of predatory fish in the
+#'  community, which is estimated by: \deqn{PropPred = Biomass Predatory Fish
+#'  Surveyed/Total Biomass Surveyed} Predatory fish species are defined as all
+#'  surveyed fish species that are not largely planktivorous (i.e. phytoplankton
+#'  and zooplankton feeders should be excluded; Shin et al. 2010). A fish
+#'  species is classified as predatory if it is piscivorous, or if it feeds on
+#'  invertebrates that are larger than the macrozooplankton category (0.2 cm).
+#'  Detritivores should not be classified as predatory fish. This indicator
+#'  captures changes in the trophic structure and changes in the functional
+#'  diversity of fish in the ecosystem.
+#'
+#'  Other useful biomass \eqn{(B)} ratios indicators include:
 #'  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 #'
-#'  Recommended data: Fishery independent survey data or model output, fish and
+#'  Recommended data: Fishery independent survey data or model output; fish and
 #'  invertebrates.
 #'@inheritParams resourcePotential
 #'@param X A dataframe of fishery independent survey data with columns "YEAR",
@@ -16,13 +27,13 @@
 #'@param group1  A character string indicating which species to include in the
 #'  numerator. Must match the name of a column in species.table.
 #'@param group2  A character string indicating which species to include in the
-#'  denominator. Must match the name of a column in species.table.
+#'  denominator. Must be "ALL" or match the name of a column in species.table.
 #'@param species.table A table with at least two columns, named after the
 #'  strings in group1 and group2. The entries in column group1 are the species
-#'  codes for the species included in this group. The entries in column group2
-#'  are the species codes for the species included in this group. species.table
-#'  may also include columns for different species groups; these will be
-#'  ignored.
+#'  codes for the species included in this group. If group2 is not "ALL", the
+#'  entries in column group2 are the species codes for the species included in
+#'  this group. species.table may also include columns for different species
+#'  groups; these will be ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "group1_group2".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
@@ -36,16 +47,26 @@
 #'  fish: A comparative exploration of variations in the theme of stock collapse
 #'  and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
 #'  81:188 206
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'
+#'  #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL,
+#'  Borges, MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D,
+#'  Kifani S, Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S,
+#'  Ojaveer H, Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury
+#'  PM. 2010. Using indicators for evaluating, comparing and communicating the
+#'  ecological status of exploited marine ecosystems. Part 2: Setting the scene.
+#'  ICES Journal of Marine Science, 67: 692-716
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
-biomassratio <- function(X, group1, group2, species.table,
+biomassRatio <- function(X, group1, group2, species.table,
                     metric = 'BIOMASS', years) {
 	
-  num <- resourcePotential(X = X, group = group1, metric = metric, years = years)  # calculate biomass of invertebrates
+  num <- resourcePotential(X = X, group = group1, metric = metric,
+                           species.table = species.table, years = years)  # calculate biomass of invertebrates
   names(num) <- c("ID", "YEAR", metric)
-  denom <- resourcePotential(X = X, group= group2, metric = metric, years = years)     # calculate biomass of demersal fish
+  denom <- resourcePotential(X = X, group= group2, metric = metric, 
+                             species.table = species.table, years = years)     # calculate biomass of demersal fish
   names(denom) <- c("ID", "YEAR", metric)
     
   num$ind = num[, metric] / denom[, metric]       # calculate invertebrate to demersal ratio

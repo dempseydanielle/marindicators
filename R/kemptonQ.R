@@ -42,7 +42,7 @@
 kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 3, 
                     group, species.table = NULL, metric = "ABUNDANCE", years) {
   
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
   X <- X[X$TL > minTL, ]
   
@@ -59,7 +59,7 @@ kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 3,
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
   
       Y <- X.ij[order(X.ij[metric]),metric]        # set Y to metric ORDERED FROM SMALLEST TO LARGEST
-      S <- length(Y)                               # number of species recorded (simpler than speciesrichness function)
+      S <- length(Y)                               # number of species recorded (simpler than speciesRichness function)
       
       if(S>2) {
         w <- c(round(S*percentiles[1], 0), round(S*percentiles[2], 0)) # index of where percentile value is in Y

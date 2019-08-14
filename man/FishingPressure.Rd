@@ -74,8 +74,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Journal of Marine Science, 67: 692-716
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{MeanTLLandings}},
-  \code{\link{landings}}, \code{\link{speciesrichness}}
+Other fishing pressure indicators: \code{\link{landings}},
+  \code{\link{meanTLLandings}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,

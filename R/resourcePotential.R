@@ -34,22 +34,14 @@
 
 resourcePotential <- function(X, group, species.table = NULL, metric = "BIOMASS", years){
   
-  df <- NULL
   uI <- unique(X$ID)
-  for(j in 1:length(uI)){
-    ID.j <- rep(uI[j], times = length(years))
-    df.j <- data.frame(ID.j, years)
-    df <- rbind(df, df.j)
-  }
-  names(df) <- c("ID", "YEAR")
+  DF <- createDataframe(uI = uI, years = years)  # create a dataframe that matches each area ID to each year
   
-  X <- speciesgroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   
- # if(nrow(X) == 0 || X == FALSE ) ind <- data.frame(ID = unique(X$ID), X = 0)
- # else {
-    ind <- aggregate(X[metric], by= c(X['ID'], X['YEAR']), FUN = sum)    # add up metric for the species group for each year + spatial scale
-    ind <- merge(df, ind, by = c("ID", "YEAR"), all.x = T)
-		#	}
+  ind <- aggregate(X[metric], by = c(X["ID"], X["YEAR"]), FUN = sum)    # add up metric for the species group for each year + spatial scale
+  ind <- merge(DF, ind, by = c("ID", "YEAR"), all.x = T)
+
   ind.name <- paste(metric, "_", group, sep ="")                       # name indicator: metric_group
   names(ind) = c("ID", "YEAR", ind.name)                             
   ind = ind[order(ind$ID), ]                # order by ID (to match output of other functions)

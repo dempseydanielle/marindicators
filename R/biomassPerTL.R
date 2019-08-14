@@ -46,48 +46,29 @@ biomassPerTL <- function(X, TL.table, metric = "BIOMASS", TL.grouping = 1, years
   breaks <- seq(1, 10, by = TL.grouping)                          # create a vector from 1 to 10 (increasing by TL.grouping)
   TL.table['TL'] <- breaks[findInterval(TL.table[,'TL'], breaks)] # truncates "TL" (removes values after the decimal)
   
+  TL.table <- na.omit(TL.table[, c("SPECIES", "TL")])  
   X <- merge(X, TL.table, by = 'SPECIES')                         # merge X and the trophic level data		
   
   ind <- stats::aggregate(X[metric], by= X[c('ID', 'YEAR', 'TL')], FUN = sum) # calculate total biomass per TL
   
 # Extract biomass at each TL ----------------------------------------------
-
-  years <- data.frame(years) # dataframe of all years
-  names(years) <- "YEAR"     
   
-  uI <- unique(X$ID)         # extract the spatial scale ID's
-  df <- NULL                 # create empty dataframe 
-  for(j in 1:length(uI)){    # create a dataframe with all years for each ID
-    ID.j <- rep(uI[j], nrow(years))
-    df.j <- cbind(ID.j, years)
-    names(df.j) <- c("ID", "YEAR")
-    df <- rbind(df, df.j)   # a dataframe with two columns ("YEAR" and "ID")
-  }
+  uI <- unique(X$ID)                            # extract the spatial scale ID's
+  DF <- createDataframe(uI = uI, years = years) # create a dataframe that matches each area ID to each year
 
   uTL <- unique(ind$TL)     # extract unique trophic levels
   for(i in 1:length(uTL)){
-    biomass <- NULL         # create an empty dataframe to store biomass
-    
     TL.i <- uTL[i]                                  # set TL.i to the current trophic level
     biomass.i <- ind[ind$TL == TL.i, ]              # subset ind to include only TL.i
     name.i <- paste(metric, "_TL", TL.i, sep = "")  # name indicator metric_TL.i
     names(biomass.i)[4] <- name.i
     biomass.i$TL <- NULL                            # remove TL column 
     
-    for(j in 1:length(uI)){                         # for years without data: add ID to ID column and NA to Biomass column
-      
-      biomass.ij <- biomass.i[biomass.i$ID == uI[j], ]  # subset data to include only spatial scale j
-      biomass.ij <- merge(years, biomass.ij, all.x = T) # merge biomass with years (for years without data, this adds NA to ID and BIOMASS colums)
-      na.inx <- which(is.na(biomass.ij$ID))             # index of where ID is NA
-      biomass.ij$ID[na.inx] <- uI[j]                    # replace NAs in col ID with the ID for spatial scale j
-      
-      biomass <- rbind(biomass, biomass.ij)             # collect biomass at TL.i for all spatial scales
-    }
-    
-    df <- merge(df, biomass)        # merge with years
+    DF <- merge(DF, biomass.i, all.x = T)           # merge biomass.i with DF so that years without data are set to NA 
   }
   
-  df <- df[order(df$ID), ]          # order by ID to match other functions
-  df	
+  DF <- DF[order(DF$ID), ]                          # order by ID to match other functions
+  DF	
+
 }
 

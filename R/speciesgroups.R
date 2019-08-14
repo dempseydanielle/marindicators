@@ -10,7 +10,7 @@
 #'@export
 
 
-speciesgroups <- function(X, species.table = NULL, group){
+speciesGroups <- function(X, species.table = NULL, group){
 
   if(group == "ALL") Y = X
   else{

@@ -40,7 +40,8 @@
         
 IVILandings <- function(land, IVI.table, negative = FALSE, years) {
  
-  land<- merge(land, IVI.table)
+  IVI.table <- na.omit(IVI.table[, c("SPECIES", "IVI")])
+  land<- merge(land, IVI.table, by = "SPECIES")
   land$IV_num <- land$CATCH * land$IVI                    # multiply catch by IVI (for numerator)
   
   uI = unique(land$ID)                   # extract the spatial scale ID's
