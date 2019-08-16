@@ -14,8 +14,8 @@ was recorded, "ID" is an area code indicating where the landing was
 recorded, "SPECIES" is a numeric code indicating the species landed, and
 "CATCH" is the corresponding landed weight.}
 
-\item{TL.table}{A dataframe with columns "SPECIES" and "TL_LAND" (trophic
-level).}
+\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding
+"TL_LAND" (trophic level). Other columns in TL.table are ignored.}
 
 \item{cutoff}{The minimum trophic level of species to include.}
 

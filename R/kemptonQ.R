@@ -13,12 +13,11 @@
 #'
 #'  Recommended data: Fishery independent surveys or model output; fish and
 #'  invertebrates
-#' @inheritParams shannon
-#'@param TL.table table with columns "SPECIES" and "TL", where the "SPECIES"
-#'  codes match those in X, and "TL" is the corresponding trophic level.
-#'@param percentiles percentiles used to determine R1 and R2. Default here is
+#'@inheritParams shannon
+#'@inheritParams meanTLCommunity
+#'@param percentiles The percentiles used to determine R1 and R2. Default is
 #'  percentiles = c(0.25, 0.75).
-#'@param minTL minimum trophic level for species included in the calculation.
+#'@param minTL Minimum trophic level for species included in the calculation.
 #'  Default is minTL = 3.
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
 #'
@@ -35,8 +34,8 @@
 #'
 #'  Kempton R, Taylor L. 1976. Models and statistics for species diversity.
 #'  Nature 262:818-820
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 3, 

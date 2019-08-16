@@ -22,15 +22,16 @@ observations are removed by the function.}
 indicator calculation. If group = "ALL", all species will be included;
 otherwise, group should match a column name in species.table.}
 
-\item{species.table}{A table with default species.table = NULL. If group =
-"ALL", this table is not required. If group does not equal "ALL",
-species.table is a table with at least one column, where the column name is
-the same as group, and the column  entries are the species codes indicating
-the species to be included in the calculation. species.table may also
-include columns for different species groups; these will be ignored.}
+\item{species.table}{If group does not equal "ALL", species.table is a table
+with at least one column, where the column name is the string group, and the
+column entries are the species codes indicating the species to be included
+in the calculation. species.table may also include columns for other species
+groups; these will be ignored. If group = "ALL", this table is not required.
+Default is species.table = NULL}
 
-\item{lmax.table}{A table with 2 columns: "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species.}
+\item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
+maximum recorded length of the corresponding species. Other columns in
+lmax.table are ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}

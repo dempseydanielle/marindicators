@@ -24,8 +24,8 @@
 #'  fish: A comparative exploration of variations in the theme of stock collapse
 #'  and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
 #'  81:188–206
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 landings <- function(land, group, species.table = NULL, years) {

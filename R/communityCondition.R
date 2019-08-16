@@ -1,4 +1,4 @@
-#' @title Calculates Fulton's Condition Index for the community (reference)
+#' @title Calculates Fulton's Condition Index for the community (Ricker, 1975)
 #' @description This function calculates Fulton's condition index for \eqn{j}
 #'   areas and \eqn{i} years.
 #' @details Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
@@ -36,6 +36,10 @@
 #'   Choi JS, Frank KT, Petrie BD, Leggett WC. 2005. Integrated Assessment of a
 #'   Large Marine Ecosystem: a case study of the devolution of the Eastern
 #'   Scotian Shelf, Canada. Oceanogr Mar Biol An Annu Rev 43:47–67
+#'
+#'   Ricker, W. E. 1975. Computation and interpretation of biological statistics
+#'   of fish populations. Bulletin of the Fisheries Research Board of Canada
+#'   191:1-382.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'   Catalina Gomez, Alida Bundy
 #' @export

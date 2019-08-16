@@ -13,7 +13,7 @@
 #'  invertebrates.
 #'@inheritParams biomassPerTL
 #'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level).
+#'  (trophic level). Other columns in TL.table are ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MeanTLCommunity".
 #'

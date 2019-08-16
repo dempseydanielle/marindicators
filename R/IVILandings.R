@@ -15,12 +15,12 @@
 #'  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 #'
 #'  Recommended data: Commercial fisheries landings, fish
-#' @inheritParams landings
-#' @inheritParams CVBiomass
-#'@param IVI.table dataframe with two columns: "SPECIES" and "IVI". "SPECIES" is
-#'  the fisheries-independent numeric species code, and "IVI" is the
-#'  corresponding intrinsic vulnerability index.
-#'@return returns a dataframe with three columns: "ID", "YEAR", and
+#'@inheritParams landings
+#'@inheritParams CVBiomass
+#'@param IVI.table A dataframe with columns "SPECIES" and the corresponding
+#'  "IVI" (intrinsic vulnerability index). Other columns in IVI.table are
+#'  ignored.
+#'@return Returns a dataframe with three columns: "ID", "YEAR", and
 #'  "IVILandings".
 #'
 #'  If there are no observations in land for spatial scale \eqn{j} in year
@@ -33,8 +33,8 @@
 #'  Cheung, William W. L., watson, Reg, Morato, Telmo, Pitcher, Tony J., Pauly,
 #'  Daniel (2007) Intrinsic vulnerability in the global fish catch. Mar Ecol
 #'  Prog Ser 333: 1 - 12
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
         

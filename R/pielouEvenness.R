@@ -1,4 +1,4 @@
-#'@title Calculates Pielou's Species Evenness
+#'@title Calculates Pielou's Species Evenness (Pielou, 1966)
 #'@description This function takes a dataframe of fisheries independent survey
 #'  data and calculates Pielou's Species Evenness for \eqn{j} areas and \eqn{i}
 #'  years.
@@ -8,8 +8,9 @@
 #'  Pielou's index is the Shannon-Weiner index computed for the sample \eqn{S}
 #'  and represents a measure of evenness of the community.
 #'
-#'  **Recommended data: Fishery independent surveys, fish and invertebrates.
-#' @inheritParams shannon
+#'  Recommended data: Fishery independent surveys or model output; fish and
+#'  invertebrates.
+#'@inheritParams shannon
 #'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
@@ -19,11 +20,14 @@
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Greenstreet SP, Rogers SI (2006) Indicators of the health of the North Sea
+#'  Greenstreet SP, Rogers SI. 2006. Indicators of the health of the North Sea
 #'  fish community: identifying reference levels for an ecosystem approach to
 #'  management. ICES J Mar Sci J du Cons 63:573 593
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}
+#'
+#'  Pielou EC. 1966. The Measurement of Diversity in Different Types of
+#'  Biological Collections. J. Theoret. Bio. (13) 131-144
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 

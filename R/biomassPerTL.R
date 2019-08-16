@@ -10,11 +10,11 @@
 #'  "BIOMASS" is the corresponding biomass (stratified and corrected for
 #'  catchability as required).
 #'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level).
+#'  (trophic level). Other columns in TL.table will be ignored.
 #'@param metric A character string indicating which column in X to use to
 #'  calculate indicator. Default is "BIOMASS".
 #'@param TL.grouping Size of the trophic level bin for which to aggregrate
-#'  biomass. Default is "TL.grouping = 1" so that biomass is aggregated over
+#'  biomass. Default is TL.grouping = 1 so that biomass is aggregated over
 #'  discrete trophic levels.
 #'@param years A vector of years for which to calculate indicator.
 #'@return Returns a dataframe with columns "ID", "YEAR", and the corresponding
@@ -36,8 +36,8 @@
 #'  trophic flows and fishing impacts of a NW Mediterranean ecosystem with
 #'  coastal upwellings by means of standardized ecological models and
 #'  indicators. Ecol. Model. 198, 53-70.
-#'@author  Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
-#'  \email{Mike.McMahon@@dfo-mpo.gc.ca}, Catalina Gomez
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
 #'@export
 
 

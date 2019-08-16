@@ -24,20 +24,21 @@ recorded, "SPECIES" is a numeric code indicating the species landed, and
 \item{group.X}{A character string indicating which species to include in the
 denominator. Must match the name of a column in species.table.}
 
-\item{group.land}{A character string indicating which species to include in the
-numerator. Must match the name of a column in species.table.}
+\item{group.land}{A character string indicating which species to include in
+the numerator. Must match the name of a column in species.table.}
 
-\item{species.table}{A table with default species.table = NULL. If group =
-"ALL", this table is not required. If group does not equal "ALL",
-species.table is a table with at least one column, where the column name is
-the same as group, and the column  entries are the species codes indicating
-the species to be included in the calculation. species.table may also
-include columns for different species groups; these will be ignored.}
+\item{species.table}{A table with at least two columns, named after the
+strings in group.X and group.land. The entries in column group.X are all the
+species in the fished group. The entries in column group.land are the
+species of interest landed from this group. species.table may also include
+columns for other species groups; these will be ignored. If group.X and
+group.land both equal "ALL", fishing pressure on the whole community is
+calculated, and species.table can be NULL.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
+Returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
 
  If biomass of group is NA and landings of group are zero, fishing pressure
  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
@@ -57,8 +58,8 @@ Fishing pressure (FP): \deqn{FP = Y_{FG}/B_{FG}} where \eqn{B_{FG}}
  \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change
  in the same direction, exploitation rate may not change.
 
- Recommended data: \eqn{B_{FG}}: fishery independent survey data, \eqn{Y_{FG}}:
- commercial fisheries landings
+ Recommended data: \eqn{B_{FG}}: fishery independent survey data,
+ \eqn{Y_{FG}}: commercial fisheries landings
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -79,7 +80,7 @@ Other fishing pressure indicators: \code{\link{landings}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca} Cataline Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

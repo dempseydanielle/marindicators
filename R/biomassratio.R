@@ -28,12 +28,13 @@
 #'  numerator. Must match the name of a column in species.table.
 #'@param group2  A character string indicating which species to include in the
 #'  denominator. Must be "ALL" or match the name of a column in species.table.
-#'@param species.table A table with at least two columns, named after the
-#'  strings in group1 and group2. The entries in column group1 are the species
-#'  codes for the species included in this group. If group2 is not "ALL", the
-#'  entries in column group2 are the species codes for the species included in
-#'  this group. species.table may also include columns for different species
-#'  groups; these will be ignored.
+#'@param species.table A table with at least one column, named after the string
+#'  group1. The entries in column group1 are the species codes for the species
+#'  included in this group. If group2 is not "ALL", an additional column in
+#'  species.table is required. This column is named after the string group2, and
+#'  entries are the species codes for the species included in this group.
+#'  species.table may also include columns for other species groups; these will
+#'  be ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "group1_group2".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
@@ -48,13 +49,13 @@
 #'  and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
 #'  81:188 206
 #'
-#'  #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL,
-#'  Borges, MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D,
-#'  Kifani S, Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S,
-#'  Ojaveer H, Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury
-#'  PM. 2010. Using indicators for evaluating, comparing and communicating the
-#'  ecological status of exploited marine ecosystems. Part 2: Setting the scene.
-#'  ICES Journal of Marine Science, 67: 692-716
+#'  Shin YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
+#'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
+#'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
+#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Using indicators for evaluating, comparing and communicating the ecological
+#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
+#'  Journal of Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

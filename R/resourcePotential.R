@@ -6,15 +6,7 @@
 #'  Recommended data: Fishery independent survey data or model output; fish and
 #'  invertebrates.
 #'@inheritParams biomassPerTL
-#'@param group A character string indicating which species to include in the
-#'  indicator calculation. If group = "ALL", all species will be included;
-#'  otherwise, group should match a column name in species.table.
-#'@param species.table A table with default species.table = NULL. If group =
-#'  "ALL", this table is not required. If group does not equal "ALL",
-#'  species.table is a table with at least one column, where the column name is
-#'  the same as group, and the column  entries are the species codes indicating
-#'  the species to be included in the calculation. species.table may also
-#'  include columns for different species groups; these will be ignored.
+#'@inheritParams shannon
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
 #'
 #'  If there is no data for a given year, the indicator value will be "NA" for

@@ -8,8 +8,9 @@
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
 #'@inheritParams resourcePotential
-#'@param lmax.table A table with 2 columns: "SPECIES" and "MAXLENGTH", the
-#'  maximum recorded length of the corresponding species.
+#'@param lmax.table A dataframe with columns "SPECIES" and "MAXLENGTH", the
+#'  maximum recorded length of the corresponding species. Other columns in
+#'  lmax.table are ignored.
 #'@param lmax The threshold for large fish (cm). Default is 85 cm (i.e., large
 #'  species are those with MAXLENGTH >= 85 cm)
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and

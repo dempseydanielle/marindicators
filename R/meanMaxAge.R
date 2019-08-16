@@ -13,8 +13,9 @@
 #'  Recommended data: Fishery independent survey data or model output, finfish
 #'  and squid.
 #'@inheritParams biomassPerTL
-#'@param  age.table  A table with 2 columns: "SPECIES" and "MAXAGE", the maximum
-#'  recorded age of the corresponding species.
+#'@param  age.table  A dataframe with columns "SPECIES" and "MAXAGE", the
+#'  maximum recorded age of the corresponding species. Other columns in
+#'  age.table are ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator

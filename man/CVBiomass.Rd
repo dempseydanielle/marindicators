@@ -13,7 +13,7 @@ CVBiomass(X, window = 5, negative = FALSE, years)
 recorded, "ID" is an area code indicating where the observation was
 recorded, and "BIOMASS" is the total recorded biomass (stratified and
 corrected for catchability as required). (Note: the function will aggregate
-biomass split over different "SPECIES" for each year, i.e., X can be the
+biomass split over a "SPECIES" column for each year, i.e., X can be the
 same dataframe used in functions biomassPerTL(), largeSpeciesIndicator(),
 meanMaxAge(), meanTLCommunity(), predatoryFish(), and resourcePotential()).}
 
@@ -26,7 +26,7 @@ Default is negative = FALSE.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and
+Returns a dataframe with three columns: "ID", "YEAR", and
   "CVBiomass".
 
   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator

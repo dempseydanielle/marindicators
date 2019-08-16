@@ -15,7 +15,7 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level).}
+(trophic level). Other columns in TL.table are ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}

@@ -17,12 +17,12 @@ recorded, "SPECIES" is a numeric code indicating the species landed, and
 indicator calculation. If group = "ALL", all species will be included;
 otherwise, group should match a column name in species.table.}
 
-\item{species.table}{A table with default species.table = NULL. If group =
-"ALL", this table is not required. If group does not equal "ALL",
-species.table is a table with at least one column, where the column name is
-the same as group, and the column  entries are the species codes indicating
-the species to be included in the calculation. species.table may also
-include columns for different species groups; these will be ignored.}
+\item{species.table}{If group does not equal "ALL", species.table is a table
+with at least one column, where the column name is the string group, and the
+column entries are the species codes indicating the species to be included
+in the calculation. species.table may also include columns for other species
+groups; these will be ignored. If group = "ALL", this table is not required.
+Default is species.table = NULL}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -58,7 +58,7 @@ Other fishing pressure indicators: \code{\link{fishingPressure}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

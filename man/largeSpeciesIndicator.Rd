@@ -19,15 +19,16 @@ catchability as required).}
 indicator calculation. If group = "ALL", all species will be included;
 otherwise, group should match a column name in species.table.}
 
-\item{species.table}{A table with default species.table = NULL. If group =
-"ALL", this table is not required. If group does not equal "ALL",
-species.table is a table with at least one column, where the column name is
-the same as group, and the column  entries are the species codes indicating
-the species to be included in the calculation. species.table may also
-include columns for different species groups; these will be ignored.}
+\item{species.table}{If group does not equal "ALL", species.table is a table
+with at least one column, where the column name is the string group, and the
+column entries are the species codes indicating the species to be included
+in the calculation. species.table may also include columns for other species
+groups; these will be ignored. If group = "ALL", this table is not required.
+Default is species.table = NULL}
 
-\item{lmax.table}{A table with 2 columns: "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species.}
+\item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
+maximum recorded length of the corresponding species. Other columns in
+lmax.table are ignored.}
 
 \item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
 species are those with MAXLENGTH >= 85 cm)}

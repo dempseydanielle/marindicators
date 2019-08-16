@@ -15,13 +15,13 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level).}
+(trophic level). Other columns in TL.table will be ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
-biomass. Default is "TL.grouping = 1" so that biomass is aggregated over
+biomass. Default is TL.grouping = 1 so that biomass is aggregated over
 discrete trophic levels.}
 
 \item{years}{A vector of years for which to calculate indicator.}
@@ -61,7 +61,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cook, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

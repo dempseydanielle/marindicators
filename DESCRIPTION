@@ -7,8 +7,8 @@ Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca
            person("Adam", "Cook", email="Adam.Cook@dfo-mpo.gc.ca", role= c("aut", "cre")),
            person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"),
            person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= c("aut")))
-Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
-Description: This package calculates a suite of ecosystem indicators.Can write a whole paragrpah here.
+Maintainer: Adam Cook <Adam.Cook@dfo-mpo.gc.ca>
+Description: This package provides functions to calculate a suite of marine ecosystem indicators, following the "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017). 
 Depends:
     R (>= 3.6.0)
 Imports:

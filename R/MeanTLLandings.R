@@ -24,8 +24,8 @@
 #'
 #'  Recommended data: Commercial fisheries landings; fish and invertebrates.
 #'@inheritParams landings
-#'@param TL.table A dataframe with columns "SPECIES" and "TL_LAND" (trophic
-#'  level).
+#'@param TL.table A dataframe with columns "SPECIES" and the corresponding
+#'  "TL_LAND" (trophic level). Other columns in TL.table are ignored.
 #'@param cutoff The minimum trophic level of species to include. Set cutoff = 0
 #'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
 #'  calculate the marine trophic index. Default is cutoff = 0.

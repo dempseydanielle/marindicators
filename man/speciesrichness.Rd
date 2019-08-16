@@ -17,26 +17,23 @@ speciesRichness(X, group, species.table = NULL, metric, years)
  corrected for catchability as required).
 
  Similarly,  commercial landings data will have columns "YEAR", "ID",
- "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
- "ID" is an area code indicating where the landing was recorded, "SPECIES" is
- a numeric code indicating the species landed, and "CATCH" is the
- corresponding landed weight.}
+ "SPECIES" are as above, and "CATCH" is the corresponding landed weight.}
 
 \item{group}{A character string indicating which species to include in the
 indicator calculation. If group = "ALL", all species will be included;
 otherwise, group should match a column name in species.table.}
 
-\item{species.table}{A table with default species.table = NULL. If group =
-"ALL", this table is not required. If group does not equal "ALL",
-species.table is a table with at least one column, where the column name is
-the same as group, and the column  entries are the species codes indicating
-the species to be included in the calculation. species.table may also
-include columns for different species groups; these will be ignored.}
+\item{species.table}{If group does not equal "ALL", species.table is a table
+with at least one column, where the column name is the string group, and the
+column entries are the species codes indicating the species to be included
+in the calculation. species.table may also include columns for other species
+groups; these will be ignored. If group = "ALL", this table is not required.
+Default is species.table = NULL}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "ABUNDANCE".}
 
-\item{years}{A vector of years for which to calculate indicator}
+\item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
 Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =

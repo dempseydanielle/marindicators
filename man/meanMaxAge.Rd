@@ -15,8 +15,9 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 "BIOMASS" is the corresponding biomass (stratified and corrected for
 catchability as required).}
 
-\item{age.table}{A table with 2 columns: "SPECIES" and "MAXAGE", the maximum
-recorded age of the corresponding species.}
+\item{age.table}{A dataframe with columns "SPECIES" and "MAXAGE", the
+maximum recorded age of the corresponding species. Other columns in
+age.table are ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}

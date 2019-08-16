@@ -24,10 +24,7 @@
 #'  corrected for catchability as required).
 #'
 #'  Similarly,  commercial landings data will have columns "YEAR", "ID",
-#'  "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-#'  "ID" is an area code indicating where the landing was recorded, "SPECIES" is
-#'  a numeric code indicating the species landed, and "CATCH" is the
-#'  corresponding landed weight.
+#'  "SPECIES" are as above, and "CATCH" is the corresponding landed weight.
 #'@return Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
 #'  "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If metrc
 #'  = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".

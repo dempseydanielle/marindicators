@@ -13,9 +13,9 @@ was recorded, "ID" is an area code indicating where the landing was
 recorded, "SPECIES" is a numeric code indicating the species landed, and
 "CATCH" is the corresponding landed weight.}
 
-\item{IVI.table}{dataframe with two columns: "SPECIES" and "IVI". "SPECIES" is
-the fisheries-independent numeric species code, and "IVI" is the
-corresponding intrinsic vulnerability index.}
+\item{IVI.table}{A dataframe with columns "SPECIES" and the corresponding
+"IVI" (intrinsic vulnerability index). Other columns in IVI.table are
+ignored.}
 
 \item{negative}{If negative = TRUE, the indicator will be multipled by -1 so
 that the expected response is to decrease with increasing fishing pressure.
@@ -24,7 +24,7 @@ Default is negative = FALSE.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and
+Returns a dataframe with three columns: "ID", "YEAR", and
  "IVILandings".
 
  If there are no observations in land for spatial scale \eqn{j} in year
@@ -65,7 +65,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Alida Bundy, Adam Cooke, Mike McMahon,
- \email{Mike.McMahon@dfo-mpo.gc.ca}, Catalina Gomez
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+ Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

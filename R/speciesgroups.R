@@ -1,5 +1,6 @@
 #'@title Assigns species to species groups
-#'@description Text here
+#'@description I don't think I need to document this one because it is not
+#'  exported for other people to use. 
 #'@inheritParams shannon
 #'@return text here
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -7,7 +8,6 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
-#'@export
 
 
 speciesGroups <- function(X, species.table = NULL, group){
