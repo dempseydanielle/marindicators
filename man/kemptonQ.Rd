@@ -4,7 +4,7 @@
 \alias{kemptonQ}
 \title{Calculates Kempton's Biodiversity Index (Kempton and Taylor, 1976)}
 \usage{
-kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 3, group,
+kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, group,
   species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
@@ -16,13 +16,15 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Other columns in TL.table are ignored.}
+(trophic level). Entries in the "SPECIES" column should be the unique
+values of species codes in X (or a subset thereof). Other columns in
+TL.table are ignored.}
 
 \item{percentiles}{The percentiles used to determine R1 and R2. Default is
 percentiles = c(0.25, 0.75).}
 
 \item{minTL}{Minimum trophic level for species included in the calculation.
-Default is minTL = 3.}
+Default is minTL = 0.}
 
 \item{group}{A character string indicating which species to include in the
 indicator calculation. If group = "ALL", all species will be included;
@@ -30,10 +32,10 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "ABUNDANCE".}
@@ -41,7 +43,7 @@ calculate indicator. Default is "ABUNDANCE".}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
+Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ_minTL".
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned NA.
@@ -77,10 +79,11 @@ Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
  Nature 262:818-820
 }
 \seealso{
-Other biodiversity indicators: \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+Other biodiversity indicators: \code{\link{allBiodiversity}},
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{margalef}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

@@ -19,11 +19,6 @@
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'   Aquat. Sci. 3232: xii + 212 p.
 #'
-#'   Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK.
-#'   2012. Redundancy in metrics describing the composition, structure, and
-#'   functioning of the North Sea demersal fish community. ICES J Mar Sci
-#'   69:8-22
-#'
 #'   Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy

@@ -1,7 +1,7 @@
 #'@title Calculates the Large Fish Indicator (Greenstreet and Rogers, 2006)
 #'@description This function calculates the Large Fish Indicator (LFI) for
 #'  \eqn{j} areas and \eqn{i} years.
-#'@details Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >50 cm)/\Sigma
+#'@details Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
 #'  B_m} \eqn{B_m} is biomass of individuals in a body size class centred at
 #'  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
 #'  describes the proportion (by weight) of the fish community that is larger
@@ -10,16 +10,16 @@
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
 #'@inheritParams resourcePotential
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
+#'@param X_length A dataframe of fishery independent survey data with columns "YEAR",
+#'  "ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
 #'  observation was recorded, "ID" is an area code indicating where the
 #'  observation was recorded, and "SPECIES" is a numeric code indicating the
-#'  species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+#'  species sampled. "LENGTH" is the length class (cm) and "BIOMASS" is the
 #'  corresponding abundance at length (stratified and corrected for catchability
 #'  as required). Species for which there are no length data should be assigned
 #'  LENGTH = -99. These observations are removed by the function.
-#'@param large.fish threshold for large fish (cm). Default is 35 cm (i.e., large
-#'  fish are those with X$LENGTH >= 35 cm)
+#'@param large.fish Threshold for large fish (cm). Default is 35 cm (i.e., large
+#'  fish are those with X$LENGTH >= 35 cm).
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "LargeFishIndicator".
 #'
@@ -40,10 +40,10 @@
 #'  Gomez, Alida Bundy
 #'@export
 
-largeFishIndicator <- function(X, group, species.table = NULL, 
+largeFishIndicator <- function(X_length, group, species.table = NULL, 
                                metric = "BIOMASS", large.fish = 35, years) {
   
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
   X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
   
   uI = unique(X$ID)                   # extract the spatial scale ID's

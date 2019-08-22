@@ -18,19 +18,23 @@
 #'  only includes species with trophic level greater than or equal to an
 #'  explicitly stated trophic level cutoff. For instance, Pauly and Watson 2005
 #'  adopted a trophic level cutoff of 3.25 to emphasize changes in the relative
-#'  abundance of higher trophic level fishes. If used is this way, this
-#'  indicator highlights changes in the relative abundance of the more
-#'  threatened high-trophic level fishes.
+#'  abundance of higher trophic level fishes, and Shannon et al. 2014 used a
+#'  cutoff of 4.0 to examine changes within the apex predator community. If used
+#'  in this way, this indicator highlights changes in the relative abundance of
+#'  the more threatened high-trophic level fishes.
 #'
 #'  Recommended data: Commercial fisheries landings; fish and invertebrates.
 #'@inheritParams landings
 #'@param TL.table A dataframe with columns "SPECIES" and the corresponding
-#'  "TL_LAND" (trophic level). Other columns in TL.table are ignored.
+#'  "TL_LAND" (trophic level). Entries in the "SPECIES" column should be the
+#'  unique values of species codes in land (or a subset thereof).  Other columns
+#'  in TL.table are ignored.
 #'@param cutoff The minimum trophic level of species to include. Set cutoff = 0
 #'  to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
 #'  calculate the marine trophic index. Default is cutoff = 0.
-#'@return returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
-#'  0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings".
+#'@return Returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
+#'  0: "MeanTL.Landings", if cutoff = 3.25: "MarineTophicIndex.Landings", or if
+#'  cutoff is a different value: "MeanTL.Landings_cutoff".
 #'
 #'  If there are no observations in land for spatial scale \eqn{j} in year
 #'  \eqn{i}, indicator value is set to NA.
@@ -45,6 +49,11 @@
 #'  Pauly D, Watson R. 2005. Background and interpretation of the Marine Trophic
 #'  Index as a measure of biodiversity. Philos Trans R Soc B Biol Sci 360:415
 #'  423
+#'
+#'  Shannon L, Coll M, Bundy A, Gascuel D, Heymans, JJ, Kleisner K, Lynam CP,
+#'  Piroddi C, Tam J, Travers-Trolet M and Shin Y. 2014. Trophic level-based
+#'  indicators to track fishing impacts across marine ecosystems. Marine Ecology
+#'  Progress Series, 512, pp.115-140.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export
@@ -70,9 +79,14 @@ meanTLLandings <- function (land, TL.table, cutoff = 0, years) {
 	 
 	ind <- merge(DF, ind, by = c("ID", "YEAR"), all.x = T)               # merge ind with DF so that years without data are set to NA 
 	
-	if(cutoff == 0)	names(ind) <- c("ID", "YEAR", "MeanTL.Landings")
-	if(cutoff >0) names(ind) <- c("ID", "YEAR", "MarineTophicIndex.Landings")
+	if(cutoff == 0) {
+	  ind.name = "MeanTL.Landings"
+	} else {if(cutoff == 3.25) {
+	  ind.name = "MarineTophicIndex.Landings"
+	} else {ind.name = paste("MeanTL.Landings_", cutoff, sep = "")}
+	}
 	
+	names(ind) <- c("ID", "YEAR", ind.name)
 	ind <- ind[order(ind$ID), ]
 	ind
 

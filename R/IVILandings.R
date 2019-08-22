@@ -18,8 +18,9 @@
 #'@inheritParams landings
 #'@inheritParams CVBiomass
 #'@param IVI.table A dataframe with columns "SPECIES" and the corresponding
-#'  "IVI" (intrinsic vulnerability index). Other columns in IVI.table are
-#'  ignored.
+#'  "IVI" (intrinsic vulnerability index). Entries in the "SPECIES" column
+#'  should be the unique values of species codes in X (or a subset thereof).
+#'  Other columns in IVI.table are ignored.
 #'@return Returns a dataframe with three columns: "ID", "YEAR", and
 #'  "IVILandings".
 #'
@@ -30,9 +31,13 @@
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Cheung, William W. L., watson, Reg, Morato, Telmo, Pitcher, Tony J., Pauly,
-#'  Daniel (2007) Intrinsic vulnerability in the global fish catch. Mar Ecol
-#'  Prog Ser 333: 1 - 12
+#'  Cheung WWL, Pitcher TJ, Pauly D. 2005. A fuzzy logic expert system to
+#'  estimate intrinsic extinction vulnerability of marine fishes to fishing.
+#'  Biol Conserv 124:97–111
+#'
+#'  Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007.
+#'  Intrinsic vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 -
+#'  12
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

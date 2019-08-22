@@ -2,6 +2,11 @@
 
 export(CVBiomass)
 export(IVILandings)
+export(allBiodiversity)
+export(allPotential)
+export(allPressure)
+export(allStability)
+export(allStructure)
 export(biomassPerTL)
 export(biomassRatio)
 export(communityCondition)

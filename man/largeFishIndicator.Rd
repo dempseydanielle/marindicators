@@ -4,15 +4,15 @@
 \alias{largeFishIndicator}
 \title{Calculates the Large Fish Indicator (Greenstreet and Rogers, 2006)}
 \usage{
-largeFishIndicator(X, group, species.table = NULL, metric = "BIOMASS",
-  large.fish = 35, years)
+largeFishIndicator(X_length, group, species.table = NULL,
+  metric = "BIOMASS", large.fish = 35, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
+\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
 observation was recorded, "ID" is an area code indicating where the
 observation was recorded, and "SPECIES" is a numeric code indicating the
-species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+species sampled. "LENGTH" is the length class (cm) and "BIOMASS" is the
 corresponding abundance at length (stratified and corrected for catchability
 as required). Species for which there are no length data should be assigned
 LENGTH = -99. These observations are removed by the function.}
@@ -23,16 +23,16 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
 
-\item{large.fish}{threshold for large fish (cm). Default is 35 cm (i.e., large
-fish are those with X$LENGTH >= 35 cm)}
+\item{large.fish}{Threshold for large fish (cm). Default is 35 cm (i.e., large
+fish are those with X$LENGTH >= 35 cm).}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -48,7 +48,7 @@ This function calculates the Large Fish Indicator (LFI) for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >50 cm)/\Sigma
+Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
  B_m} \eqn{B_m} is biomass of individuals in a body size class centred at
  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
  describes the proportion (by weight) of the fish community that is larger
@@ -70,7 +70,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allPotential}},
+  \code{\link{allStructure}}, \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}

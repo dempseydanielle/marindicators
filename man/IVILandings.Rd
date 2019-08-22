@@ -8,16 +8,17 @@ IVILandings(land, IVI.table, negative = FALSE, years)
 }
 \arguments{
 \item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing
-was recorded, "ID" is an area code indicating where the landing was
-recorded, "SPECIES" is a numeric code indicating the species landed, and
-"CATCH" is the corresponding landed weight.}
+"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
+"ID" is an area code indicating where the landing was recorded, "SPECIES" is
+a numeric code indicating the species landed, and "CATCH" is the
+corresponding landed weight.}
 
 \item{IVI.table}{A dataframe with columns "SPECIES" and the corresponding
-"IVI" (intrinsic vulnerability index). Other columns in IVI.table are
-ignored.}
+"IVI" (intrinsic vulnerability index). Entries in the "SPECIES" column
+should be the unique values of species codes in X (or a subset thereof).
+Other columns in IVI.table are ignored.}
 
-\item{negative}{If negative = TRUE, the indicator will be multipled by -1 so
+\item{negative}{If negative = TRUE, the indicator will be multiplied by -1 so
 that the expected response is to decrease with increasing fishing pressure.
 Default is negative = FALSE.}
 
@@ -55,14 +56,18 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
 
- Cheung, William W. L., watson, Reg, Morato, Telmo, Pitcher, Tony J., Pauly,
- Daniel (2007) Intrinsic vulnerability in the global fish catch. Mar Ecol
- Prog Ser 333: 1 - 12
+ Cheung WWL, Pitcher TJ, Pauly D. 2005. A fuzzy logic expert system to
+ estimate intrinsic extinction vulnerability of marine fishes to fishing.
+ Biol Conserv 124:97–111
+
+ Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007.
+ Intrinsic vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 -
+ 12
 }
 \seealso{
 Other stability and resistance indicators: \code{\link{CVBiomass}},
-  \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}},
-  \code{\link{meanMaxLength}}
+  \code{\link{allStability}}, \code{\link{biomassPerTL}},
+  \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

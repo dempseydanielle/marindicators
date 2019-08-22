@@ -15,7 +15,9 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Other columns in TL.table are ignored.}
+(trophic level). Entries in the "SPECIES" column should be the unique
+values of species codes in X (or a subset thereof). Other columns in
+TL.table are ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
@@ -60,7 +62,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Prog. Ser. 512, 115–140.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allPotential}},
+  \code{\link{allStructure}}, \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}}

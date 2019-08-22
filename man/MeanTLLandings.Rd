@@ -9,13 +9,15 @@ meanTLLandings(land, TL.table, cutoff = 0, years)
 }
 \arguments{
 \item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing
-was recorded, "ID" is an area code indicating where the landing was
-recorded, "SPECIES" is a numeric code indicating the species landed, and
-"CATCH" is the corresponding landed weight.}
+"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
+"ID" is an area code indicating where the landing was recorded, "SPECIES" is
+a numeric code indicating the species landed, and "CATCH" is the
+corresponding landed weight.}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding
-"TL_LAND" (trophic level). Other columns in TL.table are ignored.}
+"TL_LAND" (trophic level). Entries in the "SPECIES" column should be the
+unique values of species codes in land (or a subset thereof).  Other columns in
+TL.table are ignored.}
 
 \item{cutoff}{The minimum trophic level of species to include. Set cutoff = 0
 to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
@@ -70,8 +72,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  423
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{fishingPressure}},
-  \code{\link{landings}}, \code{\link{speciesRichness}}
+Other fishing pressure indicators: \code{\link{allPressure}},
+  \code{\link{fishingPressure}}, \code{\link{landings}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

@@ -19,10 +19,10 @@
 #'  otherwise, group should match a column name in species.table.
 #'@param species.table  If group does not equal "ALL", species.table is a table
 #'  with at least one column, where the column name is the string group, and the
-#'  column entries are the species codes indicating the species to be included
-#'  in the calculation. species.table may also include columns for other species
-#'  groups; these will be ignored. If group = "ALL", this table is not required.
-#'  Default is species.table = NULL
+#'  column entries are the species codes indicating the species from X to
+#'  include in the calculation. species.table may also include columns for other
+#'  species groups; these will be ignored. If group = "ALL", this table is not
+#'  required. Default is species.table = NULL.
 #'@param metric A character string indicating which column in X to use to
 #'  calculate indicator. Default is "ABUNDANCE".
 #'@param years A vector of years for which to calculate indicator.

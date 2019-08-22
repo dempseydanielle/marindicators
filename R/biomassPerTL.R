@@ -1,4 +1,4 @@
-#'@title Calculates the biomass per discrete trophic level (Coll et al., 2006)
+#'@title Calculates the biomass per discrete trophic level
 #'@description This function calculates the biomass per discrete trophic level
 #'  for \eqn{j} areas and \eqn{i} years.
 #'@details Recommended data: Fishery independent survey data or model output;
@@ -10,12 +10,17 @@
 #'  "BIOMASS" is the corresponding biomass (stratified and corrected for
 #'  catchability as required).
 #'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level). Other columns in TL.table will be ignored.
+#'  (trophic level). Entries in the "SPECIES" column should be the unique values
+#'  of species codes in X (or a subset thereof). Other columns in TL.table will
+#'  be ignored.
 #'@param metric A character string indicating which column in X to use to
 #'  calculate indicator. Default is "BIOMASS".
 #'@param TL.grouping Size of the trophic level bin for which to aggregrate
-#'  biomass. Default is TL.grouping = 1 so that biomass is aggregated over
-#'  discrete trophic levels.
+#'  biomass. For example, if TL.grouping = 1, trophic levels are binned from
+#'  1.00 - 1.99, 2.00 - 2.99, etc. If TL.grouping = 0.5, trophic levels are
+#'  binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default
+#'  is TL.grouping = 1 so that biomass is aggregated over discrete trophic
+#'  levels.
 #'@param years A vector of years for which to calculate indicator.
 #'@return Returns a dataframe with columns "ID", "YEAR", and the corresponding
 #'  biomass for each trophic level grouping. For example: for TL.grouping = 1,
@@ -31,6 +36,11 @@
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
+#'
+#'  Bundy, A. 2005. Structure and functioning of the eastern Scotian Shelf
+#'  ecosystem before and after the collapse of groundfish stocks in the early
+#'  1990s. Canadian Journal of Fisheries and Aquatic Sciences, 62(7),
+#'  pp.1453-1473.
 #'
 #'  Coll M, Shannon LJ, Moloney CL, Palomera I, Tudela S, 2006. Comparing
 #'  trophic flows and fishing impacts of a NW Mediterranean ecosystem with

@@ -4,13 +4,11 @@
 #'@details One useful biomass ratio is the proportion of predatory fish in the
 #'  community, which is estimated by: \deqn{PropPred = Biomass Predatory Fish
 #'  Surveyed/Total Biomass Surveyed} Predatory fish species are defined as all
-#'  surveyed fish species that are not largely planktivorous (i.e. phytoplankton
-#'  and zooplankton feeders should be excluded; Shin et al. 2010). A fish
-#'  species is classified as predatory if it is piscivorous, or if it feeds on
-#'  invertebrates that are larger than the macrozooplankton category (0.2 cm).
-#'  Detritivores should not be classified as predatory fish. This indicator
-#'  captures changes in the trophic structure and changes in the functional
-#'  diversity of fish in the ecosystem.
+#'  surveyed fish species that are not largely planktivorous, ie., fish that are
+#'  piscivorous, or that feed on invertebrates larger than the macrozooplankton
+#'  category (0.2 cm; Shin et al. 2010). Phytoplankton, zooplankton and detritus
+#'  feeders should be excluded. This indicator captures changes in the trophic
+#'  structure and changes in the functional diversity of fish in the ecosystem.
 #'
 #'  Other useful biomass \eqn{(B)} ratios indicators include:
 #'  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
@@ -33,6 +31,7 @@
 #'  included in this group. If group2 is not "ALL", an additional column in
 #'  species.table is required. This column is named after the string group2, and
 #'  entries are the species codes for the species included in this group.
+#'  Species codes should be a subset of those in the "SPECIES" column of X.
 #'  species.table may also include columns for other species groups; these will
 #'  be ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "group1_group2".
@@ -52,7 +51,7 @@
 #'  Shin YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
 #'  Using indicators for evaluating, comparing and communicating the ecological
 #'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
 #'  Journal of Marine Science, 67: 692-716

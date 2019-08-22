@@ -16,29 +16,32 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing
-was recorded, "ID" is an area code indicating where the landing was
-recorded, "SPECIES" is a numeric code indicating the species landed, and
-"CATCH" is the corresponding landed weight.}
+"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
+"ID" is an area code indicating where the landing was recorded, "SPECIES" is
+a numeric code indicating the species landed, and "CATCH" is the
+corresponding landed weight.}
 
 \item{group.X}{A character string indicating which species to include in the
-denominator. Must match the name of a column in species.table.}
+denominator (fished group). Must match the name of a column in
+species.table.}
 
 \item{group.land}{A character string indicating which species to include in
-the numerator. Must match the name of a column in species.table.}
+the numerator (landings). Must match the name of a column in species.table.}
 
 \item{species.table}{A table with at least two columns, named after the
-strings in group.X and group.land. The entries in column group.X are all the
-species in the fished group. The entries in column group.land are the
-species of interest landed from this group. species.table may also include
-columns for other species groups; these will be ignored. If group.X and
-group.land both equal "ALL", fishing pressure on the whole community is
-calculated, and species.table can be NULL.}
+strings in group.X and group.land. The entries in column group.X are species
+codes from X indicating the species to include in the denominator (fished
+group). The entries in column group.land are species codes from land
+indicating the species to include in the numerator (landings). species.table
+may also include columns for other species groups; these will be ignored. If
+group.X and group.land both equal "ALL", fishing pressure on the whole
+community is calculated, and species.table can be NULL.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
+Returns a dataframe with three columns: "ID", "YEAR", and
+ "FP_group.X".
 
  If biomass of group is NA and landings of group are zero, fishing pressure
  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
@@ -69,14 +72,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
- Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+ Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
  Using indicators for evaluating, comparing and communicating the ecological
  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
  Journal of Marine Science, 67: 692-716
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{landings}},
-  \code{\link{meanTLLandings}},
+Other fishing pressure indicators: \code{\link{allPressure}},
+  \code{\link{landings}}, \code{\link{meanTLLandings}},
   \code{\link{speciesRichness}}
 }
 \author{

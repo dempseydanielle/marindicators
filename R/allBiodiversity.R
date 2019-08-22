@@ -5,8 +5,9 @@
 #'  independent survey data or model output; fish and invertebrates.
 #'@inheritParams kemptonQ
 #'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level). Other columns in TL.table are ignored. If TL.table = NULL
-#'  Kempton's Q will not be calculated.
+#'  (trophic level). Entries in the "SPECIES" column should be the unique values
+#'  of species codes in X (or a subset thereof). Other columns in TL.table are
+#'  ignored. If TL.table = NULL Kempton's Q will not be calculated.
 #'@return Returns a dataframe with columns "ID", "YEAR", "SpeciesRichness",
 #'  "ShannonDiversity", "MargalefRichness_group", "PielouEvenness",
 #'  "HillDiversity", "HillDominance", "Heips", "KemptonQ"

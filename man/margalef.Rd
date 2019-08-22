@@ -20,10 +20,10 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "ABUNDANCE".}
@@ -55,18 +55,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
   Aquat. Sci. 3232: xii + 212 p.
 
-  Greenstreet SP, Fraser HM, Rogers SI, Trenkel VM, Simpson SD, Pinnegar JK.
-  2012. Redundancy in metrics describing the composition, structure, and
-  functioning of the North Sea demersal fish community. ICES J Mar Sci
-  69:8-22
-
   Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 }
 \seealso{
-Other biodiversity indicators: \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+Other biodiversity indicators: \code{\link{allBiodiversity}},
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{kemptonQ}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

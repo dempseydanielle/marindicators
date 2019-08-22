@@ -1,0 +1,93 @@
+#'@title Calculates all pressure indicators
+#'@description This function calculates all (or a subset) of the pressure
+#'  indicators for \eqn{j} areas and \eqn{i} years.
+#'@details This function calculates the pressure indicators: diversity of the
+#'  target species, total landings, landings of target groups, fishing pressure
+#'  on the community, fishing pressure on target groups, mean trophic level of
+#'  the landings, and the marine trophic index. If data are not available to
+#'  calculate one or more of these indicators, a subset will be returned. See
+#'  the help file for the individual functions for information on how each
+#'  indicator is calculated.
+#'@inheritParams resourcePotential
+#'@inheritParams landings
+#'@inheritParams allStructure
+#'@param landings.groups A vector indicating the species groups for which to
+#'  calculate the landings. Each entry must be a character string matching the
+#'  name of a column in species.groups. If landings.groups = NULL, no resource
+#'  potential indicators will be calculated.
+#'@param FP.groups A dataframe with two columns, which must be named "group.X"
+#'  and "group.land". Each row holds the group names to calculate the fishing
+#'  pressure on a target group, with the numerator in column "group.land" and
+#'  the denominator in column "group.X". Each entry must be a character string
+#'  matching the name of a column in species.groups. If FP.groups = NULL, no
+#'  fishing pressure indicators will be calculated.
+#'@param cutoff A vector containing minimum trophic level to include when
+#'  calculating the mean trophic level of the landings. Default is cutoff = c(0,
+#'  3.25), which will return the mean trophic level of the landings and the
+#'  marine trophic index.
+#'@return Returns a dataframe with columns "ID", "YEAR", and indicators
+#'  corresponding to the arguments supplied to the function.
+#'@family fishing pressure indicators
+#'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
+#'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+#'  Aquat. Sci. 3232: xii + 212 p.
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'  Catalina Gomez, Alida Bundy
+#'@export
+
+allPressure <- function(X, land, 
+                        species.table, speciesinfo.table, landings.groups, FP.groups,
+                        cutoff,  years){
+  
+  inds <- createDataframe(unique(land$ID), years)
+  
+  # Diversity of target species
+  SR.L = speciesRichness(land, metric = "CATCH", group = "ALL", years = years)
+  
+  inds <- merge(inds, SR.L)
+  
+  if(length(cutoff) > 0){
+
+    for(i in 1:length(cutoff)){
+      # Mean Trophic Level Landings 
+      MTL.i = meanTLLandings(land, TL.table = speciesinfo.table, 
+                      cutoff = cutoff[i], years = years)
+      
+      if(i == 1){MTL = MTL.i}
+      MTL <- merge(MTL, MTL.i)
+    }
+    inds <- merge(inds, MTL)
+  }
+  
+  # landings by group
+  if("CATCH" %in% colnames(land)){
+    if(length(landings.groups) > 0){
+      
+      for(j in 1:length(landings.groups)){
+        land.i <- landings(land = land, group = landings.groups[j],
+                                species.table = species.table, years = years)
+        
+        if(j == 1){land.ind = land.i}
+        land.ind <- merge(land.ind, land.i)
+      }
+      inds <- merge(inds, land.ind)
+    }
+  }
+  
+  # fishing pressure by group
+  if("BIOMASS" %in% colnames(X)){
+    for(k in 1:nrow(FP.groups)){
+      
+      FP.k = fishingPressure(X = X, land = land, group.X = FP.groups[k, "group.X"], 
+                             group.land = FP.groups[k, "group.land"],
+                             species.table = species.table,  years = years)
+      
+      if(k == 1){FP = FP.k}
+      FP <- merge(FP, FP.k)
+    }
+    inds <- merge(inds, FP)
+  }
+
+  inds
+
+}

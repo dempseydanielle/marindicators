@@ -4,21 +4,13 @@
 #'  weighted by biomass or abundance for \eqn{j} areas and \eqn{i} years.
 #'@details \deqn{MeanLength = \Sigma(Length_m * metric_i)/\Sigma metric_j} where
 #'  \eqn{Length_m} is the length (cm) of an individual in size class \eqn{m},
-#'  \eqn{B_i} is the biomass or abundance of species \eqn{i} and \eqn{metric_j}
-#'  is the total biomass or abundance of the community.
+#'  \eqn{metric_i} is the biomass or abundance of species \eqn{i} and
+#'  \eqn{metric_j} is the total biomass or abundance of the community.
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish and
 #'  invertebrates.
 #'@inheritParams resourcePotential
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", "LENGTH", "ABUNDANCE", and/or "BIOMASS". "YEAR" indicates
-#'  the year the observation was recorded, "ID" is an area code indicating where
-#'  the observation was recorded, and "SPECIES" is a numeric code indicating the
-#'  species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" and
-#'  "BIOMASS" are the corresponding abundance and biomass at length (stratified
-#'  and corrected for catchability as required). Species for which there are no
-#'  length data should be assigned LENGTH = -99. These observations are removed
-#'  by the function.
+#'@inheritParams meanMaxLength
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MeanLength_metric".
 #'
@@ -33,20 +25,20 @@
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
-#'  Using indicators for evaluating, comparing and communicating the ecological
-#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
-#'  Journal of Marine Science, 67: 692-716
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+#'  indicators for evaluating, comparing and communicating the ecological status
+#'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+#'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
 
-meanLengthCommunity <- function(X, metric, years) {
+meanLengthCommunity <- function(X_length, metric, years) {
 	
-  uI = unique(X$ID)                   # extract the spatial scale ID's
-  X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
-  ind <- NULL                         # initialize dataframe for storing indicator values
+  uI = unique(X_length$ID)                            # extract the spatial scale ID's
+  X <- X_length[-which(X_length$LENGTH == -99), ]     # remove rows that do not contain length data
+  ind <- NULL                                         # initialize dataframe for storing indicator values
   
   for (j in 1:length(uI)){            # loop over all spatal scales
     

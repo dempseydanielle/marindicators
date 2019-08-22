@@ -16,10 +16,10 @@ catchability as required).}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{group}{A character string indicating which species to include in the
 indicator calculation. If group = "ALL", all species will be included;

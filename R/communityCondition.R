@@ -8,7 +8,7 @@
 #'
 #'   Recommended data: Fishery independent survey data or model output; fish.
 #' @inheritParams resourcePotential
-#' @param X A dataframe of fishery independent survey data with columns "YEAR",
+#' @param X_length A dataframe of fishery independent survey data with columns "YEAR",
 #'   "ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
 #'   observation was recorded, "ID" is an area code indicating where the
 #'   observation was recorded, and "SPECIES" is a numeric code indicating the
@@ -18,7 +18,7 @@
 #'   should be assigned LENGTH = -99. These observations are removed by the
 #'   function.
 #' @param LenWt.table A table of annual length at weight data with 5 columns.
-#'   "YEAR", "ID", "SPECIES" correspond with those columns in X. "LENGTH" is
+#'   "YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
 #'   fish length at the corresponding "WEIGHT" (fish weight).
 #' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'   "CommunityCondition_group".
@@ -45,9 +45,9 @@
 #' @export
 
 
-communityCondition <- function(X, group, species.table = NULL, LenWt.table, years) {
+communityCondition <- function(X_length, group, species.table = NULL, LenWt.table, years) {
   
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
   
   inx99 <- which(X$LENGTH == -99)                          # index of rows that do not contain length data               
   if(length(inx99 > 0)) X <- X[-which(X$LENGTH == -99), ]  # remove rows that do not contain length data

@@ -24,20 +24,21 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL.}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Other columns in TL.table are ignored. If TL.table = FALSE,
-Kempton's Q will not be calculated.}
+(trophic level). Entries in the "SPECIES" column should be the unique values
+of species codes in X (or a subset thereof). Other columns in TL.table are
+ignored. If TL.table = NULL Kempton's Q will not be calculated.}
 
 \item{percentiles}{The percentiles used to determine R1 and R2. Default is
 percentiles = c(0.25, 0.75).}
 
 \item{minTL}{Minimum trophic level for species included in the calculation.
-Default is minTL = 3.}
+Default is minTL = 0.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -50,8 +51,8 @@ Returns a dataframe with columns "ID", "YEAR", "SpeciesRichness",
  \eqn{i}, indicator value is assigned NA.
 }
 \description{
-This function calculates the biodiversity indicators for \eqn{j}
- areas and \eqn{i} years.
+This function calculates all (or a subset of) biodiversity
+ indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 **Say that calls each function separately Recommended data: Fishery

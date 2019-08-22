@@ -9,10 +9,11 @@
 #'  Recommended data: Fishery independent survey data or model output; fish.
 #'@inheritParams resourcePotential
 #'@param lmax.table A dataframe with columns "SPECIES" and "MAXLENGTH", the
-#'  maximum recorded length of the corresponding species. Other columns in
-#'  lmax.table are ignored.
+#'  maximum recorded length of the corresponding species. Entries in the
+#'  "SPECIES" column should be the unique values of species codes in X (or a
+#'  subset thereof). Other columns in lmax.table are ignored.
 #'@param lmax The threshold for large fish (cm). Default is 85 cm (i.e., large
-#'  species are those with MAXLENGTH >= 85 cm)
+#'  species are those with MAXLENGTH >= 85 cm).
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "LargeSpeciesIndicator".
 #'
@@ -30,10 +31,10 @@
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
-#'  Using indicators for evaluating, comparing and communicating the ecological
-#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
-#'  Journal of Marine Science, 67: 692-716
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+#'  indicators for evaluating, comparing and communicating the ecological status
+#'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+#'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

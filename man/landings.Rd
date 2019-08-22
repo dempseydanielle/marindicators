@@ -8,10 +8,10 @@ landings(land, group, species.table = NULL, years)
 }
 \arguments{
 \item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing
-was recorded, "ID" is an area code indicating where the landing was
-recorded, "SPECIES" is a numeric code indicating the species landed, and
-"CATCH" is the corresponding landed weight.}
+"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
+"ID" is an area code indicating where the landing was recorded, "SPECIES" is
+a numeric code indicating the species landed, and "CATCH" is the
+corresponding landed weight.}
 
 \item{group}{A character string indicating which species to include in the
 indicator calculation. If group = "ALL", all species will be included;
@@ -19,10 +19,10 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -33,9 +33,8 @@ returns a dataframe with three columns: "ID", "YEAR", and
  If there is no data for a given year, the indicator value is set to 0.
 }
 \description{
-This function calculates the the catch of predefined speceies
- groups from commercial fisheries that is landed ashore for \eqn{j} areas and
- \eqn{i} years.
+This function calculates the commercial landings of predefined
+ speceies groups for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Calculates the total landings of predefined species groups.
@@ -46,14 +45,10 @@ Calculates the total landings of predefined species groups.
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
  Aquat. Sci. 3232: xii + 212 p.
-
- Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
- fish: A comparative exploration of variations in the theme of stock collapse
- and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
- 81:188–206
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{fishingPressure}},
+Other fishing pressure indicators: \code{\link{allPressure}},
+  \code{\link{fishingPressure}},
   \code{\link{meanTLLandings}},
   \code{\link{speciesRichness}}
 }

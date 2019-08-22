@@ -17,10 +17,17 @@
 #'  Recommended data: Commercial fisheries landings; fish and invertebrates.
 #'@inheritParams meanTLLandings
 #'@param cutoff The minimum trophic level of species to include.
-#'@param TE Trophic efficiency. Default is TE = 0.1.
-#'@param base.start The beginning of the baseline period.
-#'@param base.end The end of the baseline period.
-#'@return returns a dataframe with three columns: "ID", "YEAR", and
+#'@param TE Trophic efficiency. Default is TE = 0.1, i.e., a trophic efficiency
+#'  of 10%.
+#'@param base.start Year indicating the beginning of the baseline period. The
+#'  average landings and average mean trophic level of the landings over the
+#'  baseline period are used as baseline values to calculate FiB (see
+#'  Details). land must include data for the baseline period.
+#'@param base.end Year indicating the end of the baseline period. The
+#'  average landings and average mean trophic level of the landings over the
+#'  baseline period are used as baseline values to calculate FiB (see
+#'  Details). land must include data for the baseline period.
+#'@return Returns a dataframe with three columns: "ID", "YEAR", and
 #'  "FishinginBalance".
 #'
 #'  If there are no observations in land for spatial scale \eqn{j} and year
@@ -43,7 +50,7 @@ fishingInBalance<- function (land, TL.table, cutoff = 0, TE = 0.1,
   
   mTL <- meanTLLandings(land = land, TL.table = TL.table,                  # calculate mean trophic level of landings
                         cutoff = 0, years = c(base.start:years[length(years)])) 
-  land.total <- stats::aggregate(CATCH ~ YEAR + ID, data = land, FUN=sum)  #  calculate total landings for each spatial scale and year
+  land.total <- stats::aggregate(CATCH ~ YEAR + ID, data = land, FUN = sum)  #  calculate total landings for each spatial scale and year
 	
   mTL.0 <- aggregate(MeanTL.Landings ~ ID,                                 # calculate BASELINE Mean trophic level
                      data = mTL[mTL$YEAR %in% base.start:base.end,], 

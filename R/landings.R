@@ -1,16 +1,15 @@
 #'@title Calculates the landings per fished group
-#'@description This function calculates the the catch of predefined speceies
-#'  groups from commercial fisheries that is landed ashore for \eqn{j} areas and
-#'  \eqn{i} years.
+#'@description This function calculates the commercial landings of predefined
+#'  speceies groups for \eqn{j} areas and \eqn{i} years.
 #'@details Calculates the total landings of predefined species groups.
 #'
 #'  Recommended data: commercial fisheries landings
 #'@inheritParams resourcePotential
 #'@param land A dataframe of commercial landings data with columns "YEAR", "ID",
-#'  "SPECIES" and "CATCH". "YEAR" indicates the year the landing
-#'  was recorded, "ID" is an area code indicating where the landing was
-#'  recorded, "SPECIES" is a numeric code indicating the species landed, and
-#'  "CATCH" is the corresponding landed weight.
+#'  "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
+#'  "ID" is an area code indicating where the landing was recorded, "SPECIES" is
+#'  a numeric code indicating the species landed, and "CATCH" is the
+#'  corresponding landed weight.
 #'@return returns a dataframe with three columns: "ID", "YEAR", and
 #'  "group_Landings".
 #'
@@ -19,11 +18,6 @@
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'
-#'  Bundy A, Heymans JJ, Morissette L, Savenkoff C (2009) Seals, cod and forage
-#'  fish: A comparative exploration of variations in the theme of stock collapse
-#'  and ecosystem change in four Northwest Atlantic ecosystems. Prog Oceanogr
-#'  81:188–206
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

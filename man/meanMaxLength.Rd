@@ -5,10 +5,11 @@
 \title{Calculates the mean maximum length of fish in the community (Shin et
  al., 2005)}
 \usage{
-meanMaxLength(X, group, species.table = NULL, lmax.table, metric, years)
+meanMaxLength(X_length, group, species.table = NULL, lmax.table, metric,
+  years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
 "ID", "SPECIES", "LENGTH", and "BIOMASS" and/or "ABUNDANCE". "YEAR"
 indicates the year the observation was recorded, "ID" is an area code
 indicating where the observation was recorded, and "SPECIES" is a numeric
@@ -24,14 +25,15 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species. Other columns in
-lmax.table are ignored.}
+maximum recorded length of the corresponding species. Entries in the
+"SPECIES" column should be the unique values of species codes in X (or a
+subset thereof). Other columns in lmax.table are ignored.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
@@ -46,12 +48,12 @@ Returns a dataframe with 3 columns. "ID", "YEAR", and
  value is assigned NA.
 }
 \description{
-This function calculates the mean maximum length (MML) of fish in
+This function calculates the mean maximum length of fish in
  the community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
  years.
 }
 \details{
-Mean Maximum Length (MML): \deqn{MML = \Sigma (L_{max,i}*M_i)/\Sigma
+\deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
  M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
  \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
  invertebrates).
@@ -69,8 +71,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 }
 \seealso{
 Other stability and resistance indicators: \code{\link{CVBiomass}},
-  \code{\link{IVILandings}}, \code{\link{biomassPerTL}},
-  \code{\link{meanMaxAge}}
+  \code{\link{IVILandings}}, \code{\link{allStability}},
+  \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

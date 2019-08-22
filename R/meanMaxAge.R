@@ -2,20 +2,21 @@
 #'  2010)
 #'@description This function calculates the mean maximum age (MMA) of fish in
 #'  the community for \eqn{j} areas and \eqn{i} years.
-#'@details Mean Maximum Age (MMA): \deqn{MMA = \Sigma (age_{max,i}*B_i)/\Sigma
+#'@details Mean Maximum Age: \deqn{Mean Maximum Age = \Sigma (age_{max,i}*B_i)/\Sigma
 #'  B_i} where the sum is over all species \eqn{i}, and \eqn{B_i} is biomass of
 #'  species \eqn{i}. The mean lifespan or longevity is considered to be a fixed
 #'  parameter per species. Lifespan may vary under fishing pressure, so Shin et
 #'  al. (2010) adopted the maximum longevity observed for each species
 #'  (\eqn{age_{max,i}}). The variation of this indicator captures changes in
-#'  species composition.
+#'  species composition, and therefore changes in average lifespan.
 #'
 #'  Recommended data: Fishery independent survey data or model output, finfish
 #'  and squid.
 #'@inheritParams biomassPerTL
 #'@param  age.table  A dataframe with columns "SPECIES" and "MAXAGE", the
-#'  maximum recorded age of the corresponding species. Other columns in
-#'  age.table are ignored.
+#'  maximum recorded age of the corresponding species. Entries in the "SPECIES"
+#'  column should be the unique values of species codes in X (or a subset
+#'  thereof). Other columns in age.table are ignored.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "MeanLifespan".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
@@ -28,7 +29,7 @@
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
 #'  Using indicators for evaluating, comparing and communicating the ecological
 #'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
 #'  Journal of Marine Science, 67: 692-716

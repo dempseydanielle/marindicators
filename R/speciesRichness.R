@@ -1,17 +1,22 @@
 #'@title Calculates species richness of the community or the diversity of target
-#'  species
+#'  species (Hurlbert, 1971)
 #'@description This function counts the number of species recorded in fishery
 #'  independent survey data or commercial landings data for \eqn{i} years and
 #'  \eqn{j} areas.
-#'@details Species richness (\eqn{S_y}) is the count of the number of species
-#'  recorded in all research vessel trawl surveys collected year \eqn{y}.
+#'@details Two useful species richness indicators are: "Species Richness" (S) of
+#'  the surveyed community in an area and "Diversity of the Target Species"
+#'  (TS) in the commercial fishery, which is a measure of the distribution of
+#'  fishing pressure.
+#'
+#'  Species richness (\eqn{S_y}) is the count of the number of species recorded
+#'  in all research vessel trawl surveys collected in year \eqn{y} for a given area.
 #'
 #'  Recommended data: Fishery independent surveys or model output; fish and
 #'  invertebrates
 #'
 #'  The diversity of the target species for year y (\eqn{TS_y}) is the count of
 #'  the number of target species recorded in all trawl catches collected in that
-#'  year.
+#'  year for a given area.
 #'
 #'  Recommended data: commercial fisheries landings; fish and invertebrates.
 #'@inheritParams shannon
@@ -36,6 +41,9 @@
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
+#'
+#'  Hurlbert SH. 1971. The non-concept of species diversity: a critique and
+#'  alternative parameters. Ecology, 52, 577-86.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@importFrom stats na.omit

@@ -2,12 +2,13 @@
 % Please edit documentation in R/communityCondition.R
 \name{communityCondition}
 \alias{communityCondition}
-\title{Calculates Fulton's Condition Index for the community (reference)}
+\title{Calculates Fulton's Condition Index for the community (Ricker, 1975)}
 \usage{
-communityCondition(X, group, species.table = NULL, LenWt.table, years)
+communityCondition(X_length, group, species.table = NULL, LenWt.table,
+  years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
 "ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
 observation was recorded, "ID" is an area code indicating where the
 observation was recorded, and "SPECIES" is a numeric code indicating the
@@ -23,13 +24,13 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
-"YEAR", "ID", "SPECIES" correspond with those columns in X. "LENGTH" is
+"YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
 fish length at the corresponding "WEIGHT" (fish weight).}
 
 \item{years}{A vector of years for which to calculate indicator.}
@@ -64,9 +65,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   Choi JS, Frank KT, Petrie BD, Leggett WC. 2005. Integrated Assessment of a
   Large Marine Ecosystem: a case study of the devolution of the Eastern
   Scotian Shelf, Canada. Oceanogr Mar Biol An Annu Rev 43:47–67
+
+  Ricker, W. E. 1975. Computation and interpretation of biological statistics
+  of fish populations. Bulletin of the Fisheries Research Board of Canada
+  191:1-382.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allPotential}},
+  \code{\link{allStructure}}, \code{\link{biomassRatio}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}

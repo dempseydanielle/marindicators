@@ -18,8 +18,8 @@
 #'@param percentiles The percentiles used to determine R1 and R2. Default is
 #'  percentiles = c(0.25, 0.75).
 #'@param minTL Minimum trophic level for species included in the calculation.
-#'  Default is minTL = 3.
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ".
+#'  Default is minTL = 0.
+#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ_minTL".
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  values is assigned NA.
@@ -38,7 +38,7 @@
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 3, 
+kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 0, 
                     group, species.table = NULL, metric = "ABUNDANCE", years) {
   
   X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
@@ -75,7 +75,8 @@ kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 3,
     }
   }
   
-  names(ind) = c("ID", "YEAR", "KemptonQ")    # name the ind dataframe
+  ind.name <- paste("KemptonQ_", minTL, sep ="")            # name indicator: KemptonQ_minTL
+  names(ind) = c("ID", "YEAR", ind.name)                    # name the ind dataframe
   ind <- ind[order(ind$ID), ]                 # order by ID to be consistent with other functions
   ind                                         # return vector of indicator values for years c(start.year:end.year) 
   

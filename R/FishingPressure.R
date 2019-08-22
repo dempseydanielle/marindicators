@@ -13,24 +13,22 @@
 #'  Recommended data: \eqn{B_{FG}}: fishery independent survey data,
 #'  \eqn{Y_{FG}}: commercial fisheries landings
 #'@inheritParams landings
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-#'  was recorded, "ID" is an area code indicating where the observation was
-#'  recorded, "SPECIES" is a numeric code indicating the species sampled, and
-#'  "BIOMASS" is the corresponding biomass (stratified and corrected for
-#'  catchability as required).
+#'@inheritParams resourcePotential
 #'@param group.X A character string indicating which species to include in the
-#'  denominator. Must match the name of a column in species.table.
+#'  denominator (fished group). Must match the name of a column in
+#'  species.table.
 #'@param group.land A character string indicating which species to include in
-#'  the numerator. Must match the name of a column in species.table.
+#'  the numerator (landings). Must match the name of a column in species.table.
 #'@param species.table A table with at least two columns, named after the
-#'  strings in group.X and group.land. The entries in column group.X are all the
-#'  species in the fished group. The entries in column group.land are the
-#'  species of interest landed from this group. species.table may also include
-#'  columns for other species groups; these will be ignored. If group.X and
-#'  group.land both equal "ALL", fishing pressure on the whole community is
-#'  calculated, and species.table can be NULL.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and "FP_group".
+#'  strings in group.X and group.land. The entries in column group.X are species
+#'  codes from X indicating the species to include in the denominator (fished
+#'  group). The entries in column group.land are species codes from land
+#'  indicating the species to include in the numerator (landings). species.table
+#'  may also include columns for other species groups; these will be ignored. If
+#'  group.X and group.land both equal "ALL", fishing pressure on the whole
+#'  community is calculated, and species.table can be NULL.
+#'@return Returns a dataframe with three columns: "ID", "YEAR", and
+#'  "FP_group.X".
 #'
 #'  If biomass of group is NA and landings of group are zero, fishing pressure
 #'  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
@@ -44,7 +42,7 @@
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
 #'  Using indicators for evaluating, comparing and communicating the ecological
 #'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
 #'  Journal of Marine Science, 67: 692-716

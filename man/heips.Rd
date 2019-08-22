@@ -20,10 +20,10 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "ABUNDANCE".}
@@ -62,10 +62,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   3059: vi+188p.
 }
 \seealso{
-Other biodiversity indicators: \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+Other biodiversity indicators: \code{\link{allBiodiversity}},
+  \code{\link{hillN1}}, \code{\link{hillN2}},
+  \code{\link{kemptonQ}}, \code{\link{margalef}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

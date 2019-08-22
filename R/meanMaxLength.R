@@ -1,16 +1,16 @@
 #'@title Calculates the mean maximum length of fish in the community (Shin et
 #'  al., 2005)
-#'@description This function calculates the mean maximum length (MML) of fish in
+#'@description This function calculates the mean maximum length of fish in
 #'  the community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
 #'  years.
-#'@details Mean Maximum Length (MML): \deqn{MML = \Sigma (L_{max,i}*M_i)/\Sigma
+#'@details Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
 #'  M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
 #'  \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
 #'  invertebrates).
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
 #'@inheritParams largeSpeciesIndicator
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
+#'@param X_length A dataframe of fishery independent survey data with columns "YEAR",
 #'  "ID", "SPECIES", "LENGTH", and "BIOMASS" and/or "ABUNDANCE". "YEAR"
 #'  indicates the year the observation was recorded, "ID" is an area code
 #'  indicating where the observation was recorded, and "SPECIES" is a numeric
@@ -36,10 +36,10 @@
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-meanMaxLength <- function(X, group, species.table = NULL, lmax.table, metric, years) {
+meanMaxLength <- function(X_length, group, species.table = NULL, lmax.table, metric, years) {
 
   lmax.table <- na.omit(lmax.table[, c("SPECIES", "MAXLENGTH")])
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
   
   X <- merge(X, lmax.table, by = "SPECIES")
   X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data

@@ -45,20 +45,21 @@ calculated.}
 
 \item{species.table}{A table where the column names match the entries in
 resource.groups, ratio.groups, and/or condition.groups. Column entries are
-the species codes indicating the species to be included in each group.
-species.table may also include columns for other species groups; these will
-be ignored.}
+the species codes indicating the species from X (or X_length) included in
+each group. species.table may also include columns for other species groups;
+these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"MAXLENGTH" and "TL" (maximum recorded length and trophic level). Other
-columns will be ignored.}
+"MAXLENGTH" and "TL" (maximum recorded length and trophic level). Entries in
+the "SPECIES" column should be the unique values of species codes in X/X_length (or a
+subset thereof). Other columns will be ignored.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
-"YEAR", "ID", "SPECIES" correspond with those columns in X. "LENGTH" is
+"YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
 fish length at the corresponding "WEIGHT" (fish weight).}
 
 \item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with MAXLENGTH >= 85 cm)}
+species are those with MAXLENGTH >= 85 cm).}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -67,11 +68,26 @@ Returns a dataframe with columns "ID", "YEAR", and indicators
  corresponding to the arguments supplied to the function.
 }
 \description{
-This function calculates all (or a subset of) structure and
- functioning indicators for \eqn{j} areas and \eqn{i} years.
+This function calculates all (or a subset) of the structure and
+ function indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Text here?
+This function calculates the structure and function indicators:
+ biomass, biomass ratio(s), large species indicator, trophic level of the
+ community, large fish indicator, mean length (weighted by biomass and
+ abundance), and community condition. If data are not available to calculate
+ one or more of these indicators, a subset will be returned. See the help
+ file for the individual functions for information on how each indicator is
+ calculated.
+
+ Notes on indicator calculations: In the individual functions, the user
+ generally has control over which metric is used to calculate indicator
+ (e.g., "BIOMASS" or "ABUNDANCE"). Here, BIOMASS is used to calculate
+ biomass, biomass ratio(s), large species indicator, large fish indicator,
+ trophic level of the community, and mean length weighted by biomass.
+ ABUNDANCE is used to calculate mean length weighted by abundance and
+ community condition. Similarly, group = "ALL" for large species indicator
+ and the large fish indicator. See individual functions for more flexibility.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -79,7 +95,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allPotential}},
+  \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},

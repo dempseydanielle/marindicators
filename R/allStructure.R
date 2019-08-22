@@ -1,18 +1,18 @@
 #'@title Calculates all structure and function indicators
-#'@description This function calculates all (or a subset of) structure and
+#'@description This function calculates all (or a subset) of the structure and
 #'  function indicators for \eqn{j} areas and \eqn{i} years.
 #'@details This function calculates the structure and function indicators:
-#'  resource potential, biomass ratio(s), large species indicator, trophic level
-#'  of the community, large fish indicator, mean length (weighted by biomass and
+#'  biomass, biomass ratio(s), large species indicator, trophic level of the
+#'  community, large fish indicator, mean length (weighted by biomass and
 #'  abundance), and community condition. If data are not available to calculate
-#'  one or more of these indicators, a subset will be calculated. See the help
+#'  one or more of these indicators, a subset will be returned. See the help
 #'  file for the individual functions for information on how each indicator is
 #'  calculated.
 #'
-#'  Notes on indicator calculations: In the individual functions, the user generally
-#'  has control over which metric is used to calculate indicator (e.g.,
-#'  "BIOMASS" or "ABUNDANCE"). Here, BIOMASS is used to calculate resource
-#'  potential, biomass ratio(s), large species indicator, large fish indicator,
+#'  Notes on indicator calculations: In the individual functions, the user
+#'  generally has control over which metric is used to calculate indicator
+#'  (e.g., "BIOMASS" or "ABUNDANCE"). Here, BIOMASS is used to calculate
+#'  biomass, biomass ratio(s), large species indicator, large fish indicator,
 #'  trophic level of the community, and mean length weighted by biomass.
 #'  ABUNDANCE is used to calculate mean length weighted by abundance and
 #'  community condition. Similarly, group = "ALL" for large species indicator
@@ -20,14 +20,6 @@
 #'@inheritParams resourcePotential
 #'@inheritParams communityCondition
 #'@inheritParams largeSpeciesIndicator
-#'@param X_length A dataframe of fishery independent survey data with columns
-#'  "YEAR", "ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the
-#'  year the observation was recorded, "ID" is an area code indicating where the
-#'  observation was recorded, and "SPECIES" is a numeric code indicating the
-#'  species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
-#'  corresponding abundance at length (stratified and corrected for catchability
-#'  as required). Species for which there are no length data should be assigned
-#'  LENGTH = -99. These observations are removed by the function.
 #'@param resource.groups A vector indicating the species groups for which to
 #'  calculate the resource potential. Each entry must be a character string
 #'  matching the name of a column in species.groups. If resource.groups = NULL,
@@ -45,12 +37,13 @@
 #'  calculated.
 #'@param species.table A table where the column names match the entries in
 #'  resource.groups, ratio.groups, and/or condition.groups. Column entries are
-#'  the species codes indicating the species to be included in each group.
-#'  species.table may also include columns for other species groups; these will
-#'  be ignored.
+#'  the species codes indicating the species from X (or X_length) included in
+#'  each group. species.table may also include columns for other species groups;
+#'  these will be ignored.
 #'@param speciesinfo.table A table with columns "SPECIES" and the corresponding
-#'  "MAXLENGTH" and "TL" (maximum recorded length and trophic level). Other
-#'  columns will be ignored.
+#'  "MAXLENGTH" and "TL" (maximum recorded length and trophic level). Entries in
+#'  the "SPECIES" column should be the unique values of species codes in X/X_length (or a
+#'  subset thereof). Other columns will be ignored.
 #'@return Returns a dataframe with columns "ID", "YEAR", and indicators
 #'  corresponding to the arguments supplied to the function.
 #'@family ecosystem structure and function indicators
@@ -60,14 +53,17 @@
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export
+
 allStructure <- function(X, X_length,
                          resource.groups, condition.groups, ratio.groups,
                          species.table, speciesinfo.table, LenWt.table,
                          lmax, years){
 
+  if("BIOMASS" %in% colnames(X)) {
+    inds <- createDataframe(unique(X$ID), years)
+  } else inds <- createDataframe(unique(X_length$ID), years)
+
   if("BIOMASS" %in% colnames(X)){
-   
-     inds <- createDataframe(unique(X$ID), years)
     
     # Resource potential
     if(length(resource.groups) > 0){
@@ -107,7 +103,7 @@ allStructure <- function(X, X_length,
       TL = meanTLCommunity(X, TL.table = speciesinfo.table, metric = "BIOMASS", years = years)
       inds <- merge(inds, TL)
       }
-  }   else inds <- createDataframe(unique(X_length$ID), years)
+  } 
   
   # Length-based indicators
   if("LENGTH" %in% colnames(X_length)){
@@ -126,7 +122,7 @@ allStructure <- function(X, X_length,
     inds <- merge(inds, ML_abund)
     
     # Commuity condition
-    if("LENGTH" %in% colnames(LenWt.table) & length(condition.groups > 0)){
+    if("LENGTH" %in% colnames(LenWt.table) & length(condition.groups) > 0){
       for(k in 1:length(condition.groups)){
         condition.k = communityCondition(X_length, LenWt.table = LenWt.table, 
                                          group = condition.groups[k],

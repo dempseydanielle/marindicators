@@ -21,17 +21,18 @@ otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species to be included
-in the calculation. species.table may also include columns for other species
-groups; these will be ignored. If group = "ALL", this table is not required.
-Default is species.table = NULL}
+column entries are the species codes indicating the species from X to
+include in the calculation. species.table may also include columns for other
+species groups; these will be ignored. If group = "ALL", this table is not
+required. Default is species.table = NULL.}
 
 \item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species. Other columns in
-lmax.table are ignored.}
+maximum recorded length of the corresponding species. Entries in the
+"SPECIES" column should be the unique values of species codes in X (or a
+subset thereof). Other columns in lmax.table are ignored.}
 
 \item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with MAXLENGTH >= 85 cm)}
+species are those with MAXLENGTH >= 85 cm).}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
@@ -69,13 +70,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
- Ould Mohammed Abdallahi ., Perry I, Thiao D, Yemane D, and Cury PM. 2010.
- Using indicators for evaluating, comparing and communicating the ecological
- status of exploited marine ecosystems. Part 2: Setting the scene. ICES
- Journal of Marine Science, 67: 692-716
+ Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+ indicators for evaluating, comparing and communicating the ecological status
+ of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+ Marine Science, 67: 692-716
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allPotential}},
+  \code{\link{allStructure}}, \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{meanTLCommunity}}
