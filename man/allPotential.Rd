@@ -41,7 +41,7 @@ no resource potential indicators will be calculated.}
 \item{cutoff}{The minimum trophic level of species to include.}
 
 \item{TE}{Trophic efficiency. Default is TE = 0.1, i.e., a trophic efficiency
-of 10%.}
+of 10\%.}
 
 \item{base.start}{Year indicating the beginning of the baseline period. The
 average landings and average mean trophic level of the landings over the

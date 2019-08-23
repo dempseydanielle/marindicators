@@ -60,34 +60,20 @@ allPressure <- function(X, land,
   }
   
   # landings by group
-  if("CATCH" %in% colnames(land)){
-    if(length(landings.groups) > 0){
-      
-      for(j in 1:length(landings.groups)){
-        land.i <- landings(land = land, group = landings.groups[j],
+  if("CATCH" %in% colnames(land) & length(landings.groups) > 0){
+      land.ind <- landings(land = land, groups = landings.groups,
                                 species.table = species.table, years = years)
-        
-        if(j == 1){land.ind = land.i}
-        land.ind <- merge(land.ind, land.i)
-      }
       inds <- merge(inds, land.ind)
-    }
   }
   
   # fishing pressure by group
-  if("BIOMASS" %in% colnames(X)){
-    for(k in 1:nrow(FP.groups)){
-      
-      FP.k = fishingPressure(X = X, land = land, group.X = FP.groups[k, "group.X"], 
-                             group.land = FP.groups[k, "group.land"],
-                             species.table = species.table,  years = years)
-      
-      if(k == 1){FP = FP.k}
-      FP <- merge(FP, FP.k)
-    }
+  if("BIOMASS" %in% colnames(X) & "CATCH" %in% colnames(land) & nrow(FP.groups) > 0){
+    
+    FP = fishingPressure(X = X, land = land, FP.groups = FP.groups,
+                         species.table = species.table,  years = years)
+    
     inds <- merge(inds, FP)
   }
 
   inds
-
 }

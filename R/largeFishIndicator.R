@@ -9,7 +9,8 @@
 #'  biomass occupying the top predator trophic level).
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
-#'@inheritParams resourcePotential
+#'@inheritParams biomassPerTL
+#'@inheritParams shannon
 #'@param X_length A dataframe of fishery independent survey data with columns "YEAR",
 #'  "ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
 #'  observation was recorded, "ID" is an area code indicating where the

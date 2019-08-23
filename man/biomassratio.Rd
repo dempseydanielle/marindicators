@@ -4,7 +4,7 @@
 \alias{biomassRatio}
 \title{Calculates the biomass ratio between two species groups}
 \usage{
-biomassRatio(X, group1, group2, species.table, metric = "BIOMASS", years)
+biomassRatio(X, ratio.groups, species.table, metric = "BIOMASS", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data with columns "YEAR",
@@ -14,20 +14,19 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 "BIOMASS" is the corresponding biomass (stratified and corrected for
 catchability as required).}
 
-\item{group1}{A character string indicating which species to include in the
-numerator. Must match the name of a column in species.table.}
+\item{ratio.groups}{A dataframe with two columns, which must be named "group1"
+and "group2". Each row holds the group names for one biomass ratio, with the
+numerator in column "group1" and the denominator in column "group2".  Each
+entry must be a character string matching the name of a column in
+species.groups.}
 
-\item{group2}{A character string indicating which species to include in the
-denominator. Must be "ALL" or match the name of a column in species.table.}
-
-\item{species.table}{A table with at least one column, named after the string
-group1. The entries in column group1 are the species codes for the species
-included in this group. If group2 is not "ALL", an additional column in
-species.table is required. This column is named after the string group2, and
-entries are the species codes for the species included in this group.
-Species codes should be a subset of those in the "SPECIES" column of X.
-species.table may also include columns for other species groups; these will
-be ignored.}
+\item{species.table}{A table with column names that match the entries of
+ratio.groups. The entries in each column are the species codes for the
+species included in that group. Species codes should be a subset of those in
+the "SPECIES" column of X. species.table may also include columns for other
+species groups; these will be ignored. Note that an entry in ratio.groups
+could be "ALL". In this case, a column in species.table named "ALL" is not
+required; the function will automatically include all species in X.}
 
 \item{metric}{A character string indicating which column in X to use to
 calculate indicator. Default is "BIOMASS".}
@@ -35,7 +34,9 @@ calculate indicator. Default is "BIOMASS".}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and "group1_group2".
+Returns a dataframe with columns "ID" and "YEAR", and a column for
+ each biomass ratio, named after the entries in ratio.groups, e.g.
+ "group1_group2".
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned NA.
@@ -73,10 +74,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Shin YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
- Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
- Using indicators for evaluating, comparing and communicating the ecological
- status of exploited marine ecosystems. Part 2: Setting the scene. ICES
- Journal of Marine Science, 67: 692-716
+ Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+ indicators for evaluating, comparing and communicating the ecological status
+ of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+ Marine Science, 67: 692-716
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{allPotential}},

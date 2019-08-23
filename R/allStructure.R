@@ -67,29 +67,22 @@ allStructure <- function(X, X_length,
     
     # Resource potential
     if(length(resource.groups) > 0){
-      for(i in 1:length(resource.groups)){
-        potential.i <- resourcePotential(X, metric = "BIOMASS", group = resource.groups[i],
+
+        potential <- resourcePotential(X, metric = "BIOMASS", groups = resource.groups,
                                          species.table = species.table, years = years)
-        
-        if(i == 1){potential = potential.i}
-        potential <- merge(potential, potential.i)
-        }
-      inds <- merge(inds, potential)
+        inds <- merge(inds, potential)
       }
     
     # Biomass ratio
     if("group1" %in% colnames(ratio.groups)){
-      for(j in 1:nrow(ratio.groups)){
-        ratio.j <- biomassRatio(X, metric = "BIOMASS", group1 = ratio.groups[j, "group1"], 
-                                group2 = ratio.groups[j, "group2"],
+      
+      ratio <- biomassRatio(X, metric = "BIOMASS", ratio.groups = ratio.groups,
                                 species.table = species.table, years = years)
         
-        if(j == 1){ratio = ratio.j}
-        ratio <- merge(ratio, ratio.j)
-        }
       inds <- merge(inds, ratio)
-      }
+    }
     
+  
     # Large species indicator
     if("MAXLENGTH" %in% colnames(speciesinfo.table)){
       LSI = largeSpeciesIndicator(X, group = "ALL", species.table = species.table,
@@ -123,14 +116,11 @@ allStructure <- function(X, X_length,
     
     # Commuity condition
     if("LENGTH" %in% colnames(LenWt.table) & length(condition.groups) > 0){
-      for(k in 1:length(condition.groups)){
-        condition.k = communityCondition(X_length, LenWt.table = LenWt.table, 
-                                         group = condition.groups[k],
+      
+      condition = communityCondition(X_length, LenWt.table = LenWt.table, 
+                                         groups = condition.groups,
                                          species.table = species.table, years = years)
       
-      if(k == 1){condition = condition.k}
-      condition <- merge(condition, condition.k)
-      }
       inds <- merge(inds, condition)
     }
     

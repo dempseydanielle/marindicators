@@ -16,13 +16,13 @@ corresponding landed weight.}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding
 "TL_LAND" (trophic level). Entries in the "SPECIES" column should be the
-unique values of species codes in land (or a subset thereof).  Other columns in
-TL.table are ignored.}
+unique values of species codes in land (or a subset thereof).  Other columns
+in TL.table are ignored.}
 
 \item{cutoff}{The minimum trophic level of species to include.}
 
 \item{TE}{Trophic efficiency. Default is TE = 0.1, i.e., a trophic efficiency
-of 10%.}
+of 10\%.}
 
 \item{base.start}{Year indicating the beginning of the baseline period. The
 average landings and average mean trophic level of the landings over the

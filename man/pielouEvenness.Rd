@@ -61,8 +61,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  fish community: identifying reference levels for an ecosystem approach to
  management. ICES J Mar Sci J du Cons 63:573 593
 
- Pielou EC. 1966. The Measurement of Diversity in Different Types of
- Biological Collections. J. Theoret. Bio. (13) 131-144
+ Pielou EC. 1975. Ecological Diversity. Wiley, New York. ISBN 0-471-68925-4
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},

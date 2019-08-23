@@ -14,21 +14,21 @@
 #'  \eqn{Y_{FG}}: commercial fisheries landings
 #'@inheritParams landings
 #'@inheritParams resourcePotential
-#'@param group.X A character string indicating which species to include in the
-#'  denominator (fished group). Must match the name of a column in
-#'  species.table.
-#'@param group.land A character string indicating which species to include in
-#'  the numerator (landings). Must match the name of a column in species.table.
-#'@param species.table A table with at least two columns, named after the
-#'  strings in group.X and group.land. The entries in column group.X are species
-#'  codes from X indicating the species to include in the denominator (fished
-#'  group). The entries in column group.land are species codes from land
-#'  indicating the species to include in the numerator (landings). species.table
-#'  may also include columns for other species groups; these will be ignored. If
-#'  group.X and group.land both equal "ALL", fishing pressure on the whole
-#'  community is calculated, and species.table can be NULL.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and
-#'  "FP_group.X".
+#'@param FP.groups A dataframe with two columns, which must be named
+#'  "group.land" and "group.X". Each row holds the group names to calculate the
+#'  fishing pressure on a target group, with the numerator in column
+#'  "group.land" and the denominator in column "group.X".  Each entry must be a
+#'  character string matching the name of a column in species.groups.
+#'@param species.table A table with column names that match the entries of
+#'  FP.groups. The entries in each column are the species codes for the species
+#'  included in that group. Species codes should be a subset of those in the
+#'  "SPECIES" column of land (for group.land) or X (for group.X). species.table
+#'  may also include columns for other species groups; these will be ignored.
+#'  Note that an entry in FP.groups could be "ALL". In this case, a column in
+#'  species.table named "ALL" is not required; the function will automatically
+#'  include all species in land and/or X.
+#'@return Returns a dataframe with three columns: "ID", "YEAR", and a column for
+#'  each target group, named "FP_group.X".
 #'
 #'  If biomass of group is NA and landings of group are zero, fishing pressure
 #'  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
@@ -42,31 +42,37 @@
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
 #'  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
-#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
-#'  Using indicators for evaluating, comparing and communicating the ecological
-#'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
-#'  Journal of Marine Science, 67: 692-716
+#'  Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+#'  indicators for evaluating, comparing and communicating the ecological status
+#'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+#'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-fishingPressure <- function(X, land, group.X, group.land, species.table = NULL, years){
-                            
-  B <- resourcePotential(X, metric = "BIOMASS", group = group.X, 
-                         species.table = species.table, years = years)  # calculate the biomass of "group" in the community
-  Y <- landings(land, group = group.land, species.table = species.table, years = years)                         # calculate the landings of "group"
+fishingPressure <- function(X, land, FP.groups, species.table = NULL, years){
   
-  ind <- merge(Y, B, by = c("ID", "YEAR"), all.x = T)
-
-  ind$FP <- ind[,3]/ind[,4]                            # calculate fishing pressure
-  index_zero <- which(ind[,3] == 0)                    # index of where landings is zero
-  ind$FP[index_zero] <- 0                              # set fishing pressure to zero wherever there are no landings (even if biomass = NA)
-  ind[,3] <- NULL                                      # remove landings column
-  ind[,3] <- NULL                                      # remove biomass column
-  
-  ind.name <- paste("FP", "_", group.X, sep ="")         # name indicator: FP_group
-  names(ind) <- c("ID", "YEAR", ind.name)
-  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
+  for (k in 1:nrow(FP.groups)){
+    
+    B.k <- resourcePotential(X = X, metric = "BIOMASS", groups = FP.groups[k, "group.X"], 
+                         species.table = species.table, years = years)                                              # calculate the biomass of "group.X" in the community
+    Y.k <- landings(land = land, groups = FP.groups[k, "group.land"], species.table = species.table, years = years) # calculate the landings of "group.land"
+    
+    ind.k <- merge(Y.k, B.k, by = c("ID", "YEAR"), all.x = T)
+    
+    ind.k$FP <- ind.k[,3]/ind.k[,4]                            # calculate fishing pressure
+    index_zero <- which(ind.k[,3] == 0)                    # index of where landings is zero
+    ind.k$FP[index_zero] <- 0                              # set fishing pressure to zero wherever there are no landings (even if biomass = NA)
+    ind.k[,3] <- NULL                                      # remove landings column
+    ind.k[,3] <- NULL                                      # remove biomass column
+    
+    ind.name <- paste("FP", "_", FP.groups[k, "group.X"], sep ="")         # name indicator: FP_group
+    names(ind.k) <- c("ID", "YEAR", ind.name)
+    ind.k <- ind.k[order(ind.k$ID), ]                          # order by ID to be consistent with other functions
+    
+    if(k == 1) ind = ind.k
+    ind <- merge(ind, ind.k)
+  }
   ind                                                  # return indicator dataframe
   
 }

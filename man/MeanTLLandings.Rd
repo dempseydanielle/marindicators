@@ -16,8 +16,8 @@ corresponding landed weight.}
 
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding
 "TL_LAND" (trophic level). Entries in the "SPECIES" column should be the
-unique values of species codes in land (or a subset thereof).  Other columns in
-TL.table are ignored.}
+unique values of species codes in land (or a subset thereof).  Other columns
+in TL.table are ignored.}
 
 \item{cutoff}{The minimum trophic level of species to include. Set cutoff = 0
 to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
@@ -26,8 +26,9 @@ calculate the marine trophic index. Default is cutoff = 0.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
- 0: "MeanTL.Landings" or if cutoff > 0: "MarineTophicIndex.Landings".
+Returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
+ 0: "MeanTL.Landings", if cutoff = 3.25: "MarineTophicIndex.Landings", or if
+ cutoff is a different value: "MeanTL.Landings_cutoff".
 
  If there are no observations in land for spatial scale \eqn{j} in year
  \eqn{i}, indicator value is set to NA.
@@ -53,9 +54,10 @@ Mean trophic level of fisheries landings \eqn{TL_{Land}}:
  only includes species with trophic level greater than or equal to an
  explicitly stated trophic level cutoff. For instance, Pauly and Watson 2005
  adopted a trophic level cutoff of 3.25 to emphasize changes in the relative
- abundance of higher trophic level fishes. If used is this way, this
- indicator highlights changes in the relative abundance of the more
- threatened high-trophic level fishes.
+ abundance of higher trophic level fishes, and Shannon et al. 2014 used a
+ cutoff of 4.0 to examine changes within the apex predator community. If used
+ in this way, this indicator highlights changes in the relative abundance of
+ the more threatened high-trophic level fishes.
 
  Recommended data: Commercial fisheries landings; fish and invertebrates.
 }
@@ -70,6 +72,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Pauly D, Watson R. 2005. Background and interpretation of the Marine Trophic
  Index as a measure of biodiversity. Philos Trans R Soc B Biol Sci 360:415
  423
+
+ Shannon L, Coll M, Bundy A, Gascuel D, Heymans, JJ, Kleisner K, Lynam CP,
+ Piroddi C, Tam J, Travers-Trolet M and Shin Y. 2014. Trophic level-based
+ indicators to track fishing impacts across marine ecosystems. Marine Ecology
+ Progress Series, 512, pp.115-140.
 }
 \seealso{
 Other fishing pressure indicators: \code{\link{allPressure}},

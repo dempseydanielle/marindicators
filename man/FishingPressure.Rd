@@ -4,8 +4,7 @@
 \alias{fishingPressure}
 \title{Calculates fishing pressure}
 \usage{
-fishingPressure(X, land, group.X, group.land, species.table = NULL,
-  years)
+fishingPressure(X, land, FP.groups, species.table = NULL, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data with columns "YEAR",
@@ -21,27 +20,26 @@ catchability as required).}
 a numeric code indicating the species landed, and "CATCH" is the
 corresponding landed weight.}
 
-\item{group.X}{A character string indicating which species to include in the
-denominator (fished group). Must match the name of a column in
-species.table.}
+\item{FP.groups}{A dataframe with two columns, which must be named
+"group.land" and "group.X". Each row holds the group names to calculate the
+fishing pressure on a target group, with the numerator in column
+"group.land" and the denominator in column "group.X".  Each entry must be a
+character string matching the name of a column in species.groups.}
 
-\item{group.land}{A character string indicating which species to include in
-the numerator (landings). Must match the name of a column in species.table.}
-
-\item{species.table}{A table with at least two columns, named after the
-strings in group.X and group.land. The entries in column group.X are species
-codes from X indicating the species to include in the denominator (fished
-group). The entries in column group.land are species codes from land
-indicating the species to include in the numerator (landings). species.table
-may also include columns for other species groups; these will be ignored. If
-group.X and group.land both equal "ALL", fishing pressure on the whole
-community is calculated, and species.table can be NULL.}
+\item{species.table}{A table with column names that match the entries of
+FP.groups. The entries in each column are the species codes for the species
+included in that group. Species codes should be a subset of those in the
+"SPECIES" column of land (for group.land) or X (for group.X). species.table
+may also include columns for other species groups; these will be ignored.
+Note that an entry in FP.groups could be "ALL". In this case, a column in
+species.table named "ALL" is not required; the function will automatically
+include all species in land and/or X.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and
- "FP_group.X".
+Returns a dataframe with three columns: "ID", "YEAR", and a column for
+ each target group, named "FP_group.X".
 
  If biomass of group is NA and landings of group are zero, fishing pressure
  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
@@ -72,10 +70,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,
  Labrosse P, Link JS, Mackinson S, Masski H, Möllmann C, Neira S, Ojaveer H,
- Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010.
- Using indicators for evaluating, comparing and communicating the ecological
- status of exploited marine ecosystems. Part 2: Setting the scene. ICES
- Journal of Marine Science, 67: 692-716
+ Abdallahi KM, Perry I, Thiao D, Yemane D, and Cury PM. 2010. Using
+ indicators for evaluating, comparing and communicating the ecological status
+ of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
+ Marine Science, 67: 692-716
 }
 \seealso{
 Other fishing pressure indicators: \code{\link{allPressure}},

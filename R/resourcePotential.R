@@ -7,7 +7,11 @@
 #'  invertebrates.
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
+#'@param groups A vector indicating the species group(s) for which to calculate
+#'  the indicator. Each entry must be a character string matching the name of a
+#'  column in species.groups.
+#'@return Returns a dataframe with columns "ID" and "YEAR", and a column
+#'  "metric_group" (e.g. BIOMASS_FINFISH) for each entry in groups.
 #'
 #'  If there is no data for a given year, the indicator value will be "NA" for
 #'  that year. If biomass of species X was not captured in the survey, species X
@@ -24,19 +28,26 @@
 #'@export
 
 
-resourcePotential <- function(X, group, species.table = NULL, metric = "BIOMASS", years){
+resourcePotential <- function(X, groups, species.table = NULL, metric = "BIOMASS", years){
   
   uI <- unique(X$ID)
   DF <- createDataframe(uI = uI, years = years)  # create a dataframe that matches each area ID to each year
   
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  for(k in 1:length(groups)){                    # loop over species groups
+    X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
+    
+    ind.k <- aggregate(X.k[metric], by = c(X.k["ID"], X.k["YEAR"]), FUN = sum)    # add up metric for the species group for each year + spatial scale
+    ind.k <- merge(DF, ind.k, by = c("ID", "YEAR"), all.x = T)
+    
+    ind.name <- paste(metric, "_", groups[k], sep ="")                       # name indicator: metric_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                             
+    ind.k = ind.k[order(ind.k$ID), ]                # order by ID (to match output of other functions)
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
+  }
   
-  ind <- aggregate(X[metric], by = c(X["ID"], X["YEAR"]), FUN = sum)    # add up metric for the species group for each year + spatial scale
-  ind <- merge(DF, ind, by = c("ID", "YEAR"), all.x = T)
-
-  ind.name <- paste(metric, "_", group, sep ="")                       # name indicator: metric_group
-  names(ind) = c("ID", "YEAR", ind.name)                             
-  ind = ind[order(ind$ID), ]                # order by ID (to match output of other functions)
   ind                                       # return indicator values for unique(X$YEAR) 
   
   }	

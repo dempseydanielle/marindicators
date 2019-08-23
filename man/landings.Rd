@@ -4,7 +4,7 @@
 \alias{landings}
 \title{Calculates the landings per fished group}
 \usage{
-landings(land, group, species.table = NULL, years)
+landings(land, groups, species.table = NULL, years)
 }
 \arguments{
 \item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
@@ -13,9 +13,9 @@ landings(land, group, species.table = NULL, years)
 a numeric code indicating the species landed, and "CATCH" is the
 corresponding landed weight.}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. Each entry must be a character string matching the name of a
+column in species.groups.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the

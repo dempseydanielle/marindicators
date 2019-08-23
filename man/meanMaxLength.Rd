@@ -53,7 +53,7 @@ This function calculates the mean maximum length of fish in
  years.
 }
 \details{
-\deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
+Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
  M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
  \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
  invertebrates).

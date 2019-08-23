@@ -22,22 +22,28 @@
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-landings <- function(land, group, species.table = NULL, years) {
+landings <- function(land, groups, species.table = NULL, years) {
   
   uI <- unique(land$ID)
   DF <- createDataframe(uI = uI, years = years)  # create a dataframe that matches each area ID to each year
 
-  land <- speciesGroups(X = land, group = group, species.table = species.table) # subset land to the species group of interest
+  for(k in 1:length(groups)){                    # loop over species groups
+    
+    land.k <- speciesGroups(X = land, group = groups[k], species.table = species.table) # subset land to the species group of interest
+    
+    ind.k <- aggregate(CATCH ~ ID + YEAR, data = land.k, FUN = sum)   # sum over years and spatial scales 
+    ind.k <- merge(DF, ind.k, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
+    
+    index <- which(is.na(ind.k[,3]))                                # index NAs
+    ind.k[index, 3] <- 0                                          # replace NA with 0
+    
+    ind.name <- paste("landings_", groups[k], sep ="")        # name indicator: group_landings
+    names(ind.k) <- c("ID", "YEAR", ind.name)
+    ind.k <- ind.k[order(ind.k$ID), ]                             # order by "ID" to be consistent with other functions
+    
+    if(k == 1) ind = ind.k
+    ind <- merge(ind, ind.k)
+  }
   
-  ind <- aggregate(CATCH ~ ID + YEAR, data = land, FUN = sum)   # sum over years and spatial scales 
-  ind <- merge(DF, ind, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
-
-  index <- which(is.na(ind[,3]))                                # index NAs
-  ind[index, 3] <- 0                                            # replace NA with 0
-  
-  ind.name <- paste(group, "_", "landings", sep ="")            # name indicator: metric_group
-  names(ind) <- c("ID", "YEAR", ind.name)
-  ind <- ind[order(ind$ID), ]                                   # order by "ID" to be consistent with other functions
   ind
-  
 }

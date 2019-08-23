@@ -4,7 +4,7 @@
 \alias{resourcePotential}
 \title{Calculates the resource potential of species groups}
 \usage{
-resourcePotential(X, group, species.table = NULL, metric = "BIOMASS",
+resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
   years)
 }
 \arguments{
@@ -15,9 +15,9 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 "BIOMASS" is the corresponding biomass (stratified and corrected for
 catchability as required).}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. Each entry must be a character string matching the name of a
+column in species.groups.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
 with at least one column, where the column name is the string group, and the
@@ -32,7 +32,8 @@ calculate indicator. Default is "BIOMASS".}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and "metric_group".
+Returns a dataframe with columns "ID" and "YEAR", and a column
+ "metric_group" (e.g. BIOMASS_FINFISH) for each entry in groups.
 
  If there is no data for a given year, the indicator value will be "NA" for
  that year. If biomass of species X was not captured in the survey, species X

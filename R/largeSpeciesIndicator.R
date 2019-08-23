@@ -7,7 +7,8 @@
 #'  85 cm).
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
-#'@inheritParams resourcePotential
+#'@inheritParams biomassPerTL
+#'@inheritParams shannon
 #'@param lmax.table A dataframe with columns "SPECIES" and "MAXLENGTH", the
 #'  maximum recorded length of the corresponding species. Entries in the
 #'  "SPECIES" column should be the unique values of species codes in X (or a

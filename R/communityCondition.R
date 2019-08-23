@@ -20,9 +20,9 @@
 #' @param LenWt.table A table of annual length at weight data with 5 columns.
 #'   "YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
 #'   fish length at the corresponding "WEIGHT" (fish weight).
-#' @return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'   "CommunityCondition_group".
-#'
+#' @return Returns a dataframe with columns "ID" and "YEAR", and a column
+#'  "CommunityCondition_group" for each entry in groups.
+#'  
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'   value is assigned NA.
 #' @family ecosystem structure and function indicators
@@ -45,54 +45,63 @@
 #' @export
 
 
-communityCondition <- function(X_length, group, species.table = NULL, LenWt.table, years) {
+communityCondition <- function(X_length, groups, species.table = NULL, LenWt.table, years) {
   
-  X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
+  X <- X_length
   
   inx99 <- which(X$LENGTH == -99)                          # index of rows that do not contain length data               
   if(length(inx99 > 0)) X <- X[-which(X$LENGTH == -99), ]  # remove rows that do not contain length data
   
-  uI = unique(X$ID)                                      # extract the spatial scale ID's
-  ind <- NULL                                            # initialize dataframe for storing indicator values
-  
-  for (j in 1:length(uI)){                               # loop over all spatal scales
+  uI = unique(X$ID)                                        # extract the spatial scale ID's
+ 
+  for(k in 1:length(groups)){                              # loop over species groups
     
-    X.j = X[X$ID == uI[j], ]                             # subset biomass and abundance data to spatial scale j
-    len_wgt.j = LenWt.table[LenWt.table$ID == uI[j], ]   # subset length-weight data to spatial scale j
+    ind.k <- NULL                                          # initialize dataframe for storing indicator values
+    X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
     
-    for (i in 1:length(years)){                          # loop over each year
+    for (j in 1:length(uI)){                              # loop over all spatial scales
+    
+      X.j = X.k[X.k$ID == uI[j], ]                        # subset biomass and abundance data to spatial scale j
+      len_wgt.j = LenWt.table[LenWt.table$ID == uI[j], ]  # subset length-weight data to spatial scale j
       
-      year.i = years[i]                                  # set years.i to current year  
-      X.ij = X.j[X.j$YEAR == year.i, ]                   # subset biomass and abundance data to include only current year
-      len_wgt.ij = len_wgt.j[len_wgt.j$YEAR == year.i, ] # subset length-weight data to include only current year
-      
-      if(nrow(X.ij) > 0 & nrow(len_wgt.ij) > 0){         # if there are no observations in X.ij or len_wgt.ij, ind.i is set is to NA
+      for (i in 1:length(years)){                          # loop over each year
         
-        W <- aggregate(WEIGHT ~ LENGTH + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
+        year.i = years[i]                                  # set years.i to current year  
+        X.ij = X.j[X.j$YEAR == year.i, ]                   # subset biomass and abundance data to include only current year
+        len_wgt.ij = len_wgt.j[len_wgt.j$YEAR == year.i, ] # subset length-weight data to include only current year
         
-        if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . . 
-          Z <- merge(X.ij, W, by = c('ID', 'SPECIES','LENGTH'), all.y = T)         # merge them
+        if(nrow(X.ij) > 0 & nrow(len_wgt.ij) > 0){         # if there are no observations in X.ij or len_wgt.ij, ind.i is set is to NA
           
-          inx.na <- which(is.na(Z$ABUNDANCE))  # index of where Z$metric is zero
+          W <- aggregate(WEIGHT ~ LENGTH + SPECIES + ID, data = len_wgt.ij, FUN = mean) # fish weights by length and species
           
-         if(nrow(Z) > length(inx.na)){        # if all of the rows of Z$metric are NA, then set ind.i to NA
+          if(any(unique(X.ij$SPECIES) %in% unique(W$SPECIES)))  {                  # if there are the same species in Y (biomass) and W (weight). . .
            
-             Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
-            Z$K <- Z$WEIGHT / Z$LENGTH^3*100                                               # calculate K for each species
-            ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
-            ind.i  <- ind.i[,2]
-            
-            }   else ind.i <- NA
-          }   else ind.i <- NA
-        } else ind.i <- NA
-          
-          ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
-          ind = rbind(ind, ind.i)                           # bind ind.i to ind dataframe
-      }
-    }
+             Z <- merge(X.ij, W, by = c('ID', 'SPECIES','LENGTH'), all.y = T)      # . . . merge them
+             inx.na <- which(is.na(Z$ABUNDANCE))                                   # index of where Z$metric is NA
+             
+             if(nrow(Z) > length(inx.na)){                                            # if all of the rows of Z$metric are NA, then set ind.i to NA
+               
+               Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
+               Z$K <- Z$WEIGHT / Z$LENGTH^3*100                                               # calculate K for each species
+               
+               ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
+               ind.i  <- ind.i[,2]
+               } else ind.i <- NA
+             } else ind.i <- NA
+          } else ind.i <- NA
+        
+        ind.i = data.frame(uI[j], year.i, ind.i)          # create a dataframe with spatial scale ID, year, and indicator value
+        ind.k = rbind(ind.k, ind.i)                       # bind ind.i to ind dataframe
+      } # end of year loop
+    } # end of area ID loop
     
-  name.ind <- paste("CommunityCondition_", group, sep = "")  # name indicator metric_TL.i
-  names(ind) = c("ID", "YEAR", name.ind)    # name the ind dataframe
-  ind <- ind[order(ind$ID), ]                          # order by ID to be consistent with other functions
-  ind                                                   # return ind 
+    name.ind <- paste("CommunityCondition_", groups[k], sep = "")  # name indicator metric_TL.i
+    names(ind.k) = c("ID", "YEAR", name.ind)                       # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ]                              # order by ID to be consistent with other functions
+    
+    if(k == 1) ind = ind.k                                        # if k = 1, set ind  = ind.k
+    ind <- merge(ind, ind.k)                                      # if k > 1, merge ind.k with existing ind dataframe
+  } # end of species loop
+  
+  ind                                                             # return ind 
 }
