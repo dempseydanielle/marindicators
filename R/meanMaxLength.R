@@ -10,15 +10,6 @@
 #'
 #'  Recommended data: Fishery independent survey data or model output; fish.
 #'@inheritParams largeSpeciesIndicator
-#'@param X_length A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", "LENGTH", and "BIOMASS" and/or "ABUNDANCE". "YEAR"
-#'  indicates the year the observation was recorded, "ID" is an area code
-#'  indicating where the observation was recorded, and "SPECIES" is a numeric
-#'  code indicating the species sampled. "LENGTH" is the length class (cm) and
-#'  "BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
-#'  length (stratified and corrected for catchability as required). Species for
-#'  which there are no length data should be assigned LENGTH = -99. These
-#'  observations are removed by the function.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MMLength_metric".
 #'
@@ -36,13 +27,12 @@
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-meanMaxLength <- function(X_length, group, species.table = NULL, lmax.table, metric, years) {
+meanMaxLength <- function(X, group, species.table = NULL, lmax.table, metric, years) {
 
-  lmax.table <- na.omit(lmax.table[, c("SPECIES", "MAXLENGTH")])
-  X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
+  lmax.table <- data.frame(na.omit(lmax.table[, c("SPECIES", "MAXLENGTH")]))
+  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   
   X <- merge(X, lmax.table, by = "SPECIES")
-  X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
 
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values
@@ -57,7 +47,7 @@ meanMaxLength <- function(X_length, group, species.table = NULL, lmax.table, met
       X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
       
       if(nrow(X.ij) > 0){                           # set ind.i to NA if there are no observations in X.ij 
-      ind.i <- sum(X.ij[metric]*X.ij['MAXLENGTH'])/sum(X.ij[metric])	 # make sure this does what it should!
+        ind.i <- sum(X.ij[metric]*X.ij["MAXLENGTH"])/sum(X.ij[metric])	 # make sure this does what it should!
       } else ind.i <- NA         
       
       ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
@@ -65,7 +55,7 @@ meanMaxLength <- function(X_length, group, species.table = NULL, lmax.table, met
     }
   }
   
-  ind.name = paste("MMLength", metric, sep = "")
+  ind.name = paste("MMLength_", metric, sep = "")
   names(ind) = c("ID", "YEAR", ind.name)          # name the ind dataframe
   ind <- ind[order(ind$ID), ]                     # order by ID to be consistent with other functions
   ind                                             # return vector of indicator values for years c(start.year:end.year) 
