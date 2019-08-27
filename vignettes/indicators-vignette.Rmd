@@ -1,0 +1,170 @@
+---
+title: "Introduction to indicators"
+author: Danielle Dempsey
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{indicators-vignette}  # modify this!!
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(indicators)
+```
+
+# Heading1
+## Heading2
+### Heading3
+****
+
+* Bulleted list
+* Item 2
+    * Nested bullets need a 4-space indent.
+    * Item 2b
+
+Ordered list:
+
+1. Item 1
+1. Item 2
+1. Items are numbered automatically, even though they all start with 1.
+
+_italic_ or *italic*
+__bold__ or **bold**    
+[link text](destination)
+
+<http://this-is-a-raw-url.com>
+
+If the data underlying your table exists in R, don’t lay it out by hand. Instead use knitr::kable(), or look at printr or pander.
+
+
+
+# Motivation
+A comprehensive evaluation and selection of robust ecological indicators is one of the key steps in the process of implementing an Ecosystem Approach to fisheries management and to track progress towards meeting ecosystem goals. The "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017) developed an Indicator Selection Guidance Framework to select and evaluate potential indicators for ecosystem monitoring and assessment at different spatial scales using established selection criteria. Over 100 indicators were initially selected to represent the ecosystem attributes and pressure defined in Step 1 of the framework: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. The framework was successfully tested for the Scotian Shelf Bioregion, resulting in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fisheries independent and dependent data.
+
+The \pkg{indicators} package provides functions to calculate the full suite of marine ecosystem indicators screened in Step 4 of the guidance framework (Table 1; Bundy, Gomez, and Cook, 2017). Each indicator provides information on an ecosystem attribute or pressure. For more information, including attribute definitions and related sub-attributes, please refer to the guidance framework document (Bundy, Gomez, and Cook, 2017).
+
+Table 1: Indicators for each ecosystem attribute and pressure and the \pkg{indicators} function used to calculate each indicator.
+
+  | **ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
+  |:---------------|:---------------|:---------------:|
+  | Biodiversity | Heips Evenness Index | heips() |
+  | Biodiversity | Hill's Diversity Index | hillN1() |
+  | Biodiversity | Hill's Dominance | hillN2() |
+  | Biodiversity | Kempton's Q | kemptonQ() |
+  | Biodiversity | Margalef's Species Richness | margalef() |
+  | Biodiversity | Margalef's Species Richness (group) | margalef() |
+  | Biodiversity | Pielou's Species Evenness | pielouEvenness() |
+  | Biodiversity | Shannon's Diversity Index | shannon() |
+  | Biodiversity | Species Richness | speciesRichness() |
+  | Structure & Functioning | Biomass Ratio | biomassRatio() | 
+  | Structure & Functioning | Biomass of Trophic Guilds | resourcePotential |
+  | Structure & Functioning | Community Condition | communityCondition() |
+  | Structure & Functioning | Trophic Guild Condition | communityCondition() |
+  | Structure & Functioning | Large Fish Indicator | largeFishIndicator() |
+  | Structure & Functioning | Large Species Indicator | largeSpeciesIndicator() |
+  | Structure & Functioning | Mean Length Weighted by Abundance | meanLengthCommunity() |
+  | Structure & Functioning | Mean Length Weighted by Biomass | meanLengthCommunity() |
+  | Structure & Functioning | Mean Trophic Level of Community | meanTLCommunity() |
+  | Structure & Functioning | Proportion of Predatory Fish | biomassRatio() |
+  | Stability & Resistance | Biomass per Trophic Level | biomassPerTL() |
+  | Stability & Resistance | Intrinsic Vulnerability Index of Landings | IVILandings() |
+  | Stability & Resistance | CV of Biomass | CVBiomass() |
+  | Stability & Resistance | Mean Lifespan | meanMaxAge() |
+  | Stability & Resistance | Mean Max Length (weighted by biomass) | meanMaxLength() |
+  | Stability & Resistance | Mean Max Length (weighted by abundance) | meanMaxLength() |
+  | Resource Potential | Biomass | resourcePotential() |
+  | Resource Potential | Biomass of Finfish | resourcePotential() |
+  | Resource Potential | Biomass of Invertebrates | resourcePotential() |
+  | Resource Potential | Biomass of Fished Groups | resourcePotential() |
+  | Resource Potential | Biomass of Skates | resourcePotential() |
+  | Resource Potential | Fishing in Balance | fishingInBalance() |
+  | Fishing Pressure | Diversity of Target Species | speciesRichness() |
+  | Fishing Pressure | Fishing Pressure | fishingPressure() |
+  | Fishing Pressure | Fishing Pressure on Groups | fishingPressure() |
+  | Fishing Pressure | Landings | landings() |
+  | Fishing Pressure | Landings of Fished Groups | landings() |
+  | Fishing Pressure | Marine Trophic Index | meanTLLandings() |
+  | Fishing Pressure | Mean Trophic Level of Landings  | meanTLLandings()|
+
+# Data Requirements
+
+## Fishery-independent data
+Several dataframes are required to calculate all of the indicators in Table 1.
+Something about how can calculate a subset if don't have all data available
+
+
+**X** is a dataframe of fishery independent survey data with columns "YEAR", "ID", "SPECIES", and "ABUNDANCE" and/or "BIOMASS" (depending on which indicator is being calculated). "YEAR" indicates the year the observation was recorded, "ID" is an area code indicating where the observation was recorded, "SPECIES" is a numeric code indicating the species sampled, and "ABUNDANCE"/"BIOMASS" is the corresponding abundance/biomass (stratified and corrected for catchability as required).
+
+```{r, echo = FALSE}
+X <- read.csv(file = "C:/Users/DEMPSEYD/Documents/github/indicators/R/sysdata.rda/esswss_adjbiomass.csv", header = TRUE)
+```
+```{r}
+head(X)
+```
+Indicators calculated using X (among other arguments): Heip's Evenness Index, Hill's N1, Hills' N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of species groups (e.g., all, trophic guilds, fished groups), Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
+
+
+**X_length** is a dataframe of fishery independent survey data with columns "YEAR", "ID", "SPECIES", "LENGTH", and "ABUNDANCE" and/or "BIOMASS" (depending on which indicator is being calculated). As with X, "YEAR" indicates the year the observation was recorded, "ID" is an area code indicating where the observation was recorded, and "SPECIES" is a numeric code indicating the species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE"/"BIOMASS" is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned LENGTH = -99. These observations are removed by the function(s).
+
+```{r, echo = FALSE}
+X_length <- read.csv(file = "C:/Users/DEMPSEYD/Documents/github/indicators/R/sysdata.rda/esswss_adjbiomass_Length.csv", header = TRUE)
+X_length <- X_length[-which(X_length$LENGTH == -99), ]
+```
+```{r}
+head(X_length)
+```
+Indicators calculated using X_length (among other arguments): Community Condition, Large Fish Indicator, Mean Length.
+
+## Fishery-dependent data
+**land** is a dataframe of fishery dependent (commercial) landings data with columns "YEAR", "ID", "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded, "ID" is an area code indicating where the landing was recorded, "SPECIES" is a numeric code indicating the species landed, and "CATCH" is the corresponding landed weight.
+*note here that species code can be the same or different as those in X and X_length, but need to be consistent with TL_LAND and species.groups.
+
+```{r, echo = FALSE}
+land <- read.csv(file = "C:/Users/DEMPSEYD/Documents/github/indicators/R/sysdata.rda/esswss_landings.csv", header = TRUE)
+
+land <- land[land$YEAR >= 1970 & land$YEAR <= 2015, ]
+land <- land[order(land$YEAR),]
+```
+```{r}
+head(land)
+```
+
+Indicators calculated using land (among other arguments): Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of the Target Species, Fishing Pressure, Landings, Marine Trophic Index, and Mean Trophic Index of Landings.
+
+## Species Information
+-say that don't need to have data for ALL of the species but have to have the headings noted in Table 2
+
+Some indicators require addtional information about key species. 
+
+Table 2: 
+| **SPECIES INFO** | **HEADING** |**DESCIPRTION/Notes** | **INDICATOR(S)** 
+|:---------------| :-------------: |:--------------------------------|:--------------------------------|
+| Trophic Level | TL | Assigned from . . . . . .. . . . ..  | Kempton's Q, mean trophic level, biomass per trophic level | 
+| Intrinsic Vulnerability Index | IVI | Assigned through . . . . | IVI of landings | 
+| Maximum Length | MAXLENGTH | Maximum recorded length of corresponding species | Large Species Indicator, Mean Maximum Length |
+| Maximum Age | MAXAGE | Maximum recorded age of corresponding species | Maximum Lifespan |
+| Trophic Level of Landed Species | TL_LAND | Text here | Fishing-in_Balance, Marine Trophic Index, Mean Trophic Level of Landings |
+  
+
+
+### Length-Weight data
+
+
+
+
+
+
+
+
+
+
+# Application
+
