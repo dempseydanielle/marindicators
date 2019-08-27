@@ -81,10 +81,7 @@ meanTLLandings <- function (land, TL.table, cutoff = 0, years) {
 	
 	if(cutoff == 0) {
 	  ind.name = "MeanTL.Landings"
-	} else {if(cutoff == 3.25) {
-	  ind.name = "MarineTophicIndex.Landings"
-	} else {ind.name = paste("MeanTL.Landings_", cutoff, sep = "")}
-	}
+	} else ind.name = paste("MarineTophicIndex.Landings_", cutoff, sep = "")
 	
 	names(ind) <- c("ID", "YEAR", ind.name)
 	ind <- ind[order(ind$ID), ]

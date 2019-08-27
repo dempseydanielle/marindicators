@@ -4,8 +4,9 @@
 \alias{allBiodiversity}
 \title{Calculates all biodiversity indicators}
 \usage{
-allBiodiversity(X, metric = "ABUNDANCE", group = "ALL", species.table,
-  TL.table, percentiles = c(0.25, 0.75), minTL = 3, years)
+allBiodiversity(X, metric = "ABUNDANCE", group = "ALL",
+  species.table = NULL, TL.table, percentiles = c(0.25, 0.75),
+  minTL = 3, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data with columns "YEAR",
@@ -16,10 +17,10 @@ recorded, "SPECIES" is a numeric code indicating the species sampled, and
 catchability as required).}
 
 \item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "ABUNDANCE".}
+calculate the indicators. Default is "ABUNDANCE".}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
+\item{group}{A character string indicating the species group for which to
+calculate the indicators. If group = "ALL", all species will be included;
 otherwise, group should match a column name in species.table.}
 
 \item{species.table}{If group does not equal "ALL", species.table is a table
@@ -32,20 +33,19 @@ required. Default is species.table = NULL.}
 \item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
 (trophic level). Entries in the "SPECIES" column should be the unique values
 of species codes in X (or a subset thereof). Other columns in TL.table are
-ignored. If TL.table = NULL Kempton's Q will not be calculated.}
+ignored. If TL.table = NULL, Kempton's Q will not be calculated.}
 
-\item{percentiles}{The percentiles used to determine R1 and R2. Default is
-percentiles = c(0.25, 0.75).}
+\item{percentiles}{The percentiles used to determine R1 and R2 for calculating
+Kempton's Q. Default is percentiles = c(0.25, 0.75).}
 
-\item{minTL}{Minimum trophic level for species included in the calculation.
-Default is minTL = 0.}
+\item{minTL}{Minimum trophic level for species included to calculate Kempton's
+Q. Default is minTL = 0.}
 
-\item{years}{A vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", "SpeciesRichness",
- "ShannonDiversity", "MargalefRichness_group", "PielouEvenness",
- "HillDiversity", "HillDominance", "Heips", "KemptonQ"
+Returns a dataframe with columns "ID", "YEAR", and indicators
+ corresponding to the arguments supplied to the function.
 
  If there is no data for an indicator at spatial scale \eqn{j} in year
  \eqn{i}, indicator value is assigned NA.
@@ -55,8 +55,13 @@ This function calculates all (or a subset of) biodiversity
  indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-**Say that calls each function separately Recommended data: Fishery
- independent survey data or model output; fish and invertebrates.
+This function calculates the biodiversity indicators: species
+ richness, Shannon's index of diversity, Margalef's species richness,
+ Pielou's species evenness, Hill's N1, Hill's N2, Heip's evenness index, and
+ Kempton's Q. If trophic level data are not available to calculate Kempton's
+ Q, the remaining biodiversity indicators will be returned. See the help file
+ for the individual functions for information on how each indicator is
+ calculated.
 }
 \seealso{
 Other biodiversity indicators: \code{\link{heips}},

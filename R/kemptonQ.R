@@ -41,6 +41,8 @@
 kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 0, 
                     group, species.table = NULL, metric = "ABUNDANCE", years) {
   
+  TL.table <- na.omit(TL.table[, c("SPECIES", "TL")])
+  
   X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
   X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
   X <- X[X$TL > minTL, ]

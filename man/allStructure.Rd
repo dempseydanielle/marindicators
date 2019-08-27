@@ -4,8 +4,9 @@
 \alias{allStructure}
 \title{Calculates all structure and function indicators}
 \usage{
-allStructure(X, X_length, resource.groups, condition.groups, ratio.groups,
-  species.table, speciesinfo.table, LenWt.table, lmax, years)
+allStructure(X, X_length, LSI.group, LFI.group, resource.groups,
+  condition.groups, ratio.groups, species.table, speciesinfo.table,
+  LenWt.table, lmax, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data with columns "YEAR",
@@ -25,22 +26,32 @@ catchability as required). Species for which there are no length data
 should be assigned LENGTH = -99. These observations are removed by the
 function.}
 
+\item{LSI.group}{A character string indicating the species group for which to
+calculate the Large Species Indicator. Must be set to "ALL" or match a
+column name in species.table. If LSI.group = NULL, the large species
+indicator will not be calculated.}
+
+\item{LFI.group}{A character string indicating the species group for which to
+calculate the Large Fish Indicator. Must be set to "ALL" or match a column
+name in species.table. If LFI.group = NULL, the large fish indicator will
+not be calculated.}
+
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
 matching the name of a column in species.groups. If resource.groups = NULL,
-no resource potential indicators will be calculated.}
+the resource potential indicators will not be calculated.}
 
 \item{condition.groups}{A vector indicating the species groups for which to
 calculate Fulton's community condition factor. Each entry must be a
 character string matching the name of a column in species.groups. If
-condition.groups = NULL, no community condition indicators will be
+condition.groups = NULL, the community condition indicators will not be
 calculated.}
 
 \item{ratio.groups}{A dataframe with two columns, which must be named "group1"
 and "group2". Each row holds the group names for one biomass ratio, with the
 numerator in column "group1" and the denominator in column "group2".  Each
 entry must be a character string matching the name of a column in
-species.groups. If ratio.groups = NULL, no biomass ratio. indicators will be
+species.groups. If ratio.groups = NULL, biomass ratio indicators will not be
 calculated.}
 
 \item{species.table}{A table where the column names match the entries in
@@ -51,8 +62,8 @@ these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
 "MAXLENGTH" and "TL" (maximum recorded length and trophic level). Entries in
-the "SPECIES" column should be the unique values of species codes in X/X_length (or a
-subset thereof). Other columns will be ignored.}
+the "SPECIES" column should be the unique values of species codes in
+X/X_length (or a subset thereof). Other columns will be ignored.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
 "YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
@@ -61,7 +72,7 @@ fish length at the corresponding "WEIGHT" (fish weight).}
 \item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
 species are those with MAXLENGTH >= 85 cm).}
 
-\item{years}{A vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
 Returns a dataframe with columns "ID", "YEAR", and indicators

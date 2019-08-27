@@ -5,19 +5,15 @@
 \title{Calculates the mean maximum length of fish in the community (Shin et
  al., 2005)}
 \usage{
-meanMaxLength(X_length, group, species.table = NULL, lmax.table, metric,
-  years)
+meanMaxLength(X, group, species.table = NULL, lmax.table, metric, years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "BIOMASS" and/or "ABUNDANCE". "YEAR"
-indicates the year the observation was recorded, "ID" is an area code
-indicating where the observation was recorded, and "SPECIES" is a numeric
-code indicating the species sampled. "LENGTH" is the length class (cm) and
-"BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
-length (stratified and corrected for catchability as required). Species for
-which there are no length data should be assigned LENGTH = -99. These
-observations are removed by the function.}
+\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
+"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
+was recorded, "ID" is an area code indicating where the observation was
+recorded, "SPECIES" is a numeric code indicating the species sampled, and
+"BIOMASS" is the corresponding biomass (stratified and corrected for
+catchability as required).}
 
 \item{group}{A character string indicating which species to include in the
 indicator calculation. If group = "ALL", all species will be included;

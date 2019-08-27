@@ -21,17 +21,15 @@ catchability as required).}
 a numeric code indicating the species landed, and "CATCH" is the
 corresponding landed weight.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{A table where the column names match the entries in
+landings.groups. Column entries are the species codes indicating the species
+from land included in each group. species.table may also include columns for
+other species groups; these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"MAXLENGTH" and "TL" (maximum recorded length and trophic level). Entries in
-the "SPECIES" column should be the unique values of species codes in X/X_length (or a
-subset thereof). Other columns will be ignored.}
+"TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+should be the unique values of species codes in land (or a subset thereof).
+Other columns will be ignored.}
 
 \item{landings.groups}{A vector indicating the species groups for which to
 calculate the landings. Each entry must be a character string matching the
@@ -48,7 +46,8 @@ fishing pressure indicators will be calculated.}
 \item{cutoff}{A vector containing minimum trophic level to include when
 calculating the mean trophic level of the landings. Default is cutoff = c(0,
 3.25), which will return the mean trophic level of the landings and the
-marine trophic index.}
+marine trophic index.
+@param years A vector of years for which to calculate indicators.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }

@@ -9,17 +9,16 @@ meanLengthCommunity(X_length, metric, years)
 }
 \arguments{
 \item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "BIOMASS" and/or "ABUNDANCE". "YEAR"
-indicates the year the observation was recorded, "ID" is an area code
-indicating where the observation was recorded, and "SPECIES" is a numeric
-code indicating the species sampled. "LENGTH" is the length class (cm) and
-"BIOMASS" and "ABUNDANCE" are the corresponding biomass and abundance at
-length (stratified and corrected for catchability as required). Species for
-which there are no length data should be assigned LENGTH = -99. These
-observations are removed by the function.}
+"ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
+observation was recorded, "ID" is an area code indicating where the
+observation was recorded, and "SPECIES" is a numeric code indicating the
+species sampled. "LENGTH" is the length class (cm) and "BIOMASS" is the
+corresponding abundance at length (stratified and corrected for catchability
+as required). Species for which there are no length data should be assigned
+LENGTH = -99. These observations are removed by the function.}
 
 \item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "BIOMASS".}
+calculate indicator.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }

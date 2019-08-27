@@ -4,8 +4,9 @@
 \alias{allStability}
 \title{Calculates all stability and resistance indicators}
 \usage{
-allStability(X, X_length, land, species.table, speciesinfo.table,
-  TL.grouping = 1, window = 5, negative = FALSE, years)
+allStability(X, X_length, land, maxlength.group, species.table,
+  speciesinfo.table, TL.grouping = 1, window = 5, negative = FALSE,
+  years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data with columns "YEAR",
@@ -31,12 +32,16 @@ function.}
 a numeric code indicating the species landed, and "CATCH" is the
 corresponding landed weight.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{maxlength.group}{A character string indicating the species group for
+which to calculate the mean maximum length of fish in the community. Must be
+set to "ALL" or match a column name in species.table. If maxlength.group =
+NULL, the mean maximum length will not be calculated.}
+
+\item{species.table}{A table where the column names match the entries in
+resource.groups, ratio.groups, and/or condition.groups. Column entries are
+the species codes indicating the species from X (or X_length) included in
+each group. species.table may also include columns for other species groups;
+these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
 "MAXAGE", "MAXLENGTH" and "TL" (maximum recorded age, maximum recorded
@@ -45,29 +50,29 @@ unique values of species codes in X (or a subset thereof). Other columns
 will be ignored.}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
-biomass. For example, if TL.grouping = 1, trophic levels are binned from
-1.00 - 1.99, 2.00 - 2.99, etc. If TL.grouping = 0.5, trophic levels are
-binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default
-is TL.grouping = 1 so that biomass is aggregated over discrete trophic
-levels.}
+biomass when calculating biomass per trophic level. For example, if
+TL.grouping = 1, trophic levels are binned from 1.00 - 1.99, 2.00 - 2.99,
+etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49, 1.50
+- 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is TL.grouping = 1 so that
+biomass is aggregated over discrete trophic levels.}
 
-\item{window}{Window for the moving average. The first and last floor(window/2)
-values of the indicator are assigned NA to account for the moving average.
-Default is window = 5 years.}
+\item{window}{Window for the moving average used to calculate CV of the
+biomass. The first and last floor(window/2) values of the indicator are
+assigned NA to account for the moving average. Default is window = 5 years.}
 
-\item{negative}{If negative = TRUE, the indicator will be multiplied by -1 so
+\item{negative}{If negative = TRUE, the CVBiomass will be multiplied by -1 so
 that the expected response is to decrease with increasing fishing pressure.
 Default is negative = FALSE.}
 
-\item{years}{A vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
 Returns a dataframe with columns "ID", "YEAR", and indicators
  corresponding to the arguments supplied to the function.
 }
 \description{
-This function calculates all (or a subset) of the structure and
- function indicators for \eqn{j} areas and \eqn{i} years.
+This function calculates all (or a subset) of the stability and
+ resistance indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 This function calculates the stability and resistance indicators:

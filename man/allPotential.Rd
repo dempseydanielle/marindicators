@@ -21,39 +21,40 @@ catchability as required).}
 a numeric code indicating the species landed, and "CATCH" is the
 corresponding landed weight.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{A table where the column names match the entries in
+resource.groups. Column entries are the species codes indicating the species
+from X included in each group. species.table may also include columns for
+other species groups; these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"MAXLENGTH" and "TL" (maximum recorded length and trophic level). Entries in
-the "SPECIES" column should be the unique values of species codes in X/X_length (or a
-subset thereof). Other columns will be ignored.}
+"TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+should be the unique values of species codes in land (or a subset thereof).
+Other columns will be ignored.}
 
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
 matching the name of a column in species.groups. If resource.groups = NULL,
-no resource potential indicators will be calculated.}
+the resource potential indicators will not be calculated.}
 
-\item{cutoff}{The minimum trophic level of species to include.}
+\item{cutoff}{The minimum trophic level of species to include to calculate
+FiB. If cutoff = NULL, FiB wll not be calculated.}
 
-\item{TE}{Trophic efficiency. Default is TE = 0.1, i.e., a trophic efficiency
-of 10\%.}
+\item{TE}{Trophic efficiency, used to calculate FiB. Default is TE = 0.1,
+i.e., a trophic efficiency of 10\%. If TE = NULL, FiB wll not be calculated.}
 
-\item{base.start}{Year indicating the beginning of the baseline period. The
-average landings and average mean trophic level of the landings over the
-baseline period are used as baseline values to calculate FiB (see
-Details). land must include data for the baseline period.}
+\item{base.start}{Year indicating the beginning of the baseline period for
+calculating FiB. The average landings and average mean trophic level of the
+landings over the baseline period are used as baseline values to calculate
+FiB (see Details). land must include data for the baseline period. If
+base.start = NULL, FiB wll not be calculated.}
 
-\item{base.end}{Year indicating the end of the baseline period. The
-average landings and average mean trophic level of the landings over the
-baseline period are used as baseline values to calculate FiB (see
-Details). land must include data for the baseline period.}
+\item{base.end}{Year indicating the end of the baseline period for calculating
+FiB. The average landings and average mean trophic level of the landings
+over the baseline period are used as baseline values to calculate FiB (see
+Details). land must include data for the baseline period. If base.end =
+NULL, FiB wll not be calculated.}
 
-\item{years}{A vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
 Returns a dataframe with columns "ID", "YEAR", and indicators
@@ -66,7 +67,7 @@ This function calculates all (or a subset) of the resource
 \details{
 This function calculates the resource potential indicators: abundance
  and biomass of the community, resource potential of predefined species
- groups, and fishing-in-balance. If data are not available to calculate
+ groups, and fishing-in-balance (FiB). If data are not available to calculate
  one or more of these indicators, a subset will be returned. See the help
  file for the individual functions for information on how each indicator is
  calculated.

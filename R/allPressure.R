@@ -8,9 +8,9 @@
 #'  calculate one or more of these indicators, a subset will be returned. See
 #'  the help file for the individual functions for information on how each
 #'  indicator is calculated.
+
 #'@inheritParams resourcePotential
 #'@inheritParams landings
-#'@inheritParams allStructure
 #'@param landings.groups A vector indicating the species groups for which to
 #'  calculate the landings. Each entry must be a character string matching the
 #'  name of a column in species.groups. If landings.groups = NULL, no resource
@@ -21,10 +21,19 @@
 #'  the denominator in column "group.X". Each entry must be a character string
 #'  matching the name of a column in species.groups. If FP.groups = NULL, no
 #'  fishing pressure indicators will be calculated.
+#'@param speciesinfo.table A table with columns "SPECIES" and the corresponding
+#'  "TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+#'  should be the unique values of species codes in land (or a subset thereof).
+#'  Other columns will be ignored.
+#'@param species.table A table where the column names match the entries in
+#'  landings.groups. Column entries are the species codes indicating the species
+#'  from land included in each group. species.table may also include columns for
+#'  other species groups; these will be ignored.
 #'@param cutoff A vector containing minimum trophic level to include when
 #'  calculating the mean trophic level of the landings. Default is cutoff = c(0,
 #'  3.25), which will return the mean trophic level of the landings and the
 #'  marine trophic index.
+#'  @param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns "ID", "YEAR", and indicators
 #'  corresponding to the arguments supplied to the function.
 #'@family fishing pressure indicators

@@ -10,7 +10,9 @@
 #'  Recommended data: Fishery independent survey data or model output; fish and
 #'  invertebrates.
 #'@inheritParams resourcePotential
-#'@inheritParams meanMaxLength
+#'@inheritParams largeFishIndicator
+#'@param metric A character string indicating which column in X to use to
+#'  calculate indicator.
 #'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
 #'  "MeanLength_metric".
 #'
