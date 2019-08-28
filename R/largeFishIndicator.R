@@ -45,7 +45,9 @@ largeFishIndicator <- function(X_length, group, species.table = NULL,
                                metric = "BIOMASS", large.fish = 35, years) {
   
   X <- speciesGroups(X = X_length, group = group, species.table = species.table) # subset X to the species of interest
-  X <- X[-which(X$LENGTH == -99), ]     # remove rows that do not contain length data
+  
+  inx99 <- which(X$LENGTH == -99)                          # index of rows that do not contain length data               
+  if(length(inx99 > 0)) X <- X[-which(X$LENGTH == -99), ]  # remove rows that do not contain length data
   
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

@@ -38,9 +38,13 @@
 
 meanLengthCommunity <- function(X_length, metric, years) {
 	
-  uI = unique(X_length$ID)                            # extract the spatial scale ID's
-  X <- X_length[-which(X_length$LENGTH == -99), ]     # remove rows that do not contain length data
-  ind <- NULL                                         # initialize dataframe for storing indicator values
+  X <- X_length
+  
+  inx99 <- which(X$LENGTH == -99)                          # index of rows that do not contain length data               
+  if(length(inx99 > 0)) X <- X[-which(X$LENGTH == -99), ]  # remove rows that do not contain length data
+  
+   uI = unique(X_length$ID)                            # extract the spatial scale ID's
+   ind <- NULL                                         # initialize dataframe for storing indicator values
   
   for (j in 1:length(uI)){            # loop over all spatal scales
     
