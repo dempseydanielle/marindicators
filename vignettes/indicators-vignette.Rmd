@@ -35,56 +35,56 @@ Table 1: Indicators for each ecosystem attribute and pressure, and the \pkg{indi
 
   | **ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
   |:-------------------|:-------------------|:---------------:|
-  | Biodiversity | Heips Evenness Index | heips() |
-  | Biodiversity | Hill's Diversity Index | hillN1() |
-  | Biodiversity | Hill's Dominance | hillN2() |
-  | Biodiversity | Kempton's Q | kemptonQ() |
-  | Biodiversity | Margalef's Species Richness | margalef() |
-  | Biodiversity | Margalef's Species Richness (group) | margalef() |
-  | Biodiversity | Pielou's Species Evenness | pielouEvenness() |
-  | Biodiversity | Shannon's Diversity Index | shannon() |
-  | Biodiversity | Species Richness | speciesRichness() |
-  | Structure & Functioning | Biomass Ratio | biomassRatio() | 
-  | Structure & Functioning | Biomass of Trophic Guilds | resourcePotential |
-  | Structure & Functioning | Community Condition | communityCondition() |
-  | Structure & Functioning | Trophic Guild Condition | communityCondition() |
-  | Structure & Functioning | Large Fish Indicator | largeFishIndicator() |
-  | Structure & Functioning | Large Species Indicator | largeSpeciesIndicator() |
-  | Structure & Functioning | Mean Length Weighted by Abundance | meanLengthCommunity() |
-  | Structure & Functioning | Mean Length Weighted by Biomass | meanLengthCommunity() |
-  | Structure & Functioning | Mean Trophic Level of Community | meanTLCommunity() |
-  | Structure & Functioning | Proportion of Predatory Fish | biomassRatio() |
-  | Stability & Resistance | Biomass per Trophic Level | biomassPerTL() |
-  | Stability & Resistance | Intrinsic Vulnerability Index of Landings | IVILandings() |
-  | Stability & Resistance | Coefficient of Variation of Biomass | CVBiomass() |
-  | Stability & Resistance | Mean Lifespan | meanMaxAge() |
-  | Stability & Resistance | Mean Max Length (weighted by biomass) | meanMaxLength() |
-  | Stability & Resistance | Mean Max Length (weighted by abundance) | meanMaxLength() |
-  | Resource Potential | Biomass | resourcePotential() |
-  | Resource Potential | Biomass of Groups | resourcePotential() |
-  | Resource Potential | Fishing in Balance | fishingInBalance() |
-  | Fishing Pressure | Diversity of Target Species | speciesRichness() |
-  | Fishing Pressure | Fishing Pressure | fishingPressure() |
-  | Fishing Pressure | Fishing Pressure on Groups | fishingPressure() |
-  | Fishing Pressure | Landings | landings() |
-  | Fishing Pressure | Landings of Fished Groups | landings() |
-  | Fishing Pressure | Marine Trophic Index | meanTLLandings() |
-  | Fishing Pressure | Mean Trophic Level of Landings  | meanTLLandings()|
+  | Biodiversity | Heips Evenness Index | `heips()` |
+  | Biodiversity | Hill's Diversity Index | `hillN1()` |
+  | Biodiversity | Hill's Dominance | `hillN2()` |
+  | Biodiversity | Kempton's Q | `kemptonQ()` |
+  | Biodiversity | Margalef's Species Richness | `margalef()` |
+  | Biodiversity | Margalef's Species Richness (group) | `margalef()` |
+  | Biodiversity | Pielou's Species Evenness | `pielouEvenness()` |
+  | Biodiversity | Shannon's Diversity Index | `shannon()` |
+  | Biodiversity | Species Richness | `speciesRichness()` |
+  | Structure & Functioning | Biomass Ratio | `biomassRatio()` | 
+  | Structure & Functioning | Biomass of Trophic Guilds | `resourcePotential` |
+  | Structure & Functioning | Community Condition | `communityCondition()` |
+  | Structure & Functioning | Trophic Guild Condition | `communityCondition()` |
+  | Structure & Functioning | Large Fish Indicator | `largeFishIndicator()` |
+  | Structure & Functioning | Large Species Indicator | `largeSpeciesIndicator()` |
+  | Structure & Functioning | Mean Length Weighted by Abundance | `meanLengthCommunity()` |
+  | Structure & Functioning | Mean Length Weighted by Biomass | `meanLengthCommunity()` |
+  | Structure & Functioning | Mean Trophic Level of Community | `meanTLCommunity()` |
+  | Structure & Functioning | Proportion of Predatory Fish | `biomassRatio()` |
+  | Stability & Resistance | Biomass per Trophic Level | `biomassPerTL()` |
+  | Stability & Resistance | Intrinsic Vulnerability Index of Landings | `IVILandings()` |
+  | Stability & Resistance | Coefficient of Variation of Biomass | `CVBiomass()` |
+  | Stability & Resistance | Mean Lifespan | `meanMaxAge()` |
+  | Stability & Resistance | Mean Max Length (weighted by biomass) | `meanMaxLength()` |
+  | Stability & Resistance | Mean Max Length (weighted by abundance) | `meanMaxLength()` |
+  | Resource Potential | Biomass | `resourcePotential()` |
+  | Resource Potential | Biomass of Groups | `resourcePotential()` |
+  | Resource Potential | Fishing in Balance | `fishingInBalance()` |
+  | Fishing Pressure | Diversity of Target Species | `speciesRichness()` |
+  | Fishing Pressure | Fishing Pressure | `fishingPressure()` |
+  | Fishing Pressure | Fishing Pressure on Groups | `fishingPressure()` |
+  | Fishing Pressure | Landings | `landings()` |
+  | Fishing Pressure | Landings of Fished Groups | `landings()` |
+  | Fishing Pressure | Marine Trophic Index | `meanTLLandings()` |
+  | Fishing Pressure | Mean Trophic Level of Landings  | `meanTLLandings()`|
 
 # Data Requirements
 This section describes the data required to calculate all of the indicators in Table 1. If some data are unavailable, a subset of indicators can be calculated.
 
 ## Fishery-independent data
-**X** is a dataframe of fishery independent survey data with columns "YEAR", "ID", "SPECIES", and "ABUNDANCE" and/or "BIOMASS" (depending on which indicator is being calculated). "YEAR" indicates the year the observation was recorded, "ID" is an area code indicating where the observation was recorded, "SPECIES" is a numeric code indicating the species sampled, and "ABUNDANCE"/"BIOMASS" is the corresponding abundance/biomass (stratified and corrected for catchability as required).
+**X** is a dataframe of fishery independent survey data with columns `YEAR`, `ID`, `SPECIES`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, `SPECIES` is a numeric code indicating the species sampled, and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass (stratified and corrected for catchability as required).
 
 ```{r, echo = FALSE}
 X_show <- X[1:n.show,]
 X_show
 ```
-Indicators calculated using X (among other arguments): Heip's Evenness Index, Hill's N1, Hills' N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of species groups, Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
+Indicators calculated using `X` (among other arguments): Heip's Evenness Index, Hill's N1, Hills' N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of species groups, Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
 
 
-**X_length** is a dataframe of fishery independent survey data with columns "YEAR", "ID", "SPECIES", "LENGTH", and "ABUNDANCE" and/or "BIOMASS" (depending on which indicator is being calculated). As with X, "YEAR" indicates the year the observation was recorded, "ID" is an area code indicating where the observation was recorded, and "SPECIES" is a numeric code indicating the species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE"/"BIOMASS" is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned LENGTH = -99. These observations are removed by the function(s).
+**X_length** is a dataframe of fishery independent survey data with columns `YEAR`, `ID`, `SPECIES`, `LENGTH`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). As with `X`, `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, and `SPECIES` is a numeric code indicating the species sampled. `LENGTH` is the length class (cm) and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned `LENGTH` = -99. These observations are removed by the function(s).
 
 ```{r, echo = FALSE}
 X_length <- X_length[-which(X_length$LENGTH == -99), ]
@@ -92,19 +92,19 @@ X_length_show <- X_length[1:n.show, ]
 X_length_show
 ```
 
-Indicators calculated using X_length (among other arguments): Community Condition, Large Fish Indicator, Mean Length.
+Indicators calculated using `X_length` (among other arguments): Community Condition, Large Fish Indicator, Mean Length.
 
 ## Fishery-dependent data
-**land** is a dataframe of fishery dependent (commercial) landings data with columns "YEAR", "ID", "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded, "ID" is an area code indicating where the landing was recorded, "SPECIES" is a numeric code indicating the species landed, and "CATCH" is the corresponding landed weight.
+**land** is a dataframe of fishery dependent (commercial) landings data with columns `YEAR`, `ID`, `SPECIES` and `CATCH`. `YEAR` indicates the year the landing was recorded, `ID` is an area code indicating where the landing was recorded, `SPECIES` is a numeric code indicating the species landed, and `CATCH` is the corresponding landed weight.
 
-The species codes in land can be consistent with those in X and X_length or specific to commercial landings; however, they must be consistent with the additional information described below (see Species Information and Species Groups).
+The species codes in `land` can be consistent with those in `X` and `X_length` or specific to commercial landings; however, they must be consistent with the additional information described below (see Species Information and Species Groups).
 
 ```{r, echo = FALSE}
 land <- land[order(land$YEAR),]
 land_show <- land[1:n.show, ]
 land_show
 ```
-Indicators calculated using land (among other arguments): Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of the Target Species, Fishing Pressure, Landings, Marine Trophic Index, and Mean Trophic Index of Landings.
+Indicators calculated using `land` (among other arguments): Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of the Target Species, Fishing Pressure, Landings, Marine Trophic Index, and Mean Trophic Index of Landings.
 
 ## Additional Information 
 
@@ -115,13 +115,13 @@ Table 2: Additional species information required to calculate given indicators. 
 
 | **SPECIES INFO** | **TABLE HEADER** |**DESCIPRTION** | **INDICATOR(S)** 
 |:------------| :------------:|:--------------------------------|:----------------|
-| Trophic Level | TL | Trophic level of species caught in fisheries-independent surveys | Kempton's Q, Mean Trophic Level of Community, Biomass per Trophic Level | 
-| Maximum Length | MAXLENGTH | Maximum recorded length of of species caught in fisheries-independent surveys | Large Species Indicator, Mean Maximum Length |
-| Maximum Age | MAXAGE | Maximum recorded age of of species caught in fisheries-independent surveys | Maximum Lifespan |
-| Intrinsic Vulnerability Index | IVI | Vulnerability of commercial species, determined by considering several traits (e.g. max length, age at first maturity, longevity, von Bertalanffy growth parameter, natural mortality, fecundity, spatial behaviour, and geographic range) | IVI of landings | 
-| Trophic Level of Landed Species | TL_LAND | Trophic level of commercial species | Fishing-in-Balance, Marine Trophic Index, Mean Trophic Level of Landings |
+| Trophic Level | `TL` | Trophic level of species caught in fisheries-independent surveys | Kempton's Q, Mean Trophic Level of Community, Biomass per Trophic Level | 
+| Maximum Length | `MAXLENGTH` | Maximum recorded length of of species caught in fisheries-independent surveys | Large Species Indicator, Mean Maximum Length |
+| Maximum Age | `MAXAGE` | Maximum recorded age of of species caught in fisheries-independent surveys | Maximum Lifespan |
+| Intrinsic Vulnerability Index | `IVI` | Vulnerability of commercial species, determined by considering several traits (e.g. max length, age at first maturity, longevity, von Bertalanffy growth parameter, natural mortality, fecundity, spatial behaviour, and geographic range) | IVI of landings | 
+| Trophic Level of Landed Species | `TL_LAND` | Trophic level of commercial species | Fishing-in-Balance, Marine Trophic Index, Mean Trophic Level of Landings |
   
-The species information is passed to the function through a table with at least two columns: "SPECIES" (the species codes) and the corresponding column of information, which should be named after one of the table headers in Table 2. For example:
+The species information is passed to the function through a table with at least two columns: `SPECIES` (the species codes) and the corresponding column of information, which should be named after one of the table headers in Table 2. For example:
 
 ```{r, echo = FALSE}
 TL.table <- na.omit(species.info[, c("SPECIES", "TL")])
@@ -130,16 +130,16 @@ TL.table <- TL.table[1:n.show, ]
 TL.table
 ```
 
-If the species codes in X and land are consistent (e.g., the fisheries-indepent species codes are the same as the commercial species codes), it may be convenient to store all of the extra information in a single table. If information is not available for a given species, assign a value of NA. This whole table may be passed to a function; superfluous columns will be ignored.
+If the species codes in `X` and `land` are consistent (e.g., the fisheries-indepent species codes are the same as the commercial species codes), it may be convenient to store all of the extra information in a single table. If information is not available for a given species, assign a value of `NA`. This whole table may be passed to a function; superfluous columns will be ignored.
 
 ```{r, echo = FALSE}
 species.info_show <- species.info[1:10, ]
 species.info_show
 ```
-If the species codes in X and land are not the same, then the extra information should be stored in at least two tables (e.g., TL, MAXLENGTH, and MAXAGE in one table, and IVI and TL_LAND in the other).
+If the species codes in `X` and `land` are not the same, then the extra information should be stored in at least two tables (e.g., `TL`, `MAXLENGTH`, and `MAXAGE` in one table, and `IVI` and `TL_LAND` in the other).
 
 ### Length-Weight data
-The Community Condition indicator (based on Fulton's condition index) requires annual length-weight data for all species of interest. This table should have 5 columns: "YEAR", "ID", and "SPECIES" correspond with those columns in X_length, while "LENGTH" is fish length at the corresponding "WEIGHT" (fish weight).
+The Community Condition indicator (based on Fulton's condition index) requires annual length-weight data for all species of interest. This table should have 5 columns: `YEAR`, `ID`, and `SPECIES` correspond with those columns in `X_length`, while `LENGTH` is fish length at the corresponding `WEIGHT` (fish weight).
 
 ```{r, echo = FALSE}
 len.wt_show <- Length_Weight[1:n.show, ]
@@ -148,7 +148,7 @@ len.wt_show
 ```
 
 ### Species Groups
-Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here species.groups. The column names of species.groups are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fisheries-independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in X and land, the fisheries-independent groups should include species codes from X, and the commercial groups should include species codes from land).
+Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here species.groups. The column names of species.groups are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fisheries-independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in X and `land`, the fisheries-independent groups should include species codes from `X`, and the commercial groups should include species codes from `land`).
 
 ```{r, echo = FALSE}
 species.groups_show <- species.groups[1:n.show, c(1:7)]
@@ -161,13 +161,13 @@ Note that if no group is specified, all species will automatically be included i
 # Application
 This section describes the general use of the functions in the indicators package. See the package manual or help file for each function for more details.
 
-Most functions calculate a single indicator, and return a dataframe with three columns: "ID", "YEAR", and the indicator. For example, the following function call calculates Shannon's index of diversity for two areas (ESS and WSS) from 2010 - 2015:
+Most functions calculate a single indicator, and return a dataframe with three columns: `ID`, `YEAR`, and the indicator. For example, the following function call calculates Shannon's index of diversity for two areas (ESS and WSS) from 2010 - 2015:
 
 ```{r}
 shannon(X, group = "ALL", metric = "ABUNDANCE", species.table = NULL,  years = c(2010:2015))
 ```
 
-biomassPerTL() returns "ID" and "YEAR", plus a column for each trophic level range specified by TL.grouping (see ?biomassPerTL for more detail):
+biomassPerTL() returns `ID` and `YEAR`, plus a column for each trophic level range specified by TL.grouping (see ?biomassPerTL for more detail):
 
 ```{r}
 biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", TL.grouping = 1, years = c(2010:2015))
