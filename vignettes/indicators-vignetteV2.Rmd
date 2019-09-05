@@ -37,78 +37,83 @@ The framework was successfully tested for the Scotian Shelf Biogregion. Four eco
 The `indicators` package provides functions to calculate the suite of marine ecosystem indicators screened in Step 4 of the guidance framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values.
 
 
-Table 1: `indicators` function to calculate each of the 68 indicators screened for the Scotian Shelf in Step 4 of the Guidance Framework. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
+Table 1: `indicators` function to calculate each of the 68 indicators screened for the Scotian Shelf in Step 4 of the Guidance Framework. Ecosystem attributes and pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
 
-  | **ATTRIBUTE** | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
-  |:-------------------|:-----------------------|:------------------------|:---------------:|
-  | Biodiversity | Species Richness | **Margalef's Species Richness** | `margalef()` |
-  | Biodiversity | Species Richness | Margalef's Species Richness (groundfish) | `margalef()` |
-  | Biodiversity | Species Richness | Species Richness | `speciesRichness()` |
-  | Biodiversity | Species Diversity | Shannon's Diversity Index | `shannon()` |
-  | Biodiversity | Species Diversity | Hill's Diversity Index | `hillN1()` |
-  | Biodiversity | Species Diversity | Kempton's Q | `kemptonQ()` |
-  | Biodiversity | Species Evenness | Pielou's Species Evenness | `pielouEvenness()` |
-  | Biodiversity | Species Evenness | Hill's Dominance | `hillN2()` |
-  | Biodiversity | Species Evenness | **Heip's Evenness Index** | `heips()` |
-  | Structure & Functioning | Structure: Top of Food Web | **Large Fish Indicator** | `largeFishIndicator()` |
-  | Structure & Functioning | Structure: Top of Food Web | Large Species Indicator | `largeSpeciesIndicator()` |
-  | Structure & Functioning | Structure: Top of Food Web | Proportion of Predatory Fish | `biomassRatio()` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Large Benthivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Medium Benthivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Planktivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | **Biomass of Piscivores** | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | **Biomass of Zoopiscivores** | `resourcePotential` |
-  | Structure & Functioning | Size structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
-  | Structure & Functioning | Size structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
-  | Structure & Functioning | Trophic Structure | **Mean Trophic Level of Community** | `meanTLCommunity()` |
-  | Structure & Functioning | Structural Change | Pelagic to Demersal biomass ratio | `biomassRatio()` | 
-  | Structure & Functioning | Structural Change | Invertebrate to Demersal biomass ratio | `biomassRatio()` | 
-  | Structure & Functioning | Ecosystem Functioning | **Community Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Large Benthivore Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Medium Benthivore Condition**  | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | Planktivore Condition | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Piscivore Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Zoopiscivore Condition** | `communityCondition()` |
-  | Stability & Resistance | Ecosystem Resistance | **Mean Lifespan** | `meanMaxAge()` |
-  | Stability & Resistance | Ecosystem Resistance | Mean Max Length (weighted by abundance) | `meanMaxLength()` |
-  | Stability & Resistance | Ecosystem Resistance | Mean Max Length (weighted by biomass) | `meanMaxLength()` |
-  | Stability & Resistance | Ecosystem Resistance | **Intrinsic Vulnerability Index of Landings** | `IVILandings()` |
-  | Stability & Resistance | Stability of Trophic Community | **Biomass per Trophic Level 2** | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Trophic Community | Biomass per Trophic Level 3 | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Trophic Community | Biomass per Trophic Level 4 | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Community Biomass | **Coefficient of Variation of Biomass** | `CVBiomass()` |
-  | Resource Potential | Potential of Community | **Biomass** | `resourcePotential()` |
-  | Resource Potential | Potential of Community | Biomass of Finfish | `resourcePotential()` |
-  | Resource Potential | Potential of Community | **Biomass of Invertebrates**  | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Clupeids | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Forage Fish | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | **Biomass of Gadoids** | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Groundfish | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | **Biomass of Flatfish** | `resourcePotential()` |
-  | Resource Potential | Potential of Indicator Species | **Biomass of Skates** | `resourcePotential()` |
-  | Resource Potential | Fishing Strategies & System Productivity | Fishing in Balance | `fishingInBalance()` |
-  | Fishing Pressure | Fishing Pressure on Community | **Fishing Pressure on Community** | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Community | Fishing Pressure on Finfish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Community | Fishing Pressure on Invertebrates | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | **Fishing Pressure on Clupeids** | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Forage Fish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Groundfish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Gadoids | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Skates | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Flatfish | `fishingPressure()` |
-  | Fishing Pressure | Distribution of Fishing Pressure | **Marine Trophic Index** | `meanTLLandings()` |
-  | Fishing Pressure | Distribution of Fishing Pressure | **Mean Trophic Level of Landings**  | `meanTLLandings()`|
-  | Fishing Pressure | Distribution of Fishing Pressure | **Diversity of Target Species** | `speciesRichness()` |
-  | Fishing Pressure | Total Landings | Landings | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Clupeids | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Forage Fish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Groundfish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Gadoids | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Finfish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Invertebrates | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Skates** | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Flatfish** | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Large Pelagics** | `landings()` |
+  | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
+  |:-----------------------|:------------------------|:---------------:|
+  | **BIODIVERSITY** |  | |
+  | Species Richness | **Margalef's Species Richness** | `margalef()` |
+  | Species Richness | Margalef's Species Richness (groundfish) | `margalef()` |
+  | Species Richness | Species Richness | `speciesRichness()` |
+  | Species Diversity | Shannon's Diversity Index | `shannon()` |
+  | Species Diversity | Hill's Diversity Index | `hillN1()` |
+  | Species Diversity | Kempton's Q | `kemptonQ()` |
+  | Species Evenness | Pielou's Species Evenness | `pielouEvenness()` |
+  | Species Evenness | Hill's Dominance | `hillN2()` |
+  | Species Evenness | **Heip's Evenness Index** | `heips()` |
+  | **STRUCTURE & FUNCTIONING** |  | |
+  | Structure: Top of Food Web | **Large Fish Indicator** | `largeFishIndicator()` |
+  | Structure: Top of Food Web | Large Species Indicator | `largeSpeciesIndicator()` |
+  | Structure: Top of Food Web | Proportion of Predatory Fish | `biomassRatio()` |
+  | Structure: Trophic Guilds | Biomass of Large Benthivores | `resourcePotential` |
+  | Structure: Trophic Guilds | Biomass of Medium Benthivores | `resourcePotential` |
+  | Structure: Trophic Guilds | Biomass of Planktivores | `resourcePotential` |
+  | Structure: Trophic Guilds | **Biomass of Piscivores** | `resourcePotential` |
+  | Structure: Trophic Guilds | **Biomass of Zoopiscivores** | `resourcePotential` |
+  | Size structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
+  | Size structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
+  | Trophic Structure | **Mean Trophic Level of Community** | `meanTLCommunity()` |
+  | Structural Change | Pelagic to Demersal biomass ratio | `biomassRatio()` | 
+  | Structural Change | Invertebrate to Demersal biomass ratio | `biomassRatio()` | 
+  | Ecosystem Functioning | **Community Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Large Benthivore Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Medium Benthivore Condition**  | `communityCondition()` |
+  | Ecosystem Functioning | Planktivore Condition | `communityCondition()` |
+  | Ecosystem Functioning | **Piscivore Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Zoopiscivore Condition** | `communityCondition()` |
+  | **STABILITY & RESISTANCE** |  | |
+  | Ecosystem Resistance | **Mean Lifespan** | `meanMaxAge()` |
+  | Ecosystem Resistance | Mean Max Length (weighted by abundance) | `meanMaxLength()` |
+  | Ecosystem Resistance | Mean Max Length (weighted by biomass) | `meanMaxLength()` |
+  | Ecosystem Resistance | **Intrinsic Vulnerability Index of Landings** | `IVILandings()` |
+  | Stability of Trophic Community | **Biomass per Trophic Level 2** | `biomassPerTL()` |
+  | Stability of Trophic Community | Biomass per Trophic Level 3 | `biomassPerTL()` |
+  | Stability of Trophic Community | Biomass per Trophic Level 4 | `biomassPerTL()` |
+  | Stability of Community Biomass | **Coefficient of Variation of Biomass** | `CVBiomass()` |
+  | **RESOURCE POTENTIAL** | | |
+  | Potential of Community | **Biomass** | `resourcePotential()` |
+  | Potential of Community | Biomass of Finfish | `resourcePotential()` |
+  | Potential of Community | **Biomass of Invertebrates** | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Clupeids | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Forage Fish | `resourcePotential()` |
+  | Potential of Fished Groups | **Biomass of Gadoids** | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Groundfish | `resourcePotential()` |
+  | Potential of Fished Groups | **Biomass of Flatfish** | `resourcePotential()` |
+  | Potential of Indicator Species | **Biomass of Skates** | `resourcePotential()` |
+  | Fishing Strategies & System Productivity | Fishing in Balance | `fishingInBalance()` |
+  | **FISHING PRESSURE** |  | |
+  | Fishing Pressure on Community | **Fishing Pressure on Community** | `fishingPressure()` |
+  | Fishing Pressure on Community | Fishing Pressure on Finfish | `fishingPressure()` |
+  | Fishing Pressure on Community | Fishing Pressure on Invertebrates | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | **Fishing Pressure on Clupeids** | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Forage Fish | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Groundfish | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Gadoids | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Skates | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Flatfish | `fishingPressure()` |
+  | Distribution of Fishing Pressure | **Marine Trophic Index** | `meanTLLandings()` |
+  | Distribution of Fishing Pressure | **Mean Trophic Level of Landings**  | `meanTLLandings()`|
+  | Distribution of Fishing Pressure | **Diversity of Target Species** | `speciesRichness()` |
+  | Total Landings | **Landings** | `landings()` |
+  | Total Landings | Landings of Clupeids | `landings()` |
+  | Total Landings | Landings of Forage Fish | `landings()` |
+  | Total Landings | Landings of Groundfish | `landings()` |
+  | Total Landings | Landings of Gadoids | `landings()` |
+  | Total Landings | Landings of Finfish | `landings()` |
+  | Total Landings | Landings of Invertebrates | `landings()` |
+  | Total Landings | **Landings of Skates** | `landings()` |
+  | Total Landings | **Landings of Flatfish** | `landings()` |
+  | Total Landings | **Landings of Large Pelagics** | `landings()` |
 
 # Data Requirements
 This section describes the data required to calculate all of the indicators in Table 1. If some data are unavailable, a subset of indicators will be calculated.
