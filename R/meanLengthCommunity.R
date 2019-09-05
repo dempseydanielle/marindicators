@@ -1,23 +1,21 @@
 #'@title Calculates the mean length of the community weighted by biomass or
-#'  abundance (Shin et al., 2010)
+#'  abundance
 #'@description This function calculates the mean length of the community
 #'  weighted by biomass or abundance for \eqn{j} areas and \eqn{i} years.
 #'@details \deqn{MeanLength = \Sigma(Length_m * metric_i)/\Sigma metric_j} where
 #'  \eqn{Length_m} is the length (cm) of an individual in size class \eqn{m},
 #'  \eqn{metric_i} is the biomass or abundance of species \eqn{i} and
-#'  \eqn{metric_j} is the total biomass or abundance of the community.
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish and
-#'  invertebrates.
+#'  \eqn{metric_j} is the total biomass or abundance of the community (Shin et
+#'  al., 2010).
 #'@inheritParams resourcePotential
 #'@inheritParams largeFishIndicator
-#'@param metric A character string indicating which column in X to use to
+#'@param metric A character string indicating which column in \code{X} to use to
 #'  calculate indicator.
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MeanLength_metric".
+#'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+#'  \code{MeanLength_metric}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  value is assigned NA.
+#'  value is assigned \code{NA}.
 #'@importFrom stats aggregate
 #'@family structure and functioning indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

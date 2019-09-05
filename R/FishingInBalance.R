@@ -1,4 +1,4 @@
-#'@title Calculates the Fishing-in-Balance Index (Pauly et al., 2000)
+#'@title Calculates the Fishing-in-Balance Index
 #'@description This function calculates the Fishing-in-Balance (FiB) Index of
 #'  fisheries landings for \eqn{j} areas and \eqn{i} years.
 #'@details Fishing-in-Balance (FiB) Index: \deqn{FiB = log(Y_k*(1/TE)^{TL_k}) -
@@ -12,26 +12,25 @@
 #'  expanded and/or bottom-up effects are occurring, and there is more catch
 #'  than expected, while a negative FiB index indicates it is likely that the
 #'  fishing impact is so high that the ecosystem function is impaired and the
-#'  ecosystem is less productive owing to excessive fishery removals.
-#'
-#'  Recommended data: Commercial fisheries landings; fish and invertebrates.
+#'  ecosystem is less productive owing to excessive fishery removals (Pauly et
+#'  al., 2000).
 #'@inheritParams meanTLLandings
-#'@param cutoff The minimum trophic level of species to include.
-#'@param TE Trophic efficiency. Default is TE = 0.1, i.e., a trophic efficiency
-#'  of 10\%.
+#'@param minTL The minimum trophic level of species to include.
+#'@param TE Trophic efficiency. Default is \code{TE = 0.1}, i.e., a trophic
+#'  efficiency of 10\%.
 #'@param base.start Year indicating the beginning of the baseline period. The
 #'  average landings and average mean trophic level of the landings over the
-#'  baseline period are used as baseline values to calculate FiB (see
-#'  Details). land must include data for the baseline period.
-#'@param base.end Year indicating the end of the baseline period. The
-#'  average landings and average mean trophic level of the landings over the
-#'  baseline period are used as baseline values to calculate FiB (see
-#'  Details). land must include data for the baseline period.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and
-#'  "FishinginBalance".
+#'  baseline period are used as baseline values to calculate FiB (see Details).
+#'  \code{land} must include data for the baseline period.
+#'@param base.end Year indicating the end of the baseline period. The average
+#'  landings and average mean trophic level of the landings over the baseline
+#'  period are used as baseline values to calculate FiB (see Details).
+#'  \code{land} must include data for the baseline period.
+#'@return Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
+#'  \code{FishinginBalance}.
 #'
 #'  If there are no observations in land for spatial scale \eqn{j} and year
-#'  \eqn{i}, indicator value is set to NA.
+#'  \eqn{i}, indicator value is set to \code{NA}.
 #'@importFrom stats aggregate
 #'@family resource potential indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -45,11 +44,11 @@
 #'  Catalina Gomez, Alida Bundy
 #'@export
 
-fishingInBalance<- function (land, TL.table, cutoff = 0, TE = 0.1,   
+fishingInBalance<- function (land, TL.table, minTL = 0, TE = 0.1,   
                              base.start, base.end, years) {
   
   mTL <- meanTLLandings(land = land, TL.table = TL.table,                  # calculate mean trophic level of landings
-                        cutoff = 0, years = c(base.start:years[length(years)])) 
+                        minTL = 0, years = c(base.start:years[length(years)])) 
   land.total <- stats::aggregate(CATCH ~ YEAR + ID, data = land, FUN = sum)  #  calculate total landings for each spatial scale and year
 	
   mTL.0 <- aggregate(MeanTL.Landings ~ ID,                                 # calculate BASELINE Mean trophic level

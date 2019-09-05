@@ -7,48 +7,46 @@
 biomassPerTL(X, TL.table, metric = "BIOMASS", TL.grouping = 1, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
-\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Entries in the "SPECIES" column should be the unique values
-of species codes in X (or a subset thereof). Other columns in TL.table will
-be ignored.}
+\item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
+\code{TL} (trophic level). Entries in the \code{SPECIES} column should be
+the unique values of species codes in \code{X} (or a subset thereof). Other
+columns in \code{TL.table} will be ignored.}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "BIOMASS".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
-biomass. For example, if TL.grouping = 1, trophic levels are binned from
-1.00 - 1.99, 2.00 - 2.99, etc. If TL.grouping = 0.5, trophic levels are
-binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default
-is TL.grouping = 1 so that biomass is aggregated over discrete trophic
-levels.}
+biomass. For example, if \code{TL.grouping = 1}, trophic levels are binned
+from 1.00 - 1.99, 2.00 - 2.99, etc. If \code{TL.grouping = 0.5}, trophic
+levels are binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99,
+etc. Default is \code{TL.grouping = 1} so that biomass is aggregated over
+discrete trophic levels.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", and the corresponding
- biomass for each trophic level grouping. For example: for TL.grouping = 1,
- function will return columns "BIOMASS_TL2", "BIOMASS_TL3", "BIOMASS_TL4".
- For TL.grouping = 0.5, function will return columns "BIOMASS_TL2",
- "BIOMASS_TL2.5", "BIOMASS_TL3", "BIOMASS_TL3.5", "BIOMASS_TL4",
- "BIOMASS_TL4.5".
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and the
+ corresponding biomass for each trophic level grouping. For example: for
+ \code{TL.grouping = 1}, function will return columns \code{BIOMASS_TL2},
+ \code{BIOMASS_TL3}, \code{BIOMASS_TL4}. For \code{TL.grouping = 0.5},
+ function will return columns \code{BIOMASS_TL2}, \code{BIOMASS_TL2.5},
+ \code{BIOMASS_TL3}, \code{BIOMASS_TL3.5}, \code{BIOMASS_TL4},
+ \code{BIOMASS_TL4.5}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
- value is assigned NA.
+ value is assigned \code{NA}.
 }
 \description{
 This function calculates the biomass per discrete trophic level
  for \eqn{j} areas and \eqn{i} years.
-}
-\details{
-Recommended data: Fishery independent survey data or model output;
- fish and invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

@@ -2,54 +2,54 @@
 % Please edit documentation in R/hillN1.R
 \name{hillN1}
 \alias{hillN1}
-\title{Calculates Hill's index of diversity (Hill, 1973)}
+\title{Calculates Hill's index of diversity}
 \usage{
 hillN1(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"ABUNDANCE" is the corresponding abundance (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{ABUNDANCE} is the
+corresponding abundance (stratified and corrected for catchability as
+required).}
 
 \item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+indicator calculation. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "ABUNDANCE".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "ABUNDANCE"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity".
+Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+ \code{HillDiversity}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
- values is assigned NA.
+ values is assigned \code{NA}.
 }
 \description{
-This function takes a dataframe of fisheries independent survey
- data and calculates Hill's index of diversity for \eqn{j} areas and \eqn{i}
- years.
+This function calculates Hill's index of diversity for \eqn{j}
+ areas and \eqn{i} years.
 }
 \details{
 Hill's N1 diversity index is the exponential of the Shannon-Weiner
  index.\deqn{HillN1 = e^{-\Sigma p_i ln( p_i )}} \eqn{p_i} is the proportion
  of the total sample contributed by the i(th) species and \eqn{S} is the
  number of species recorded in the sample. This index is sensitive to the
- number of species recorded in the sample.
-
- Recommended data: Fishery independent surveys or model output; fish and
- invertebrates
+ number of species recorded in the sample (Hill, 1973).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -71,7 +71,7 @@ Other biodiversity indicators: \code{\link{allBiodiversity}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
- Catalina Gomez, Alida Bundy
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca}, Catalina
+ Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

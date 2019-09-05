@@ -5,54 +5,54 @@
 \title{Calculates all pressure indicators}
 \usage{
 allPressure(X, land, species.table, speciesinfo.table, landings.groups,
-  FP.groups, cutoff, years)
+  FP.groups, minTL, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{species.table}{A table where the column names match the entries in
-landings.groups. Column entries are the species codes indicating the species
-from land included in each group. species.table may also include columns for
+\code{landings.groups}. Column entries are the species codes indicating the species
+from \code{land} included in each group. \code{species.table} may also include columns for
 other species groups; these will be ignored.}
 
-\item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+\item{speciesinfo.table}{A table with columns \code{SPECIES} and the corresponding
+\code{TL_LAND} (trophic level of landed species). Entries in the \code{SPECIES} column
 should be the unique values of species codes in land (or a subset thereof).
 Other columns will be ignored.}
 
 \item{landings.groups}{A vector indicating the species groups for which to
 calculate the landings. Each entry must be a character string matching the
-name of a column in species.groups. If landings.groups = NULL, no resource
+name of a column in \code{species.groups}. If \code{landings.groups = NULL}, no resource
 potential indicators will be calculated.}
 
-\item{FP.groups}{A dataframe with two columns, which must be named "group.X"
-and "group.land". Each row holds the group names to calculate the fishing
-pressure on a target group, with the numerator in column "group.land" and
-the denominator in column "group.X". Each entry must be a character string
-matching the name of a column in species.groups. If FP.groups = NULL, no
+\item{FP.groups}{A dataframe with two columns, which must be named \code{group.X}
+and \code{group.land}. Each row holds the group names to calculate the fishing
+pressure on a target group, with the numerator in column \code{group.land} and
+the denominator in column \code{group.X}. Each entry must be a character string
+matching the name of a column in species.groups. If \code{FP.groups = NULL}, no
 fishing pressure indicators will be calculated.}
 
-\item{cutoff}{A vector containing minimum trophic level to include when
-calculating the mean trophic level of the landings. Default is cutoff = c(0,
-3.25), which will return the mean trophic level of the landings and the
-marine trophic index.
-@param years A vector of years for which to calculate indicators.}
+\item{minTL}{A vector containing minimum trophic level to include when
+calculating the mean trophic level of the landings. Default is \code{minTL = c(0,
+3.25)}, which will return the mean trophic level of the landings and the
+marine trophic index.}
 
-\item{years}{A vector of years for which to calculate indicator.}
+\item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", and indicators
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and indicators
  corresponding to the arguments supplied to the function.
 }
 \description{

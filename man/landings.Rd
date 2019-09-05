@@ -7,28 +7,29 @@
 landings(land, groups, species.table = NULL, years)
 }
 \arguments{
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in species.groups.}
+column in \code{species.groups}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-returns a dataframe with three columns: "ID", "YEAR", and
- "group_Landings".
+returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
+ \code{group_Landings}.
 
  If there is no data for a given year, the indicator value is set to 0.
 }
@@ -38,8 +39,6 @@ This function calculates the commercial landings of predefined
 }
 \details{
 Calculates the total landings of predefined species groups.
-
- Recommended data: commercial fisheries landings
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

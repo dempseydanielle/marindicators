@@ -9,46 +9,50 @@ allBiodiversity(X, metric = "ABUNDANCE", group = "ALL",
   minTL = 3, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"ABUNDANCE" is the corresponding abundance (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{ABUNDANCE} is the
+corresponding abundance (stratified and corrected for catchability as
+required).}
 
 \item{metric}{A character string indicating which column in X to use to
-calculate the indicators. Default is "ABUNDANCE".}
+calculate the indicators. Default is \code{ABUNDANCE}.}
 
 \item{group}{A character string indicating the species group for which to
-calculate the indicators. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+calculate the indicators. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Entries in the "SPECIES" column should be the unique values
-of species codes in X (or a subset thereof). Other columns in TL.table are
-ignored. If TL.table = NULL, Kempton's Q will not be calculated.}
+\item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
+\code{TL} (trophic level). Entries in the \code{SPECIES} column should be
+the unique values of species codes in \code{X} (or a subset thereof). Other
+columns in \code{TL.table} are ignored. If \code{TL.table = NULL}, Kempton's
+Q will not be calculated.}
 
 \item{percentiles}{The percentiles used to determine R1 and R2 for calculating
-Kempton's Q. Default is percentiles = c(0.25, 0.75).}
+Kempton's Q. Default is \code{percentiles = c(0.25, 0.75)}.}
 
 \item{minTL}{Minimum trophic level for species included to calculate Kempton's
-Q. Default is minTL = 0.}
+Q. Default is \code{minTL = 0}.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", and indicators
- corresponding to the arguments supplied to the function.
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+ indicators corresponding to the arguments supplied to the function.
 
  If there is no data for an indicator at spatial scale \eqn{j} in year
- \eqn{i}, indicator value is assigned NA.
+ \eqn{i}, indicator value is assigned \code{NA}.
 }
 \description{
 This function calculates all (or a subset of) biodiversity

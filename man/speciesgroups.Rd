@@ -7,23 +7,26 @@
 speciesGroups(X, species.table = NULL, group)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"ABUNDANCE" is the corresponding abundance (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{ABUNDANCE} is the
+corresponding abundance (stratified and corrected for catchability as
+required).}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
 \item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+indicator calculation. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 }
 \value{
 text here

@@ -1,4 +1,4 @@
-#'@title Calculates the Large Fish Indicator (Greenstreet and Rogers, 2006)
+#'@title Calculates the Large Fish Indicator
 #'@description This function calculates the Large Fish Indicator (LFI) for
 #'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
@@ -6,26 +6,27 @@
 #'  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
 #'  describes the proportion (by weight) of the fish community that is larger
 #'  than some length threshold (default here is 35 cm, i.e., the proportion of
-#'  biomass occupying the top predator trophic level).
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish.
+#'  biomass occupying the top predator trophic level; Greenstreet and Rogers,
+#'  2006).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
-#'@param X_length A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
-#'  observation was recorded, "ID" is an area code indicating where the
-#'  observation was recorded, and "SPECIES" is a numeric code indicating the
-#'  species sampled. "LENGTH" is the length class (cm) and "BIOMASS" is the
-#'  corresponding abundance at length (stratified and corrected for catchability
-#'  as required). Species for which there are no length data should be assigned
-#'  LENGTH = -99. These observations are removed by the function.
+#'@param X_length A dataframe of fishery independent survey data with columns
+#'  \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}.
+#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+#'  area code indicating where the observation was recorded, and \code{SPECIES}
+#'  is a numeric code indicating the species sampled. \code{LENGTH} is the
+#'  length class (cm) and \code{BIOMASS} is the corresponding abundance at
+#'  length (stratified and corrected for catchability as required). Species for
+#'  which there are no length data should be assigned \code{LENGTH = -99}. These
+#'  observations are removed by the function.
 #'@param large.fish Threshold for large fish (cm). Default is 35 cm (i.e., large
-#'  fish are those with X$LENGTH >= 35 cm).
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "LargeFishIndicator".
+#'  fish are those with \code{X$LENGTH} >= 35 cm).
+#'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+#'  \code{LargeFishIndicator}.
 #'
-#'  If there are no observations of large fish or no observations in X for
-#'  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+#'  If there are no observations of large fish or no observations in \code{X}
+#'  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned
+#'  \code{NA}.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

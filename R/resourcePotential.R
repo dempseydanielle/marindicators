@@ -2,22 +2,17 @@
 #'@description This function calculates the biomass or abundance of a
 #'  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
 #'@details This indicator reflects temporal dynamics of species groups.
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish and
-#'  invertebrates.
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
 #'@param groups A vector indicating the species group(s) for which to calculate
 #'  the indicator. Each entry must be a character string matching the name of a
-#'  column in species.groups.
-#'@return Returns a dataframe with columns "ID" and "YEAR", and a column
-#'  "metric_group" (e.g. BIOMASS_FINFISH) for each entry in groups.
+#'  column in \code{species.groups}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'  column \code{metric_group} (e.g., \code{BIOMASS_FINFISH}) for each entry in
+#'  \code{groups}.
 #'
-#'  If there is no data for a given year, the indicator value will be "NA" for
-#'  that year. If biomass of species X was not captured in the survey, species X
-#'  is still likely to be present, just not detected or perhaps not recorded.
-#'  Replacing with zero would have an impact on trends, whereas treating as NA
-#'  does not.
+#'  If there is no data for a given year, the indicator value will be \code{NA}
+#'  for that year.
 #'@family resource potential indicators
 #'@family ecosystem structure and functioning indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

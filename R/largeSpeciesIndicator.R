@@ -1,25 +1,25 @@
-#'@title Calculates the Large Species Indicator (Shin et al., 2010)
+#'@title Calculates the Large Species Indicator
 #'@description This function calculates the Large Species Indicator (LSI) for
 #'  \eqn{j} areas and \eqn{i} years.
-#'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
+#'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} > 85
 #'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
-#'  and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
-#'  85 cm).
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish.
+#'  and \eqn{L_{max}} is the maximum asymptotic length in cm (here the default
+#'  is 85 cm; Shin et al., 2010).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
-#'@param lmax.table A dataframe with columns "SPECIES" and "MAXLENGTH", the
-#'  maximum recorded length of the corresponding species. Entries in the
-#'  "SPECIES" column should be the unique values of species codes in X (or a
-#'  subset thereof). Other columns in lmax.table are ignored.
+#'@param lmax.table A dataframe with columns \code{SPECIES} and
+#'  \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
+#'  Entries in the \code{SPECIES} column should be the unique values of species
+#'  codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+#'  are ignored.
 #'@param lmax The threshold for large fish (cm). Default is 85 cm (i.e., large
-#'  species are those with MAXLENGTH >= 85 cm).
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "LargeSpeciesIndicator".
+#'  species are those with \code{MAXLENGTH} >= 85 cm).
+#'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+#'  \code{LargeSpeciesIndicator}.
 #'
-#'  If there are no observations of large species or no observations in X for
-#'  spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+#'  If there are no observations of large species or no observations in \code{X}
+#'  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned
+#'  \code{NA}.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

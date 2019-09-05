@@ -3,31 +3,32 @@
 \name{meanLengthCommunity}
 \alias{meanLengthCommunity}
 \title{Calculates the mean length of the community weighted by biomass or
- abundance (Shin et al., 2010)}
+ abundance}
 \usage{
 meanLengthCommunity(X_length, metric, years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "BIOMASS". "YEAR" indicates the year the
-observation was recorded, "ID" is an area code indicating where the
-observation was recorded, and "SPECIES" is a numeric code indicating the
-species sampled. "LENGTH" is the length class (cm) and "BIOMASS" is the
-corresponding abundance at length (stratified and corrected for catchability
-as required). Species for which there are no length data should be assigned
-LENGTH = -99. These observations are removed by the function.}
+\item{X_length}{A dataframe of fishery independent survey data with columns
+\code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, and \code{SPECIES}
+is a numeric code indicating the species sampled. \code{LENGTH} is the
+length class (cm) and \code{BIOMASS} is the corresponding abundance at
+length (stratified and corrected for catchability as required). Species for
+which there are no length data should be assigned \code{LENGTH = -99}. These
+observations are removed by the function.}
 
-\item{metric}{A character string indicating which column in X to use to
+\item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and
- "MeanLength_metric".
+Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+ \code{MeanLength_metric}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
- value is assigned NA.
+ value is assigned \code{NA}.
 }
 \description{
 This function calculates the mean length of the community
@@ -37,10 +38,8 @@ This function calculates the mean length of the community
 \deqn{MeanLength = \Sigma(Length_m * metric_i)/\Sigma metric_j} where
  \eqn{Length_m} is the length (cm) of an individual in size class \eqn{m},
  \eqn{metric_i} is the biomass or abundance of species \eqn{i} and
- \eqn{metric_j} is the total biomass or abundance of the community.
-
- Recommended data: Fishery independent survey data or model output; fish and
- invertebrates.
+ \eqn{metric_j} is the total biomass or abundance of the community (Shin et
+ al., 2010).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

@@ -1,16 +1,14 @@
-#'@title Calculates Hill's species dominance (Hill, 1973)
+#'@title Calculates Hill's species dominance
 #'@description This function calculates Hill's species dominance for \eqn{j}
 #'  areas and \eqn{i} years.
 #'@details  Hill's Species Dominance (HillN2): \deqn{HillN2 = 1/\Sigma p_i^2}
 #'  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
 #'  species. HillN2 is the inverse of the Simpson's index. This index is
-#'  sensitive to the evenness of the distribution of individuals between
-#'  species.
-#'
-#'  Recommended data: Fishery independent surveys or model output; fish and
-#'  invertebrates
+#'  sensitive to the evenness of the distribution of individuals between species
+#'  (Hill, 1973).
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "HillDominance".
+#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'  \code{HillDominance}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  values is assigned NA.

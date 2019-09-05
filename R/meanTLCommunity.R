@@ -1,4 +1,4 @@
-#'@title Calculates the mean trophic level of the community (Christensen, 1998)
+#'@title Calculates the mean trophic level of the community
 #'@description This function calculates the mean trophic level of the community
 #'  weighted by biomass for \eqn{j} areas and \eqn{i} years.
 #'@details Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
@@ -7,20 +7,17 @@
 #'
 #'  This indicator is based on trophic levels of all species with available
 #'  biomass time series, weighted by annual species-specific biomass, to reflect
-#'  the structure of the community.
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish and
-#'  invertebrates.
+#'  the structure of the community (Christensen, 1998).
 #'@inheritParams biomassPerTL
-#'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level). Entries in the "SPECIES" column should be the unique
-#'  values of species codes in X (or a subset thereof). Other columns in
-#'  TL.table are ignored.
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MeanTLCommunity".
+#'@param TL.table A dataframe with columns \code{SPECIES} and the corresponding
+#'  \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
+#'  the unique values of species codes in \code{X} (or a subset thereof). Other
+#'  columns in \code{TL.table} are ignored.
+#'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+#'  \code{MeanTLCommunity}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  value is assigned NA.
+#'  value is assigned \code{NA}.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

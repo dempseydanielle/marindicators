@@ -13,19 +13,17 @@
 #'  from 1 to 100, with 100 being the most vulnerable. See Appendix 1 from
 #'  Cheung et al., 2007:
 #'  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
-#'
-#'  Recommended data: Commercial fisheries landings, fish
 #'@inheritParams landings
 #'@inheritParams CVBiomass
-#'@param IVI.table A dataframe with columns "SPECIES" and the corresponding
-#'  "IVI" (intrinsic vulnerability index). Entries in the "SPECIES" column
-#'  should be the unique values of species codes in X (or a subset thereof).
-#'  Other columns in IVI.table are ignored.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and
-#'  "IVILandings".
+#'@param IVI.table A dataframe with columns \code{SPECIES} and the corresponding
+#'  \code{IVI} (intrinsic vulnerability index). Entries in the \code{SPECIES}
+#'  column should be the unique values of species codes in \code{land} (or a
+#'  subset thereof). Other columns in \code{IVI.table} are ignored.
+#'@return Returns a dataframe with three columns: \code{ID}, "YEAR", and
+#'  \code{IVILandings}.
 #'
 #'  If there are no observations in land for spatial scale \eqn{j} in year
-#'  \eqn{i}, indicator value is assigned NA.
+#'  \eqn{i}, indicator value is assigned \code{NA}.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -35,9 +33,8 @@
 #'  estimate intrinsic extinction vulnerability of marine fishes to fishing.
 #'  Biol Conserv 124:97–111
 #'
-#'  Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007.
-#'  Intrinsic vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 -
-#'  12
+#'  Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007. Intrinsic
+#'  vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

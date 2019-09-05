@@ -1,20 +1,17 @@
-#'@title Calculates the mean maximum length of fish in the community (Shin et
-#'  al., 2005)
-#'@description This function calculates the mean maximum length of fish in
-#'  the community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
+#'@title Calculates the mean maximum length of fish in the community
+#'@description This function calculates the mean maximum length of fish in the
+#'  community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
 #'  years.
-#'@details Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
-#'  M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
-#'  \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
-#'  invertebrates).
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish.
+#'@details Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
+#'  (L_{max,i}*M_i)/\Sigma M_i} where \eqn{L_{max,i}} is the maximum asymptotic
+#'  length (cm) of species \eqn{i}, and \eqn{M_i} is biomass or abundance of
+#'  species \eqn{i} (excluding invertebrates; (Shin et al., 2005).
 #'@inheritParams largeSpeciesIndicator
-#'@return Returns a dataframe with 3 columns. "ID", "YEAR", and
-#'  "MMLength_metric".
+#'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+#'  \code{MMLength_metric}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  value is assigned NA.
+#'  value is assigned \code{NA}.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

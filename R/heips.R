@@ -1,15 +1,12 @@
-#' @title Calculates Heip's evenness index (Heip, 1974)
+#' @title Calculates Heip's evenness index 
 #' @description This function calculates Heip's evenness index (HE) of the
 #'   community for \eqn{j} areas and \eqn{i} years.
 #' @details Heip's Evenness Index (HE): \deqn{HE = (exp^{H'} - 1)/(S - 1)} where
 #'   \eqn{H'} is Shannon's index of diversity and \eqn{S} is species richness.
 #'   This index ranges from 0 to 1 and measures how equally the species richness
-#'   contributes to the total abundance or biomass of the community.
-#'
-#'   Recommended data: Fishery independent surveys or model output; fish and
-#'   invertebrates
+#'   contributes to the total abundance or biomass of the community (Heip, 1974).
 #' @inheritParams  shannon
-#' @return Returns a dataframe with 3 columns: "ID", YEAR", and "Heips".
+#' @return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and \code{Heips}.
 #'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'   value is assigned NA.

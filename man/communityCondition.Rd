@@ -2,45 +2,48 @@
 % Please edit documentation in R/communityCondition.R
 \name{communityCondition}
 \alias{communityCondition}
-\title{Calculates Fulton's Condition Index for the community (Ricker, 1975)}
+\title{Calculates Fulton's Condition Index for the community}
 \usage{
 communityCondition(X_length, groups, species.table = NULL, LenWt.table,
   years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
-observation was recorded, "ID" is an area code indicating where the
-observation was recorded, and "SPECIES" is a numeric code indicating the
-species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+\item{X_length}{A dataframe of fishery independent survey data or model
+output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
+and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, and \code{SPECIES} is a numeric code indicating the species
+sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
 corresponding abundance at length (stratified and corrected for
 catchability as required). Species for which there are no length data
-should be assigned LENGTH = -99. These observations are removed by the
-function.}
+should be assigned \code{LENGTH = -99}. These observations are removed by
+the function.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in species.groups.}
+column in \code{species.groups}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
-"YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
-fish length at the corresponding "WEIGHT" (fish weight).}
+\code{YEAR}, \code{ID}, \code{SPECIES} correspond with those columns in
+\code{X_length}. \code{LENGTH} is fish length at the corresponding
+\code{WEIGHT} (fish weight).}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with columns "ID" and "YEAR", and a column
- "CommunityCondition_group" for each entry in groups.
- 
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+  column \code{CCondition_group} for each entry in \code{groups}.
+
   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  value is assigned NA.
+  value is assigned \code{NA}.
 }
 \description{
 This function calculates Fulton's condition index for \eqn{j}
@@ -50,9 +53,8 @@ This function calculates Fulton's condition index for \eqn{j}
 Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
   A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
   the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
-  \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j}.
-
-  Recommended data: Fishery independent survey data or model output; fish.
+  \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j} (Ricker,
+  1975).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

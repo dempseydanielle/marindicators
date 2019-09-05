@@ -1,4 +1,4 @@
-#'@title Calculates Kempton's Biodiversity Index (Kempton and Taylor, 1976)
+#'@title Calculates Kempton's Biodiversity Index
 #'@description This function calculates Kempton's Biodiversity index (Q) for
 #'  \eqn{j} areas and \eqn{i} years.
 #'@details Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
@@ -9,20 +9,18 @@
 #'  groups, \eqn{p_1} and  \eqn{p_2} are the lower and upper percentiles of
 #'  interest and \eqn{R_1} and \eqn{R_2} are the corresponding lower and upper
 #'  quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2} are
-#'  defaulted to 0.25 and 0.75, respectively.
-#'
-#'  Recommended data: Fishery independent surveys or model output; fish and
-#'  invertebrates
+#'  defaulted to 0.25 and 0.75, respectively (Kempton and Taylor, 1976).
 #'@inheritParams shannon
 #'@inheritParams meanTLCommunity
 #'@param percentiles The percentiles used to determine R1 and R2. Default is
-#'  percentiles = c(0.25, 0.75).
+#'  \code{percentiles = c(0.25, 0.75)}.
 #'@param minTL Minimum trophic level for species included in the calculation.
-#'  Default is minTL = 0.
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ_minTL".
+#'  Default is \code{minTL = 0}.
+#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'  \code{KemptonQ_minTL}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  values is assigned NA.
+#'  values is assigned \code{NA}.
 #'@family biodiversity indicators
 #'@references Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
 #'  diversity index for use with ecosystem simulation models. Ecological

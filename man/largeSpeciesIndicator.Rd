@@ -2,61 +2,64 @@
 % Please edit documentation in R/largeSpeciesIndicator.R
 \name{largeSpeciesIndicator}
 \alias{largeSpeciesIndicator}
-\title{Calculates the Large Species Indicator (Shin et al., 2010)}
+\title{Calculates the Large Species Indicator}
 \usage{
 largeSpeciesIndicator(X, group, species.table = NULL, lmax.table,
   lmax = 85, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
 \item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+indicator calculation. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species. Entries in the
-"SPECIES" column should be the unique values of species codes in X (or a
-subset thereof). Other columns in lmax.table are ignored.}
+\item{lmax.table}{A dataframe with columns \code{SPECIES} and
+\code{MAXLENGTH}, the maximum recorded length of the corresponding species.
+Entries in the \code{SPECIES} column should be the unique values of species
+codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+are ignored.}
 
 \item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with MAXLENGTH >= 85 cm).}
+species are those with \code{MAXLENGTH} >= 85 cm).}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "BIOMASS".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and
- "LargeSpeciesIndicator".
+Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+ \code{LargeSpeciesIndicator}.
 
- If there are no observations of large species or no observations in X for
- spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+ If there are no observations of large species or no observations in \code{X}
+ for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned
+ \code{NA}.
 }
 \description{
 This function calculates the Large Species Indicator (LSI) for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} >85
+Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} > 85
  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
- and \eqn{L_{max}} is the maximum asymptotic length (cm; here the default is
- 85 cm).
-
- Recommended data: Fishery independent survey data or model output; fish.
+ and \eqn{L_{max}} is the maximum asymptotic length in cm (here the default
+ is 85 cm; Shin et al., 2010).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

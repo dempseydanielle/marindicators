@@ -5,59 +5,61 @@
 \title{Calculates all resource potential indicators}
 \usage{
 allPotential(X, land, species.table, speciesinfo.table, resource.groups,
-  cutoff = 0, TE = 0.1, base.start, base.end, years)
+  minTL = 0, TE = 0.1, base.start, base.end, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{species.table}{A table where the column names match the entries in
 resource.groups. Column entries are the species codes indicating the species
-from X included in each group. species.table may also include columns for
+from \code{X} included in each group. \code{species.table} may also include columns for
 other species groups; these will be ignored.}
 
-\item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+\item{speciesinfo.table}{A table with columns \code{SPECIES} and the corresponding
+\code{TL_LAND} (trophic level of landed species). Entries in the \code{SPECIES} column
 should be the unique values of species codes in land (or a subset thereof).
 Other columns will be ignored.}
 
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
-matching the name of a column in species.groups. If resource.groups = NULL,
-the resource potential indicators will not be calculated.}
+matching the name of a column in \code{species.groups}. If
+\code{resource.groups = NULL}, the resource potential indicators will not be
+calculated.}
 
-\item{cutoff}{The minimum trophic level of species to include to calculate
-FiB. If cutoff = NULL, FiB wll not be calculated.}
+\item{minTL}{The minimum trophic level of species to include to calculate
+FiB. If \code{minTL = NULL}, FiB wll not be calculated.}
 
-\item{TE}{Trophic efficiency, used to calculate FiB. Default is TE = 0.1,
-i.e., a trophic efficiency of 10\%. If TE = NULL, FiB wll not be calculated.}
+\item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE = 0.1},
+i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not be calculated.}
 
 \item{base.start}{Year indicating the beginning of the baseline period for
 calculating FiB. The average landings and average mean trophic level of the
 landings over the baseline period are used as baseline values to calculate
-FiB (see Details). land must include data for the baseline period. If
-base.start = NULL, FiB wll not be calculated.}
+FiB (see Details). \code{land} must include data for the baseline period. If
+\code{base.start = NULL}, FiB wll not be calculated.}
 
 \item{base.end}{Year indicating the end of the baseline period for calculating
 FiB. The average landings and average mean trophic level of the landings
 over the baseline period are used as baseline values to calculate FiB (see
-Details). land must include data for the baseline period. If base.end =
-NULL, FiB wll not be calculated.}
+Details). \code{land} must include data for the baseline period. If \code{base.end =
+NULL}, FiB wll not be calculated.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", and indicators
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and indicators
  corresponding to the arguments supplied to the function.
 }
 \description{

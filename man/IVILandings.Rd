@@ -7,29 +7,29 @@
 IVILandings(land, IVI.table, negative = FALSE, years)
 }
 \arguments{
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
-\item{IVI.table}{A dataframe with columns "SPECIES" and the corresponding
-"IVI" (intrinsic vulnerability index). Entries in the "SPECIES" column
-should be the unique values of species codes in X (or a subset thereof).
-Other columns in IVI.table are ignored.}
+\item{IVI.table}{A dataframe with columns \code{SPECIES} and the corresponding
+\code{IVI} (intrinsic vulnerability index). Entries in the \code{SPECIES}
+column should be the unique values of species codes in \code{land} (or a
+subset thereof). Other columns in \code{IVI.table} are ignored.}
 
-\item{negative}{If negative = TRUE, the indicator will be multiplied by -1 so
-that the expected response is to decrease with increasing fishing pressure.
-Default is negative = FALSE.}
+\item{negative}{If \code{negative = TRUE}, the indicator will be multiplied by
+-1 so that the expected response is to decrease with increasing fishing
+pressure. Default is \code{negative = FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and
- "IVILandings".
+Returns a dataframe with three columns: \code{ID}, "YEAR", and
+ \code{IVILandings}.
 
  If there are no observations in land for spatial scale \eqn{j} in year
- \eqn{i}, indicator value is assigned NA.
+ \eqn{i}, indicator value is assigned \code{NA}.
 }
 \description{
 This calculates the intrinsic vulnerability index (IVI) of the
@@ -48,8 +48,6 @@ The weighted intrinsic vulnerability index (IVI) of species in the
  from 1 to 100, with 100 being the most vulnerable. See Appendix 1 from
  Cheung et al., 2007:
  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
-
- Recommended data: Commercial fisheries landings, fish
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -60,9 +58,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  estimate intrinsic extinction vulnerability of marine fishes to fishing.
  Biol Conserv 124:97–111
 
- Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007.
- Intrinsic vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 -
- 12
+ Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007. Intrinsic
+ vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
 }
 \seealso{
 Other stability and resistance indicators: \code{\link{CVBiomass}},

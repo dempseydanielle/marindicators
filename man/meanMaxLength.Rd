@@ -2,59 +2,60 @@
 % Please edit documentation in R/meanMaxLength.R
 \name{meanMaxLength}
 \alias{meanMaxLength}
-\title{Calculates the mean maximum length of fish in the community (Shin et
- al., 2005)}
+\title{Calculates the mean maximum length of fish in the community}
 \usage{
 meanMaxLength(X, group, species.table = NULL, lmax.table, metric, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
 \item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+indicator calculation. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{lmax.table}{A dataframe with columns "SPECIES" and "MAXLENGTH", the
-maximum recorded length of the corresponding species. Entries in the
-"SPECIES" column should be the unique values of species codes in X (or a
-subset thereof). Other columns in lmax.table are ignored.}
+\item{lmax.table}{A dataframe with columns \code{SPECIES} and
+\code{MAXLENGTH}, the maximum recorded length of the corresponding species.
+Entries in the \code{SPECIES} column should be the unique values of species
+codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+are ignored.}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "BIOMASS".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. "ID", "YEAR", and
- "MMLength_metric".
+Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
+ \code{MMLength_metric}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
- value is assigned NA.
+ value is assigned \code{NA}.
 }
 \description{
-This function calculates the mean maximum length of fish in
- the community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
+This function calculates the mean maximum length of fish in the
+ community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
  years.
 }
 \details{
-Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma (L_{max,i}*M_i)/\Sigma
- M_i} where \eqn{L_{max,i}} is the maximum asymptotic length (cm) of species
- \eqn{i}, and \eqn{M_i} is biomass or abundance of species \eqn{i} (excluding
- invertebrates).
-
- Recommended data: Fishery independent survey data or model output; fish.
+Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
+ (L_{max,i}*M_i)/\Sigma M_i} where \eqn{L_{max,i}} is the maximum asymptotic
+ length (cm) of species \eqn{i}, and \eqn{M_i} is biomass or abundance of
+ species \eqn{i} (excluding invertebrates; (Shin et al., 2005).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

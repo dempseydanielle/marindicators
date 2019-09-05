@@ -3,35 +3,36 @@
 \name{meanTLLandings}
 \alias{meanTLLandings}
 \title{Calculates the mean trophic level or marine trophic index of fisheries
- landings (Pauly et al., 1998)}
+ landings}
 \usage{
-meanTLLandings(land, TL.table, cutoff = 0, years)
+meanTLLandings(land, TL.table, minTL = 0, years)
 }
 \arguments{
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
-\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding
-"TL_LAND" (trophic level). Entries in the "SPECIES" column should be the
-unique values of species codes in land (or a subset thereof).  Other columns
-in TL.table are ignored.}
+\item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
+\code{TL_LAND} (trophic level). Entries in the \code{SPECIES} column should
+be the unique values of species codes in \code{land} (or a subset thereof).
+Other columns in \code{TL.table} are ignored.}
 
-\item{cutoff}{The minimum trophic level of species to include. Set cutoff = 0
-to calculate the mean trophic level of the landings; Set cutoff = 3.25 to
-calculate the marine trophic index. Default is cutoff = 0.}
+\item{minTL}{The minimum trophic level of species to include. Set \code{minTL
+= 0} to calculate the mean trophic level of the landings; Set \code{minTL =
+3.25} to calculate the marine trophic index. Default is \code{minTL = 0}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and if cutoff =
- 0: "MeanTL.Landings", if cutoff = 3.25: "MarineTophicIndex.Landings", or if
- cutoff is a different value: "MeanTL.Landings_cutoff".
+Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and if
+ \code{minTL = 0}: \code{MeanTL.Landings}, if \code{minTL = 3.25}:
+ \code{MTI.Landings}, or if \code{minTL} is a different value:
+ \code{MeanTL.Landings_minTL}.
 
  If there are no observations in land for spatial scale \eqn{j} in year
- \eqn{i}, indicator value is set to NA.
+ \eqn{i}, indicator value is set to \code{NA}.
 }
 \description{
 This function calculates the mean trophic level or marine trophic
@@ -48,18 +49,16 @@ Mean trophic level of fisheries landings \eqn{TL_{Land}}:
  This indicator captures the average trophic level of the species exploited
  in the fishery. In general, it reflects a transition from long-lived, high
  trophic level, demersal fish toward short-lived, low trophic level pelagic
- fish and invertebrates.
+ fish and invertebrates (Pauly et al., 1998).
 
  The marine trophic index is calculated similarly to \eqn{TL_{Land}}, but
  only includes species with trophic level greater than or equal to an
- explicitly stated trophic level cutoff. For instance, Pauly and Watson 2005
- adopted a trophic level cutoff of 3.25 to emphasize changes in the relative
+ explicitly stated trophic level minTL. For instance, Pauly and Watson 2005
+ adopted a trophic level minTL of 3.25 to emphasize changes in the relative
  abundance of higher trophic level fishes, and Shannon et al. 2014 used a
- cutoff of 4.0 to examine changes within the apex predator community. If used
+ minTL of 4.0 to examine changes within the apex predator community. If used
  in this way, this indicator highlights changes in the relative abundance of
- the more threatened high-trophic level fishes.
-
- Recommended data: Commercial fisheries landings; fish and invertebrates.
+ the more threatened high-trophic level fishes (Pauly et al., 1998).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

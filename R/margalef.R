@@ -1,19 +1,16 @@
-#' @title Calculates Margalef's species richness (Margalef, 1958)
+#' @title Calculates Margalef's species richness
 #' @description This function calculates Margalef's species richness for \eqn{j}
 #'   areas and \eqn{i} years.
 #' @details Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
 #'   \eqn{S_y} is the count of the number of species recorded in all trawl
 #'   catches collected in year \eqn{y}. \eqn{F} is the total count of all
-#'   individuals caught in year \eqn{y}.
-#'
-#'   Recommended data: Fishery independent surveys or model output; fish and
-#'   invertebrates.
+#'   individuals caught in year \eqn{y} (Margalef, 1958).
 #' @inheritParams shannon
-#' @return Returns a dataframe with 3 columns: "ID", YEAR", and
-#'   "MargalefRichness_group".
+#' @return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'   \code{MargalefRichness_group}.
 #'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'   values is assigned NA.
+#'   values is assigned \code{NA}.
 #' @family biodiversity indicators
 #' @references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -21,7 +18,7 @@
 #'
 #'   Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'  Catalina Gomez, Alida Bundy
+#'   Catalina Gomez, Alida Bundy
 #' @export
 
 margalef <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {

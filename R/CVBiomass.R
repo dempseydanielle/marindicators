@@ -1,35 +1,31 @@
-#'@title Calculates the the coefficient of variation of the biomass (Blanchard
-#'  and Boucher, 2001)
+#'@title Calculates the the coefficient of variation of the biomass
 #'@description This function calculates the coefficient of variation of the
 #'  biomass for \eqn{j} areas and \eqn{i} years.
 #'@details The coefficient of variation of the biomass (CVBiomass) was estimated
-#'  as a five year moving average: \deqn{CVBiomass = (1/n)\Sigma(SD_i/Xbar_i)}
-#'  The sum is from year \eqn{i} to year \eqn{i+n-1}, where \eqn{n=5} for the
-#'  5-year moving average. \eqn{SD_i} is the standard deviation of the mean
-#'  biomass and \eqn{Xbar_i} is the mean biomass for year \eqn{i}.
+#'  as an n-year moving average (Blanchard and Boucher, 2001):
 #'
-#'  Data used: Fishery independent survey data or model output; fish and
-#'  invertebrates
+#'  CVbiomass = sd(total biomass for the past n years)/mean(total biomass for
+#'  the past n years)
 #'@inheritParams biomassPerTL
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", and "BIOMASS". "YEAR" indicates the year the observation was recorded,
-#'  "ID" is an area code indicating where the observation was recorded, and
-#'  "BIOMASS" is the total recorded biomass (stratified and corrected for
-#'  catchability as required). (Note: the function will sum biomass split over
-#'  an additional "SPECIES" column for each year, i.e., X can be the same
-#'  dataframe used in functions biomassPerTL(), largeSpeciesIndicator(),
-#'  meanMaxAge(), meanTLCommunity(), predatoryFish(), and resourcePotential()).
-#'@param window Window for the moving average. The first and last floor(window/2)
-#'  values of the indicator are assigned NA to account for the moving average.
-#'  Default is window = 5 years.
-#'@param negative If negative = TRUE, the indicator will be multiplied by -1 so
-#'  that the expected response is to decrease with increasing fishing pressure.
-#'  Default is negative = FALSE.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and "CVBiomass".
+#'@param X A dataframe of fishery independent survey data or model output with
+#'  columns \code{YEAR}, \code{ID}, and \code{BIOMASS}.  \code{YEAR} indicates
+#'  the year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, and \code{BIOMASS} is the total recorded
+#'  biomass (stratified and corrected for catchability as required). (Note: if
+#'  \code{X} has an additional \code{SPECIES} column, the function will
+#'  automatically calculate the total biomass).
+#'@param window Window for the moving average. The first and last
+#'  \code{floor(window/2)} values of the indicator are assigned \code{NA} to
+#'  account for the moving average. Default is \code{window = 5} years.
+#'@param negative If \code{negative = TRUE}, the indicator will be multiplied by
+#'  -1 so that the expected response is to decrease with increasing fishing
+#'  pressure. Default is \code{negative = FALSE}.
+#'@return Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
+#'  \code{CVBiomass}.
 #'
-#'  The first and last floor(window/2) values of the indicator are assigned NA
-#'  to account for the moving average. If there is no data for spatial scale
-#'  \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+#'  The first and last \code{floor(window/2)} values of the indicator are
+#'  assigned \code{NA} to account for the moving average. If there is no data
+#'  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

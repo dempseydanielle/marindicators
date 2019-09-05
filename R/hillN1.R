@@ -1,20 +1,17 @@
-#'@title Calculates Hill's index of diversity (Hill, 1973)
-#'@description This function takes a dataframe of fisheries independent survey
-#'  data and calculates Hill's index of diversity for \eqn{j} areas and \eqn{i}
-#'  years.
+#'@title Calculates Hill's index of diversity
+#'@description This function calculates Hill's index of diversity for \eqn{j}
+#'  areas and \eqn{i} years.
 #'@details Hill's N1 diversity index is the exponential of the Shannon-Weiner
 #'  index.\deqn{HillN1 = e^{-\Sigma p_i ln( p_i )}} \eqn{p_i} is the proportion
 #'  of the total sample contributed by the i(th) species and \eqn{S} is the
 #'  number of species recorded in the sample. This index is sensitive to the
-#'  number of species recorded in the sample.
-#'
-#'  Recommended data: Fishery independent surveys or model output; fish and
-#'  invertebrates
+#'  number of species recorded in the sample (Hill, 1973).
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "HillDiversity".
+#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'  \code{HillDiversity}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  values is assigned NA.
+#'  values is assigned \code{NA}.
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -26,8 +23,8 @@
 #'
 #'  Hill MO. 1973. Diversity and evenness: a unifying notation and its
 #'  consequences. Ecology 54: 427-431.
-#'@author Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'  Catalina Gomez, Alida Bundy
+#'@author Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca}, Catalina
+#'  Gomez, Alida Bundy
 #'@export
 
 

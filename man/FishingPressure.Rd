@@ -7,43 +7,46 @@
 fishingPressure(X, land, FP.groups, species.table = NULL, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{FP.groups}{A dataframe with two columns, which must be named
-"group.land" and "group.X". Each row holds the group names to calculate the
-fishing pressure on a target group, with the numerator in column
-"group.land" and the denominator in column "group.X".  Each entry must be a
-character string matching the name of a column in species.groups.}
+\code{group.land} and \code{group.X}. Each row holds the group names to
+calculate the fishing pressure on a target group, with the numerator in
+column \code{group.land} and the denominator in column {group.X}.  Each
+entry must be a character string matching the name of a column in
+\code{species.groups}.}
 
 \item{species.table}{A table with column names that match the entries of
-FP.groups. The entries in each column are the species codes for the species
-included in that group. Species codes should be a subset of those in the
-"SPECIES" column of land (for group.land) or X (for group.X). species.table
-may also include columns for other species groups; these will be ignored.
-Note that an entry in FP.groups could be "ALL". In this case, a column in
-species.table named "ALL" is not required; the function will automatically
-include all species in land and/or X.}
+\code{FP.groups}. The entries in each column are the species codes for the
+species included in that group. Species codes should be a subset of those in
+the \code{SPECIES} column of \code{land} (for \code{group.land}) or \code{X}
+(for \code{group.X}). \code{species.table} may also include columns for
+other species groups; these will be ignored. Note that an entry in
+\code{FP.groups} could be \code{"ALL"}. In this case, a column in
+\code{species.table} named \code{"ALL"} is not required; the function will
+automatically include all species in \code{land} and/or \code{X}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and a column for
- each target group, named "FP_group.X".
+Returns a dataframe with columns: \code{ID} and \code{YEAR}, and a
+ column for each target group, named \code{FP_group.X}.
 
- If biomass of group is NA and landings of group are zero, fishing pressure
- is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
- set to NA.
+ If biomass of \code{group.X} is \code{NA} and landings of \code{group.land}
+ are zero, fishing pressure is set to zero. Otherwise, if biomass of
+ \code{group.X} is \code{NA}, fishing pressure is set to \code{NA}.
 }
 \description{
 This function calculates fishing pressure on a fished group for
@@ -58,9 +61,6 @@ Fishing pressure (FP): \deqn{FP = Y_{FG}/B_{FG}} where \eqn{B_{FG}}
  at the ecosystem level. Change in this indicator can result from change in
  \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change
  in the same direction, exploitation rate may not change.
-
- Recommended data: \eqn{B_{FG}}: fishery independent survey data,
- \eqn{Y_{FG}}: commercial fisheries landings
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

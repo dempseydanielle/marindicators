@@ -10,24 +10,26 @@
 #'  calculated.
 #'@inheritParams shannon
 #'@param metric A character string indicating which column in X to use to
-#'  calculate the indicators. Default is "ABUNDANCE".
+#'  calculate the indicators. Default is \code{ABUNDANCE}.
 #'@param group A character string indicating the species group for which to
-#'  calculate the indicators. If group = "ALL", all species will be included;
-#'  otherwise, group should match a column name in species.table.
-#'@param TL.table A dataframe with columns "SPECIES" and the corresponding "TL"
-#'  (trophic level). Entries in the "SPECIES" column should be the unique values
-#'  of species codes in X (or a subset thereof). Other columns in TL.table are
-#'  ignored. If TL.table = NULL, Kempton's Q will not be calculated.
+#'  calculate the indicators. If \code{group = "ALL"}, all species will be
+#'  included; otherwise, \code{group} should match a column name in
+#'  \code{species.table}.
+#'@param TL.table A dataframe with columns \code{SPECIES} and the corresponding
+#'  \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
+#'  the unique values of species codes in \code{X} (or a subset thereof). Other
+#'  columns in \code{TL.table} are ignored. If \code{TL.table = NULL}, Kempton's
+#'  Q will not be calculated.
 #'@param percentiles The percentiles used to determine R1 and R2 for calculating
-#'  Kempton's Q. Default is percentiles = c(0.25, 0.75).
+#'  Kempton's Q. Default is \code{percentiles = c(0.25, 0.75)}.
 #'@param minTL Minimum trophic level for species included to calculate Kempton's
-#'  Q. Default is minTL = 0.
+#'  Q. Default is \code{minTL = 0}.
 #'@param years A vector of years for which to calculate indicators.
-#'@return Returns a dataframe with columns "ID", "YEAR", and indicators
-#'  corresponding to the arguments supplied to the function.
+#'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+#'  indicators corresponding to the arguments supplied to the function.
 #'
 #'  If there is no data for an indicator at spatial scale \eqn{j} in year
-#'  \eqn{i}, indicator value is assigned NA.
+#'  \eqn{i}, indicator value is assigned \code{NA}.
 #'@importFrom stats aggregate
 #'@family biodiversity indicators
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},

@@ -1,4 +1,4 @@
-#'@title Calculates Pielou's Species Evenness (Pielou, 1966)
+#'@title Calculates Pielou's Species Evenness
 #'@description This function takes a dataframe of fisheries independent survey
 #'  data and calculates Pielou's Species Evenness for \eqn{j} areas and \eqn{i}
 #'  years.
@@ -6,15 +6,13 @@
 #'  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
 #'  species and \eqn{S} is the number of species recorded in the sample.
 #'  Pielou's index is the Shannon-Weiner index computed for the sample \eqn{S}
-#'  and represents a measure of evenness of the community.
-#'
-#'  Recommended data: Fishery independent surveys or model output; fish and
-#'  invertebrates.
+#'  and represents a measure of evenness of the community (Pielou, 1966).
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns: "ID", YEAR", and "PielouEvenness".
+#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'  \code{PielouEvenness}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  values is assigned NA.
+#'  values is assigned \code{NA}.
 #'@family biodiversity indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

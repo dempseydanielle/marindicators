@@ -1,41 +1,40 @@
 #'@title Calculates species richness of the community or the diversity of target
-#'  species (Hurlbert, 1971)
+#'  species
 #'@description This function counts the number of species recorded in fishery
 #'  independent survey data or commercial landings data for \eqn{i} years and
 #'  \eqn{j} areas.
 #'@details Two useful species richness indicators are: "Species Richness" (S) of
-#'  the surveyed community in an area and "Diversity of the Target Species"
-#'  (TS) in the commercial fishery, which is a measure of the distribution of
-#'  fishing pressure.
+#'  the surveyed community in an area and "Diversity of the Target Species" (TS)
+#'  in the commercial fishery, which is a measure of the distribution of fishing
+#'  pressure.
 #'
 #'  Species richness (\eqn{S_y}) is the count of the number of species recorded
-#'  in all research vessel trawl surveys collected in year \eqn{y} for a given area.
-#'
-#'  Recommended data: Fishery independent surveys or model output; fish and
-#'  invertebrates
+#'  in all research vessel trawl surveys collected in year \eqn{y} for a given
+#'  area (Hurlbert, 1971).
 #'
 #'  The diversity of the target species for year y (\eqn{TS_y}) is the count of
 #'  the number of target species recorded in all trawl catches collected in that
 #'  year for a given area.
-#'
-#'  Recommended data: commercial fisheries landings; fish and invertebrates.
 #'@inheritParams shannon
-#'@param X A dataframe of fishery independent survey data OR commercial landings
-#'  data. Fishery independent suvey data has columns "YEAR", "ID", "SPECIES",
-#'  and "ABUNDANCE" and/or "BIOMASS". "YEAR" indicates the year the observation
-#'  was recorded, "ID" is an area code indicating where the observation was
-#'  recorded, "SPECIES" is a numeric code indicating the species sampled, and
-#'  "ABUNDANCE"/"BIOMASS" is the corresponding abundance/biomass (stratified and
-#'  corrected for catchability as required).
+#'@param X A dataframe of fishery independent survey data or model output OR
+#'  commercial landings data. Fishery independent suvey data has columns
+#'  \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE} and/or
+#'  \code{BIOMASS}. \code{YEAR} indicates the year the observation was recorded,
+#'  \code{ID} is an area code indicating where the observation was recorded,
+#'  \code{SPECIES} is a numeric code indicating the species sampled, and
+#'  \code{ABUNDANCE}/\code{BIOMASS} is the corresponding abundance/biomass
+#'  (stratified and corrected for catchability as required).
 #'
-#'  Similarly,  commercial landings data will have columns "YEAR", "ID",
-#'  "SPECIES" are as above, and "CATCH" is the corresponding landed weight.
-#'@return Returns a dataframe with 3 columns. If metric = "BIOMASS" or metric =
-#'  "ABUNDANCE", columns will be named "ID", "YEAR", "SpeciesRichness". If metrc
-#'  = "CATCH", columns will be named  "ID", "YEAR", "DiversityTargetSpp".
+#'  Similarly, commercial landings data should have columns \code{YEAR},
+#'  \code{ID}, \code{SPECIES} are as above, and \code{CATCH} is the
+#'  corresponding landed weight.
+#'@return Returns a dataframe with 3 columns. If \code{metric = "BIOMASS"} or
+#'  \code{metric = "ABUNDANCE"}, columns will be named \code{ID}, \code{YEAR},
+#'  \code{SpeciesRichness}. If \code{metric = "CATCH"}, columns will be named
+#'  \code{ID}, \code{YEAR}, \code{DiversityTargetSpp}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  values is assigned NA.
+#'  values is assigned \code{NA}.
 #'@family biodiversity indicators
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

@@ -12,33 +12,35 @@
 #'@inheritParams communityCondition
 #'@param maxlength.group A character string indicating the species group for
 #'  which to calculate the mean maximum length of fish in the community. Must be
-#'  set to "ALL" or match a column name in species.table. If maxlength.group =
-#'  NULL, the mean maximum length will not be calculated.
+#'  set to \code{"ALL"} or match a column name in \code{species.table}. If
+#'  \code{maxlength.group = NULL}, the mean maximum length will not be
+#'  calculated.
 #'@param species.table A table where the column names match the entries in
-#'  resource.groups, ratio.groups, and/or condition.groups. Column entries are
-#'  the species codes indicating the species from X (or X_length) included in
-#'  each group. species.table may also include columns for other species groups;
-#'  these will be ignored.
-#'@param speciesinfo.table A table with columns "SPECIES" and the corresponding
-#'  "MAXAGE", "MAXLENGTH" and "TL" (maximum recorded age, maximum recorded
-#'  length and trophic level). Entries in the "SPECIES" column should be the
-#'  unique values of species codes in X (or a subset thereof). Other columns
-#'  will be ignored.
+#'  \code{resource.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
+#'  Column entries are the species codes indicating the species from \code{X}
+#'  (or \code{X_length}) included in each group. \code{species.table} may also
+#'  include columns for other species groups; these will be ignored.
+#'@param speciesinfo.table A table with columns \code{SPECIES} and the
+#'  corresponding \code{MAXAGE}, \code{MAXLENGTH} and \code{TL} (maximum
+#'  recorded age, maximum recorded length and trophic level). Entries in the
+#'  \code{SPECIES} column should be the unique values of species codes in
+#'  \code{X} (or a subset thereof). Other columns will be ignored.
 #'@param TL.grouping Size of the trophic level bin for which to aggregrate
 #'  biomass when calculating biomass per trophic level. For example, if
-#'  TL.grouping = 1, trophic levels are binned from 1.00 - 1.99, 2.00 - 2.99,
-#'  etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49, 1.50
-#'  - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is TL.grouping = 1 so that
-#'  biomass is aggregated over discrete trophic levels.
+#'  \code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
+#'  2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
+#'  1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
+#'  1} so that biomass is aggregated over discrete trophic levels.
 #'@param window Window for the moving average used to calculate CV of the
-#'  biomass. The first and last floor(window/2) values of the indicator are
-#'  assigned NA to account for the moving average. Default is window = 5 years.
-#'@param negative If negative = TRUE, the CVBiomass will be multiplied by -1 so
-#'  that the expected response is to decrease with increasing fishing pressure.
-#'  Default is negative = FALSE.
+#'  biomass. The first and last \code{floor(window/2)} values of the indicator
+#'  are assigned \code{NA} to account for the moving average. Default is
+#'  \code{window = 5} years.
+#'@param negative If \code{negative = TRUE}, the CVBiomass will be multiplied by
+#'  -1 so that the expected response is to decrease with increasing fishing
+#'  pressure. Default is \code{negative = FALSE}.
 #'@param years A vector of years for which to calculate indicators.
-#'@return Returns a dataframe with columns "ID", "YEAR", and indicators
-#'  corresponding to the arguments supplied to the function.
+#'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+#'  indicators corresponding to the arguments supplied to the function.
 #'@family stability and resistance indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

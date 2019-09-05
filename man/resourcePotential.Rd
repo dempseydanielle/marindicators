@@ -8,38 +8,38 @@ resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
   years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in species.groups.}
+column in \code{species.groups}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "BIOMASS".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with columns "ID" and "YEAR", and a column
- "metric_group" (e.g. BIOMASS_FINFISH) for each entry in groups.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+ column \code{metric_group} (e.g., \code{BIOMASS_FINFISH}) for each entry in
+ \code{groups}.
 
- If there is no data for a given year, the indicator value will be "NA" for
- that year. If biomass of species X was not captured in the survey, species X
- is still likely to be present, just not detected or perhaps not recorded.
- Replacing with zero would have an impact on trends, whereas treating as NA
- does not.
+ If there is no data for a given year, the indicator value will be \code{NA}
+ for that year.
 }
 \description{
 This function calculates the biomass or abundance of a
@@ -47,9 +47,6 @@ This function calculates the biomass or abundance of a
 }
 \details{
 This indicator reflects temporal dynamics of species groups.
-
- Recommended data: Fishery independent survey data or model output; fish and
- invertebrates.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

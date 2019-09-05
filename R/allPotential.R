@@ -13,27 +13,27 @@
 #'@inheritParams fishingInBalance
 #'@param species.table A table where the column names match the entries in
 #'  resource.groups. Column entries are the species codes indicating the species
-#'  from X included in each group. species.table may also include columns for
+#'  from \code{X} included in each group. \code{species.table} may also include columns for
 #'  other species groups; these will be ignored.
-#'@param speciesinfo.table A table with columns "SPECIES" and the corresponding
-#'  "TL_LAND" (trophic level of landed species). Entries in the "SPECIES" column
+#'@param speciesinfo.table A table with columns \code{SPECIES} and the corresponding
+#'  \code{TL_LAND} (trophic level of landed species). Entries in the \code{SPECIES} column
 #'  should be the unique values of species codes in land (or a subset thereof).
 #'  Other columns will be ignored.
-#'@param cutoff The minimum trophic level of species to include to calculate
-#'  FiB. If cutoff = NULL, FiB wll not be calculated.
-#'@param TE Trophic efficiency, used to calculate FiB. Default is TE = 0.1,
-#'  i.e., a trophic efficiency of 10\%. If TE = NULL, FiB wll not be calculated.
+#'@param minTL The minimum trophic level of species to include to calculate
+#'  FiB. If \code{minTL = NULL}, FiB wll not be calculated.
+#'@param TE Trophic efficiency, used to calculate FiB. Default is \code{TE = 0.1},
+#'  i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not be calculated.
 #'@param base.start Year indicating the beginning of the baseline period for
 #'  calculating FiB. The average landings and average mean trophic level of the
 #'  landings over the baseline period are used as baseline values to calculate
-#'  FiB (see Details). land must include data for the baseline period. If
-#'  base.start = NULL, FiB wll not be calculated.
+#'  FiB (see Details). \code{land} must include data for the baseline period. If
+#'  \code{base.start = NULL}, FiB wll not be calculated.
 #'@param base.end Year indicating the end of the baseline period for calculating
 #'  FiB. The average landings and average mean trophic level of the landings
 #'  over the baseline period are used as baseline values to calculate FiB (see
-#'  Details). land must include data for the baseline period. If base.end =
-#'  NULL, FiB wll not be calculated.
-#'@return Returns a dataframe with columns "ID", "YEAR", and indicators
+#'  Details). \code{land} must include data for the baseline period. If \code{base.end =
+#'  NULL}, FiB wll not be calculated.
+#'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and indicators
 #'  corresponding to the arguments supplied to the function.
 #'@family ecosystem structure and function indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -46,7 +46,7 @@
 
 allPotential <- function(X, land, 
                          species.table, speciesinfo.table, 
-                         resource.groups, cutoff = 0,
+                         resource.groups, minTL = 0,
                          TE = 0.1, base.start, base.end, years){
   
   if("BIOMASS" %in% colnames(X)) {
@@ -69,10 +69,10 @@ allPotential <- function(X, land,
   }
 
   # Fishing in Balance
-  if("CATCH" %in% colnames(land) & length(TE) > 0 & length(cutoff) >0
+  if("CATCH" %in% colnames(land) & length(TE) > 0 & length(minTL) >0
      &length(base.start) > 0 & length(base.end) >0){
     FIB = fishingInBalance(land, TE = TE,  base.start = base.start, base.end = base.end, 
-                          TL.table = speciesinfo.table,  cutoff = cutoff,  years = years)
+                          TL.table = speciesinfo.table,  minTL = minTL,  years = years)
     
     inds <- merge(inds, FIB)
   }

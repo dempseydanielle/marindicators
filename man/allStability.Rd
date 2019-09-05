@@ -9,66 +9,70 @@ allStability(X, X_length, land, maxlength.group, species.table,
   years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"BIOMASS" is the corresponding biomass (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{BIOMASS} is the
+corresponding biomass (stratified and corrected for catchability as
+required).}
 
-\item{X_length}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
-observation was recorded, "ID" is an area code indicating where the
-observation was recorded, and "SPECIES" is a numeric code indicating the
-species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+\item{X_length}{A dataframe of fishery independent survey data or model
+output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
+and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, and \code{SPECIES} is a numeric code indicating the species
+sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
 corresponding abundance at length (stratified and corrected for
 catchability as required). Species for which there are no length data
-should be assigned LENGTH = -99. These observations are removed by the
-function.}
+should be assigned \code{LENGTH = -99}. These observations are removed by
+the function.}
 
-\item{land}{A dataframe of commercial landings data with columns "YEAR", "ID",
-"SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-"ID" is an area code indicating where the landing was recorded, "SPECIES" is
-a numeric code indicating the species landed, and "CATCH" is the
-corresponding landed weight.}
+\item{land}{A dataframe of commercial landings data with columns \code{YEAR},
+\code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+the landing was recorded, \code{ID} is an area code indicating where the
+landing was recorded, \code{SPECIES} is a numeric code indicating the
+species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{maxlength.group}{A character string indicating the species group for
 which to calculate the mean maximum length of fish in the community. Must be
-set to "ALL" or match a column name in species.table. If maxlength.group =
-NULL, the mean maximum length will not be calculated.}
+set to \code{"ALL"} or match a column name in \code{species.table}. If
+\code{maxlength.group = NULL}, the mean maximum length will not be
+calculated.}
 
 \item{species.table}{A table where the column names match the entries in
-resource.groups, ratio.groups, and/or condition.groups. Column entries are
-the species codes indicating the species from X (or X_length) included in
-each group. species.table may also include columns for other species groups;
-these will be ignored.}
+\code{resource.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
+Column entries are the species codes indicating the species from \code{X}
+(or \code{X_length}) included in each group. \code{species.table} may also
+include columns for other species groups; these will be ignored.}
 
-\item{speciesinfo.table}{A table with columns "SPECIES" and the corresponding
-"MAXAGE", "MAXLENGTH" and "TL" (maximum recorded age, maximum recorded
-length and trophic level). Entries in the "SPECIES" column should be the
-unique values of species codes in X (or a subset thereof). Other columns
-will be ignored.}
+\item{speciesinfo.table}{A table with columns \code{SPECIES} and the
+corresponding \code{MAXAGE}, \code{MAXLENGTH} and \code{TL} (maximum
+recorded age, maximum recorded length and trophic level). Entries in the
+\code{SPECIES} column should be the unique values of species codes in
+\code{X} (or a subset thereof). Other columns will be ignored.}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
 biomass when calculating biomass per trophic level. For example, if
-TL.grouping = 1, trophic levels are binned from 1.00 - 1.99, 2.00 - 2.99,
-etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49, 1.50
-- 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is TL.grouping = 1 so that
-biomass is aggregated over discrete trophic levels.}
+\code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
+2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
+1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
+1} so that biomass is aggregated over discrete trophic levels.}
 
 \item{window}{Window for the moving average used to calculate CV of the
-biomass. The first and last floor(window/2) values of the indicator are
-assigned NA to account for the moving average. Default is window = 5 years.}
+biomass. The first and last \code{floor(window/2)} values of the indicator
+are assigned \code{NA} to account for the moving average. Default is
+\code{window = 5} years.}
 
-\item{negative}{If negative = TRUE, the CVBiomass will be multiplied by -1 so
-that the expected response is to decrease with increasing fishing pressure.
-Default is negative = FALSE.}
+\item{negative}{If \code{negative = TRUE}, the CVBiomass will be multiplied by
+-1 so that the expected response is to decrease with increasing fishing
+pressure. Default is \code{negative = FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns "ID", "YEAR", and indicators
- corresponding to the arguments supplied to the function.
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+ indicators corresponding to the arguments supplied to the function.
 }
 \description{
 This function calculates all (or a subset) of the stability and

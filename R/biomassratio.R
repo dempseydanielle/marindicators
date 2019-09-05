@@ -12,34 +12,33 @@
 #'
 #'  Other useful biomass \eqn{(B)} ratios indicators include:
 #'  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
-#'
-#'  Recommended data: Fishery independent survey data or model output; fish and
-#'  invertebrates.
 #'@inheritParams resourcePotential
-#'@param X A dataframe of fishery independent survey data with columns "YEAR",
-#'  "ID", "SPECIES", and "BIOMASS". "YEAR" indicates the year the observation
-#'  was recorded, "ID" is an area code indicating where the observation was
-#'  recorded, "SPECIES" is a numeric code indicating the species sampled, and
-#'  "BIOMASS" is the corresponding biomass (stratified and corrected for
-#'  catchability as required).
-#'@param ratio.groups A dataframe with two columns, which must be named "group1"
-#'  and "group2". Each row holds the group names for one biomass ratio, with the
-#'  numerator in column "group1" and the denominator in column "group2".  Each
-#'  entry must be a character string matching the name of a column in
-#'  species.groups.
+#'@param X A dataframe of fishery independent survey data or model output with
+#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
+#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+#'  area code indicating where the observation was recorded, \code{SPECIES} is a
+#'  numeric code indicating the species sampled, and \code{BIOMASS} is the
+#'  corresponding biomass (stratified and corrected for catchability as
+#'  required).
+#'@param ratio.groups A dataframe with two columns, which must be named
+#'  \code{group1} and \code{group2}. Each row holds the group names for one
+#'  biomass ratio, with the numerator in column \code{group1} and the
+#'  denominator in column \code{group2}. Each entry must be a character string
+#'  matching the name of a column in \code{species.groups}.
 #'@param species.table A table with column names that match the entries of
-#'  ratio.groups. The entries in each column are the species codes for the
-#'  species included in that group. Species codes should be a subset of those in
-#'  the "SPECIES" column of X. species.table may also include columns for other
-#'  species groups; these will be ignored. Note that an entry in ratio.groups
-#'  could be "ALL". In this case, a column in species.table named "ALL" is not
-#'  required; the function will automatically include all species in X.
-#'@return Returns a dataframe with columns "ID" and "YEAR", and a column for
-#'  each biomass ratio, named after the entries in ratio.groups, e.g.
-#'  "group1_group2".
+#'  \code{ratio.groups}. The entries in each column are the species codes for
+#'  the species included in that group. Species codes should be a subset of
+#'  those in the \code{SPECIES} column of \code{X}. \code{species.table} may
+#'  also include columns for other species groups; these will be ignored. Note
+#'  that an entry in \code{ratio.groups} could be \code{"ALL"}. In this case, a
+#'  column in \code{species.table} named \code{"ALL"} is not required; the
+#'  function will automatically include all species in \code{X}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'  column for each biomass ratio, named after the entries in ratio.groups, e.g.
+#'  \code{group1_group2}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'  values is assigned NA.
+#'  values is assigned \code{NA}.
 #'@family ecosystem structure and function indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

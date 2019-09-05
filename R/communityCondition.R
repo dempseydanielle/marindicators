@@ -1,30 +1,31 @@
-#' @title Calculates Fulton's Condition Index for the community (Ricker, 1975)
+#' @title Calculates Fulton's Condition Index for the community
 #' @description This function calculates Fulton's condition index for \eqn{j}
 #'   areas and \eqn{i} years.
 #' @details Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
 #'   A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
 #'   the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
-#'   \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j}.
-#'
-#'   Recommended data: Fishery independent survey data or model output; fish.
+#'   \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j} (Ricker,
+#'   1975).
 #' @inheritParams resourcePotential
-#' @param X_length A dataframe of fishery independent survey data with columns "YEAR",
-#'   "ID", "SPECIES", "LENGTH", and "ABUNDANCE". "YEAR" indicates the year the
-#'   observation was recorded, "ID" is an area code indicating where the
-#'   observation was recorded, and "SPECIES" is a numeric code indicating the
-#'   species sampled. "LENGTH" is the length class (cm) and "ABUNDANCE" is the
+#' @param X_length A dataframe of fishery independent survey data or model
+#'   output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
+#'   and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+#'   recorded, \code{ID} is an area code indicating where the observation was
+#'   recorded, and \code{SPECIES} is a numeric code indicating the species
+#'   sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
 #'   corresponding abundance at length (stratified and corrected for
 #'   catchability as required). Species for which there are no length data
-#'   should be assigned LENGTH = -99. These observations are removed by the
-#'   function.
+#'   should be assigned \code{LENGTH = -99}. These observations are removed by
+#'   the function.
 #' @param LenWt.table A table of annual length at weight data with 5 columns.
-#'   "YEAR", "ID", "SPECIES" correspond with those columns in X_length. "LENGTH" is
-#'   fish length at the corresponding "WEIGHT" (fish weight).
-#' @return Returns a dataframe with columns "ID" and "YEAR", and a column
-#'  "CommunityCondition_group" for each entry in groups.
-#'  
+#'   \code{YEAR}, \code{ID}, \code{SPECIES} correspond with those columns in
+#'   \code{X_length}. \code{LENGTH} is fish length at the corresponding
+#'   \code{WEIGHT} (fish weight).
+#' @return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'   column \code{CCondition_group} for each entry in \code{groups}.
+#'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-#'   value is assigned NA.
+#'   value is assigned \code{NA}.
 #' @family ecosystem structure and function indicators
 #' @references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -79,10 +80,10 @@ communityCondition <- function(X_length, groups, species.table = NULL, LenWt.tab
              Z <- merge(X.ij, W, by = c('ID', 'SPECIES','LENGTH'), all.y = T)      # . . . merge them
              inx.na <- which(is.na(Z$ABUNDANCE))                                   # index of where Z$metric is NA
              
-             if(nrow(Z) > length(inx.na)){                                            # if all of the rows of Z$metric are NA, then set ind.i to NA
+             if(nrow(Z) > length(inx.na)){                                         # if all of the rows of Z$metric are NA, then set ind.i to NA
                
                Z <- merge(Z, aggregate(ABUNDANCE~ID, data = Z, FUN = sum), by = 'ID') # add a column of total abundance (same for each row)
-               Z$K <- Z$WEIGHT / Z$LENGTH^3*100                                               # calculate K for each species
+               Z$K <- Z$WEIGHT / Z$LENGTH^3*100                                       # calculate K for each species
                
                ind.i <- aggregate(Z$K*Z$ABUNDANCE.x/Z$ABUNDANCE.y ~ ID, data = Z, FUN = sum)   # calculate Fulton's condition index
                ind.i  <- ind.i[,2]
@@ -95,7 +96,7 @@ communityCondition <- function(X_length, groups, species.table = NULL, LenWt.tab
       } # end of year loop
     } # end of area ID loop
     
-    name.ind <- paste("CommunityCondition_", groups[k], sep = "")  # name indicator metric_TL.i
+    name.ind <- paste("CCondition_", groups[k], sep = "")  # name indicator metric_TL.i
     names(ind.k) = c("ID", "YEAR", name.ind)                       # name the ind dataframe
     ind.k <- ind.k[order(ind.k$ID), ]                              # order by ID to be consistent with other functions
     

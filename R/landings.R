@@ -2,16 +2,14 @@
 #'@description This function calculates the commercial landings of predefined
 #'  speceies groups for \eqn{j} areas and \eqn{i} years.
 #'@details Calculates the total landings of predefined species groups.
-#'
-#'  Recommended data: commercial fisheries landings
 #'@inheritParams resourcePotential
-#'@param land A dataframe of commercial landings data with columns "YEAR", "ID",
-#'  "SPECIES" and "CATCH". "YEAR" indicates the year the landing was recorded,
-#'  "ID" is an area code indicating where the landing was recorded, "SPECIES" is
-#'  a numeric code indicating the species landed, and "CATCH" is the
-#'  corresponding landed weight.
-#'@return returns a dataframe with three columns: "ID", "YEAR", and
-#'  "group_Landings".
+#'@param land A dataframe of commercial landings data with columns \code{YEAR},
+#'  \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+#'  the landing was recorded, \code{ID} is an area code indicating where the
+#'  landing was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species landed, and \code{CATCH} is the corresponding landed weight.
+#'@return returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
+#'  \code{group_Landings}.
 #'
 #'  If there is no data for a given year, the indicator value is set to 0.
 #'@family fishing pressure indicators

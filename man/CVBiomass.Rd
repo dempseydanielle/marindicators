@@ -2,37 +2,36 @@
 % Please edit documentation in R/CVBiomass.R
 \name{CVBiomass}
 \alias{CVBiomass}
-\title{Calculates the the coefficient of variation of the biomass (Blanchard
- and Boucher, 2001)}
+\title{Calculates the the coefficient of variation of the biomass}
 \usage{
 CVBiomass(X, window = 5, negative = FALSE, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", and "BIOMASS". "YEAR" indicates the year the observation was recorded,
-"ID" is an area code indicating where the observation was recorded, and
-"BIOMASS" is the total recorded biomass (stratified and corrected for
-catchability as required). (Note: the function will sum biomass split over
-an additional "SPECIES" column for each year, i.e., X can be the same
-dataframe used in functions biomassPerTL(), largeSpeciesIndicator(),
-meanMaxAge(), meanTLCommunity(), predatoryFish(), and resourcePotential()).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, and \code{BIOMASS}.  \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, and \code{BIOMASS} is the total recorded
+biomass (stratified and corrected for catchability as required). (Note: if
+\code{X} has an additional \code{SPECIES} column, the function will
+automatically calculate the total biomass).}
 
-\item{window}{Window for the moving average. The first and last floor(window/2)
-values of the indicator are assigned NA to account for the moving average.
-Default is window = 5 years.}
+\item{window}{Window for the moving average. The first and last
+\code{floor(window/2)} values of the indicator are assigned \code{NA} to
+account for the moving average. Default is \code{window = 5} years.}
 
-\item{negative}{If negative = TRUE, the indicator will be multiplied by -1 so
-that the expected response is to decrease with increasing fishing pressure.
-Default is negative = FALSE.}
+\item{negative}{If \code{negative = TRUE}, the indicator will be multiplied by
+-1 so that the expected response is to decrease with increasing fishing
+pressure. Default is \code{negative = FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with three columns: "ID", "YEAR", and "CVBiomass".
+Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
+ \code{CVBiomass}.
 
- The first and last floor(window/2) values of the indicator are assigned NA
- to account for the moving average. If there is no data for spatial scale
- \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+ The first and last \code{floor(window/2)} values of the indicator are
+ assigned \code{NA} to account for the moving average. If there is no data
+ for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
 This function calculates the coefficient of variation of the
@@ -40,13 +39,10 @@ This function calculates the coefficient of variation of the
 }
 \details{
 The coefficient of variation of the biomass (CVBiomass) was estimated
- as a five year moving average: \deqn{CVBiomass = (1/n)\Sigma(SD_i/Xbar_i)}
- The sum is from year \eqn{i} to year \eqn{i+n-1}, where \eqn{n=5} for the
- 5-year moving average. \eqn{SD_i} is the standard deviation of the mean
- biomass and \eqn{Xbar_i} is the mean biomass for year \eqn{i}.
+ as an n-year moving average (Blanchard and Boucher, 2001):
 
- Data used: Fishery independent survey data or model output; fish and
- invertebrates
+ CVbiomass = sd(total biomass for the past n years)/mean(total biomass for
+ the past n years)
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

@@ -2,51 +2,55 @@
 % Please edit documentation in R/kemptonQ.R
 \name{kemptonQ}
 \alias{kemptonQ}
-\title{Calculates Kempton's Biodiversity Index (Kempton and Taylor, 1976)}
+\title{Calculates Kempton's Biodiversity Index}
 \usage{
 kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, group,
   species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data with columns "YEAR",
-"ID", "SPECIES", and "ABUNDANCE". "YEAR" indicates the year the observation
-was recorded, "ID" is an area code indicating where the observation was
-recorded, "SPECIES" is a numeric code indicating the species sampled, and
-"ABUNDANCE" is the corresponding abundance (stratified and corrected for
-catchability as required).}
+\item{X}{A dataframe of fishery independent survey data or model output with
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, \code{SPECIES} is a
+numeric code indicating the species sampled, and \code{ABUNDANCE} is the
+corresponding abundance (stratified and corrected for catchability as
+required).}
 
-\item{TL.table}{A dataframe with columns "SPECIES" and the corresponding "TL"
-(trophic level). Entries in the "SPECIES" column should be the unique
-values of species codes in X (or a subset thereof). Other columns in
-TL.table are ignored.}
+\item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
+\code{TL} (trophic level). Entries in the \code{SPECIES} column should be
+the unique values of species codes in \code{X} (or a subset thereof). Other
+columns in \code{TL.table} are ignored.}
 
 \item{percentiles}{The percentiles used to determine R1 and R2. Default is
-percentiles = c(0.25, 0.75).}
+\code{percentiles = c(0.25, 0.75)}.}
 
 \item{minTL}{Minimum trophic level for species included in the calculation.
-Default is minTL = 0.}
+Default is \code{minTL = 0}.}
 
 \item{group}{A character string indicating which species to include in the
-indicator calculation. If group = "ALL", all species will be included;
-otherwise, group should match a column name in species.table.}
+indicator calculation. If \code{group = "ALL"}, all species will be
+included; otherwise, \code{group} should match a column name in
+\code{species.table}.}
 
-\item{species.table}{If group does not equal "ALL", species.table is a table
-with at least one column, where the column name is the string group, and the
-column entries are the species codes indicating the species from X to
-include in the calculation. species.table may also include columns for other
-species groups; these will be ignored. If group = "ALL", this table is not
-required. Default is species.table = NULL.}
+\item{species.table}{If \code{group} does not equal \code{"ALL"},
+\code{species.table} is a table with at least one column, where the column
+name is the string \code{group}, and the column entries are the species
+codes indicating the species from \code{X} to include in the calculation.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. If \code{group = "ALL"}, this table is not required.
+Default is \code{species.table = NULL}.}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate indicator. Default is "ABUNDANCE".}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate indicator. Default is \code{metric = "ABUNDANCE"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: "ID", YEAR", and "KemptonQ_minTL".
+Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+ \code{KemptonQ_minTL}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
- values is assigned NA.
+ values is assigned \code{NA}.
 }
 \description{
 This function calculates Kempton's Biodiversity index (Q) for
@@ -61,10 +65,7 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
  groups, \eqn{p_1} and  \eqn{p_2} are the lower and upper percentiles of
  interest and \eqn{R_1} and \eqn{R_2} are the corresponding lower and upper
  quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2} are
- defaulted to 0.25 and 0.75, respectively.
-
- Recommended data: Fishery independent surveys or model output; fish and
- invertebrates
+ defaulted to 0.25 and 0.75, respectively (Kempton and Taylor, 1976).
 }
 \references{
 Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species

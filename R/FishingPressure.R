@@ -9,30 +9,29 @@
 #'  at the ecosystem level. Change in this indicator can result from change in
 #'  \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change
 #'  in the same direction, exploitation rate may not change.
-#'
-#'  Recommended data: \eqn{B_{FG}}: fishery independent survey data,
-#'  \eqn{Y_{FG}}: commercial fisheries landings
 #'@inheritParams landings
 #'@inheritParams resourcePotential
 #'@param FP.groups A dataframe with two columns, which must be named
-#'  "group.land" and "group.X". Each row holds the group names to calculate the
-#'  fishing pressure on a target group, with the numerator in column
-#'  "group.land" and the denominator in column "group.X".  Each entry must be a
-#'  character string matching the name of a column in species.groups.
+#'  \code{group.land} and \code{group.X}. Each row holds the group names to
+#'  calculate the fishing pressure on a target group, with the numerator in
+#'  column \code{group.land} and the denominator in column {group.X}.  Each
+#'  entry must be a character string matching the name of a column in
+#'  \code{species.groups}.
 #'@param species.table A table with column names that match the entries of
-#'  FP.groups. The entries in each column are the species codes for the species
-#'  included in that group. Species codes should be a subset of those in the
-#'  "SPECIES" column of land (for group.land) or X (for group.X). species.table
-#'  may also include columns for other species groups; these will be ignored.
-#'  Note that an entry in FP.groups could be "ALL". In this case, a column in
-#'  species.table named "ALL" is not required; the function will automatically
-#'  include all species in land and/or X.
-#'@return Returns a dataframe with three columns: "ID", "YEAR", and a column for
-#'  each target group, named "FP_group.X".
+#'  \code{FP.groups}. The entries in each column are the species codes for the
+#'  species included in that group. Species codes should be a subset of those in
+#'  the \code{SPECIES} column of \code{land} (for \code{group.land}) or \code{X}
+#'  (for \code{group.X}). \code{species.table} may also include columns for
+#'  other species groups; these will be ignored. Note that an entry in
+#'  \code{FP.groups} could be \code{"ALL"}. In this case, a column in
+#'  \code{species.table} named \code{"ALL"} is not required; the function will
+#'  automatically include all species in \code{land} and/or \code{X}.
+#'@return Returns a dataframe with columns: \code{ID} and \code{YEAR}, and a
+#'  column for each target group, named \code{FP_group.X}.
 #'
-#'  If biomass of group is NA and landings of group are zero, fishing pressure
-#'  is set to zero. Otherwise, if biomass of group is NA, fishing pressure is
-#'  set to NA.
+#'  If biomass of \code{group.X} is \code{NA} and landings of \code{group.land}
+#'  are zero, fishing pressure is set to zero. Otherwise, if biomass of
+#'  \code{group.X} is \code{NA}, fishing pressure is set to \code{NA}.
 #'
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
