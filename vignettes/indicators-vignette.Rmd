@@ -30,7 +30,7 @@ n.digits <- 2
 # Motivation
 A comprehensive evaluation and selection of robust ecological indicators is one of the key steps in the process of implementing an Ecosystem Approach to fisheries management and to track progress towards meeting ecosystem goals. The "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017) developed an Indicator Selection Guidance Framework (Fig. 1) to select and evaluate potential indicators for ecosystem monitoring and assessment at different spatial scales using established selection criteria. 
 
-![Figure 1. Indicator Selection Guidance Framework](Figure 1.png)
+![Figure 1. Indicator Selection Guidance Framework](Figure1.png)
 
 The framework was successfully tested for the Scotian Shelf Biogregion. Four ecosystem attributes and one pressure were defined in Step 1: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, over 100 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators (Table 1), and the quantitative screening and redundancy analysis in Steps 5 and 6 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fisheries independent and dependent data (Table 1). For more information, including attribute and sub-attribute definitions and the methods used to select the final suite of indicators, please refer to the guidance framework document (Bundy, Gomez, and Cook, 2017).
 

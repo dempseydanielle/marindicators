@@ -14,3 +14,4 @@ data/
 *.pdf
 *.zip
 Example/
+inst/doc
