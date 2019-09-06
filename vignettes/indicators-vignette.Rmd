@@ -37,84 +37,89 @@ The framework was successfully tested for the Scotian Shelf Biogregion. Four eco
 The `indicators` package provides functions to calculate the suite of marine ecosystem indicators screened in Step 4 of the guidance framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values.
 
 
-Table 1: `indicators` function to calculate each of the 68 indicators screened for the Scotian Shelf in Step 4 of the Guidance Framework. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
+Table 1: `indicators` function to calculate each of the 68 indicators screened for the Scotian Shelf in Step 4 of the Guidance Framework. Ecosystem attributes and pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
 
-  | **ATTRIBUTE** | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
-  |:-------------------|:-----------------------|:------------------------|:---------------:|
-  | Biodiversity | Species Richness | **Margalef's Species Richness** | `margalef()` |
-  | Biodiversity | Species Richness | Margalef's Species Richness (groundfish) | `margalef()` |
-  | Biodiversity | Species Richness | Species Richness | `speciesRichness()` |
-  | Biodiversity | Species Diversity | Shannon's Diversity Index | `shannon()` |
-  | Biodiversity | Species Diversity | Hill's Diversity Index | `hillN1()` |
-  | Biodiversity | Species Diversity | Kempton's Q | `kemptonQ()` |
-  | Biodiversity | Species Evenness | Pielou's Species Evenness | `pielouEvenness()` |
-  | Biodiversity | Species Evenness | Hill's Dominance | `hillN2()` |
-  | Biodiversity | Species Evenness | **Heip's Evenness Index** | `heips()` |
-  | Structure & Functioning | Structure: Top of Food Web | **Large Fish Indicator** | `largeFishIndicator()` |
-  | Structure & Functioning | Structure: Top of Food Web | Large Species Indicator | `largeSpeciesIndicator()` |
-  | Structure & Functioning | Structure: Top of Food Web | Proportion of Predatory Fish | `biomassRatio()` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Large Benthivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Medium Benthivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | Biomass of Planktivores | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | **Biomass of Piscivores** | `resourcePotential` |
-  | Structure & Functioning | Structure: Trophic Guilds | **Biomass of Zoopiscivores** | `resourcePotential` |
-  | Structure & Functioning | Size structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
-  | Structure & Functioning | Size structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
-  | Structure & Functioning | Trophic Structure | **Mean Trophic Level of Community** | `meanTLCommunity()` |
-  | Structure & Functioning | Structural Change | Pelagic to Demersal biomass ratio | `biomassRatio()` | 
-  | Structure & Functioning | Structural Change | Invertebrate to Demersal biomass ratio | `biomassRatio()` | 
-  | Structure & Functioning | Ecosystem Functioning | **Community Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Large Benthivore Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Medium Benthivore Condition**  | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | Planktivore Condition | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Piscivore Condition** | `communityCondition()` |
-  | Structure & Functioning | Ecosystem Functioning | **Zoopiscivore Condition** | `communityCondition()` |
-  | Stability & Resistance | Ecosystem Resistance | **Mean Lifespan** | `meanMaxAge()` |
-  | Stability & Resistance | Ecosystem Resistance | Mean Max Length (weighted by abundance) | `meanMaxLength()` |
-  | Stability & Resistance | Ecosystem Resistance | Mean Max Length (weighted by biomass) | `meanMaxLength()` |
-  | Stability & Resistance | Ecosystem Resistance | **Intrinsic Vulnerability Index of Landings** | `IVILandings()` |
-  | Stability & Resistance | Stability of Trophic Community | **Biomass per Trophic Level 2** | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Trophic Community | Biomass per Trophic Level 3 | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Trophic Community | Biomass per Trophic Level 4 | `biomassPerTL()` |
-  | Stability & Resistance | Stability of Community Biomass | **Coefficient of Variation of Biomass** | `CVBiomass()` |
-  | Resource Potential | Potential of Community | **Biomass** | `resourcePotential()` |
-  | Resource Potential | Potential of Community | Biomass of Finfish | `resourcePotential()` |
-  | Resource Potential | Potential of Community | **Biomass of Invertebrates**  | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Clupeids | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Forage Fish | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | **Biomass of Gadoids** | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | Biomass of Groundfish | `resourcePotential()` |
-  | Resource Potential | Potential of Fished Groups | **Biomass of Flatfish** | `resourcePotential()` |
-  | Resource Potential | Potential of Indicator Species | **Biomass of Skates** | `resourcePotential()` |
-  | Resource Potential | Fishing Strategies & System Productivity | Fishing in Balance | `fishingInBalance()` |
-  | Fishing Pressure | Fishing Pressure on Community | **Fishing Pressure on Community** | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Community | Fishing Pressure on Finfish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Community | Fishing Pressure on Invertebrates | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | **Fishing Pressure on Clupeids** | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Forage Fish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Groundfish | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Gadoids | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Skates | `fishingPressure()` |
-  | Fishing Pressure | Fishing Pressure on Fished Groups | Fishing Pressure on Flatfish | `fishingPressure()` |
-  | Fishing Pressure | Distribution of Fishing Pressure | **Marine Trophic Index** | `meanTLLandings()` |
-  | Fishing Pressure | Distribution of Fishing Pressure | **Mean Trophic Level of Landings**  | `meanTLLandings()`|
-  | Fishing Pressure | Distribution of Fishing Pressure | **Diversity of Target Species** | `speciesRichness()` |
-  | Fishing Pressure | Total Landings | Landings | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Clupeids | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Forage Fish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Groundfish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Gadoids | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Finfish | `landings()` |
-  | Fishing Pressure | Total Landings | Landings of Invertebrates | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Skates** | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Flatfish** | `landings()` |
-  | Fishing Pressure | Total Landings | **Landings of Large Pelagics** | `landings()` |
+  | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
+  |:-----------------------|:------------------------|:---------------:|
+  | **BIODIVERSITY** |  | |
+  | Species Richness | **Margalef's Species Richness** | `margalef()` |
+  | Species Richness | Margalef's Species Richness (groundfish) | `margalef()` |
+  | Species Richness | Species Richness | `speciesRichness()` |
+  | Species Diversity | Shannon's Diversity Index | `shannon()` |
+  | Species Diversity | Hill's Diversity Index | `hillN1()` |
+  | Species Diversity | Kempton's Q | `kemptonQ()` |
+  | Species Evenness | Pielou's Species Evenness | `pielouEvenness()` |
+  | Species Evenness | Hill's Dominance | `hillN2()` |
+  | Species Evenness | **Heip's Evenness Index** | `heips()` |
+  | **STRUCTURE & FUNCTIONING** |  | |
+  | Structure: Top of Food Web | **Large Fish Indicator** | `largeFishIndicator()` |
+  | Structure: Top of Food Web | Large Species Indicator | `largeSpeciesIndicator()` |
+  | Structure: Top of Food Web | Proportion of Predatory Fish | `biomassRatio()` |
+  | Structure: Trophic Guilds | Biomass of Large Benthivores | `resourcePotential()` |
+  | Structure: Trophic Guilds | Biomass of Medium Benthivores | `resourcePotential()` |
+  | Structure: Trophic Guilds | Biomass of Planktivores | `resourcePotential()` |
+  | Structure: Trophic Guilds | **Biomass of Piscivores** | `resourcePotential()` |
+  | Structure: Trophic Guilds | **Biomass of Zoopiscivores** | `resourcePotential()` |
+  | Size structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
+  | Size structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
+  | Trophic Structure | **Mean Trophic Level of Community** | `meanTLCommunity()` |
+  | Structural Change | Pelagic to Demersal biomass ratio | `biomassRatio()` | 
+  | Structural Change | Invertebrate to Demersal biomass ratio | `biomassRatio()` | 
+  | Ecosystem Functioning | **Community Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Large Benthivore Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Medium Benthivore Condition**  | `communityCondition()` |
+  | Ecosystem Functioning | Planktivore Condition | `communityCondition()` |
+  | Ecosystem Functioning | **Piscivore Condition** | `communityCondition()` |
+  | Ecosystem Functioning | **Zoopiscivore Condition** | `communityCondition()` |
+  | **STABILITY & RESISTANCE** |  | |
+  | Ecosystem Resistance | **Mean Lifespan** | `meanMaxAge()` |
+  | Ecosystem Resistance | Mean Max Length (weighted by abundance) | `meanMaxLength()` |
+  | Ecosystem Resistance | Mean Max Length (weighted by biomass) | `meanMaxLength()` |
+  | Ecosystem Resistance | **Intrinsic Vulnerability Index of Landings** | `IVILandings()` |
+  | Stability of Trophic Community | **Biomass per Trophic Level 2** | `biomassPerTL()` |
+  | Stability of Trophic Community | Biomass per Trophic Level 3 | `biomassPerTL()` |
+  | Stability of Trophic Community | Biomass per Trophic Level 4 | `biomassPerTL()` |
+  | Stability of Community Biomass | **Coefficient of Variation of Biomass** | `CVBiomass()` |
+  | **RESOURCE POTENTIAL** | | |
+  | Potential of Community | **Biomass** | `resourcePotential()` |
+  | Potential of Community | Biomass of Finfish | `resourcePotential()` |
+  | Potential of Community | **Biomass of Invertebrates** | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Clupeids | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Forage Fish | `resourcePotential()` |
+  | Potential of Fished Groups | **Biomass of Gadoids** | `resourcePotential()` |
+  | Potential of Fished Groups | Biomass of Groundfish | `resourcePotential()` |
+  | Potential of Fished Groups | **Biomass of Flatfish** | `resourcePotential()` |
+  | Potential of Indicator Species | **Biomass of Skates** | `resourcePotential()` |
+  | Fishing Strategies & System Productivity | Fishing in Balance | `fishingInBalance()` |
+  | **FISHING PRESSURE** |  | |
+  | Fishing Pressure on Community | **Fishing Pressure on Community** | `fishingPressure()` |
+  | Fishing Pressure on Community | Fishing Pressure on Finfish | `fishingPressure()` |
+  | Fishing Pressure on Community | Fishing Pressure on Invertebrates | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | **Fishing Pressure on Clupeids** | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Forage Fish | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Groundfish | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Gadoids | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Skates | `fishingPressure()` |
+  | Fishing Pressure on Fished Groups | Fishing Pressure on Flatfish | `fishingPressure()` |
+  | Distribution of Fishing Pressure | **Marine Trophic Index** | `meanTLLandings()` |
+  | Distribution of Fishing Pressure | **Mean Trophic Level of Landings**  | `meanTLLandings()`|
+  | Distribution of Fishing Pressure | **Diversity of Target Species** | `speciesRichness()` |
+  | Total Landings | **Landings** | `landings()` |
+  | Total Landings | Landings of Clupeids | `landings()` |
+  | Total Landings | Landings of Forage Fish | `landings()` |
+  | Total Landings | Landings of Groundfish | `landings()` |
+  | Total Landings | Landings of Gadoids | `landings()` |
+  | Total Landings | Landings of Finfish | `landings()` |
+  | Total Landings | Landings of Invertebrates | `landings()` |
+  | Total Landings | **Landings of Skates** | `landings()` |
+  | Total Landings | **Landings of Flatfish** | `landings()` |
+  | Total Landings | **Landings of Large Pelagics** | `landings()` |
 
 # Data Requirements
-This section describes the data required to calculate all of the indicators in Table 1. If some data are unavailable, a subset of indicators will be calculated.
+This section describes the data required to calculate all of the indicators in Table 1. If some data are unavailable, a subset of indicators can be calculated.
 
 ## Fishery-independent data
-**X** is a dataframe of fishery independent survey data with columns `YEAR`, `ID`, `SPECIES`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, `SPECIES` is a numeric code indicating the species sampled, and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass (stratified and corrected for catchability as required).
+**X** is a dataframe of fishery-independent survey data with columns `YEAR`, `ID`, `SPECIES`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, `SPECIES` is a numeric code indicating the species sampled, and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass (stratified and corrected for catchability as required).
 
 ```{r, echo = FALSE}
 X1 <- X[X$YEAR == 2014 & X$ID == "AREA1", ]
@@ -136,10 +141,10 @@ X_show$ABUNDANCE <- formatC(X_show$ABUNDANCE, format = "e", digits = n.digits)
 
 X_show
 ```
-Indicators calculated using `X` (among other arguments): Heip's Evenness Index, Hill's N1, Hills' N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of species groups, Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
+Indicators calculated using `X` (among other arguments): Heip's Evenness Index, Hill's N1, Hill's N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of Species Groups, Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
 
 
-**X_length** is a dataframe of fishery independent survey data with columns `YEAR`, `ID`, `SPECIES`, `LENGTH`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). As with `X`, `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, and `SPECIES` is a numeric code indicating the species sampled. `LENGTH` is the length class (cm) and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned `LENGTH` = -99. These observations are removed by the function(s).
+**X_length** is a dataframe of fishery-independent survey data with columns `YEAR`, `ID`, `SPECIES`, `LENGTH`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). As with `X`, `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, and `SPECIES` is a numeric code indicating the species sampled. `LENGTH` is the length class (cm) and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned `LENGTH = -99`. These observations are removed by the function(s).
 
 ```{r, echo = FALSE}
 X_length <- X_length[-which(X_length$LENGTH == -99), ]
@@ -166,7 +171,7 @@ X_length_show
 Indicators calculated using `X_length` (among other arguments): Community Condition, Large Fish Indicator, Mean Length.
 
 ## Fishery-dependent data
-**land** is a dataframe of fishery dependent (commercial) landings data with columns `YEAR`, `ID`, `SPECIES` and `CATCH`. `YEAR` indicates the year the landing was recorded, `ID` is an area code indicating where the landing was recorded, `SPECIES` is a numeric code indicating the species landed, and `CATCH` is the corresponding landed weight, in the same units as `BIOMASS` in `X` and `X_length`.
+**land** is a dataframe of fishery dependent (commercial) landings data with columns `YEAR`, `ID`, `SPECIES` and `CATCH`. `YEAR` indicates the year the landing was recorded, `ID` is an area code indicating where the landing was recorded, `SPECIES` is a numeric code indicating the species landed, and `CATCH` is the corresponding landed weight (in the same units as `BIOMASS` in `X` and `X_length`).
 
 The species codes in `land` can be consistent with those in `X` and `X_length` or specific to commercial landings; however, they must be consistent with the additional information described below (see Species Information and Species Groups).
 
@@ -247,14 +252,11 @@ Length_Weight4 <- Length_Weight4[1:n.show, ]
 
 Length_Weight_show <- rbind(Length_Weight1, Length_Weight2 ,Length_Weight3, Length_Weight4)
 
-#len.wt_show <- Length_Weight[1:(n.show*2), ]
-
-
 Length_Weight_show
 ```
 
 ### Species Groups
-Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here species.groups. The column names of species.groups are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fisheries-independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in X and `land`, the fisheries-independent groups should include species codes from `X`, and the commercial groups should include species codes from `land`).
+Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here `species.groups`. The column names of `species.groups` are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fishery-independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in `X` and `land`, the fishery-independent groups should include species codes from `X`, and the commercial groups should include species codes from `land`).
 
 ```{r, echo = FALSE}
 species.groups_show <- species.groups[1:(n.show*2), c(1:7)]
@@ -264,11 +266,9 @@ species.groups_show
 Note that the user does not need to include a column with all species (i.e., all species are automatically included in the calculation if argument `group = "ALL"`).
 
 # Application
-**If biomass of species X was not captured in the survey, species X is still likely to be present, just not detected or perhaps not recorded. Replacing with zero would have an impact on trends, whereas treating as NA does not.**
-
 This section describes the general use of the functions in the indicators package. See the package manual or help file for each function for more details.
 
-Most functions calculate a single indicator, and return a dataframe with three columns: `ID`, `YEAR`, and the indicator. For example, the following function call calculates Shannon's index of diversity for two areas (defined by column `ID` in `X`) from 2010 - 2015:
+Most functions calculate a single indicator, and return a dataframe with three columns: `ID`, `YEAR`, and the indicator. For example, the following function call calculates Shannon's index of diversity for the two areas defined by the `ID` column in `X` (`AREA` and `AREA2`) from 2014 - 2019:
 
 ```{r, eval = FALSE}
 shannon(X, group = "ALL", metric = "ABUNDANCE", species.table = NULL,  years = c(2014:2019))
@@ -279,7 +279,7 @@ shan_out$ShannonDiversity <- round(shan_out$ShannonDiversity, digits = 3)
 shan_out
 ```
 
-`biomassPerTL()` returns `ID` and `YEAR`, plus a column for each trophic level range specified by `TL.grouping` (see `?biomassPerTL` for more detail):
+Some functions calculate more than one indicator depending on the arguments. For example, `biomassPerTL()` returns `ID` and `YEAR`, plus a column for each trophic level range specified by `TL.grouping` (see `?biomassPerTL` for more detail). For `TL.grouping = 1`:
 
 ```{r, eval = FALSE}
 biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", TL.grouping = 1, years = c(2014:2019))
@@ -288,8 +288,7 @@ biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", TL.grouping = 1, ye
 bio_TL <- biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", TL.grouping = 1, years = c(2014:2019))
 bio_TL 
 ```
-
-Some functions can calculate more than one indicator depending on the arguments. For example, meanTLLandings() calculates the mean trophic level of the landings when the trophic level minTL = 0, and the mean trophic index when trophic level minTL > 0.
+meanTLLandings() calculates the mean trophic level of the landings when the trophic level minTL = 0, and the mean trophic index when trophic level minTL > 0.
 
 ```{r, eval = FALSE}
 meanTLLandings(land, TL.table = species.info, minTL = 0, years = c(2014:2019))
@@ -323,7 +322,7 @@ potential <-resourcePotential(X, metric = "BIOMASS", groups = resource.groups, s
 potential
 ```
 
-Finally, all indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned. For example, the following call would return 18 structure and functioning indicators (not shown here):
+Finally, all indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned. For example, the following call would return 18 structure and functioning indicators (indicator names listed below):
 
 ```{r}
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
@@ -340,6 +339,12 @@ inds <- allStructure(X = X, X_length = X_length,
              lmax = 85, years = c(2014:2019))
 names(inds)
 ```
+
+## Missing Data
+If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is assigned `NA` or `0`. We recognize that even if a species is not detected during the fisheries-independent survey, it may still be present in the community. All indicators calculated from `X` and `X_land` are therefore assigned `NA` (rather than `0`) for years that are missing data. 
+In contrast, we assume that if there are no recorded commercial landings of a species, then that species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fish group is `NA`, fishing pressure is set to `NA`.
+
+Other indicators that are calculated from `land` are assigned `NA` for years without observations (e.g., intrinsic vulnerability index, Fishing-in-Balance, diversity of target species, marine trophic index, mean trophic level of landings).
 
 # References 
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232: xii + 212 p.
