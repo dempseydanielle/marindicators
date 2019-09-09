@@ -52,17 +52,15 @@
 #'@export
 
 
-allStability <- function(X, X_length, land, 
+allStability <- function(X, land, 
                          maxlength.group,
                          species.table, speciesinfo.table,  
                          TL.grouping = 1, window = 5, negative = FALSE, years){
   
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
-  } else {if("BIOMASS" %in% colnames(X_length)) {
-      inds <- createDataframe(unique(X_length$ID), years)
   } else {inds <- createDataframe(unique(land$ID), years)}
-  }
+  
   
   if("BIOMASS" %in% colnames(X)){
     
@@ -73,7 +71,6 @@ allStability <- function(X, X_length, land,
     # Max LifeSpan
     if("MAXAGE" %in% colnames(speciesinfo.table)){
       MMA = meanMaxAge(X, age.table = speciesinfo.table, "BIOMASS", years = years)
-      
       inds <- merge(inds, MMA)
     }
     
@@ -83,20 +80,15 @@ allStability <- function(X, X_length, land,
                             TL.grouping = TL.grouping, years = years)
       inds <- merge(inds, bio_TL)
     }
-  } 
-  
-  # Mean max length
-  if("LENGTH" %in% colnames(X_length) & "MAXLENGTH" %in% colnames(speciesinfo.table) & 
-     length(maxlength.group) > 0){
     
-    if("BIOMASS" %in% colnames(X_length)){
-      MML_bio = meanMaxLength(X_length, group = maxlength.group, species.table = species.table,
+    if("MAXLENGTH" %in% colnames(speciesinfo.table) & length(maxlength.group) > 0){
+      MML_bio = meanMaxLength(X, group = maxlength.group, species.table = species.table,
                         maxlength.table = speciesinfo.table, metric = "BIOMASS", years = years)
       inds <- merge(inds, MML_bio)
     }
  
-    if("ABUNDANCE" %in% colnames(X_length)){
-      MML_abund = meanMaxLength(X_length, group = maxlength.group,  species.table = species.table,
+    if("ABUNDANCE" %in% colnames(X)){
+      MML_abund = meanMaxLength(X, group = maxlength.group,  species.table = species.table,
                           maxlength.table = speciesinfo.table, metric = "ABUNDANCE", years = years)
       inds <- merge(inds, MML_abund)
     }
