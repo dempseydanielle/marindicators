@@ -323,7 +323,7 @@ potential <-resourcePotential(X, metric = "BIOMASS", groups = resource.groups, s
 potential
 ```
 
-Finally, all indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned. For example, the following call would return 18 structure and functioning indicators (indicator names listed below):
+Finally, all indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned. For example, the following call would return 19 structure and functioning indicators (indicator names listed below):
 
 ```{r}
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
