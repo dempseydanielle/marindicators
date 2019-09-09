@@ -2,11 +2,11 @@
 % Please edit documentation in R/allBiodiversity.R
 \name{allBiodiversity}
 \alias{allBiodiversity}
-\title{Calculates all biodiversity indicators}
+\title{Calculates all Biodiversity indicators}
 \usage{
 allBiodiversity(X, metric = "ABUNDANCE", group = "ALL",
   species.table = NULL, TL.table, percentiles = c(0.25, 0.75),
-  minTL = 3, years)
+  minTL = 0, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -17,18 +17,17 @@ numeric code indicating the species sampled, and \code{ABUNDANCE} is the
 corresponding abundance (stratified and corrected for catchability as
 required).}
 
-\item{metric}{A character string indicating which column in X to use to
-calculate the indicators. Default is \code{ABUNDANCE}.}
+\item{metric}{A character string indicating which column in \code{X} to use to
+calculate the indicators. Default is \code{metric = "ABUNDANCE"}.}
 
 \item{group}{A character string indicating the species group for which to
 calculate the indicators. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -55,15 +54,15 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  \eqn{i}, indicator value is assigned \code{NA}.
 }
 \description{
-This function calculates all (or a subset of) biodiversity
+This function calculates all (or a subset) of the Biodiversity
  indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This function calculates the biodiversity indicators: species
- richness, Shannon's index of diversity, Margalef's species richness,
- Pielou's species evenness, Hill's N1, Hill's N2, Heip's evenness index, and
+This function calculates the Biodiversity indicators: Species
+ Richness, Shannon's Index of Diversity, Margalef's Species Richness,
+ Pielou's Species Evenness, Hill's N1, Hill's N2, Heip's Evenness Index, and
  Kempton's Q. If trophic level data are not available to calculate Kempton's
- Q, the remaining biodiversity indicators will be returned. See the help file
+ Q, the remaining Biodiversity indicators will be returned. See the help file
  for the individual functions for information on how each indicator is
  calculated.
 }

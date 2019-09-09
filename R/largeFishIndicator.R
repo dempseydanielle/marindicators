@@ -20,7 +20,7 @@
 #'  which there are no length data should be assigned \code{LENGTH = -99}. These
 #'  observations are removed by the function.
 #'@param large.fish Threshold for large fish (cm). Default is 35 cm (i.e., large
-#'  fish are those with \code{X$LENGTH} >= 35 cm).
+#'  fish are those with \code{X_length$LENGTH} >= 35 cm).
 #'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
 #'  \code{LargeFishIndicator}.
 #'

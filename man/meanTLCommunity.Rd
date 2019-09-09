@@ -2,7 +2,7 @@
 % Please edit documentation in R/meanTLCommunity.R
 \name{meanTLCommunity}
 \alias{meanTLCommunity}
-\title{Calculates the mean trophic level of the community}
+\title{Calculates the Mean Trophic Level of the community}
 \usage{
 meanTLCommunity(X, TL.table, metric = "BIOMASS", years)
 }
@@ -33,11 +33,11 @@ Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
  value is assigned \code{NA}.
 }
 \description{
-This function calculates the mean trophic level of the community
+This function calculates the Mean Trophic Level of the community
  weighted by biomass for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
+Mean trophic level (TL): \deqn{TL = \Sigma (TL_i*B_i)/\Sigma B_i}
  \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
  of species \eqn{i}.
 

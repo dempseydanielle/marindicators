@@ -1,13 +1,19 @@
-#'@title Calculates the landings per fished group
+#'@title Calculates the Landings per fished group
 #'@description This function calculates the commercial landings of predefined
 #'  speceies groups for \eqn{j} areas and \eqn{i} years.
-#'@details Calculates the total landings of predefined species groups.
+#'@details Calculates the Landings of predefined species groups.
 #'@inheritParams resourcePotential
 #'@param land A dataframe of commercial landings data with columns \code{YEAR},
 #'  \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 #'  the landing was recorded, \code{ID} is an area code indicating where the
 #'  landing was recorded, \code{SPECIES} is a numeric code indicating the
 #'  species landed, and \code{CATCH} is the corresponding landed weight.
+#'@param species.table A table with at least one column, where the column names
+#'  match the entries in \code{groups}, and the column entries are species codes
+#'  from \code{land} indicating which species are included that group.
+#'  \code{species.table} may also include columns for other species groups;
+#'  these will be ignored. If \code{group = "ALL"}, this table is not required.
+#'  Default is \code{species.table = NULL}.
 #'@return returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
 #'  \code{group_Landings}.
 #'

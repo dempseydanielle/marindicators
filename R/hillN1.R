@@ -1,7 +1,7 @@
-#'@title Calculates Hill's index of diversity
-#'@description This function calculates Hill's index of diversity for \eqn{j}
-#'  areas and \eqn{i} years.
-#'@details Hill's N1 diversity index is the exponential of the Shannon-Weiner
+#'@title Calculates Hill's Index of Diversity (N1)
+#'@description This function calculates Hill's Index of Diversity (N1) for
+#'  \eqn{j} areas and \eqn{i} years.
+#'@details Hill's N1 Diversity Index is the exponential of the Shannon-Weiner
 #'  index.\deqn{HillN1 = e^{-\Sigma p_i ln( p_i )}} \eqn{p_i} is the proportion
 #'  of the total sample contributed by the i(th) species and \eqn{S} is the
 #'  number of species recorded in the sample. This index is sensitive to the

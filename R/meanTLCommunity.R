@@ -1,7 +1,7 @@
-#'@title Calculates the mean trophic level of the community
-#'@description This function calculates the mean trophic level of the community
+#'@title Calculates the Mean Trophic Level of the community
+#'@description This function calculates the Mean Trophic Level of the community
 #'  weighted by biomass for \eqn{j} areas and \eqn{i} years.
-#'@details Mean trophic level (TL): \deqn{TL = \Sigma TL_i*B_i)/\Sigma B_i}
+#'@details Mean trophic level (TL): \deqn{TL = \Sigma (TL_i*B_i)/\Sigma B_i}
 #'  \eqn{TL_i} is trophic level of species \eqn{i}, and \eqn{B_i} is the biomass
 #'  of species \eqn{i}.
 #'

@@ -1,16 +1,16 @@
-#'@title Calculates all biodiversity indicators
-#'@description This function calculates all (or a subset of) biodiversity
+#'@title Calculates all Biodiversity indicators
+#'@description This function calculates all (or a subset) of the Biodiversity
 #'  indicators for \eqn{j} areas and \eqn{i} years.
-#'@details This function calculates the biodiversity indicators: species
-#'  richness, Shannon's index of diversity, Margalef's species richness,
-#'  Pielou's species evenness, Hill's N1, Hill's N2, Heip's evenness index, and
+#'@details This function calculates the Biodiversity indicators: Species
+#'  Richness, Shannon's Index of Diversity, Margalef's Species Richness,
+#'  Pielou's Species Evenness, Hill's N1, Hill's N2, Heip's Evenness Index, and
 #'  Kempton's Q. If trophic level data are not available to calculate Kempton's
-#'  Q, the remaining biodiversity indicators will be returned. See the help file
+#'  Q, the remaining Biodiversity indicators will be returned. See the help file
 #'  for the individual functions for information on how each indicator is
 #'  calculated.
 #'@inheritParams shannon
-#'@param metric A character string indicating which column in X to use to
-#'  calculate the indicators. Default is \code{ABUNDANCE}.
+#'@param metric A character string indicating which column in \code{X} to use to
+#'  calculate the indicators. Default is \code{metric = "ABUNDANCE"}.
 #'@param group A character string indicating the species group for which to
 #'  calculate the indicators. If \code{group = "ALL"}, all species will be
 #'  included; otherwise, \code{group} should match a column name in
@@ -37,7 +37,7 @@
 #'@export
 
 allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.table = NULL, TL.table, 
-                            percentiles = c(.25, 0.75), minTL = 3, years){
+                            percentiles = c(.25, 0.75), minTL = 0, years){
   
   S = speciesRichness(X = X, metric = metric, group = group, species.table = species.table, years = years)
   H = shannon(X = X, metric = metric, group = group, species.table = species.table, years = years)

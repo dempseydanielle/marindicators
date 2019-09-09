@@ -2,7 +2,7 @@
 % Please edit documentation in R/CVBiomass.R
 \name{CVBiomass}
 \alias{CVBiomass}
-\title{Calculates the the coefficient of variation of the biomass}
+\title{Calculates the Coefficient of Variation of the Biomass}
 \usage{
 CVBiomass(X, window = 5, negative = FALSE, years)
 }
@@ -34,11 +34,11 @@ Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
 \description{
-This function calculates the coefficient of variation of the
- biomass for \eqn{j} areas and \eqn{i} years.
+This function calculates the Coefficient of Variation of the
+ Biomass for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-The coefficient of variation of the biomass (CVBiomass) was estimated
+The Coefficient of Variation of the Biomass (CVBiomass) was estimated
  as an n-year moving average (Blanchard and Boucher, 2001):
 
  CVbiomass = sd(total biomass for the past n years)/mean(total biomass for

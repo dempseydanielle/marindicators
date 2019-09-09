@@ -1,17 +1,17 @@
-#'@title Calculates the intrinsic vulnerability index of the catch
-#'@description This calculates the intrinsic vulnerability index (IVI) of the
-#'  catch for \eqn{j} areas and \eqn{i} years.
-#'@details The weighted intrinsic vulnerability index (IVI) of species in the
-#'  catch was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma C_j} where
-#'  the sum is over all species, j. The vulnerability for each species was
-#'  determined by considering several traits including maximum length, age at
-#'  first maturity, longevity, von Bertalanffy growth parameter, natural
-#'  mortality, fecundity, spatial behaviour and geographic range (e.g. species
-#'  with larger body size, higher longevity, higher age at maturity, and lower
-#'  growth rates have higher vulnerability indexes and should be less able to
-#'  sustain high fishing mortality; Cheung et al. 2005). The index values ranges
-#'  from 1 to 100, with 100 being the most vulnerable. See Appendix 1 from
-#'  Cheung et al., 2007:
+#'@title Calculates the Intrinsic Vulnerability Index of fishery landings
+#'@description This function calculates the Intrinsic Vulnerability Index (IVI)
+#'  of the fishery landings for \eqn{j} areas and \eqn{i} years.
+#'@details The weighted Intrinsic Vulnerability Index (IVI) of species in the
+#'  fishery landings was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma
+#'  C_j} where the sum is over all species, j. The vulnerability for each
+#'  species was determined by considering several traits including maximum
+#'  length, age at first maturity, longevity, von Bertalanffy growth parameter,
+#'  natural mortality, fecundity, spatial behaviour and geographic range (e.g.
+#'  species with larger body size, higher longevity, higher age at maturity, and
+#'  lower growth rates have higher vulnerability indexes and should be less able
+#'  to sustain high fishing mortality; Cheung et al. 2005). The index values
+#'  ranges from 1 to 100, with 100 being the most vulnerable. See Appendix 1
+#'  from Cheung et al., 2007:
 #'  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 #'@inheritParams landings
 #'@inheritParams CVBiomass
@@ -19,11 +19,11 @@
 #'  \code{IVI} (intrinsic vulnerability index). Entries in the \code{SPECIES}
 #'  column should be the unique values of species codes in \code{land} (or a
 #'  subset thereof). Other columns in \code{IVI.table} are ignored.
-#'@return Returns a dataframe with three columns: \code{ID}, "YEAR", and
+#'@return Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
 #'  \code{IVILandings}.
 #'
-#'  If there are no observations in land for spatial scale \eqn{j} in year
-#'  \eqn{i}, indicator value is assigned \code{NA}.
+#'  If there are no observations in \code{land} for spatial scale \eqn{j} in
+#'  year \eqn{i}, indicator value is assigned \code{NA}.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

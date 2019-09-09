@@ -2,7 +2,7 @@
 % Please edit documentation in R/allPotential.R
 \name{allPotential}
 \alias{allPotential}
-\title{Calculates all resource potential indicators}
+\title{Calculates all Resource Potential indicators}
 \usage{
 allPotential(X, land, species.table, speciesinfo.table, resource.groups,
   minTL = 0, TE = 0.1, base.start, base.end, years)
@@ -23,53 +23,54 @@ landing was recorded, \code{SPECIES} is a numeric code indicating the
 species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{species.table}{A table where the column names match the entries in
-resource.groups. Column entries are the species codes indicating the species
-from \code{X} included in each group. \code{species.table} may also include columns for
-other species groups; these will be ignored.}
+\code{resource.groups}. Column entries are the species codes indicating the
+species from \code{X} included in each group. \code{species.table} may also
+include columns for other species groups; these will be ignored.}
 
-\item{speciesinfo.table}{A table with columns \code{SPECIES} and the corresponding
-\code{TL_LAND} (trophic level of landed species). Entries in the \code{SPECIES} column
-should be the unique values of species codes in land (or a subset thereof).
-Other columns will be ignored.}
+\item{speciesinfo.table}{A table with columns \code{SPECIES} and the
+corresponding \code{TL_LAND} (trophic level of landed species). Entries in
+the \code{SPECIES} column should be the unique values of species codes in
+\code{land} (or a subset thereof). Other columns will be ignored.}
 
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
-matching the name of a column in \code{species.groups}. If
+matching the name of a column in \code{species.table}. If
 \code{resource.groups = NULL}, the resource potential indicators will not be
 calculated.}
 
-\item{minTL}{The minimum trophic level of species to include to calculate
-FiB. If \code{minTL = NULL}, FiB wll not be calculated.}
+\item{minTL}{The minimum trophic level of species to include to calculate FiB.
+If \code{minTL = NULL}, FiB wll not be calculated.}
 
-\item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE = 0.1},
-i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not be calculated.}
+\item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE =
+0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
+be calculated.}
 
 \item{base.start}{Year indicating the beginning of the baseline period for
 calculating FiB. The average landings and average mean trophic level of the
 landings over the baseline period are used as baseline values to calculate
-FiB (see Details). \code{land} must include data for the baseline period. If
+FiB. \code{land} must include data for the baseline period. If
 \code{base.start = NULL}, FiB wll not be calculated.}
 
 \item{base.end}{Year indicating the end of the baseline period for calculating
 FiB. The average landings and average mean trophic level of the landings
-over the baseline period are used as baseline values to calculate FiB (see
-Details). \code{land} must include data for the baseline period. If \code{base.end =
+over the baseline period are used as baseline values to calculate FiB.
+\code{land} must include data for the baseline period. If \code{base.end =
 NULL}, FiB wll not be calculated.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns \code{ID}, \code{YEAR}, and indicators
- corresponding to the arguments supplied to the function.
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+ indicators corresponding to the arguments supplied to the function.
 }
 \description{
-This function calculates all (or a subset) of the resource
- potential indicators for \eqn{j} areas and \eqn{i} years.
+This function calculates all (or a subset) of the Resource
+ Potential indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This function calculates the resource potential indicators: abundance
- and biomass of the community, resource potential of predefined species
- groups, and fishing-in-balance (FiB). If data are not available to calculate
+This function calculates the Resource Potential indicators: Abundance
+ and Biomass of the community, Resource Potential of predefined species
+ groups, and Fishing-in-Balance (FiB). If data are not available to calculate
  one or more of these indicators, a subset will be returned. See the help
  file for the individual functions for information on how each indicator is
  calculated.

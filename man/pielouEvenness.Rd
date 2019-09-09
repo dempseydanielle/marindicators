@@ -21,10 +21,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -42,15 +41,14 @@ Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
  values is assigned \code{NA}.
 }
 \description{
-This function takes a dataframe of fisheries independent survey
- data and calculates Pielou's Species Evenness for \eqn{j} areas and \eqn{i}
- years.
+This function calculates Pielou's Species Evenness for \eqn{j}
+ areas and \eqn{i} years.
 }
 \details{
 Pielou's Species Evenness: \deqn{J' = -\Sigma p_i ln( p_i )/ln(S)}
  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
  species and \eqn{S} is the number of species recorded in the sample.
- Pielou's index is the Shannon-Weiner index computed for the sample \eqn{S}
+ Pielou's Index is the Shannon-Weiner Index computed for the sample \eqn{S}
  and represents a measure of evenness of the community (Pielou, 1966).
 }
 \references{

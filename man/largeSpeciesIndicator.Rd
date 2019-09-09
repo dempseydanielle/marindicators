@@ -4,8 +4,8 @@
 \alias{largeSpeciesIndicator}
 \title{Calculates the Large Species Indicator}
 \usage{
-largeSpeciesIndicator(X, group, species.table = NULL, lmax.table,
-  lmax = 85, metric = "BIOMASS", years)
+largeSpeciesIndicator(X, group, species.table = NULL, maxlength.table,
+  max.length = 85, metric = "BIOMASS", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -21,21 +21,20 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
 
-\item{lmax.table}{A dataframe with columns \code{SPECIES} and
+\item{maxlength.table}{A dataframe with columns \code{SPECIES} and
 \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 Entries in the \code{SPECIES} column should be the unique values of species
-codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+codes in \code{X} (or a subset thereof). Other columns in \code{maxlength.table}
 are ignored.}
 
-\item{lmax}{The threshold for large fish (cm). Default is 85 cm (i.e., large
+\item{max.length}{The threshold for large fish (cm). Default is 85 cm (i.e., large
 species are those with \code{MAXLENGTH} >= 85 cm).}
 
 \item{metric}{A character string indicating which column in \code{X} to use to

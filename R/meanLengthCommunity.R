@@ -1,6 +1,6 @@
-#'@title Calculates the mean length of the community weighted by biomass or
+#'@title Calculates the Mean Length of the Community weighted by biomass or
 #'  abundance
-#'@description This function calculates the mean length of the community
+#'@description This function calculates the Mean Length of the Community
 #'  weighted by biomass or abundance for \eqn{j} areas and \eqn{i} years.
 #'@details \deqn{MeanLength = \Sigma(Length_m * metric_i)/\Sigma metric_j} where
 #'  \eqn{Length_m} is the length (cm) of an individual in size class \eqn{m},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/heips.R
 \name{heips}
 \alias{heips}
-\title{Calculates Heip's evenness index}
+\title{Calculates Heip's Evenness Index}
 \usage{
 heips(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
@@ -20,10 +20,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -34,20 +33,22 @@ calculate indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and \code{Heips}.
+Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+  \code{Heips}.
 
   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
   value is assigned NA.
 }
 \description{
-This function calculates Heip's evenness index (HE) of the
+This function calculates Heip's Evenness Index (HE) of the
   community for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Heip's Evenness Index (HE): \deqn{HE = (exp^{H'} - 1)/(S - 1)} where
   \eqn{H'} is Shannon's index of diversity and \eqn{S} is species richness.
   This index ranges from 0 to 1 and measures how equally the species richness
-  contributes to the total abundance or biomass of the community (Heip, 1974).
+  contributes to the total abundance or biomass of the community (Heip,
+  1974).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -70,6 +71,6 @@ Other biodiversity indicators: \code{\link{allBiodiversity}},
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
- Catalina Gomez, Alida Bundy
+  Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

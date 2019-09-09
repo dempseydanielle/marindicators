@@ -1,7 +1,7 @@
-#'@title Calculates the the coefficient of variation of the biomass
-#'@description This function calculates the coefficient of variation of the
-#'  biomass for \eqn{j} areas and \eqn{i} years.
-#'@details The coefficient of variation of the biomass (CVBiomass) was estimated
+#'@title Calculates the Coefficient of Variation of the Biomass
+#'@description This function calculates the Coefficient of Variation of the
+#'  Biomass for \eqn{j} areas and \eqn{i} years.
+#'@details The Coefficient of Variation of the Biomass (CVBiomass) was estimated
 #'  as an n-year moving average (Blanchard and Boucher, 2001):
 #'
 #'  CVbiomass = sd(total biomass for the past n years)/mean(total biomass for
@@ -68,7 +68,7 @@
 	      
 	      bio <- aggregate(BIOMASS ~ YEAR + ID, data = X.j, FUN = sum)  # sum biomass for each year
 	      ind.j <- data.frame(YEAR = bio['YEAR'], 
-	                       BIOMASS = movingStatistics(bio[,'BIOMASS'], n = window, stat='cv')) # 1/moving average of coefficient of variation of the biomass
+	                       BIOMASS = movingStatistics(bio[,'BIOMASS'], n = window, stat='cv')) # moving average of coefficient of variation of the biomass
 
 	      ind.j[ind.j$YEAR %in% inx.NA, "BIOMASS"] <- NA   # set the first and last floor(window/2) years to NA 
 	      

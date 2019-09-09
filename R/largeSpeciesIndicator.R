@@ -7,12 +7,12 @@
 #'  is 85 cm; Shin et al., 2010).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
-#'@param lmax.table A dataframe with columns \code{SPECIES} and
+#'@param maxlength.table A dataframe with columns \code{SPECIES} and
 #'  \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 #'  Entries in the \code{SPECIES} column should be the unique values of species
-#'  codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+#'  codes in \code{X} (or a subset thereof). Other columns in \code{maxlength.table}
 #'  are ignored.
-#'@param lmax The threshold for large fish (cm). Default is 85 cm (i.e., large
+#'@param max.length The threshold for large fish (cm). Default is 85 cm (i.e., large
 #'  species are those with \code{MAXLENGTH} >= 85 cm).
 #'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
 #'  \code{LargeSpeciesIndicator}.
@@ -42,10 +42,10 @@
 
 
 largeSpeciesIndicator <- function(X, group, species.table = NULL,
-                                  lmax.table, lmax = 85,  metric = "BIOMASS", years) {
+                                  maxlength.table, max.length = 85,  metric = "BIOMASS", years) {
   
   X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
-  largespecies <- lmax.table$SPECIES[lmax.table$MAXLENGTH > lmax]
+  largespecies <- maxlength.table$SPECIES[maxlength.table$MAXLENGTH > max.length]
  
   uI = unique(X$ID)                   # extract the spatial scale ID's
   ind <- NULL                         # initialize dataframe for storing indicator values

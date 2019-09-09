@@ -2,7 +2,7 @@
 % Please edit documentation in R/meanLengthCommunity.R
 \name{meanLengthCommunity}
 \alias{meanLengthCommunity}
-\title{Calculates the mean length of the community weighted by biomass or
+\title{Calculates the Mean Length of the Community weighted by biomass or
  abundance}
 \usage{
 meanLengthCommunity(X_length, metric, years)
@@ -31,7 +31,7 @@ Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
  value is assigned \code{NA}.
 }
 \description{
-This function calculates the mean length of the community
+This function calculates the Mean Length of the Community
  weighted by biomass or abundance for \eqn{j} areas and \eqn{i} years.
 }
 \details{

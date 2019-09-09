@@ -1,13 +1,13 @@
-#'@title Calculates the mean trophic level or marine trophic index of fisheries
+#'@title Calculates the Mean Trophic Level or Marine Trophic Index of fisheries
 #'  landings
-#'@description This function calculates the mean trophic level or marine trophic
-#'  index of fisheries landings for \eqn{j} areas and \eqn{i} years.
-#'@details Mean trophic level of fisheries landings \eqn{TL_{Land}}:
+#'@description This function calculates the Mean Trophic Level or Marine Trophic
+#'  Index of fisheries landings for \eqn{j} areas and \eqn{i} years.
+#'@details Mean trophic level of fisheries landings (\eqn{TL_{Land}}):
 #'  \deqn{TL_{Land} = \Sigma (TL_i*Y_i)/Y} where \eqn{TL_i} is the trophic level
 #'  of species \eqn{i}, \eqn{Y_i} is the landings of species \eqn{i}, and
 #'  \eqn{Y} is the total landings of all species. Trophic Level of individual
-#'  species is estimated either through an Ecopath model or dietary analysis, or
-#'  taken from a global database such as Fishbase.
+#'  species can be estimated either through an Ecopath model or dietary
+#'  analysis, or taken from a global database such as Fishbase.
 #'
 #'  This indicator captures the average trophic level of the species exploited
 #'  in the fishery. In general, it reflects a transition from long-lived, high

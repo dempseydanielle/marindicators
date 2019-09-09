@@ -1,12 +1,12 @@
-#'@title Calculates the resource potential of species groups
-#'@description This function calculates the biomass or abundance of a
+#'@title Calculates the Resource Potential of species groups
+#'@description This function calculates the Biomass or Abundance of a
 #'  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
 #'@details This indicator reflects temporal dynamics of species groups.
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
 #'@param groups A vector indicating the species group(s) for which to calculate
 #'  the indicator. Each entry must be a character string matching the name of a
-#'  column in \code{species.groups}.
+#'  column in \code{species.table}.
 #'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
 #'  column \code{metric_group} (e.g., \code{BIOMASS_FINFISH}) for each entry in
 #'  \code{groups}.

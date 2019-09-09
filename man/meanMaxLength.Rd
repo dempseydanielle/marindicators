@@ -2,9 +2,10 @@
 % Please edit documentation in R/meanMaxLength.R
 \name{meanMaxLength}
 \alias{meanMaxLength}
-\title{Calculates the mean maximum length of fish in the community}
+\title{Calculates the Mean Maximum Length of fish in the community}
 \usage{
-meanMaxLength(X, group, species.table = NULL, lmax.table, metric, years)
+meanMaxLength(X, group, species.table = NULL, maxlength.table, metric,
+  years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -20,18 +21,17 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
 
-\item{lmax.table}{A dataframe with columns \code{SPECIES} and
+\item{maxlength.table}{A dataframe with columns \code{SPECIES} and
 \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 Entries in the \code{SPECIES} column should be the unique values of species
-codes in \code{X} (or a subset thereof). Other columns in \code{lmax.table}
+codes in \code{X} (or a subset thereof). Other columns in \code{maxlength.table}
 are ignored.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
@@ -47,7 +47,7 @@ Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
  value is assigned \code{NA}.
 }
 \description{
-This function calculates the mean maximum length of fish in the
+This function calculates the Mean Maximum Length of fish in the
  community weighted by biomass or abundance for \eqn{j} areas and \eqn{i}
  years.
 }
@@ -55,7 +55,7 @@ This function calculates the mean maximum length of fish in the
 Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
  (L_{max,i}*M_i)/\Sigma M_i} where \eqn{L_{max,i}} is the maximum asymptotic
  length (cm) of species \eqn{i}, and \eqn{M_i} is biomass or abundance of
- species \eqn{i} (excluding invertebrates; (Shin et al., 2005).
+ species \eqn{i} (excluding invertebrates; Shin et al., 2005).
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

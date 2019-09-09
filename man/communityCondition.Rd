@@ -21,18 +21,17 @@ the function.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in \code{species.groups}.}
+column in \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
-\code{YEAR}, \code{ID}, \code{SPECIES} correspond with those columns in
+\code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
 \code{X_length}. \code{LENGTH} is fish length at the corresponding
 \code{WEIGHT} (fish weight).}
 
@@ -46,7 +45,7 @@ Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
   value is assigned \code{NA}.
 }
 \description{
-This function calculates Fulton's condition index for \eqn{j}
+This function calculates Fulton's Condition Index for \eqn{j}
   areas and \eqn{i} years.
 }
 \details{
