@@ -1,5 +1,5 @@
-#'@title Calculates the mean maximum age of fish in the community
-#'@description This function calculates the mean maximum age (MMA) of fish in
+#'@title Calculates the Mean Maximum Age of fish in the community
+#'@description This function calculates the Mean Maximum Age (MMA) of fish in
 #'  the community for \eqn{j} areas and \eqn{i} years.
 #'@details Mean Maximum Age: \deqn{Mean Maximum Age = \Sigma
 #'  (age_{max,i}*B_i)/\Sigma B_i} where the sum is over all species \eqn{i}, and

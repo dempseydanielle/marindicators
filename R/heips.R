@@ -1,12 +1,14 @@
-#' @title Calculates Heip's evenness index 
-#' @description This function calculates Heip's evenness index (HE) of the
+#' @title Calculates Heip's Evenness Index
+#' @description This function calculates Heip's Evenness Index (HE) of the
 #'   community for \eqn{j} areas and \eqn{i} years.
 #' @details Heip's Evenness Index (HE): \deqn{HE = (exp^{H'} - 1)/(S - 1)} where
 #'   \eqn{H'} is Shannon's index of diversity and \eqn{S} is species richness.
 #'   This index ranges from 0 to 1 and measures how equally the species richness
-#'   contributes to the total abundance or biomass of the community (Heip, 1974).
+#'   contributes to the total abundance or biomass of the community (Heip,
+#'   1974).
 #' @inheritParams  shannon
-#' @return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and \code{Heips}.
+#' @return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
+#'   \code{Heips}.
 #'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'   value is assigned NA.
@@ -22,7 +24,7 @@
 #'   Ecosystem Approach to Oceans Management. Can. Tech. Rep. Fish. Aquat. Sci.
 #'   3059: vi+188p.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'  Catalina Gomez, Alida Bundy
+#'   Catalina Gomez, Alida Bundy
 #' @export
 
 heips <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {

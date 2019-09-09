@@ -6,8 +6,8 @@ movingStatistics<- function(x, n=1,stat=c('mean','median','cv','sd','var')) {
 
 #calculates the running statistics for a time series of data
 
-        before <- floor  ((n-1)/2)
-        after  <- ceiling((n-1)/2)
+    before <- floor  ((n-1)/2)
+    after  <- ceiling((n-1)/2)
 
     s     <- rep(0, length(x))
     count <- rep(0, length(x))

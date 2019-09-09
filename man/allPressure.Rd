@@ -2,7 +2,7 @@
 % Please edit documentation in R/allPressure.R
 \name{allPressure}
 \alias{allPressure}
-\title{Calculates all pressure indicators}
+\title{Calculates all Pressure indicators}
 \usage{
 allPressure(X, land, species.table, speciesinfo.table, landings.groups,
   FP.groups, minTL, years)
@@ -20,50 +20,52 @@ required).}
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 the landing was recorded, \code{ID} is an area code indicating where the
 landing was recorded, \code{SPECIES} is a numeric code indicating the
-species landed, and \code{CATCH} is the corresponding landed weight.}
+species landed, and \code{CATCH} is the corresponding landed weight (in the
+same  units as \code{BIOMASS} in \code{X}).}
 
 \item{species.table}{A table where the column names match the entries in
-\code{landings.groups}. Column entries are the species codes indicating the species
-from \code{land} included in each group. \code{species.table} may also include columns for
-other species groups; these will be ignored.}
+\code{landings.groups}. Column entries are the species codes indicating the
+species from \code{land} included in each group. \code{species.table} may
+also include columns for other species groups; these will be ignored.}
 
-\item{speciesinfo.table}{A table with columns \code{SPECIES} and the corresponding
-\code{TL_LAND} (trophic level of landed species). Entries in the \code{SPECIES} column
-should be the unique values of species codes in land (or a subset thereof).
-Other columns will be ignored.}
+\item{speciesinfo.table}{A table with columns \code{SPECIES} and the
+corresponding \code{TL_LAND} (trophic level of landed species). Entries in
+the \code{SPECIES} column should be the unique values of species codes in
+land (or a subset thereof). Other columns will be ignored.}
 
 \item{landings.groups}{A vector indicating the species groups for which to
 calculate the landings. Each entry must be a character string matching the
-name of a column in \code{species.groups}. If \code{landings.groups = NULL}, no resource
-potential indicators will be calculated.}
+name of a column in \code{species.table}. If \code{landings.groups = NULL},
+no Landings indicators will be calculated.}
 
-\item{FP.groups}{A dataframe with two columns, which must be named \code{group.X}
-and \code{group.land}. Each row holds the group names to calculate the fishing
-pressure on a target group, with the numerator in column \code{group.land} and
-the denominator in column \code{group.X}. Each entry must be a character string
-matching the name of a column in species.groups. If \code{FP.groups = NULL}, no
-fishing pressure indicators will be calculated.}
+\item{FP.groups}{A dataframe with two columns, which must be named
+\code{group.land} and \code{group.X}. Each row holds the group names to
+calculate the fishing pressure on a target group, with the numerator in
+column \code{group.land} and the denominator in column \code{group.X}. Each
+entry must be a character string matching the name of a column in
+\code{species.table}. If \code{FP.groups = NULL}, no fishing pressure
+indicators will be calculated.}
 
 \item{minTL}{A vector containing minimum trophic level to include when
-calculating the mean trophic level of the landings. Default is \code{minTL = c(0,
-3.25)}, which will return the mean trophic level of the landings and the
-marine trophic index.}
+calculating the mean trophic level of the landings. Default is \code{minTL =
+c(0, 3.25)}, which will return the mean trophic level of the landings and
+the marine trophic index.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
 \value{
-Returns a dataframe with columns \code{ID}, \code{YEAR}, and indicators
- corresponding to the arguments supplied to the function.
+Returns a dataframe with columns \code{ID}, \code{YEAR}, and
+ indicators corresponding to the arguments supplied to the function.
 }
 \description{
-This function calculates all (or a subset) of the pressure
+This function calculates all (or a subset) of the Pressure
  indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This function calculates the pressure indicators: diversity of the
- target species, total landings, landings of target groups, fishing pressure
- on the community, fishing pressure on target groups, mean trophic level of
- the landings, and the marine trophic index. If data are not available to
+This function calculates the Pressure indicators: Diversity of the
+ Target Species, Total Landings, Landings of Target Groups, Fishing Pressure
+ on the Community, Fishing Pressure on Target Groups, Mean Trophic Level of
+ the Landings, and the Marine Trophic Index. If data are not available to
  calculate one or more of these indicators, a subset will be returned. See
  the help file for the individual functions for information on how each
  indicator is calculated.

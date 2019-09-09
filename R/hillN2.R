@@ -1,6 +1,6 @@
-#'@title Calculates Hill's species dominance
-#'@description This function calculates Hill's species dominance for \eqn{j}
-#'  areas and \eqn{i} years.
+#'@title Calculates Hill's Species Dominance (N2)
+#'@description This function calculates Hill's Species Dominance (N2) for
+#'  \eqn{j} areas and \eqn{i} years.
 #'@details  Hill's Species Dominance (HillN2): \deqn{HillN2 = 1/\Sigma p_i^2}
 #'  \eqn{p_i} is the proportion of the total sample contributed by the i(th)
 #'  species. HillN2 is the inverse of the Simpson's index. This index is

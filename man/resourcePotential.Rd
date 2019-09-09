@@ -2,7 +2,7 @@
 % Please edit documentation in R/resourcePotential.R
 \name{resourcePotential}
 \alias{resourcePotential}
-\title{Calculates the resource potential of species groups}
+\title{Calculates the Resource Potential of species groups}
 \usage{
 resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
   years)
@@ -18,12 +18,11 @@ required).}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in \code{species.groups}.}
+column in \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -42,7 +41,7 @@ Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
  for that year.
 }
 \description{
-This function calculates the biomass or abundance of a
+This function calculates the Biomass or Abundance of a
  pre-defined group of species for \eqn{j} areas and \eqn{i} years.
 }
 \details{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/allStability.R
 \name{allStability}
 \alias{allStability}
-\title{Calculates all stability and resistance indicators}
+\title{Calculates all Stability and Resistance indicators}
 \usage{
 allStability(X, X_length, land, maxlength.group, species.table,
   speciesinfo.table, TL.grouping = 1, window = 5, negative = FALSE,
@@ -47,26 +47,27 @@ Column entries are the species codes indicating the species from \code{X}
 include columns for other species groups; these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns \code{SPECIES} and the
-corresponding \code{MAXAGE}, \code{MAXLENGTH} and \code{TL} (maximum
-recorded age, maximum recorded length and trophic level). Entries in the
+corresponding \code{MAXAGE}, \code{MAXLENGTH}, and \code{TL} (maximum
+recorded age, maximum recorded length, and trophic level). Entries in the
 \code{SPECIES} column should be the unique values of species codes in
 \code{X} (or a subset thereof). Other columns will be ignored.}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
-biomass when calculating biomass per trophic level. For example, if
+biomass when calculating Biomass per Trophic Level. For example, if
 \code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
 2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
 1} so that biomass is aggregated over discrete trophic levels.}
 
-\item{window}{Window for the moving average used to calculate CV of the
-biomass. The first and last \code{floor(window/2)} values of the indicator
-are assigned \code{NA} to account for the moving average. Default is
-\code{window = 5} years.}
+\item{window}{Window for the moving average used to calculate the Coefficient
+of Variation of the Biomass. The first and last \code{floor(window/2)}
+values of the indicator are assigned \code{NA} to account for the moving
+average. Default is \code{window = 5} years.}
 
-\item{negative}{If \code{negative = TRUE}, the CVBiomass will be multiplied by
--1 so that the expected response is to decrease with increasing fishing
-pressure. Default is \code{negative = FALSE}.}
+\item{negative}{If \code{negative = TRUE}, the Coefficient of Variation of the
+Biomasss will be multiplied by -1 so that the expected response is to
+decrease with increasing fishing pressure. Default is \code{negative =
+FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 }
@@ -75,16 +76,17 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
 }
 \description{
-This function calculates all (or a subset) of the stability and
- resistance indicators for \eqn{j} areas and \eqn{i} years.
+This function calculates all (or a subset) of the Stability and
+ Resistance indicators for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-This function calculates the stability and resistance indicators:
- biomass per trophic level, intrinsic vulnerability index, CV of biomass,
- mean lifespan, and mean maximum length (weighted by biomass and abundance).
- If data are not available to calculate one or more of these indicators, a
- subset will be returned. See the help file for the individual functions for
- information on how each indicator is calculated.
+This function calculates the Stability and Resistance indicators:
+ Biomass per Trophic Level, Intrinsic Vulnerability Index, Coefficient of
+ Variation of the biomass, Mean Lifespan, and Mean Maximum Length (weighted
+ by biomass and abundance). If data are not available to calculate one or
+ more of these indicators, a subset will be returned. See the help file for
+ the individual functions for information on how each indicator is
+ calculated.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

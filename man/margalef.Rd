@@ -2,7 +2,7 @@
 % Please edit documentation in R/margalef.R
 \name{margalef}
 \alias{margalef}
-\title{Calculates Margalef's species richness}
+\title{Calculates Margalef's Species Richness}
 \usage{
 margalef(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
@@ -20,10 +20,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -41,11 +40,11 @@ Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
   values is assigned \code{NA}.
 }
 \description{
-This function calculates Margalef's species richness for \eqn{j}
+This function calculates Margalef's Species Richness for \eqn{j}
   areas and \eqn{i} years.
 }
 \details{
-Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
+Margalef's Species Richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
   \eqn{S_y} is the count of the number of species recorded in all trawl
   catches collected in year \eqn{y}. \eqn{F} is the total count of all
   individuals caught in year \eqn{y} (Margalef, 1958).

@@ -1,7 +1,7 @@
-#' @title Calculates Margalef's species richness
-#' @description This function calculates Margalef's species richness for \eqn{j}
+#' @title Calculates Margalef's Species Richness
+#' @description This function calculates Margalef's Species Richness for \eqn{j}
 #'   areas and \eqn{i} years.
-#' @details Margalef's species richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
+#' @details Margalef's Species Richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
 #'   \eqn{S_y} is the count of the number of species recorded in all trawl
 #'   catches collected in year \eqn{y}. \eqn{F} is the total count of all
 #'   individuals caught in year \eqn{y} (Margalef, 1958).

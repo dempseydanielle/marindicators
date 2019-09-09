@@ -2,7 +2,7 @@
 % Please edit documentation in R/hillN1.R
 \name{hillN1}
 \alias{hillN1}
-\title{Calculates Hill's index of diversity}
+\title{Calculates Hill's Index of Diversity (N1)}
 \usage{
 hillN1(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
@@ -20,10 +20,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -41,11 +40,11 @@ Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
  values is assigned \code{NA}.
 }
 \description{
-This function calculates Hill's index of diversity for \eqn{j}
- areas and \eqn{i} years.
+This function calculates Hill's Index of Diversity (N1) for
+ \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Hill's N1 diversity index is the exponential of the Shannon-Weiner
+Hill's N1 Diversity Index is the exponential of the Shannon-Weiner
  index.\deqn{HillN1 = e^{-\Sigma p_i ln( p_i )}} \eqn{p_i} is the proportion
  of the total sample contributed by the i(th) species and \eqn{S} is the
  number of species recorded in the sample. This index is sensitive to the

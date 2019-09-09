@@ -19,16 +19,16 @@ required).}
 \code{group1} and \code{group2}. Each row holds the group names for one
 biomass ratio, with the numerator in column \code{group1} and the
 denominator in column \code{group2}. Each entry must be a character string
-matching the name of a column in \code{species.groups}.}
+matching the name of a column in \code{species.table} or \code{"ALL"}.}
 
 \item{species.table}{A table with column names that match the entries of
-\code{ratio.groups}. The entries in each column are the species codes for
-the species included in that group. Species codes should be a subset of
-those in the \code{SPECIES} column of \code{X}. \code{species.table} may
-also include columns for other species groups; these will be ignored. Note
-that an entry in \code{ratio.groups} could be \code{"ALL"}. In this case, a
-column in \code{species.table} named \code{"ALL"} is not required; the
-function will automatically include all species in \code{X}.}
+\code{ratio.groups}. The entries in each column are the species codes from
+\code{X} indicating which species are included that group.
+\code{species.table} may also include columns for other species groups;
+these will be ignored. Note that an entry in \code{ratio.groups} could be
+\code{"ALL"}. In this case, a column in \code{species.table} named
+\code{"ALL"} is not required; the function will automatically include all
+species in \code{X}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
@@ -49,13 +49,16 @@ This function calculates the biomass ratio between two
 }
 \details{
 One useful biomass ratio is the proportion of predatory fish in the
- community, which is estimated by: \deqn{PropPred = Biomass Predatory Fish
- Surveyed/Total Biomass Surveyed} Predatory fish species are defined as all
- surveyed fish species that are not largely planktivorous, ie., fish that are
- piscivorous, or that feed on invertebrates larger than the macrozooplankton
- category (0.2 cm; Shin et al. 2010). Phytoplankton, zooplankton and detritus
- feeders should be excluded. This indicator captures changes in the trophic
- structure and changes in the functional diversity of fish in the ecosystem.
+ community, which is estimated by:
+
+ PropPred = Biomass of Predatory Fish Surveyed/Total Biomass Surveyed
+
+ Predatory fish species are defined as all surveyed fish species that are not
+ largely planktivorous, ie., fish that are piscivorous, or that feed on
+ invertebrates larger than the macrozooplankton category (0.2 cm; Shin et al.
+ 2010). Phytoplankton, zooplankton and detritus feeders should be excluded.
+ This indicator captures changes in the trophic structure and changes in the
+ functional diversity of fish in the ecosystem.
 
  Other useful biomass \eqn{(B)} ratios indicators include:
  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}

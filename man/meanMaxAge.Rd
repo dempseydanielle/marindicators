@@ -2,7 +2,7 @@
 % Please edit documentation in R/meanMaxAge.R
 \name{meanMaxAge}
 \alias{meanMaxAge}
-\title{Calculates the mean maximum age of fish in the community}
+\title{Calculates the Mean Maximum Age of fish in the community}
 \usage{
 meanMaxAge(X, age.table, metric = "BIOMASS", years)
 }
@@ -34,7 +34,7 @@ Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
  value is assigned NA.
 }
 \description{
-This function calculates the mean maximum age (MMA) of fish in
+This function calculates the Mean Maximum Age (MMA) of fish in
  the community for \eqn{j} areas and \eqn{i} years.
 }
 \details{

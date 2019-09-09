@@ -2,8 +2,8 @@
 % Please edit documentation in R/speciesRichness.R
 \name{speciesRichness}
 \alias{speciesRichness}
-\title{Calculates species richness of the community or the diversity of target
- species}
+\title{Calculates Species Richness of the community or the Diversity of Target
+ Species}
 \usage{
 speciesRichness(X, group, species.table = NULL, metric, years)
 }
@@ -26,10 +26,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}

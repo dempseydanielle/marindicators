@@ -2,7 +2,7 @@
 % Please edit documentation in R/fishingPressure.R
 \name{fishingPressure}
 \alias{fishingPressure}
-\title{Calculates fishing pressure}
+\title{Calculates Fishing Pressure}
 \usage{
 fishingPressure(X, land, FP.groups, species.table = NULL, years)
 }
@@ -19,24 +19,25 @@ required).}
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 the landing was recorded, \code{ID} is an area code indicating where the
 landing was recorded, \code{SPECIES} is a numeric code indicating the
-species landed, and \code{CATCH} is the corresponding landed weight.}
+species landed, and \code{CATCH} is the corresponding landed weight (in the
+same  units as \code{BIOMASS} in \code{X}).}
 
 \item{FP.groups}{A dataframe with two columns, which must be named
 \code{group.land} and \code{group.X}. Each row holds the group names to
 calculate the fishing pressure on a target group, with the numerator in
-column \code{group.land} and the denominator in column {group.X}.  Each
+column \code{group.land} and the denominator in column \code{group.X}. Each
 entry must be a character string matching the name of a column in
-\code{species.groups}.}
+\code{species.table}.}
 
 \item{species.table}{A table with column names that match the entries of
 \code{FP.groups}. The entries in each column are the species codes for the
 species included in that group. Species codes should be a subset of those in
-the \code{SPECIES} column of \code{land} (for \code{group.land}) or \code{X}
-(for \code{group.X}). \code{species.table} may also include columns for
-other species groups; these will be ignored. Note that an entry in
-\code{FP.groups} could be \code{"ALL"}. In this case, a column in
-\code{species.table} named \code{"ALL"} is not required; the function will
-automatically include all species in \code{land} and/or \code{X}.}
+the \code{SPECIES} column of \code{land} (for groups in \code{group.land})
+or \code{X} (for groups in \code{group.X}). \code{species.table} may also
+include columns for other species groups; these will be ignored. Note that
+an entry in \code{FP.groups} could be \code{"ALL"}. In this case, a column
+in \code{species.table} named \code{"ALL"} is not required; the function
+will automatically include all species in \code{land} and/or \code{X}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -49,18 +50,19 @@ Returns a dataframe with columns: \code{ID} and \code{YEAR}, and a
  \code{group.X} is \code{NA}, fishing pressure is set to \code{NA}.
 }
 \description{
-This function calculates fishing pressure on a fished group for
+This function calculates Fishing Pressure on a fished group for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Fishing pressure (FP): \deqn{FP = Y_{FG}/B_{FG}} where \eqn{B_{FG}}
- is the biomass of the fished group(s) and \eqn{Y_{FG}} is the landed catch
- of the group(s).
+Fishing pressure (FP): \deqn{FP = Landings_{FG}/Biomass_{FG}} where
+ \eqn{Landings_{FG}} is the landed catch of the fished group and
+ \eqn{Biomass_{FG}} is the biomass of the fished group.
 
  This indicator measures the level of exploitation or total fishing pressure
- at the ecosystem level. Change in this indicator can result from change in
- \eqn{B_{FG}}, \eqn{Y_{FG}} or both. If \eqn{B_{FG}} and \eqn{Y_{FG}} change
- in the same direction, exploitation rate may not change.
+ at the ecosystem or species group level. Change in this indicator can result
+ from change in \eqn{Landings_{FG}}, \eqn{Biomass_{FG}} or both. If
+ \eqn{Landings_{FG}} and \eqn{Biomass_{FG}} change in the same direction,
+ exploitation rate may not change.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

@@ -2,7 +2,7 @@
 % Please edit documentation in R/landings.R
 \name{landings}
 \alias{landings}
-\title{Calculates the landings per fished group}
+\title{Calculates the Landings per fished group}
 \usage{
 landings(land, groups, species.table = NULL, years)
 }
@@ -15,12 +15,11 @@ species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
-column in \code{species.groups}.}
+column in \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column names
+match the entries in \code{groups}, and the column entries are species codes
+from \code{land} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -38,7 +37,7 @@ This function calculates the commercial landings of predefined
  speceies groups for \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Calculates the total landings of predefined species groups.
+Calculates the Landings of predefined species groups.
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

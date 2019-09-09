@@ -2,7 +2,7 @@
 % Please edit documentation in R/hillN2.R
 \name{hillN2}
 \alias{hillN2}
-\title{Calculates Hill's species dominance}
+\title{Calculates Hill's Species Dominance (N2)}
 \usage{
 hillN2(X, group, species.table = NULL, metric = "ABUNDANCE", years)
 }
@@ -20,10 +20,9 @@ indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{If \code{group} does not equal \code{"ALL"},
-\code{species.table} is a table with at least one column, where the column
-name is the string \code{group}, and the column entries are the species
-codes indicating the species from \code{X} to include in the calculation.
+\item{species.table}{A table with at least one column, where the column name
+is the string \code{group}, and the column entries are species codes from
+\code{X} indicating which species are included that group.
 \code{species.table} may also include columns for other species groups;
 these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
@@ -41,8 +40,8 @@ Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
  values is assigned NA.
 }
 \description{
-This function calculates Hill's species dominance for \eqn{j}
- areas and \eqn{i} years.
+This function calculates Hill's Species Dominance (N2) for
+ \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Hill's Species Dominance (HillN2): \deqn{HillN2 = 1/\Sigma p_i^2}

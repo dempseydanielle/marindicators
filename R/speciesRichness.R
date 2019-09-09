@@ -1,5 +1,5 @@
-#'@title Calculates species richness of the community or the diversity of target
-#'  species
+#'@title Calculates Species Richness of the community or the Diversity of Target
+#'  Species
 #'@description This function counts the number of species recorded in fishery
 #'  independent survey data or commercial landings data for \eqn{i} years and
 #'  \eqn{j} areas.

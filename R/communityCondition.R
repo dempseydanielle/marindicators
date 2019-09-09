@@ -1,5 +1,5 @@
 #' @title Calculates Fulton's Condition Index for the community
-#' @description This function calculates Fulton's condition index for \eqn{j}
+#' @description This function calculates Fulton's Condition Index for \eqn{j}
 #'   areas and \eqn{i} years.
 #' @details Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
 #'   A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
@@ -18,7 +18,7 @@
 #'   should be assigned \code{LENGTH = -99}. These observations are removed by
 #'   the function.
 #' @param LenWt.table A table of annual length at weight data with 5 columns.
-#'   \code{YEAR}, \code{ID}, \code{SPECIES} correspond with those columns in
+#'   \code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
 #'   \code{X_length}. \code{LENGTH} is fish length at the corresponding
 #'   \code{WEIGHT} (fish weight).
 #' @return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
