@@ -1,0 +1,18 @@
+#' Example fishery dependent data
+#'
+#' A dataframe of example fishery dependent (commercial) landings data for two
+#' areas (AREA1 and AREA2) from 2014 - 2019.
+#'
+#' Indicators calculated using fishery dependent data (among other arguments):
+#' Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of the Target
+#' Species, Fishing Pressure, Landings, Marine Trophic Index, and Mean Trophic
+#' Index of Landings.
+#' 
+#' @format A dataframe with 612 rows and 4 variables: \describe{
+#'   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
+#'   observation was recorded} \item{SPECIES}{Numeric code indicating the
+#'   species sampled (can be consistent with X or not; see vignette)} 
+#'   \item{CATCH}{Corresponding landed weight (in the same units as \code{BIOMASS} in \code{X}}}
+#'
+#' @source This is made-up example data.
+"land"
