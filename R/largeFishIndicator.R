@@ -40,6 +40,11 @@
 #'  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 #'@author Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca}, Catalina
 #'  Gomez, Alida Bundy
+#'@examples
+#'data(X_length)
+#'data(species.groups)
+#'largeFishIndicator(X_length, group = "FINFISH", species.table = species.groups, 
+#'    metric = "BIOMASS", years = c(2014:2019))
 #'@export
 
 largeFishIndicator <- function(X_length, group, species.table = NULL, 

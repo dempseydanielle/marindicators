@@ -62,6 +62,12 @@ Fishing-in-Balance (FiB) Index: \deqn{FiB = log(Y_k*(1/TE)^{TL_k}) -
  ecosystem is less productive owing to excessive fishery removals (Pauly et
  al., 2000).
 }
+\examples{
+data(land)
+data(species.info)
+fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,  
+   base.start = 2014, base.end = 2019, years = c(2014:2019))  
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

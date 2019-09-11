@@ -4,9 +4,8 @@
 \alias{allStability}
 \title{Calculates all Stability and Resistance indicators}
 \usage{
-allStability(X, X_length, land, maxlength.group, species.table,
-  speciesinfo.table, TL.grouping = 1, window = 5, negative = FALSE,
-  years)
+allStability(X, land, maxlength.group, species.table, speciesinfo.table,
+  TL.grouping = 1, window = 5, negative = FALSE, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -16,17 +15,6 @@ area code indicating where the observation was recorded, \code{SPECIES} is a
 numeric code indicating the species sampled, and \code{BIOMASS} is the
 corresponding biomass (stratified and corrected for catchability as
 required).}
-
-\item{X_length}{A dataframe of fishery independent survey data or model
-output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
-and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, and \code{SPECIES} is a numeric code indicating the species
-sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for
-catchability as required). Species for which there are no length data
-should be assigned \code{LENGTH = -99}. These observations are removed by
-the function.}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year

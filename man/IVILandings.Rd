@@ -49,6 +49,11 @@ The weighted Intrinsic Vulnerability Index (IVI) of species in the
  from Cheung et al., 2007:
  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 }
+\examples{
+data(land)
+data(species.info)
+IVILandings(land, IVI.table = species.info, negative = TRUE, years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

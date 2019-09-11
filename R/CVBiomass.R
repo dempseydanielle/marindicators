@@ -44,6 +44,9 @@
 #'  Journal of Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'CVBiomass(X, window = 5, negative = TRUE, years = c(2014:2019))
 #'@export
 
 

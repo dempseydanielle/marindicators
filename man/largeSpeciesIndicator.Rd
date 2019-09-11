@@ -60,6 +60,12 @@ Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} > 85
  and \eqn{L_{max}} is the maximum asymptotic length in cm (here the default
  is 85 cm; Shin et al., 2010).
 }
+\examples{
+data(X)
+data(species.groups)
+largeSpeciesIndicator(X, group = "ALL", species.table = species.groups, 
+   maxlength.table = species.info, max.length=85,  metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

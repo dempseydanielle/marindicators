@@ -42,9 +42,14 @@
 #'  706
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(land)
+#'data(species.info)
+#'fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,  
+#'    base.start = 2014, base.end = 2019, years = c(2014:2019))  
 #'@export
 
-fishingInBalance<- function (land, TL.table, minTL = 0, TE = 0.1,   
+fishingInBalance<- function(land, TL.table, minTL = 0, TE = 0.1,   
                              base.start, base.end, years) {
   
   mTL <- meanTLLandings(land = land, TL.table = TL.table,                  # calculate mean trophic level of landings

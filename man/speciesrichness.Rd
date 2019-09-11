@@ -66,6 +66,13 @@ Two useful species richness indicators are: "Species Richness" (S) of
  the number of target species recorded in all trawl catches collected in that
  year for a given area.
 }
+\examples{
+data(X)
+speciesRichness(X, group = "ALL", metric = "BIOMASS", years = c(2014:2019))
+
+data(land)
+speciesRichness(land, group = "ALL", metric = "CATCH",  years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

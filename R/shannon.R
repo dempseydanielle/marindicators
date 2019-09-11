@@ -44,10 +44,13 @@
 #'  Hall, London. 179 pp.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples 
+#'data(X)
+#'shannon(X, group = "ALL", metric = "ABUNDANCE", years = c(2015:2019))
 #'@export
 
 
-shannon <- function(X,  group, species.table = NULL, metric = "ABUNDANCE", years) {
+shannon <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years) {
   
   X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
 

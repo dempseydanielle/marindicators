@@ -50,6 +50,10 @@ Hill's Species Dominance (HillN2): \deqn{HillN2 = 1/\Sigma p_i^2}
  sensitive to the evenness of the distribution of individuals between species
  (Hill, 1973).
 }
+\examples{
+data(X)
+hillN2(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

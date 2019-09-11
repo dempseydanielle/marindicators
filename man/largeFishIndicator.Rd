@@ -59,6 +59,12 @@ Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
  biomass occupying the top predator trophic level; Greenstreet and Rogers,
  2006).
 }
+\examples{
+data(X_length)
+data(species.groups)
+largeFishIndicator(X_length, group = "FINFISH", species.table = species.groups, 
+   metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

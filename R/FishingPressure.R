@@ -54,6 +54,18 @@
 #'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(land)
+#'data(species.groups)
+#'
+#' FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+#'    c("CLUPEIDS", "CLUPEIDS.L"),
+#'    c("FLATFISH", "FLATFISH.L"),
+#'    c("GROUNDFISH", "GROUNDFISH.L")))
+#'names(FP.groups) <- c("group.X", "group.land")
+#'fishingPressure(X = X, land = land, FP.groups = FP.groups, 
+#'    species.table = species.groups,  years = c(2014:2019))
 #'@export
 
 fishingPressure <- function(X, land, FP.groups, species.table = NULL, years){

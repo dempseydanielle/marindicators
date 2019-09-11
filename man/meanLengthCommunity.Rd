@@ -41,6 +41,11 @@ This function calculates the Mean Length of the Community
  \eqn{metric_j} is the total biomass or abundance of the community (Shin et
  al., 2010).
 }
+\examples{
+data(X_length)
+meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
+meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

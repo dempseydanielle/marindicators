@@ -24,6 +24,13 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(land)
+#'data(species.groups)
+#'
+#'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+#'landings(land, groups = landings.groups, species.table = species.groups, 
+#'    years = c(2014:2019))
 #'@export
 
 landings <- function(land, groups, species.table = NULL, years) {

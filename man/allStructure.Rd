@@ -17,16 +17,15 @@ numeric code indicating the species sampled, and \code{BIOMASS} is the
 corresponding biomass (stratified and corrected for catchability as
 required).}
 
-\item{X_length}{A dataframe of fishery independent survey data or model
-output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
-and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+\item{X_length}{A dataframe of fishery independent survey data or model output
+with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
 recorded, \code{ID} is an area code indicating where the observation was
 recorded, and \code{SPECIES} is a numeric code indicating the species
 sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for
-catchability as required). Species for which there are no length data
-should be assigned \code{LENGTH = -99}. These observations are removed by
-the function.}
+corresponding abundance at length (stratified and corrected for catchability
+as required). Species for which there are no length data should be assigned
+\code{LENGTH = -99}. These observations are removed by the function.}
 
 \item{LSI.group}{A character string indicating the species group for which to
 calculate the Large Species Indicator. Must be set to \code{"ALL"} or match

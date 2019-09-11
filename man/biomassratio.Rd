@@ -63,6 +63,12 @@ One useful biomass ratio is the proportion of predatory fish in the
  Other useful biomass \eqn{(B)} ratios indicators include:
  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 }
+\examples{
+ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
+names(ratio.groups) <- c("group1", "group2")
+biomassRatio(X, ratio.groups = ratio.groups, species.table = species.groups, 
+   metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

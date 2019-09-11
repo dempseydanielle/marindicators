@@ -55,6 +55,11 @@
 #'  Progress Series, 512, pp.115-140.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(land)
+#'data(species.info)
+#'meanTLLandings(land, TL.table = species.info, minTL = 0, years = c(2014:2019))
+#'meanTLLandings(land, TL.table = species.info, minTL = 3.25, years = c(2014:2019))
 #'@export
 
 meanTLLandings <- function (land, TL.table, minTL = 0, years) {

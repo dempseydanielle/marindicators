@@ -18,10 +18,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = FALSE}
 library(indicators)
-```
-```{r, echo = F}
-path <- file.path("C:/Users/DEMPSEYD/Documents/github/indicators/R")
-load(paste(path, "/sysdata.rda", sep = ""))
 
 n.show <- 4
 n.digits <- 2
@@ -208,7 +204,7 @@ Table 2: Additional species information required to calculate given indicators. 
 | **SPECIES INFO** | **TABLE HEADER** |**DESCRIPTION** | **INDICATOR(S)** 
 |:------------| :------------:|:--------------------------------|:----------------|
 | Trophic Level | `TL` | Trophic level of species caught in fishery independent surveys | Kempton's Q[^2], Mean Trophic Level of Community, Biomass per Trophic Level | 
-| Maximum Length | `MAXLENGTH` | Maximum recorded length of of species caught in fisheries independent surveys | Large Species Indicator, Mean Maximum Length |
+| Maximum Length | `MAXLENGTH` | Maximum recorded length of species caught in fisheries independent surveys | Large Species Indicator, Mean Maximum Length |
 | Maximum Age | `MAXAGE` | Maximum recorded age of of species caught in fishery independent surveys | Maximum Lifespan |
 | Intrinsic Vulnerability Index | `IVI` | Vulnerability of commercial species, determined by considering several traits (e.g. max length, age at first maturity, longevity, von Bertalanffy growth parameter, natural mortality, fecundity, spatial behaviour, and geographic range) | IVI of landings | 
 | Trophic Level of Landed Species | `TL_LAND` | Trophic level of commercial species | Fishing-in-Balance, Marine Trophic Index, Mean Trophic Level of Landings |

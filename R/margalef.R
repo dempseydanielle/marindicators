@@ -19,6 +19,9 @@
 #'   Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'   Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'margalef(X, group = "ALL", metric= "ABUNDANCE", years = c(2014:2019))
 #' @export
 
 margalef <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {

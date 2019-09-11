@@ -51,6 +51,10 @@ Pielou's Species Evenness: \deqn{J' = -\Sigma p_i ln( p_i )/ln(S)}
  Pielou's Index is the Shannon-Weiner Index computed for the sample \eqn{S}
  and represents a measure of evenness of the community (Pielou, 1966).
 }
+\examples{
+data(X)
+pielouEvenness(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

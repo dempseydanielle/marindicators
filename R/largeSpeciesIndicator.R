@@ -38,6 +38,11 @@
 #'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(species.groups)
+#'largeSpeciesIndicator(X, group = "ALL", species.table = species.groups, 
+#'    maxlength.table = species.info, max.length=85,  metric = "BIOMASS", years = c(2014:2019))
 #'@export
 
 

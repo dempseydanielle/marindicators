@@ -46,6 +46,12 @@
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@importFrom stats na.omit
+#'@examples
+#'data(X)
+#'speciesRichness(X, group = "ALL", metric = "BIOMASS", years = c(2014:2019))
+#'
+#'data(land)
+#'speciesRichness(land, group = "ALL", metric = "CATCH",  years = c(2014:2019))
 #'@export
 
 

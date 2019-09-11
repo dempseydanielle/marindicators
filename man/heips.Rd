@@ -50,6 +50,10 @@ Heip's Evenness Index (HE): \deqn{HE = (exp^{H'} - 1)/(S - 1)} where
   contributes to the total abundance or biomass of the community (Heip,
   1974).
 }
+\examples{
+data(X)
+heips(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

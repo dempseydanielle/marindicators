@@ -39,6 +39,14 @@ This function calculates the commercial landings of predefined
 \details{
 Calculates the Landings of predefined species groups.
 }
+\examples{
+data(land)
+data(species.groups)
+
+landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+landings(land, groups = landings.groups, species.table = species.groups, 
+   years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

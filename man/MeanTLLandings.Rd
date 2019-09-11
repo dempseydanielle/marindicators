@@ -60,6 +60,12 @@ Mean trophic level of fisheries landings (\eqn{TL_{Land}}):
  in this way, this indicator highlights changes in the relative abundance of
  the more threatened high-trophic level fishes (Pauly et al., 1998).
 }
+\examples{
+data(land)
+data(species.info)
+meanTLLandings(land, TL.table = species.info, minTL = 0, years = c(2014:2019))
+meanTLLandings(land, TL.table = species.info, minTL = 3.25, years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

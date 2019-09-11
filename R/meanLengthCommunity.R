@@ -31,6 +31,10 @@
 #'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X_length)
+#'meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
+#'meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
 #'@export
 
 

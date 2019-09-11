@@ -47,6 +47,21 @@ This function calculates the Biomass or Abundance of a
 \details{
 This indicator reflects temporal dynamics of species groups.
 }
+\examples{
+data(X)
+data(species.groups)
+
+resourcePotential(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+resourcePotential(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
+
+trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE")
+resourcePotential(X, groups = trophicguild.groups, 
+   species.table = species.groups, metric = "BIOMASS", years = c(2014:2019))
+   
+resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", "FORAGE", "GADOIDS", "GROUNDFISH")
+resourcePotential(X, groups = resource.groups, species.table = species.groups, 
+   metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

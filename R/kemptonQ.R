@@ -34,6 +34,11 @@
 #'  Nature 262:818-820
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(species.info)
+#'kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
+#'    group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 0, 

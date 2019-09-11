@@ -71,5 +71,9 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
+data(X)
+data(species.info)
+biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", 
+   TL.grouping = 1, years = c(2014:2019))
 }
 \concept{stability and resistance indicators}

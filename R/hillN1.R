@@ -25,6 +25,9 @@
 #'  consequences. Ecology 54: 427-431.
 #'@author Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca}, Catalina
 #'  Gomez, Alida Bundy
+#'@examples 
+#'data(X)
+#'hillN1(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 

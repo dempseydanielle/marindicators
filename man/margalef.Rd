@@ -49,6 +49,10 @@ Margalef's Species Richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
   catches collected in year \eqn{y}. \eqn{F} is the total count of all
   individuals caught in year \eqn{y} (Margalef, 1958).
 }
+\examples{
+data(X)
+margalef(X, group = "ALL", metric= "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

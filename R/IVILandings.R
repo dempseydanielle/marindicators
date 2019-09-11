@@ -37,6 +37,10 @@
 #'  vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(land)
+#'data(species.info)
+#'IVILandings(land, IVI.table = species.info, negative = TRUE, years = c(2014:2019))
 #'@export
 
         

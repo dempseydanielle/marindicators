@@ -45,6 +45,11 @@ Mean trophic level (TL): \deqn{TL = \Sigma (TL_i*B_i)/\Sigma B_i}
  biomass time series, weighted by annual species-specific biomass, to reflect
  the structure of the community (Christensen, 1998).
 }
+\examples{
+data(X)
+data(species.info)
+meanTLCommunity(X, TL.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

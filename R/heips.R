@@ -25,6 +25,9 @@
 #'   3059: vi+188p.
 #' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'   Catalina Gomez, Alida Bundy
+#' @examples
+#' data(X)
+#' heips(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #' @export
 
 heips <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {

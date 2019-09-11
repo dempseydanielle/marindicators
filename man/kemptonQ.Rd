@@ -66,6 +66,12 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
  quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2} are
  defaulted to 0.25 and 0.75, respectively (Kempton and Taylor, 1976).
 }
+\examples{
+data(X)
+data(species.info)
+kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
+   group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
  diversity index for use with ecosystem simulation models. Ecological

@@ -50,6 +50,10 @@ Shannon's index of diversity (H'): \deqn{H' = -\Sigma p_i ln(p_i)}
  index is sensitive to the number of species recorded in the sample
  (Magurran, 1988).
 }
+\examples{
+data(X)
+shannon(X, group = "ALL", metric = "ABUNDANCE", years = c(2015:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

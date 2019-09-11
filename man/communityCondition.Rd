@@ -8,16 +8,15 @@ communityCondition(X_length, groups, species.table = NULL, LenWt.table,
   years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data or model
-output with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
-and \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+\item{X_length}{A dataframe of fishery independent survey data or model output
+with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
 recorded, \code{ID} is an area code indicating where the observation was
 recorded, and \code{SPECIES} is a numeric code indicating the species
 sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for
-catchability as required). Species for which there are no length data
-should be assigned \code{LENGTH = -99}. These observations are removed by
-the function.}
+corresponding abundance at length (stratified and corrected for catchability
+as required). Species for which there are no length data should be assigned
+\code{LENGTH = -99}. These observations are removed by the function.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
@@ -39,37 +38,46 @@ Default is \code{species.table = NULL}.}
 }
 \value{
 Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
-  column \code{CCondition_group} for each entry in \code{groups}.
+ column \code{CCondition_group} for each entry in \code{groups}.
 
-  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  value is assigned \code{NA}.
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ value is assigned \code{NA}.
 }
 \description{
 This function calculates Fulton's Condition Index for \eqn{j}
-  areas and \eqn{i} years.
+ areas and \eqn{i} years.
 }
 \details{
 Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
-  A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
-  the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
-  \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j} (Ricker,
-  1975).
+ A_j)/\Sigma A_j} where the sum is over all species, \eqn{j}, \eqn{A_j} is
+ the abundance of species \eqn{j}, and \deqn{K_j = 100*W_j/L_j^3} where
+ \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j} (Ricker,
+ 1975).
+}
+\examples{
+data(X_length)
+data(species.groups)
+data(Length_Weight)
+condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", 
+   "PLANKTIVORE", "ZOOPISCIVORE")
+communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups, 
+   species.table = species.groups, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  DFO. 2003. State of the Eastern Scotian Shelf ecosystem. Dartmouth, Nova
-  Scotia
+ DFO. 2003. State of the Eastern Scotian Shelf ecosystem. Dartmouth, Nova
+ Scotia
 
-  Choi JS, Frank KT, Petrie BD, Leggett WC. 2005. Integrated Assessment of a
-  Large Marine Ecosystem: a case study of the devolution of the Eastern
-  Scotian Shelf, Canada. Oceanogr Mar Biol An Annu Rev 43:47–67
+ Choi JS, Frank KT, Petrie BD, Leggett WC. 2005. Integrated Assessment of a
+ Large Marine Ecosystem: a case study of the devolution of the Eastern
+ Scotian Shelf, Canada. Oceanogr Mar Biol An Annu Rev 43:47–67
 
-  Ricker, W. E. 1975. Computation and interpretation of biological statistics
-  of fish populations. Bulletin of the Fisheries Research Board of Canada
-  191:1-382.
+ Ricker, W. E. 1975. Computation and interpretation of biological statistics
+ of fish populations. Bulletin of the Fisheries Research Board of Canada
+ 191:1-382.
 }
 \seealso{
 Other ecosystem structure and function indicators: \code{\link{allPotential}},
@@ -80,6 +88,6 @@ Other ecosystem structure and function indicators: \code{\link{allPotential}},
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
-  Catalina Gomez, Alida Bundy
+ Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

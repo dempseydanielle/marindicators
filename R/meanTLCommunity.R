@@ -33,6 +33,10 @@
 #'  Prog. Ser. 512, 115–140.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples 
+#'data(X)
+#'data(species.info)
+#'meanTLCommunity(X, TL.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 #'@export
 
 

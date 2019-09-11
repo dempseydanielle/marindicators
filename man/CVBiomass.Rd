@@ -44,6 +44,10 @@ The Coefficient of Variation of the Biomass (CVBiomass) was estimated
  CVbiomass = sd(total biomass for the past n years)/mean(total biomass for
  the past n years)
 }
+\examples{
+data(X)
+CVBiomass(X, window = 5, negative = TRUE, years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

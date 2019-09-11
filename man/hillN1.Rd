@@ -50,6 +50,10 @@ Hill's N1 Diversity Index is the exponential of the Shannon-Weiner
  number of species recorded in the sample. This index is sensitive to the
  number of species recorded in the sample (Hill, 1973).
 }
+\examples{
+data(X)
+hillN1(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

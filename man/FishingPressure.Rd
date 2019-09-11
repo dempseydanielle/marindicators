@@ -64,6 +64,19 @@ Fishing pressure (FP): \deqn{FP = Landings_{FG}/Biomass_{FG}} where
  \eqn{Landings_{FG}} and \eqn{Biomass_{FG}} change in the same direction,
  exploitation rate may not change.
 }
+\examples{
+data(X)
+data(land)
+data(species.groups)
+
+FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+   c("CLUPEIDS", "CLUPEIDS.L"),
+   c("FLATFISH", "FLATFISH.L"),
+   c("GROUNDFISH", "GROUNDFISH.L")))
+names(FP.groups) <- c("group.X", "group.land")
+fishingPressure(X = X, land = land, FP.groups = FP.groups, 
+   species.table = species.groups,  years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
