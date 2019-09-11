@@ -34,6 +34,13 @@
 #'@family biodiversity indicators
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(species.info)
+#'data(species.groups)
+#'
+#'allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.info, 
+#'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019))
 #'@export
 
 allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.table = NULL, TL.table, 

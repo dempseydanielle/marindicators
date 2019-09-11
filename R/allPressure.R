@@ -41,11 +41,27 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(land)
+#'data(species.groups)
+#'data(species.info)
+#'
+#'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+#' FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+#'    c("CLUPEIDS", "CLUPEIDS.L"),
+#'    c("FLATFISH", "FLATFISH.L"),
+#'    c("GROUNDFISH", "GROUNDFISH.L")))
+#'names(FP.groups) <- c("group.X", "group.land")
+#'
+#'allPressure(X = X, land = land, species.table = species.groups, 
+#'    speciesinfo.table = species.info, landings.groups = landings.groups, 
+#'    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019))
 #'@export
 
 allPressure <- function(X, land, 
                         species.table, speciesinfo.table, landings.groups, FP.groups,
-                        minTL,  years){
+                        minTL = c(0, 3.25),  years){
   
   inds <- createDataframe(unique(land$ID), years)
   

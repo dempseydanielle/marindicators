@@ -66,7 +66,7 @@ Fishing-in-Balance (FiB) Index: \deqn{FiB = log(Y_k*(1/TE)^{TL_k}) -
 data(land)
 data(species.info)
 fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,  
-   base.start = 2014, base.end = 2019, years = c(2014:2019))  
+   base.start = 2014, base.end = 2015, years = c(2014:2019))  
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

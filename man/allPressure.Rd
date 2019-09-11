@@ -5,7 +5,7 @@
 \title{Calculates all Pressure indicators}
 \usage{
 allPressure(X, land, species.table, speciesinfo.table, landings.groups,
-  FP.groups, minTL, years)
+  FP.groups, minTL = c(0, 3.25), years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -69,6 +69,23 @@ This function calculates the Pressure indicators: Diversity of the
  calculate one or more of these indicators, a subset will be returned. See
  the help file for the individual functions for information on how each
  indicator is calculated.
+}
+\examples{
+data(X)
+data(land)
+data(species.groups)
+data(species.info)
+
+landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+   c("CLUPEIDS", "CLUPEIDS.L"),
+   c("FLATFISH", "FLATFISH.L"),
+   c("GROUNDFISH", "GROUNDFISH.L")))
+names(FP.groups) <- c("group.X", "group.land")
+
+allPressure(X = X, land = land, species.table = species.groups, 
+   speciesinfo.table = species.info, landings.groups = landings.groups, 
+   FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

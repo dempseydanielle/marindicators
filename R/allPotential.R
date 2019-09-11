@@ -42,6 +42,18 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(land)
+#'data(species.table)
+#'data(species.info)
+#'
+#'resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", 
+#'    "FORAGE",  "GADOIDS", "GROUNDFISH")
+#'allPotential(X = X, land = land, species.table = species.groups, 
+#'    speciesinfo.table = species.info, resource.groups = resource.groups, 
+#'    TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019))
+#'
 #'@export
 
 

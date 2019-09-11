@@ -75,6 +75,19 @@ This function calculates the Resource Potential indicators: Abundance
  file for the individual functions for information on how each indicator is
  calculated.
 }
+\examples{
+data(X)
+data(land)
+data(species.table)
+data(species.info)
+
+resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", 
+   "FORAGE",  "GADOIDS", "GROUNDFISH")
+allPotential(X = X, land = land, species.table = species.groups, 
+   speciesinfo.table = species.info, resource.groups = resource.groups, 
+   TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019))
+
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

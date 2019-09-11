@@ -1,7 +1,7 @@
 Package: indicators
 Title: Marine Ecosystem Indicators Package
-Version: 0.0.0.9004
-Date: 2019.07.04
+Version: 0.0.1
+Date: 2019-09-11
 Authors: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
 Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role="aut"),
            person("Adam", "Cook", email="Adam.Cook@dfo-mpo.gc.ca", role= c("aut", "cre")),

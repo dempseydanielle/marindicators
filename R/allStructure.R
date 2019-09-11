@@ -63,6 +63,26 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
+#'data(X)
+#'data(X_length)
+#'data(species.groups)
+#'data(species.info)
+#'data(Length_Weight)
+#'
+#'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
+#'names(ratio.groups) <- c("group1", "group2")
+#'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", 
+#'    "ZOOPISCIVORE")
+#'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
+#'     "PLANKTIVORE", "ZOOPISCIVORE")
+#'allStructure(X = X, X_length = X_length, 
+#'    LSI.group = "ALL", LFI.group = "ALL", 
+#'    resource.groups = trophicguild.groups, condition.groups = condition.groups, 
+#'    ratio.groups = ratio.groups,
+#'    species.table = species.groups, speciesinfo.table = species.info, 
+#'    LenWt.table = Length_Weight, 
+#'    max.length = 85, years = c(2014:2019))
 #'@export
 
 allStructure <- function(X, X_length,

@@ -76,6 +76,16 @@ This function calculates the Stability and Resistance indicators:
  the individual functions for information on how each indicator is
  calculated.
 }
+\examples{
+data(X)
+data(land)
+data(species.info)  
+data(species.groups)
+ 
+allStability(X = X, land = land, maxlength.group = "FINFISH",
+   species.table = species.groups, speciesinfo.table = species.info,
+   TL.grouping = 1, window = 5, negative = FALSE, years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

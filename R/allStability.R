@@ -49,6 +49,16 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'
+#'@examples
+#'data(X)
+#'data(land)
+#'data(species.info)  
+#'data(species.groups)
+#'  
+#'allStability(X = X, land = land, maxlength.group = "FINFISH",
+#'    species.table = species.groups, speciesinfo.table = species.info,
+#'    TL.grouping = 1, window = 5, negative = FALSE, years = c(2014:2019))
 #'@export
 
 
