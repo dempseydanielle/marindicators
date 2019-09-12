@@ -55,8 +55,19 @@
 #'  values of species codes in \code{X}/\code{X_length} (or a subset thereof).
 #'  Other columns will be ignored.
 #'@param years A vector of years for which to calculate indicators.
+#'@param raw A logical value. If \code{raw = TRUE}, the raw indicator values are
+#'  returned from the function. If \code{raw = FALSE}, the raw indcator values
+#'  are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+#'  \code{std} must be \code{TRUE}.
+#'@param std A logical value. If \code{std = TRUE}, the standardized indicator
+#'  values for each area ID are returned from the function. Here, indicators are
+#'  standardized using Z-scores, i.e., by subtracting the mean and dividing by
+#'  the standard deviation (ignoring NA values). If \code{std = FALSE}, the
+#'  standardized indcator values are not returned. Default is \code{std = TRUE}.
+#'  Either \code{raw} or \code{std} must be \code{TRUE}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
+#'  Standardized indicators are noted with "_s" in the name.
 #'@family ecosystem structure and function indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -72,24 +83,24 @@
 #'
 #'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 #'names(ratio.groups) <- c("group1", "group2")
-#'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", 
+#'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
 #'    "ZOOPISCIVORE")
 #'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
 #'     "PLANKTIVORE", "ZOOPISCIVORE")
-#'allStructure(X = X, X_length = X_length, 
-#'    LSI.group = "ALL", LFI.group = "ALL", 
-#'    resource.groups = trophicguild.groups, condition.groups = condition.groups, 
+#'allStructure(X = X, X_length = X_length,
+#'    LSI.group = "ALL", LFI.group = "ALL",
+#'    resource.groups = trophicguild.groups, condition.groups = condition.groups,
 #'    ratio.groups = ratio.groups,
-#'    species.table = species.groups, speciesinfo.table = species.info, 
-#'    LenWt.table = Length_Weight, 
-#'    max.length = 85, years = c(2014:2019))
+#'    species.table = species.groups, speciesinfo.table = species.info,
+#'    LenWt.table = Length_Weight,
+#'    max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
 #'@export
 
 allStructure <- function(X, X_length,
                          LSI.group, LFI.group,
                          resource.groups, condition.groups, ratio.groups,
                          species.table, speciesinfo.table, LenWt.table,
-                         max.length, years){
+                         max.length, years, raw = TRUE, std = TRUE){
 
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
@@ -161,6 +172,15 @@ allStructure <- function(X, X_length,
       inds <- merge(inds, condition, all.x = TRUE)
     }
     
+  }
+  
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
+  if(std == TRUE){
+    inds_std <-  standardize(inds)
+    
+    if(raw == FALSE) inds <- inds_std
+    if(raw == TRUE) inds <- merge(inds, inds_std)
   }
   
   inds

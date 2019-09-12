@@ -5,7 +5,8 @@
 \title{Calculates all Resource Potential indicators}
 \usage{
 allPotential(X, land, species.table, speciesinfo.table, resource.groups,
-  minTL = 0, TE = 0.1, base.start, base.end, years)
+  minTL = 0, TE = 0.1, base.start, base.end, years, raw = TRUE,
+  std = TRUE)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -58,6 +59,18 @@ over the baseline period are used as baseline values to calculate FiB.
 NULL}, FiB wll not be calculated.}
 
 \item{years}{A vector of years for which to calculate indicators.}
+
+\item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
+returned from the function. If \code{raw = FALSE}, the raw indcator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
+
+\item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
+values for each area ID are returned from the function. Here, indicators are
+standardized using Z-scores, i.e., by subtracting the mean and dividing by
+the standard deviation (ignoring NA values). If \code{std = FALSE}, the
+standardized indcator values are not returned. Default is \code{std = TRUE}.
+Either \code{raw} or \code{std} must be \code{TRUE}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
@@ -85,7 +98,8 @@ resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH",
    "FORAGE",  "GADOIDS", "GROUNDFISH")
 allPotential(X = X, land = land, species.table = species.groups, 
    speciesinfo.table = species.info, resource.groups = resource.groups, 
-   TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019))
+   TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019), 
+   raw = FALSE, std = TRUE)
 
 }
 \references{

@@ -9,6 +9,7 @@
 #'  the help file for the individual functions for information on how each
 #'  indicator is calculated.
 #'@inheritParams fishingPressure
+#'@inheritParams allStructure
 #'@param landings.groups A vector indicating the species groups for which to
 #'  calculate the landings. Each entry must be a character string matching the
 #'  name of a column in \code{species.table}. If \code{landings.groups = NULL},
@@ -35,6 +36,7 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
+#'  Standardized indicators are noted with "_s" in the name.
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -48,20 +50,20 @@
 #'data(species.info)
 #'
 #'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
-#' FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+#' FP.groups <- data.frame(rbind(c("ALL", "ALL"),
 #'    c("CLUPEIDS", "CLUPEIDS.L"),
 #'    c("FLATFISH", "FLATFISH.L"),
 #'    c("GROUNDFISH", "GROUNDFISH.L")))
 #'names(FP.groups) <- c("group.X", "group.land")
 #'
-#'allPressure(X = X, land = land, species.table = species.groups, 
-#'    speciesinfo.table = species.info, landings.groups = landings.groups, 
-#'    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019))
+#'allPressure(X = X, land = land, species.table = species.groups,
+#'    speciesinfo.table = species.info, landings.groups = landings.groups,
+#'    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)
 #'@export
 
 allPressure <- function(X, land, 
                         species.table, speciesinfo.table, landings.groups, FP.groups,
-                        minTL = c(0, 3.25),  years){
+                        minTL = c(0, 3.25),  years, raw = TRUE, std = TRUE){
   
   inds <- createDataframe(unique(land$ID), years)
   
@@ -96,8 +98,17 @@ allPressure <- function(X, land,
     FP = fishingPressure(X = X, land = land, FP.groups = FP.groups,
                          species.table = species.table,  years = years)
     
-    inds <- merge(inds, FP, all.x = TRUE, all.x = TRUE)
+    inds <- merge(inds, FP, all.x = TRUE)
   }
-
+  
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
+  if(std == TRUE){
+    inds_std <-  standardize(inds)
+    
+    if(raw == FALSE) inds <- inds_std
+    if(raw == TRUE) inds <- merge(inds, inds_std)
+  }
+  
   inds
 }

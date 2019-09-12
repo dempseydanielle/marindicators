@@ -11,6 +11,7 @@
 #'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams communityCondition
+#'@inheritParams allStructure
 #'@param maxlength.group A character string indicating the species group for
 #'  which to calculate the mean maximum length of fish in the community. Must be
 #'  set to \code{"ALL"} or match a column name in \code{species.table}. If
@@ -32,10 +33,10 @@
 #'  2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
 #'  1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
 #'  1} so that biomass is aggregated over discrete trophic levels.
-#'@param wind Window for the moving average used to calculate the Coefficient
-#'  of Variation of the Biomass. The first and last \code{floor(wind/2)}
-#'  values of the indicator are assigned \code{NA} to account for the moving
-#'  average. Default is \code{wind = 5} years.
+#'@param wind Window for the moving average used to calculate the Coefficient of
+#'  Variation of the Biomass. The first and last \code{floor(wind/2)} values of
+#'  the indicator are assigned \code{NA} to account for the moving average.
+#'  Default is \code{wind = 5} years.
 #'@param negative If \code{negative = TRUE}, the Coefficient of Variation of the
 #'  Biomasss will be multiplied by -1 so that the expected response is to
 #'  decrease with increasing fishing pressure. Default is \code{negative =
@@ -43,29 +44,30 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
+#'  Standardized indicators are noted with "_s" in the name.
 #'@family stability and resistance indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
-#'
 #'@examples
 #'data(X)
 #'data(land)
-#'data(species.info)  
+#'data(species.info)
 #'data(species.groups)
-#'  
+#'
 #'allStability(X = X, land = land, maxlength.group = "FINFISH",
-#'    species.table = species.groups, speciesinfo.table = species.info,
-#'    TL.grouping = 1, wind = 5, negative = FALSE, years = c(2014:2019))
+#'    species.table = species.groups, speciesinfo.table = species.info,TL.grouping = 1,
+#'    wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
 #'@export
 
 
 allStability <- function(X, land, 
                          maxlength.group,
                          species.table, speciesinfo.table,  
-                         TL.grouping = 1, wind = 5, negative = FALSE, years){
+                         TL.grouping = 1, wind = 5, negative = FALSE, 
+                         years,  raw = TRUE, std = TRUE){
   
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
@@ -112,6 +114,15 @@ allStability <- function(X, land,
       IVI = IVILandings(land, IVI.table = speciesinfo.table, negative = negative, years = years)
       inds <- merge(inds, IVI, all.x = TRUE)
     }
+  }
+  
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
+  if(std == TRUE){
+    inds_std <-  standardize(inds)
+    
+    if(raw == FALSE) inds <- inds_std
+    if(raw == TRUE) inds <- merge(inds, inds_std)
   }
   
   inds

@@ -5,7 +5,8 @@
 \title{Calculates all Stability and Resistance indicators}
 \usage{
 allStability(X, land, maxlength.group, species.table, speciesinfo.table,
-  TL.grouping = 1, wind = 5, negative = FALSE, years)
+  TL.grouping = 1, wind = 5, negative = FALSE, years, raw = TRUE,
+  std = TRUE)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -58,6 +59,18 @@ decrease with increasing fishing pressure. Default is \code{negative =
 FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicators.}
+
+\item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
+returned from the function. If \code{raw = FALSE}, the raw indcator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
+
+\item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
+values for each area ID are returned from the function. Here, indicators are
+standardized using Z-scores, i.e., by subtracting the mean and dividing by
+the standard deviation (ignoring NA values). If \code{std = FALSE}, the
+standardized indcator values are not returned. Default is \code{std = TRUE}.
+Either \code{raw} or \code{std} must be \code{TRUE}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
@@ -83,8 +96,8 @@ data(species.info)
 data(species.groups)
  
 allStability(X = X, land = land, maxlength.group = "FINFISH",
-   species.table = species.groups, speciesinfo.table = species.info,
-   TL.grouping = 1, wind = 5, negative = FALSE, years = c(2014:2019))
+   species.table = species.groups, speciesinfo.table = species.info,TL.grouping = 1, 
+   wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

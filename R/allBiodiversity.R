@@ -9,6 +9,7 @@
 #'  for the individual functions for information on how each indicator is
 #'  calculated.
 #'@inheritParams shannon
+#'@inheritParams allStructure
 #'@param metric A character string indicating which column in \code{X} to use to
 #'  calculate the indicators. Default is \code{metric = "ABUNDANCE"}.
 #'@param group A character string indicating the species group for which to
@@ -27,9 +28,7 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
-#'
-#'  If there is no data for an indicator at spatial scale \eqn{j} in year
-#'  \eqn{i}, indicator value is assigned \code{NA}.
+#'  Standardized indicators are noted with "_s" in the name.
 #'@importFrom stats aggregate
 #'@family biodiversity indicators
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
@@ -39,12 +38,12 @@
 #'data(species.info)
 #'data(species.groups)
 #'
-#'allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.info, 
-#'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019))
+#'allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.info,
+#'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 #'@export
 
 allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.table = NULL, TL.table, 
-                            percentiles = c(.25, 0.75), minTL = 0, years){
+                            percentiles = c(.25, 0.75), minTL = 0, years, raw = TRUE, std = TRUE){
   
   S = speciesRichness(X = X, metric = metric, group = group, species.table = species.table, years = years)
   H = shannon(X = X, metric = metric, group = group, species.table = species.table, years = years)
@@ -67,6 +66,15 @@ allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.tabl
   names(inds)[10] <- names(Q)[3]
   }
   
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+
+  if(std == TRUE){
+    inds_std <-  standardize(inds)
+    
+    if(raw == FALSE) inds <- inds_std
+    if(raw == TRUE) inds <- merge(inds, inds_std)
+  }
+
   inds
 }
                             

@@ -53,7 +53,7 @@ landings <- function(land, groups, species.table = NULL, years) {
     ind.k <- ind.k[order(ind.k$ID), ]                             # order by "ID" to be consistent with other functions
     
     if(k == 1) ind = ind.k
-    ind <- merge(ind, ind.k)
+    ind <- merge(ind, ind.k, all.x = TRUE)
   }
   
   ind

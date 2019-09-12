@@ -5,7 +5,7 @@
 \title{Calculates all Pressure indicators}
 \usage{
 allPressure(X, land, species.table, speciesinfo.table, landings.groups,
-  FP.groups, minTL = c(0, 3.25), years)
+  FP.groups, minTL = c(0, 3.25), years, raw = TRUE, std = TRUE)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -52,6 +52,18 @@ c(0, 3.25)}, which will return the mean trophic level of the landings and
 the marine trophic index.}
 
 \item{years}{A vector of years for which to calculate indicators.}
+
+\item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
+returned from the function. If \code{raw = FALSE}, the raw indcator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
+
+\item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
+values for each area ID are returned from the function. Here, indicators are
+standardized using Z-scores, i.e., by subtracting the mean and dividing by
+the standard deviation (ignoring NA values). If \code{std = FALSE}, the
+standardized indcator values are not returned. Default is \code{std = TRUE}.
+Either \code{raw} or \code{std} must be \code{TRUE}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
@@ -85,7 +97,7 @@ names(FP.groups) <- c("group.X", "group.land")
 
 allPressure(X = X, land = land, species.table = species.groups, 
    speciesinfo.table = species.info, landings.groups = landings.groups, 
-   FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019))
+   FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

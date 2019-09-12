@@ -6,7 +6,7 @@
 \usage{
 allStructure(X, X_length, LSI.group, LFI.group, resource.groups,
   condition.groups, ratio.groups, species.table, speciesinfo.table,
-  LenWt.table, max.length, years)
+  LenWt.table, max.length, years, raw = TRUE, std = TRUE)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -77,6 +77,18 @@ Other columns will be ignored.}
 species are those with \code{MAXLENGTH} >= 85 cm).}
 
 \item{years}{A vector of years for which to calculate indicators.}
+
+\item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
+returned from the function. If \code{raw = FALSE}, the raw indcator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
+
+\item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
+values for each area ID are returned from the function. Here, indicators are
+standardized using Z-scores, i.e., by subtracting the mean and dividing by
+the standard deviation (ignoring NA values). If \code{std = FALSE}, the
+standardized indcator values are not returned. Default is \code{std = TRUE}.
+Either \code{raw} or \code{std} must be \code{TRUE}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
@@ -123,7 +135,7 @@ allStructure(X = X, X_length = X_length,
    ratio.groups = ratio.groups,
    species.table = species.groups, speciesinfo.table = species.info, 
    LenWt.table = Length_Weight, 
-   max.length = 85, years = c(2014:2019))
+   max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
