@@ -70,7 +70,7 @@ allPotential <- function(X, land,
   if("ABUNDANCE" %in% colnames(X)){
     abund = resourcePotential(X, metric = "ABUNDANCE", groups = "ALL",
                           species.table = species.table, years = years)
-    inds <- merge(inds, abund)
+    inds <- merge(inds, abund, all.x = TRUE)
   }
   
   # Biomass 
@@ -78,7 +78,7 @@ allPotential <- function(X, land,
       
         potential <- resourcePotential(X, metric = "BIOMASS", groups = resource.groups,
                                        species.table = species.table, years = years)
-        inds <- merge(inds, potential)
+        inds <- merge(inds, potential, all.x = TRUE)
   }
 
   # Fishing in Balance
@@ -87,7 +87,7 @@ allPotential <- function(X, land,
     FIB = fishingInBalance(land, TE = TE,  base.start = base.start, base.end = base.end, 
                           TL.table = speciesinfo.table,  minTL = minTL,  years = years)
     
-    inds <- merge(inds, FIB)
+    inds <- merge(inds, FIB, all.x = TRUE)
   }
 
   inds

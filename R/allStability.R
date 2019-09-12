@@ -32,10 +32,10 @@
 #'  2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
 #'  1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
 #'  1} so that biomass is aggregated over discrete trophic levels.
-#'@param window Window for the moving average used to calculate the Coefficient
-#'  of Variation of the Biomass. The first and last \code{floor(window/2)}
+#'@param wind Window for the moving average used to calculate the Coefficient
+#'  of Variation of the Biomass. The first and last \code{floor(wind/2)}
 #'  values of the indicator are assigned \code{NA} to account for the moving
-#'  average. Default is \code{window = 5} years.
+#'  average. Default is \code{wind = 5} years.
 #'@param negative If \code{negative = TRUE}, the Coefficient of Variation of the
 #'  Biomasss will be multiplied by -1 so that the expected response is to
 #'  decrease with increasing fishing pressure. Default is \code{negative =
@@ -58,14 +58,14 @@
 #'  
 #'allStability(X = X, land = land, maxlength.group = "FINFISH",
 #'    species.table = species.groups, speciesinfo.table = species.info,
-#'    TL.grouping = 1, window = 5, negative = FALSE, years = c(2014:2019))
+#'    TL.grouping = 1, wind = 5, negative = FALSE, years = c(2014:2019))
 #'@export
 
 
 allStability <- function(X, land, 
                          maxlength.group,
                          species.table, speciesinfo.table,  
-                         TL.grouping = 1, window = 5, negative = FALSE, years){
+                         TL.grouping = 1, wind = 5, negative = FALSE, years){
   
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
@@ -75,32 +75,32 @@ allStability <- function(X, land,
   if("BIOMASS" %in% colnames(X)){
     
     # CV biomass
-    CV_bio = CVBiomass(X, window = 5, negative = negative, years = years)
-    inds <- merge(inds, CV_bio)
+    CV_bio = CVBiomass(X, wind = 5, negative = negative, years = years)
+    inds <- merge(inds, CV_bio, all.x = TRUE)
     
     # Max LifeSpan
     if("MAXAGE" %in% colnames(speciesinfo.table)){
       MMA = meanMaxAge(X, age.table = speciesinfo.table, "BIOMASS", years = years)
-      inds <- merge(inds, MMA)
+      inds <- merge(inds, MMA, all.x = TRUE)
     }
     
     # Biomass per TL
     if("TL" %in% colnames(speciesinfo.table)){
       bio_TL = biomassPerTL(X, TL.table = speciesinfo.table, metric = "BIOMASS", 
                             TL.grouping = TL.grouping, years = years)
-      inds <- merge(inds, bio_TL)
+      inds <- merge(inds, bio_TL, all.x = TRUE)
     }
     
     if("MAXLENGTH" %in% colnames(speciesinfo.table) & length(maxlength.group) > 0){
       MML_bio = meanMaxLength(X, group = maxlength.group, species.table = species.table,
                         maxlength.table = speciesinfo.table, metric = "BIOMASS", years = years)
-      inds <- merge(inds, MML_bio)
+      inds <- merge(inds, MML_bio, all.x = TRUE)
     }
  
     if("ABUNDANCE" %in% colnames(X)){
       MML_abund = meanMaxLength(X, group = maxlength.group,  species.table = species.table,
                           maxlength.table = speciesinfo.table, metric = "ABUNDANCE", years = years)
-      inds <- merge(inds, MML_abund)
+      inds <- merge(inds, MML_abund, all.x = TRUE)
     }
   }
   
@@ -110,7 +110,7 @@ allStability <- function(X, land,
     # IVI Landings
     if("IVI" %in% colnames(speciesinfo.table)){
       IVI = IVILandings(land, IVI.table = speciesinfo.table, negative = negative, years = years)
-      inds <- merge(inds, IVI)
+      inds <- merge(inds, IVI, all.x = TRUE)
     }
   }
   

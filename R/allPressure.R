@@ -68,7 +68,7 @@ allPressure <- function(X, land,
   # Diversity of target species
   SR.L = speciesRichness(land, metric = "CATCH", group = "ALL", years = years)
   
-  inds <- merge(inds, SR.L)
+  inds <- merge(inds, SR.L, all.x = TRUE)
   
   if(length(minTL) > 0){
 
@@ -78,16 +78,16 @@ allPressure <- function(X, land,
                       minTL = minTL[i], years = years)
       
       if(i == 1){MTL = MTL.i}
-      MTL <- merge(MTL, MTL.i)
+      MTL <- merge(MTL, MTL.i, all.x = TRUE)
     }
-    inds <- merge(inds, MTL)
+    inds <- merge(inds, MTL, all.x = TRUE)
   }
   
   # landings by group
   if("CATCH" %in% colnames(land) & length(landings.groups) > 0){
       land.ind <- landings(land = land, groups = landings.groups,
                                 species.table = species.table, years = years)
-      inds <- merge(inds, land.ind)
+      inds <- merge(inds, land.ind, all.x = TRUE)
   }
   
   # fishing pressure by group
@@ -96,7 +96,7 @@ allPressure <- function(X, land,
     FP = fishingPressure(X = X, land = land, FP.groups = FP.groups,
                          species.table = species.table,  years = years)
     
-    inds <- merge(inds, FP)
+    inds <- merge(inds, FP, all.x = TRUE, all.x = TRUE)
   }
 
   inds

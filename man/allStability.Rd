@@ -5,7 +5,7 @@
 \title{Calculates all Stability and Resistance indicators}
 \usage{
 allStability(X, land, maxlength.group, species.table, speciesinfo.table,
-  TL.grouping = 1, window = 5, negative = FALSE, years)
+  TL.grouping = 1, wind = 5, negative = FALSE, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -47,10 +47,10 @@ biomass when calculating Biomass per Trophic Level. For example, if
 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
 1} so that biomass is aggregated over discrete trophic levels.}
 
-\item{window}{Window for the moving average used to calculate the Coefficient
-of Variation of the Biomass. The first and last \code{floor(window/2)}
+\item{wind}{Window for the moving average used to calculate the Coefficient
+of Variation of the Biomass. The first and last \code{floor(wind/2)}
 values of the indicator are assigned \code{NA} to account for the moving
-average. Default is \code{window = 5} years.}
+average. Default is \code{wind = 5} years.}
 
 \item{negative}{If \code{negative = TRUE}, the Coefficient of Variation of the
 Biomasss will be multiplied by -1 so that the expected response is to
@@ -84,7 +84,7 @@ data(species.groups)
  
 allStability(X = X, land = land, maxlength.group = "FINFISH",
    species.table = species.groups, speciesinfo.table = species.info,
-   TL.grouping = 1, window = 5, negative = FALSE, years = c(2014:2019))
+   TL.grouping = 1, wind = 5, negative = FALSE, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

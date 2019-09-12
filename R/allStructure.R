@@ -102,7 +102,7 @@ allStructure <- function(X, X_length,
 
         potential <- resourcePotential(X, metric = "BIOMASS", groups = resource.groups,
                                          species.table = species.table, years = years)
-        inds <- merge(inds, potential)
+        inds <- merge(inds, potential, all.x = TRUE)
       }
     
     # Biomass ratio
@@ -111,7 +111,7 @@ allStructure <- function(X, X_length,
       ratio <- biomassRatio(X, metric = "BIOMASS", ratio.groups = ratio.groups,
                                 species.table = species.table, years = years)
         
-      inds <- merge(inds, ratio)
+      inds <- merge(inds, ratio, all.x = TRUE)
     }
     
   
@@ -120,7 +120,7 @@ allStructure <- function(X, X_length,
       LSI = largeSpeciesIndicator(X, group = LSI.group, species.table = species.table,
                               maxlength.table = speciesinfo.table, max.length = max.length,  
                               metric = "BIOMASS", years = years)
-      inds <- merge(inds, LSI)
+      inds <- merge(inds, LSI, all.x = TRUE)
       }
     
     # Trophic level of the community
@@ -128,7 +128,7 @@ allStructure <- function(X, X_length,
       
       TL = meanTLCommunity(X, TL.table = speciesinfo.table, metric = "BIOMASS", years = years)
       
-      inds <- merge(inds, TL)
+      inds <- merge(inds, TL, all.x = TRUE)
       }
   } 
   
@@ -140,16 +140,16 @@ allStructure <- function(X, X_length,
       
       LFI = largeFishIndicator(X_length, group = LFI.group, species.table = species.table,
                              metric = "BIOMASS", years = years)
-      inds <- merge(inds, LFI)
+      inds <- merge(inds, LFI, all.x = TRUE)
     }
     
     # Mean length of community weighted by biomass
     ML_bio = meanLengthCommunity(X_length, metric = "BIOMASS", years = years)
-    inds <- merge(inds, ML_bio)
+    inds <- merge(inds, ML_bio, all.x = TRUE)
     
     # Mean length of community weighted by abundance
     ML_abund = meanLengthCommunity(X_length, metric = "ABUNDANCE", years = years)
-    inds <- merge(inds, ML_abund)
+    inds <- merge(inds, ML_abund, all.x = TRUE)
     
     # Commuity condition
     if("LENGTH" %in% colnames(LenWt.table) & length(condition.groups) > 0){
@@ -158,7 +158,7 @@ allStructure <- function(X, X_length,
                                          groups = condition.groups,
                                          species.table = species.table, years = years)
       
-      inds <- merge(inds, condition)
+      inds <- merge(inds, condition, all.x = TRUE)
     }
     
   }
