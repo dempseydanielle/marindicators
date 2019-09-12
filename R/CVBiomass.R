@@ -14,16 +14,16 @@
 #'  biomass (stratified and corrected for catchability as required). (Note: if
 #'  \code{X} has an additional \code{SPECIES} column, the function will
 #'  automatically calculate the total biomass).
-#'@param window Window for the moving average. The first and last
-#'  \code{floor(window/2)} values of the indicator are assigned \code{NA} to
-#'  account for the moving average. Default is \code{window = 5} years.
+#'@param wind Window for the moving average. The first and last
+#'  \code{floor(wind/2)} values of the indicator are assigned \code{NA} to
+#'  account for the moving average. Default is \code{wind = 5} years.
 #'@param negative If \code{negative = TRUE}, the indicator will be multiplied by
 #'  -1 so that the expected response is to decrease with increasing fishing
 #'  pressure. Default is \code{negative = FALSE}.
 #'@return Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
 #'  \code{CVBiomass}.
 #'
-#'  The first and last \code{floor(window/2)} values of the indicator are
+#'  The first and last \code{floor(wind/2)} values of the indicator are
 #'  assigned \code{NA} to account for the moving average. If there is no data
 #'  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 #'@family stability and resistance indicators
@@ -46,13 +46,13 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'CVBiomass(X, window = 5, negative = TRUE, years = c(2014:2019))
+#'CVBiomass(X, wind = 5, negative = TRUE, years = c(2014:2019))
 #'@export
 
 
-	CVBiomass <- function(X, window = 5, negative = FALSE, years){
+	CVBiomass <- function(X, wind = 5, negative = FALSE, years){
 	  
-	  inx <- floor(window/2)                       # determine how many NAs at the beginning and end, based on size of window
+	  inx <- floor(wind/2)                       # determine how many NAs at the beginning and end, based on size of wind
 	  inx.start <- years[c(1:inx)]                 # first inx years
 	  inx <- inx - 1
 	  inx.end <- years[(length(years) - c(0:inx))] # last inx years
@@ -67,13 +67,13 @@
 
 	    X.j = X[X$ID == uI[j], ]             # subset data to spatial scale j
 
-	    if(nrow(X) > window) {               # if nrow(X) < window, movingStatistics will not work 
+	    if(nrow(X) > wind) {               # if nrow(X) < wind, movingStatistics will not work 
 	      
 	      bio <- aggregate(BIOMASS ~ YEAR + ID, data = X.j, FUN = sum)  # sum biomass for each year
 	      ind.j <- data.frame(YEAR = bio['YEAR'], 
-	                       BIOMASS = movingStatistics(bio[,'BIOMASS'], n = window, stat='cv')) # moving average of coefficient of variation of the biomass
+	                       BIOMASS = movingStatistics(bio[,'BIOMASS'], n = wind, stat='cv')) # moving average of coefficient of variation of the biomass
 
-	      ind.j[ind.j$YEAR %in% inx.NA, "BIOMASS"] <- NA   # set the first and last floor(window/2) years to NA 
+	      ind.j[ind.j$YEAR %in% inx.NA, "BIOMASS"] <- NA   # set the first and last floor(wind/2) years to NA 
 	      
 	      ind.j <- merge(years, ind.j, all.x = T)
 	   

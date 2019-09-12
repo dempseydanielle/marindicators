@@ -4,7 +4,7 @@
 \alias{CVBiomass}
 \title{Calculates the Coefficient of Variation of the Biomass}
 \usage{
-CVBiomass(X, window = 5, negative = FALSE, years)
+CVBiomass(X, wind = 5, negative = FALSE, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -15,9 +15,9 @@ biomass (stratified and corrected for catchability as required). (Note: if
 \code{X} has an additional \code{SPECIES} column, the function will
 automatically calculate the total biomass).}
 
-\item{window}{Window for the moving average. The first and last
-\code{floor(window/2)} values of the indicator are assigned \code{NA} to
-account for the moving average. Default is \code{window = 5} years.}
+\item{wind}{Window for the moving average. The first and last
+\code{floor(wind/2)} values of the indicator are assigned \code{NA} to
+account for the moving average. Default is \code{wind = 5} years.}
 
 \item{negative}{If \code{negative = TRUE}, the indicator will be multiplied by
 -1 so that the expected response is to decrease with increasing fishing
@@ -29,7 +29,7 @@ pressure. Default is \code{negative = FALSE}.}
 Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
  \code{CVBiomass}.
 
- The first and last \code{floor(window/2)} values of the indicator are
+ The first and last \code{floor(wind/2)} values of the indicator are
  assigned \code{NA} to account for the moving average. If there is no data
  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 }
@@ -46,7 +46,7 @@ The Coefficient of Variation of the Biomass (CVBiomass) was estimated
 }
 \examples{
 data(X)
-CVBiomass(X, window = 5, negative = TRUE, years = c(2014:2019))
+CVBiomass(X, wind = 5, negative = TRUE, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
