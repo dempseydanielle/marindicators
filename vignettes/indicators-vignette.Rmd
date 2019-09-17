@@ -319,7 +319,7 @@ potential <-resourcePotential(X, metric = "BIOMASS", groups = resource.groups, s
 potential
 ```
 
-All indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned.  The user can choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following call would return the raw values of 18 structure and functioning indicators (indicator names listed below):
+All indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned.  The user can choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following call would return the raw values of 18 Structure and Functioning indicators (indicator names listed below):
 
 ```{r}
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
@@ -337,7 +337,7 @@ inds <- allStructure(X = X, X_length = X_length,
              raw = TRUE, std = FALSE)
 names(inds)
 ```
-By changing arguments such that `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions (denoted with `_s` in the indicator name) of the same structure and functioning indicators:
+Changing the arguments to `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions of the same Structure and Functioning indicators (denoted with `_s` in the indicator name):
 
 ```{r}
 inds_std <- allStructure(X = X, X_length = X_length, 
@@ -351,7 +351,7 @@ inds_std <- allStructure(X = X, X_length = X_length,
 names(inds_std)
 ```
 
-Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. The following example calculates 53 standardized indicators and returns them to the global environment in variable all_inds.
+Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. For example, the following function call calculates 53 standardized indicators and returns them to the global environment in variable `all_inds`.
 
 ```{r}
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
@@ -381,8 +381,6 @@ all_inds <- extractAll(X = X, X_length = X_length, land = land,
 names(all_inds)
 
 ```
-
-
 
 ## Missing Data
 If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is assigned `NA` or `0`. We recognize that even if a species is not detected during the fishery independent survey, it may still be present in the community. All indicators calculated from `X` and `X_land` are therefore assigned `NA` (rather than `0`) for years that are missing data. 
