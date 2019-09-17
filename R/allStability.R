@@ -1,6 +1,8 @@
 #'@title Calculates all Stability and Resistance indicators
 #'@description This function calculates all (or a subset) of the Stability and
-#'  Resistance indicators for \eqn{j} areas and \eqn{i} years.
+#'  Resistance indicators for \eqn{j} areas and \eqn{i} years. The user can
+#'  choose whether the function returns the raw indicator values, the
+#'  standaradized (z-score) values, or both.
 #'@details This function calculates the Stability and Resistance indicators:
 #'  Biomass per Trophic Level, Intrinsic Vulnerability Index, Coefficient of
 #'  Variation of the biomass, Mean Lifespan, and Mean Maximum Length (weighted

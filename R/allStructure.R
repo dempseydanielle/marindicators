@@ -1,6 +1,8 @@
 #'@title Calculates all structure and function indicators
 #'@description This function calculates all (or a subset) of the Structure and
-#'  Functioning indicators for \eqn{j} areas and \eqn{i} years.
+#'  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
+#'  choose whether the function returns the raw indicator values, the
+#'  standardized (z-score) values, or both.
 #'@details This function calculates the Structure and Functioning indicators:
 #'  biomass, biomass ratio(s), large species indicator, trophic level of the
 #'  community, large fish indicator, mean length (weighted by biomass and
@@ -28,10 +30,10 @@
 #'  calculate the Large Fish Indicator. Must be set to \code{"ALL"} or match a
 #'  column name in \code{species.table}. If \code{LFI.group = NULL}, the Large
 #'  Fish Indicator will not be calculated.
-#'@param resource.groups A vector indicating the species groups for which to
+#'@param guild.groups A vector indicating the species groups for which to
 #'  calculate the resource potential. Each entry must be a character string
 #'  matching the name of a column in \code{species.table}. If
-#'  \code{resource.groups = NULL}, the resource potential indicators will not be
+#'  \code{guild.groups = NULL}, these indicators will not be
 #'  calculated.
 #'@param condition.groups  A vector indicating the species groups for which to
 #'  calculate Fulton's community condition factor. Each entry must be a
@@ -45,7 +47,7 @@
 #'  matching the name of a column in \code{species.table} or \code{"ALL"}. If
 #'  \code{ratio.groups = NULL}, biomass ratio indicators will not be calculated.
 #'@param species.table A table where the column names match the entries in
-#'  \code{resource.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
+#'  \code{guild.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
 #'  Column entries are the species codes indicating the species from \code{X}
 #'  (or \code{X_length}) included in each group. \code{species.table} may also
 #'  include columns for other species groups; these will be ignored.
@@ -89,7 +91,7 @@
 #'     "PLANKTIVORE", "ZOOPISCIVORE")
 #'allStructure(X = X, X_length = X_length,
 #'    LSI.group = "ALL", LFI.group = "ALL",
-#'    resource.groups = trophicguild.groups, condition.groups = condition.groups,
+#'    guild.groups = trophicguild.groups, condition.groups = condition.groups,
 #'    ratio.groups = ratio.groups,
 #'    species.table = species.groups, speciesinfo.table = species.info,
 #'    LenWt.table = Length_Weight,
@@ -98,7 +100,7 @@
 
 allStructure <- function(X, X_length,
                          LSI.group, LFI.group,
-                         resource.groups, condition.groups, ratio.groups,
+                         guild.groups, condition.groups, ratio.groups,
                          species.table, speciesinfo.table, LenWt.table,
                          max.length, years, raw = TRUE, std = TRUE){
 
@@ -109,9 +111,9 @@ allStructure <- function(X, X_length,
   if("BIOMASS" %in% colnames(X)){
     
     # Resource potential
-    if(length(resource.groups) > 0){
+    if(length(guild.groups) > 0){
 
-        potential <- resourcePotential(X, metric = "BIOMASS", groups = resource.groups,
+        potential <- resourcePotential(X, metric = "BIOMASS", groups = guild.groups,
                                          species.table = species.table, years = years)
         inds <- merge(inds, potential, all.x = TRUE)
       }

@@ -36,8 +36,7 @@ the \code{SPECIES} column should be the unique values of species codes in
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
 matching the name of a column in \code{species.table}. If
-\code{resource.groups = NULL}, the resource potential indicators will not be
-calculated.}
+\code{resource.groups = NULL}, these indicators will not be calculated.}
 
 \item{minTL}{The minimum trophic level of species to include to calculate FiB.
 If \code{minTL = NULL}, FiB wll not be calculated.}
@@ -75,10 +74,13 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
+ Standardized indicators are noted with "_s" in the name.
 }
 \description{
 This function calculates all (or a subset) of the Resource
- Potential indicators for \eqn{j} areas and \eqn{i} years.
+ Potential indicators for \eqn{j} areas and \eqn{i} years. The user can
+ choose whether the function returns the raw indicator values, the
+ standaradized (z-score) values, or both.
 }
 \details{
 This function calculates the Resource Potential indicators: Abundance
@@ -94,11 +96,11 @@ data(land)
 data(species.table)
 data(species.info)
 
-resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", 
+resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH",
    "FORAGE",  "GADOIDS", "GROUNDFISH")
-allPotential(X = X, land = land, species.table = species.groups, 
-   speciesinfo.table = species.info, resource.groups = resource.groups, 
-   TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019), 
+allPotential(X = X, land = land, species.table = species.groups,
+   speciesinfo.table = species.info, resource.groups = resource.groups,
+   TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019),
    raw = FALSE, std = TRUE)
 
 }

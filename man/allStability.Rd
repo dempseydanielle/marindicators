@@ -48,10 +48,10 @@ biomass when calculating Biomass per Trophic Level. For example, if
 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99, etc. Default is \code{TL.grouping =
 1} so that biomass is aggregated over discrete trophic levels.}
 
-\item{wind}{Window for the moving average used to calculate the Coefficient
-of Variation of the Biomass. The first and last \code{floor(wind/2)}
-values of the indicator are assigned \code{NA} to account for the moving
-average. Default is \code{wind = 5} years.}
+\item{wind}{Window for the moving average used to calculate the Coefficient of
+Variation of the Biomass. The first and last \code{floor(wind/2)} values of
+the indicator are assigned \code{NA} to account for the moving average.
+Default is \code{wind = 5} years.}
 
 \item{negative}{If \code{negative = TRUE}, the Coefficient of Variation of the
 Biomasss will be multiplied by -1 so that the expected response is to
@@ -75,10 +75,13 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
+ Standardized indicators are noted with "_s" in the name.
 }
 \description{
 This function calculates all (or a subset) of the Stability and
- Resistance indicators for \eqn{j} areas and \eqn{i} years.
+ Resistance indicators for \eqn{j} areas and \eqn{i} years. The user can
+ choose whether the function returns the raw indicator values, the
+ standaradized (z-score) values, or both.
 }
 \details{
 This function calculates the Stability and Resistance indicators:
@@ -92,11 +95,11 @@ This function calculates the Stability and Resistance indicators:
 \examples{
 data(X)
 data(land)
-data(species.info)  
+data(species.info)
 data(species.groups)
- 
+
 allStability(X = X, land = land, maxlength.group = "FINFISH",
-   species.table = species.groups, speciesinfo.table = species.info,TL.grouping = 1, 
+   species.table = species.groups, speciesinfo.table = species.info,TL.grouping = 1,
    wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \references{

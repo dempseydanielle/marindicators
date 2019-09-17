@@ -4,7 +4,7 @@
 \alias{allStructure}
 \title{Calculates all structure and function indicators}
 \usage{
-allStructure(X, X_length, LSI.group, LFI.group, resource.groups,
+allStructure(X, X_length, LSI.group, LFI.group, guild.groups,
   condition.groups, ratio.groups, species.table, speciesinfo.table,
   LenWt.table, max.length, years, raw = TRUE, std = TRUE)
 }
@@ -37,10 +37,10 @@ calculate the Large Fish Indicator. Must be set to \code{"ALL"} or match a
 column name in \code{species.table}. If \code{LFI.group = NULL}, the Large
 Fish Indicator will not be calculated.}
 
-\item{resource.groups}{A vector indicating the species groups for which to
+\item{guild.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
 matching the name of a column in \code{species.table}. If
-\code{resource.groups = NULL}, the resource potential indicators will not be
+\code{guild.groups = NULL}, these indicators will not be
 calculated.}
 
 \item{condition.groups}{A vector indicating the species groups for which to
@@ -57,7 +57,7 @@ matching the name of a column in \code{species.table} or \code{"ALL"}. If
 \code{ratio.groups = NULL}, biomass ratio indicators will not be calculated.}
 
 \item{species.table}{A table where the column names match the entries in
-\code{resource.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
+\code{guild.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
 Column entries are the species codes indicating the species from \code{X}
 (or \code{X_length}) included in each group. \code{species.table} may also
 include columns for other species groups; these will be ignored.}
@@ -93,10 +93,13 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
+ Standardized indicators are noted with "_s" in the name.
 }
 \description{
 This function calculates all (or a subset) of the Structure and
- Functioning indicators for \eqn{j} areas and \eqn{i} years.
+ Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
+ choose whether the function returns the raw indicator values, the
+ standardized (z-score) values, or both.
 }
 \details{
 This function calculates the Structure and Functioning indicators:
@@ -125,16 +128,16 @@ data(Length_Weight)
 
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 names(ratio.groups) <- c("group1", "group2")
-trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", 
+trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
    "ZOOPISCIVORE")
 condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
     "PLANKTIVORE", "ZOOPISCIVORE")
-allStructure(X = X, X_length = X_length, 
-   LSI.group = "ALL", LFI.group = "ALL", 
-   resource.groups = trophicguild.groups, condition.groups = condition.groups, 
+allStructure(X = X, X_length = X_length,
+   LSI.group = "ALL", LFI.group = "ALL",
+   guild.groups = trophicguild.groups, condition.groups = condition.groups,
    ratio.groups = ratio.groups,
-   species.table = species.groups, speciesinfo.table = species.info, 
-   LenWt.table = Length_Weight, 
+   species.table = species.groups, speciesinfo.table = species.info,
+   LenWt.table = Length_Weight,
    max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
 }
 \references{

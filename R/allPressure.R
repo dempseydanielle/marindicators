@@ -1,6 +1,8 @@
 #'@title Calculates all Pressure indicators
 #'@description This function calculates all (or a subset) of the Pressure
-#'  indicators for \eqn{j} areas and \eqn{i} years.
+#'  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
+#'  the function returns the raw indicator values, the standaradized (z-score)
+#'  values, or both.
 #'@details This function calculates the Pressure indicators: Diversity of the
 #'  Target Species, Total Landings, Landings of Target Groups, Fishing Pressure
 #'  on the Community, Fishing Pressure on Target Groups, Mean Trophic Level of

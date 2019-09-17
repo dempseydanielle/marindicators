@@ -1,6 +1,8 @@
 #'@title Calculates all Biodiversity indicators
 #'@description This function calculates all (or a subset) of the Biodiversity
-#'  indicators for \eqn{j} areas and \eqn{i} years.
+#'  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
+#'  the function returns the raw indicator values, the standaradized (z-score)
+#'  values, or both.
 #'@details This function calculates the Biodiversity indicators: Species
 #'  Richness, Shannon's Index of Diversity, Margalef's Species Richness,
 #'  Pielou's Species Evenness, Hill's N1, Hill's N2, Heip's Evenness Index, and

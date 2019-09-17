@@ -61,13 +61,13 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
-
- If there is no data for an indicator at spatial scale \eqn{j} in year
- \eqn{i}, indicator value is assigned \code{NA}.
+ Standardized indicators are noted with "_s" in the name.
 }
 \description{
 This function calculates all (or a subset) of the Biodiversity
- indicators for \eqn{j} areas and \eqn{i} years.
+ indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
+ the function returns the raw indicator values, the standaradized (z-score)
+ values, or both.
 }
 \details{
 This function calculates the Biodiversity indicators: Species
@@ -87,11 +87,11 @@ allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.i
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \seealso{
-Other biodiversity indicators: \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{margalef}},
-  \code{\link{pielouEvenness}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: \code{\link{extractAll}},
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{kemptonQ}},
+  \code{\link{margalef}}, \code{\link{pielouEvenness}},
+  \code{\link{shannon}}, \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
