@@ -67,6 +67,8 @@ allPressure <- function(X, land,
                         species.table, speciesinfo.table, landings.groups, FP.groups,
                         minTL = c(0, 3.25),  years, raw = TRUE, std = TRUE){
   
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
   inds <- createDataframe(unique(land$ID), years)
   
   # Diversity of target species
@@ -102,8 +104,6 @@ allPressure <- function(X, land,
     
     inds <- merge(inds, FP, all.x = TRUE)
   }
-  
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
   
   if(std == TRUE){
     inds_std <-  standardize(inds)

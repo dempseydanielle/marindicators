@@ -47,6 +47,8 @@
 allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.table = NULL, TL.table, 
                             percentiles = c(.25, 0.75), minTL = 0, years, raw = TRUE, std = TRUE){
   
+  if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
+  
   S = speciesRichness(X = X, metric = metric, group = group, species.table = species.table, years = years)
   H = shannon(X = X, metric = metric, group = group, species.table = species.table, years = years)
   marg = margalef(X = X, metric = metric, group = group, species.table = species.table, years = years)
@@ -68,7 +70,6 @@ allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.tabl
   names(inds)[10] <- names(Q)[3]
   }
   
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
 
   if(std == TRUE){
     inds_std <-  standardize(inds)

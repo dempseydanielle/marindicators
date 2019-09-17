@@ -106,7 +106,7 @@ extractAll <- function(X, X_length, land,
                             ratio.groups = ratio.groups,
                             species.table = species.table, speciesinfo.table = speciesinfo.table, 
                             LenWt.table = LenWt.table,
-                            max.length = max.length, years = years, raw = raw, std = std)
+                            max.length = max.length, years = years, raw = raw, std =  std)
   
   stability <- allStability(X = X, land = land, 
                             maxlength.group = maxlength.group,
@@ -132,6 +132,15 @@ extractAll <- function(X, X_length, land,
   inds <- merge(inds, potential, all.x = TRUE)
   inds <- merge(inds, pressure, all.x = TRUE)
 
+  if(raw == TRUE & std == TRUE){
+    
+    std_cols <- grep("_s", names(inds))
+    inds_std <- inds[, std_cols]
+    inds_raw <- inds[, -std_cols]
+    
+    inds <- cbind(inds_raw, inds_std)
+  }
+  
   if(length(export.path) > 0){
     write.csv(inds, file = paste(export.path, "/allIndicators.csv", sep = ""), row.names = FALSE)
   } else  inds

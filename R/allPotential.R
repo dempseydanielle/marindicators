@@ -70,6 +70,9 @@ allPotential <- function(X, land,
                          minTL = 0, TE = 0.1, base.start, base.end, 
                          years,  raw = TRUE, std = TRUE){
   
+  
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
   } else inds <- createDataframe(unique(land$ID), years)
@@ -98,8 +101,6 @@ allPotential <- function(X, land,
     inds <- merge(inds, FIB, all.x = TRUE)
   }
 
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
-  
   if(std == TRUE){
     inds_std <-  standardize(inds)
     

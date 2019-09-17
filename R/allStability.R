@@ -71,6 +71,8 @@ allStability <- function(X, land,
                          TL.grouping = 1, wind = 5, negative = FALSE, 
                          years,  raw = TRUE, std = TRUE){
   
+  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
   } else {inds <- createDataframe(unique(land$ID), years)}
@@ -117,8 +119,6 @@ allStability <- function(X, land,
       inds <- merge(inds, IVI, all.x = TRUE)
     }
   }
-  
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
   
   if(std == TRUE){
     inds_std <-  standardize(inds)
