@@ -319,7 +319,7 @@ potential <-resourcePotential(X, metric = "BIOMASS", groups = resource.groups, s
 potential
 ```
 
-Finally, all indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned. For example, the following call would return 19 structure and functioning indicators (indicator names listed below):
+All indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned.  The user can choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following call would return the raw values of 18 structure and functioning indicators (indicator names listed below):
 
 ```{r}
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
@@ -329,13 +329,60 @@ condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLA
 
 inds <- allStructure(X = X, X_length = X_length, 
              LSI.group = "ALL", LFI.group = "ALL",
-             resource.groups = trophicguild.groups, condition.groups = condition.groups,
+             guild.groups = trophicguild.groups, condition.groups = condition.groups,
              ratio.groups = ratio.groups,
              species.table = species.groups, speciesinfo.table = species.info,
              LenWt.table = Length_Weight,
-             max.length = 85, years = c(2014:2019))
+             max.length = 85, years = c(2014:2019),
+             raw = TRUE, std = FALSE)
 names(inds)
 ```
+By changing arguments such that `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions (denoted with `_s` in the indicator name) of the same structure and functioning indicators:
+
+```{r}
+inds_std <- allStructure(X = X, X_length = X_length, 
+             LSI.group = "ALL", LFI.group = "ALL",
+             guild.groups = trophicguild.groups, condition.groups = condition.groups,
+             ratio.groups = ratio.groups,
+             species.table = species.groups, speciesinfo.table = species.info,
+             LenWt.table = Length_Weight,
+             max.length = 85, years = c(2014:2019),
+             raw = FALSE, std = TRUE)
+names(inds_std)
+```
+
+Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. The following example calculates 53 standardized indicators and returns them to the global environment in variable all_inds.
+
+```{r}
+landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+   c("CLUPEIDS", "CLUPEIDS.L"),
+   c("FLATFISH", "FLATFISH.L"),
+   c("GROUNDFISH", "GROUNDFISH.L")))
+names(FP.groups) <- c("group.X", "group.land")
+
+all_inds <- extractAll(X = X, X_length = X_length, land = land,
+           speciesinfo.table = species.info, 
+           species.table = species.groups, 
+           LenWt.table = Length_Weight,
+           metric.bio = "ABUNDANCE", group.bio = "ALL", minTL.bio = 3,
+           LSI.group = "ALL", LFI.group = "ALL",
+           guild.groups = trophicguild.groups,
+           resource.groups = resource.groups, condition.groups = condition.groups, 
+           ratio.groups = ratio.groups,
+           max.length = 85,  maxlength.group = "FINFISH", 
+           TL.grouping = 1, wind = 5, negative = TRUE,
+           minTL.FiB = 0, base.start = 2014, base.end = 2015,
+           landings.groups = landings.groups, FP.groups = FP.groups, 
+           minTL.FP = c(0, 3.25),
+           years = c(2014:2019), 
+           raw = FALSE, std = TRUE, export.path = NULL)
+
+names(all_inds)
+
+```
+
+
 
 ## Missing Data
 If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is assigned `NA` or `0`. We recognize that even if a species is not detected during the fishery independent survey, it may still be present in the community. All indicators calculated from `X` and `X_land` are therefore assigned `NA` (rather than `0`) for years that are missing data. 

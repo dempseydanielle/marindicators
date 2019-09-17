@@ -34,7 +34,7 @@ these will be ignored. If \code{group = "ALL"}, this table is not required.
 Default is \code{species.table = NULL}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
-calculate indicator. Default is \code{metric = "ABUNDANCE"}.}
+calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -83,10 +83,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}
+  \code{\link{extractAll}}, \code{\link{heips}},
+  \code{\link{hillN1}}, \code{\link{hillN2}},
+  \code{\link{kemptonQ}}, \code{\link{margalef}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}}
 
 Other fishing pressure indicators: \code{\link{allPressure}},
   \code{\link{fishingPressure}}, \code{\link{landings}},

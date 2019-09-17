@@ -1,6 +1,8 @@
 #'@title Calculates all Resource Potential indicators
 #'@description This function calculates all (or a subset) of the Resource
-#'  Potential indicators for \eqn{j} areas and \eqn{i} years.
+#'  Potential indicators for \eqn{j} areas and \eqn{i} years. The user can
+#'  choose whether the function returns the raw indicator values, the
+#'  standaradized (z-score) values, or both.
 #'@details This function calculates the Resource Potential indicators: Abundance
 #'  and Biomass of the community, Resource Potential of predefined species
 #'  groups, and Fishing-in-Balance (FiB). If data are not available to calculate
@@ -11,6 +13,10 @@
 #'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams fishingInBalance
+#'@param resource.groups A vector indicating the species groups for which to
+#'  calculate the resource potential. Each entry must be a character string
+#'  matching the name of a column in \code{species.table}. If
+#'  \code{resource.groups = NULL}, these indicators will not be calculated.
 #'@param species.table A table where the column names match the entries in
 #'  \code{resource.groups}. Column entries are the species codes indicating the
 #'  species from \code{X} included in each group. \code{species.table} may also

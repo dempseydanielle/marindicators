@@ -68,10 +68,13 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
+ Standardized indicators are noted with "_s" in the name.
 }
 \description{
 This function calculates all (or a subset) of the Pressure
- indicators for \eqn{j} areas and \eqn{i} years.
+ indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
+ the function returns the raw indicator values, the standaradized (z-score)
+ values, or both.
 }
 \details{
 This function calculates the Pressure indicators: Diversity of the
@@ -89,14 +92,14 @@ data(species.groups)
 data(species.info)
 
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
-FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
+FP.groups <- data.frame(rbind(c("ALL", "ALL"),
    c("CLUPEIDS", "CLUPEIDS.L"),
    c("FLATFISH", "FLATFISH.L"),
    c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
-allPressure(X = X, land = land, species.table = species.groups, 
-   speciesinfo.table = species.info, landings.groups = landings.groups, 
+allPressure(X = X, land = land, species.table = species.groups,
+   speciesinfo.table = species.info, landings.groups = landings.groups,
    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)
 }
 \references{

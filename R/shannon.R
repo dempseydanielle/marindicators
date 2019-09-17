@@ -24,7 +24,7 @@
 #'  these will be ignored. If \code{group = "ALL"}, this table is not required.
 #'  Default is \code{species.table = NULL}.
 #'@param metric A character string indicating which column in \code{X} to use to
-#'  calculate indicator. Default is \code{metric = "ABUNDANCE"}.
+#'  calculate the indicator. Default is \code{metric = "ABUNDANCE"}.
 #'@param years A vector of years for which to calculate indicator.
 #'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
 #'  \code{ShannonDiversity}.
@@ -44,7 +44,7 @@
 #'  Hall, London. 179 pp.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
-#'@examples 
+#'@examples
 #'data(X)
 #'shannon(X, group = "ALL", metric = "ABUNDANCE", years = c(2015:2019))
 #'@export
