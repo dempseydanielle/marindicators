@@ -14,7 +14,9 @@ standardize <- function(x) {
     
     xj <- x[x$ID == uI[j], ]       # subset x to area of interest
     
-    xj[, 3:n.col] <- apply(xj[, 3:n.col], MARGIN = 2, FUN = scale) # standardize each indicator
+    if(n.col == 3) xj[, 3] <- as.numeric(scale(xj[, 3]))
+    if(n.col > 3) xj[, 3:n.col] <- apply(xj[, 3:n.col], MARGIN = 2, FUN = scale) # standardize each indicator
+    
     
     df <- rbind(df, xj)            #rbind standardized indicators from different areas
     
