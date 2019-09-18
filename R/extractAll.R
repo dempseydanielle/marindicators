@@ -99,6 +99,7 @@ extractAll <- function(X, X_length, land,
                                TL.table = speciesinfo.table, 
                                percentiles = c(0.25, 0.75), minTL = minTL.bio, 
                                years = years, raw = raw, std = std)
+
   
   structure <- allStructure(X = X, X_length = X_length, 
                             LSI.group = LSI.group, LFI.group = LFI.group, 
@@ -107,7 +108,7 @@ extractAll <- function(X, X_length, land,
                             species.table = species.table, speciesinfo.table = speciesinfo.table, 
                             LenWt.table = LenWt.table,
                             max.length = max.length, years = years, raw = raw, std =  std)
-  
+
   stability <- allStability(X = X, land = land, 
                             maxlength.group = maxlength.group,
                             species.table = species.table, speciesinfo.table = speciesinfo.table,  

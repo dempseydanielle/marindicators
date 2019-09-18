@@ -321,6 +321,7 @@ potential
 
 All indicators from a given attribute or pressure can be calculated with a single function call. If some data are not available, a subset of indicators can be returned.  The user can choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following call would return the raw values of 18 Structure and Functioning indicators (indicator names listed below):
 
+
 ```{r}
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 names(ratio.groups) <- c("group1", "group2")
@@ -337,7 +338,8 @@ inds <- allStructure(X = X, X_length = X_length,
              raw = TRUE, std = FALSE)
 names(inds)
 ```
-Changing the arguments to `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions of the same Structure and Functioning indicators (denoted with `_s` in the indicator name):
+
+By changing the arguments to `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions of the same Structure and Functioning indicators (denoted with `_s` in the indicator name):
 
 ```{r}
 inds_std <- allStructure(X = X, X_length = X_length, 
@@ -352,6 +354,7 @@ names(inds_std)
 ```
 
 Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. For example, the following function call calculates 53 standardized indicators and returns them to the global environment in variable `all_inds`.
+
 
 ```{r}
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
