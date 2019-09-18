@@ -104,7 +104,7 @@ allStructure <- function(X, X_length,
                          species.table, speciesinfo.table, LenWt.table,
                          max.length, years, raw = TRUE, std = TRUE){
 
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)

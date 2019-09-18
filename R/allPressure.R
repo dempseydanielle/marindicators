@@ -67,7 +67,7 @@ allPressure <- function(X, land,
                         species.table, speciesinfo.table, landings.groups, FP.groups,
                         minTL = c(0, 3.25),  years, raw = TRUE, std = TRUE){
   
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
   inds <- createDataframe(unique(land$ID), years)
   

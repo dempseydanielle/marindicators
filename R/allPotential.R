@@ -71,7 +71,7 @@ allPotential <- function(X, land,
                          years,  raw = TRUE, std = TRUE){
   
   
-  if(raw == FALSE & std == FALSE) print("error: both raw and std are FALSE")
+  if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
   if("BIOMASS" %in% colnames(X)) {
     inds <- createDataframe(unique(X$ID), years)
