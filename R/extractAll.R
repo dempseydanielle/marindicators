@@ -125,17 +125,18 @@ extractAll <- function(X, X_length, land,
                             minTL = minTL.FiB, TE = TE, base.start = base.start, base.end = base.end, 
                             years = years, raw = raw, std = std)
   
+  if("CATCH" %in% colnames(land)) {
   pressure <- allPressure(X = X, land = land, 
                           species.table = species.table, speciesinfo.table = speciesinfo.table, 
                           landings.groups = landings.groups, FP.groups = FP.groups,
                           minTL = c(0, 3.25),  years, raw = raw, std = std)
-  
+  }
   
   inds <- merge(inds, diversity, all.x = TRUE)
   inds <- merge(inds, structure, all.x = TRUE)
   inds <- merge(inds, stability, all.x = TRUE)
   inds <- merge(inds, potential, all.x = TRUE)
-  inds <- merge(inds, pressure, all.x = TRUE)
+  if("CATCH" %in% colnames(land)) inds <- merge(inds, pressure, all.x = TRUE)
 
   if(raw == TRUE & std == TRUE){
     
