@@ -92,7 +92,7 @@ extractAll <- function(X, X_length, land,
                        guild.groups, resource.groups, condition.groups, 
                        ratio.groups, max.length,
                        maxlength.group, TL.grouping = 1, wind = 5, negative = FALSE,
-                       minTL.FiB, TE = 0.1, base.start, base.end,
+                       minTL.FiB = 0, TE = 0.1, base.start, base.end,
                        landings.groups, FP.groups, minTL.FP = c(0, 3.25),
                        raw = TRUE, std = TRUE,
                        export.path = NULL, export.id = NULL){
@@ -122,7 +122,7 @@ extractAll <- function(X, X_length, land,
   potential <- allPotential(X = X, land = land, 
                             species.table = species.table, speciesinfo.table = speciesinfo.table, 
                             resource.groups = resource.groups, 
-                            minTL = minTL.FiB, TE = 0.1, base.start = base.start, base.end = base.end, 
+                            minTL = minTL.FiB, TE = TE, base.start = base.start, base.end = base.end, 
                             years = years, raw = raw, std = std)
   
   pressure <- allPressure(X = X, land = land, 
