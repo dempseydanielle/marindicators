@@ -11,7 +11,7 @@ extractAll(X, X_length, land, speciesinfo.table, species.table,
   max.length, maxlength.group, TL.grouping = 1, wind = 5,
   negative = FALSE, minTL.FiB, TE = 0.1, base.start, base.end,
   landings.groups, FP.groups, minTL.FP = c(0, 3.25), raw = TRUE,
-  std = TRUE, export.path = NULL)
+  std = TRUE, export.path = NULL, export.id = NULL)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -182,9 +182,14 @@ standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{export.path}{File path indicating where to save a .csv file of
-calculated indicators (named allIndicators.csv). If \code{export.file =
-NULL}, the indicator dataframe will be returned to the global environment,
-but not exported as a .csv file.}
+calculated indicators (named allIndicators_export.id.csv; see below). If
+\code{export.file = NULL}, the indicator dataframe will be returned to the
+global environment, but not exported as a .csv file.}
+
+\item{export.id}{Character string for the name of the .csv file (if
+export.path is specified), for example an area name or date of analysis. The
+exported .csv file is named allIndicators_export.id.csv. Default is
+\code{export.id = NULL}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and

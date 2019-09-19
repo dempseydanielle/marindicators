@@ -31,9 +31,13 @@
 #'  c(0, 3.25)}, which will return the mean trophic level of the landings and
 #'  the marine trophic index.
 #'@param export.path File path indicating where to save a .csv file of
-#'  calculated indicators (named allIndicators.csv). If \code{export.file =
-#'  NULL}, the indicator dataframe will be returned to the global environment,
-#'  but not exported as a .csv file.
+#'  calculated indicators (named allIndicators_export.id.csv; see below). If
+#'  \code{export.file = NULL}, the indicator dataframe will be returned to the
+#'  global environment, but not exported as a .csv file.
+#'@param export.id Character string for the name of the .csv file (if
+#'  export.path is specified), for example an area name or date of analysis. The
+#'  exported .csv file is named allIndicators_export.id.csv. Default is
+#'  \code{export.id = NULL}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
 #'  Standardized indicators are noted with "_s" in the name.
@@ -91,7 +95,7 @@ extractAll <- function(X, X_length, land,
                        minTL.FiB, TE = 0.1, base.start, base.end,
                        landings.groups, FP.groups, minTL.FP = c(0, 3.25),
                        raw = TRUE, std = TRUE,
-                       export.path = NULL){
+                       export.path = NULL, export.id = NULL){
   
   inds <- createDataframe(unique(X$ID), years)
   
@@ -143,7 +147,8 @@ extractAll <- function(X, X_length, land,
   }
   
   if(length(export.path) > 0){
-    write.csv(inds, file = paste(export.path, "/allIndicators.csv", sep = ""), row.names = FALSE)
+    write.csv(inds, file = paste(export.path, "/allIndicators_", 
+                                 export.id, ".csv", sep = ""), row.names = FALSE)
   } else  inds
   
 }
