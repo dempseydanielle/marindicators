@@ -1,5 +1,5 @@
-Package: indicators
-Title: Marine Ecosystem Indicators Package
+Package: marindicators
+Title: Calculates marine ecosystem indicators 
 Version: 0.0.1
 Date: 2019-09-11
 Authors: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
