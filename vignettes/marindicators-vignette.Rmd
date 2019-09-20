@@ -1,10 +1,10 @@
 ---
-title: "Introduction to indicators"
+title: "Introduction to marindicators"
 author: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{indicators-vignette}  # modify this!!
+  %\VignetteIndexEntry{marindicators-vignette}  # modify this!!
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, echo = FALSE}
-library(indicators)
+library(marindicators)
 
 n.show <- 4
 n.digits <- 2
@@ -30,10 +30,10 @@ A comprehensive evaluation and selection of robust ecological indicators is one 
 
 The framework was successfully tested for the Scotian Shelf Biogregion. In Step 1, four ecosystem attributes and one pressure were defined: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, over 100 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators, which were calculated in Step 4 (Table 1). The quantitative screening in Step 5 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fisheries independent and dependent data (Table 1; Step 6). For more information, including attribute and sub-attribute definitions and the methods used to select the final suite of indicators, please refer to the Guidance Framework document (Bundy, Gomez, and Cook, 2017).
 
-The `indicators` package provides functions to calculate the suite of marine ecosystem indicators calculated in Step 4 of the Guidance Framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values.
+The `marindicators` package provides functions to calculate the suite of marine ecosystem indicators calculated in Step 4 of the Guidance Framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values.
 
 
-Table 1: `indicators` function to calculate each of the 68 indicators calculated for the Scotian Shelf in Step 4 of the Guidance Framework. Ecosystem attributes/pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
+Table 1: `marindicators` function to calculate each of the 68 indicators calculated for the Scotian Shelf in Step 4 of the Guidance Framework. Ecosystem attributes/pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
 
   | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
   |:-----------------------|:-------------------------|:---------------:|
@@ -263,7 +263,7 @@ species.groups_show
 Note that the user does not need to include a column with all species (i.e., all species are automatically included in the calculation if argument `group = "ALL"`).
 
 # Application
-This section describes the general use of the functions in the indicators package. See the package manual or help file for each function for more details.
+This section describes the general use of the functions in the `marindicators` package. See the package manual or help file for each function for more details.
 
 Most functions calculate a single indicator, and return a dataframe with three columns: `ID`, `YEAR`, and the indicator. For example, the following function call calculates Shannon's Index of Diversity for the two areas defined by the `ID` column in `X` (`AREA` and `AREA2`) from 2014 - 2019:
 

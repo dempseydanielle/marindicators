@@ -8,7 +8,7 @@ Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca
            person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"),
            person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= c("aut")))
 Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
-Description: The indicators package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fisheries independent trawl survey data and fisheries landings data, following the "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017). 
+Description: The marindicators package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fisheries independent trawl survey data and fisheries landings data, following the "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017). 
 Depends:
     R (>= 3.6.0)
 Imports:
