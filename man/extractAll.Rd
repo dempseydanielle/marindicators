@@ -9,7 +9,7 @@ extractAll(X, X_length, land, speciesinfo.table, species.table,
   percentiles = c(0.25, 0.75), minTL.bio = 0, LSI.group, LFI.group,
   guild.groups, resource.groups, condition.groups, ratio.groups,
   max.length, maxlength.group, TL.grouping = 1, wind = 5,
-  negative = FALSE, minTL.FiB, TE = 0.1, base.start, base.end,
+  negative = FALSE, minTL.FiB = 0, TE = 0.1, base.start, base.end,
   landings.groups, FP.groups, minTL.FP = c(0, 3.25), raw = TRUE,
   std = TRUE, export.path = NULL, export.id = NULL)
 }
