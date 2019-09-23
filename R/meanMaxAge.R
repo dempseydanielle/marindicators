@@ -34,9 +34,10 @@
 #'  Marine Science, 67: 692-716
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
-#'data(X)
-#'data(species.info)
-#'meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+#'@examples
+#' data(X)
+#' data(species.info)
+#' meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 #'@export
 
 	meanMaxAge <- function(X, age.table, metric = "BIOMASS", years) {

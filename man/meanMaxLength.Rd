@@ -57,6 +57,14 @@ Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
  length (cm) of species \eqn{i}, and \eqn{M_i} is biomass or abundance of
  species \eqn{i} (excluding invertebrates; Shin et al., 2005).
 }
+\examples{
+data(X)
+data(species.info)
+meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
+   maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
+   maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -74,11 +82,5 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
-data(X)
-data(species.info)
-meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
-   maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
-meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
-   maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
 }
 \concept{stability and resistance indicators}

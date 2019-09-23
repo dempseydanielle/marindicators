@@ -38,7 +38,7 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
-#'  Standardized indicators are noted with "_s" in the name.
+#'  Standardized indicators are noted with \code{_s} in the name.
 #'@family fishing pressure indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

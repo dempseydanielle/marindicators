@@ -10,12 +10,12 @@ allPotential(X, land, species.table, speciesinfo.table, resource.groups,
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
+(stratified and corrected for catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -60,13 +60,13 @@ NULL}, FiB wll not be calculated.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned from the function. If \code{raw = FALSE}, the raw indcator values
-are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
-\code{std} must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indcator values are
+not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
+must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned from the function. Here, indicators are
-standardized using Z-scores, i.e., by subtracting the mean and dividing by
+values for each area ID are returned by the function. Indicators are
+standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
@@ -74,7 +74,7 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
- Standardized indicators are noted with "_s" in the name.
+ Standardized indicators are noted with \code{_s} in the name.
 }
 \description{
 This function calculates all (or a subset) of the Resource

@@ -10,6 +10,16 @@
 #'  more of these indicators, a subset will be returned. See the help file for
 #'  the individual functions for information on how each indicator is
 #'  calculated.
+#'
+#'
+#'  Notes on indicator calculations: In the individual functions, the user
+#'  generally has control over which metric (e.g., \code{BIOMASS} or
+#'  \code{ABUNDANCE}) is used to calculate the indicator.  Here, \code{BIOMASS}
+#'  is used to calculate Coefficient of Variation of the Biomass, Mean Lifespan,
+#'  Biomass per Trophic Level, and Mean Maximum Length weighted by biomass.
+#'  \code{ABUNDANCE} is used to calculate Mean Maximum Length weighted by
+#'  abundance. See individual functions for more flexibility.
+
 #'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams communityCondition
@@ -25,10 +35,13 @@
 #'  (or \code{X_length}) included in each group. \code{species.table} may also
 #'  include columns for other species groups; these will be ignored.
 #'@param speciesinfo.table A table with columns \code{SPECIES} and the
-#'  corresponding \code{MAXAGE}, \code{MAXLENGTH}, and \code{TL} (maximum
-#'  recorded age, maximum recorded length, and trophic level). Entries in the
-#'  \code{SPECIES} column should be the unique values of species codes in
-#'  \code{X} (or a subset thereof). Other columns will be ignored.
+#'  corresponding \code{TL}, \code{MAXLENGTH}, \code{MAXAGE}, and \code{IVI}
+#'  (trophic level, maximum recorded age, maximum recorded length, and intrinsic
+#'  vulnerability index). Entries in the \code{SPECIES} column should be the
+#'  unique values of species codes in \code{X} (or a subset thereof). If there
+#'  are different species codes in \code{X} and \code{land}, the Intrinsic
+#'  Vulnerability Index of the Landings indicator should be calculated
+#'  separately using the function \code{IVILandings()}.
 #'@param TL.grouping Size of the trophic level bin for which to aggregrate
 #'  biomass when calculating Biomass per Trophic Level. For example, if
 #'  \code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
@@ -46,7 +59,7 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
-#'  Standardized indicators are noted with "_s" in the name.
+#'  Standardized indicators are noted with \code{_s} in the name.
 #'@family stability and resistance indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -81,30 +94,30 @@ allStability <- function(X, land,
   if("BIOMASS" %in% colnames(X)){
     
     # CV biomass
-    CV_bio = CVBiomass(X, wind = 5, negative = negative, years = years)
+    CV_bio = CVBiomass(X = X, wind = wind, negative = negative, years = years)
     inds <- merge(inds, CV_bio, all.x = TRUE)
     
     # Max LifeSpan
     if("MAXAGE" %in% colnames(speciesinfo.table)){
-      MMA = meanMaxAge(X, age.table = speciesinfo.table, "BIOMASS", years = years)
+      MMA = meanMaxAge(X = X, age.table = speciesinfo.table, metric = "BIOMASS", years = years)
       inds <- merge(inds, MMA, all.x = TRUE)
     }
     
     # Biomass per TL
     if("TL" %in% colnames(speciesinfo.table)){
-      bio_TL = biomassPerTL(X, TL.table = speciesinfo.table, metric = "BIOMASS", 
+      bio_TL = biomassPerTL(X = X, TL.table = speciesinfo.table, metric = "BIOMASS", 
                             TL.grouping = TL.grouping, years = years)
       inds <- merge(inds, bio_TL, all.x = TRUE)
     }
     
     if("MAXLENGTH" %in% colnames(speciesinfo.table) & length(maxlength.group) > 0){
-      MML_bio = meanMaxLength(X, group = maxlength.group, species.table = species.table,
+      MML_bio = meanMaxLength(X = X, group = maxlength.group, species.table = species.table,
                         maxlength.table = speciesinfo.table, metric = "BIOMASS", years = years)
       inds <- merge(inds, MML_bio, all.x = TRUE)
     }
  
     if("ABUNDANCE" %in% colnames(X)){
-      MML_abund = meanMaxLength(X, group = maxlength.group,  species.table = species.table,
+      MML_abund = meanMaxLength(X = X, group = maxlength.group,  species.table = species.table,
                           maxlength.table = speciesinfo.table, metric = "ABUNDANCE", years = years)
       inds <- merge(inds, MML_abund, all.x = TRUE)
     }

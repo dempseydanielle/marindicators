@@ -47,6 +47,11 @@ Mean Maximum Age: \deqn{Mean Maximum Age = \Sigma
  indicator captures changes in species composition, and therefore changes in
  average lifespan (Shin et al., 2010).
 }
+\examples{
+data(X)
+data(species.info)
+meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+}
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
@@ -68,8 +73,5 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
-data(X)
-data(species.info)
-meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 }
 \concept{stability and resistance indicators}

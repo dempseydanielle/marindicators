@@ -86,10 +86,10 @@ Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{extractAll}}, \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{margalef}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

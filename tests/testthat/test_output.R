@@ -1,5 +1,5 @@
 context("Output indicators")
-library(indicators)
+library(marindicators)
 
 data(X)
 data(X_length)

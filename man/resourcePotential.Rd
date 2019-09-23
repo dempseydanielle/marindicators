@@ -9,12 +9,12 @@ resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
+(stratified and corrected for catchability as required).}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
 the indicator. Each entry must be a character string matching the name of a
@@ -55,11 +55,11 @@ resourcePotential(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 resourcePotential(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 
 trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE")
-resourcePotential(X, groups = trophicguild.groups, 
+resourcePotential(X, groups = trophicguild.groups,
    species.table = species.groups, metric = "BIOMASS", years = c(2014:2019))
-   
+
 resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", "FORAGE", "GADOIDS", "GROUNDFISH")
-resourcePotential(X, groups = resource.groups, species.table = species.groups, 
+resourcePotential(X, groups = resource.groups, species.table = species.groups,
    metric = "BIOMASS", years = c(2014:2019))
 }
 \references{

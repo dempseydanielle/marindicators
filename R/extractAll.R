@@ -1,6 +1,6 @@
 #'@title Calculates indicators from all attributes
-#'@description This function calculates all of the indicators described in this
-#'  package. The user can choose whether the function returns the indicator
+#'@description This function can calculate all of the indicators described in
+#'  this package. The user can choose whether the function returns the indicator
 #'  dataframe to the global environment, or exports the dataframe to a csv file.
 #'  The user can also choose whether the function returns the raw indicator
 #'  values, the standaradized (z-score) values, or both.
@@ -15,6 +15,39 @@
 #'@inheritParams allStability
 #'@inheritParams allPotential
 #'@inheritParams allPressure
+#'@param X A dataframe of fishery independent survey data or model output with
+#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{BIOMASS} and
+#'  \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+#'  recorded, \code{ID} is an area code indicating where the observation was
+#'  recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+#'  and \code{ABUNDANCE} is the corresponding abundance (stratified and
+#'  corrected for catchability as required).
+#'@param X_length A dataframe of fishery independent survey data or model output
+#'  with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
+#'  \code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, and \code{SPECIES} is a numeric code indicating
+#'  the species sampled. \code{LENGTH} is the length class (cm) and
+#'  \code{ABUNDANCE} is the corresponding abundance at length (stratified and
+#'  corrected for catchability as required). Species for which there are no
+#'  length data should be assigned \code{LENGTH = -99}. These observations are
+#'  removed by the function.
+#'@param land A dataframe of commercial landings data with columns \code{YEAR},
+#'  \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
+#'  the landing was recorded, \code{ID} is an area code indicating where the
+#'  landing was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species landed, and \code{CATCH} is the corresponding landed weight. If
+#'  \code{land = NULL}, the landings-based indicators will not be calculated.
+#'@param speciesinfo.table A table with columns \code{SPECIES} and the
+#'  corresponding \code{TL}, \code{MAXLENGTH}, \code{MAXAGE},  \code{IVI}, and
+#'  \code{TL_LAND} (trophic level, maximum recorded age, maximum recorded
+#'  length, intrinsic vulnerability index, and trophic level of the landings).
+#'  Entries in the \code{SPECIES} column should be the unique values of species
+#'  codes in \code{X}/\code{X_length} (or a subset thereof). If there are
+#'  different species codes in \code{X} and \code{land}, the Fishing-in-Balance,
+#'  Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the
+#'  Landings, and Marine Trophic Index should be calculated using their
+#'  respective single functions (see manual or vignette).
 #'@param metric.bio A character string indicating which column in \code{X} to
 #'  use to calculate the biodiversity indicators. Default is \code{metric =
 #'  "ABUNDANCE"}.
@@ -24,6 +57,10 @@
 #'  name in \code{species.table}. Default is \code{group.bio = "ALL"}.
 #'@param minTL.bio Minimum trophic level for species included to calculate
 #'  Kempton's Q. Default is \code{minTL.bio = 0}.
+#'@param negative If \code{negative = TRUE}, the Coefficient of Variation of the
+#'  Biomass and the Intrinsic Vulnerability Index of the Landings will be
+#'  multiplied by -1 so that their expected response is to decrease with
+#'  increasing fishing pressure. Default is \code{negative = FALSE}.
 #'@param minTL.FiB The minimum trophic level of species to include to calculate
 #'  Fishing-in-Balance.
 #'@param minTL.FP A vector containing minimum trophic level to include when
@@ -34,7 +71,7 @@
 #'  calculated indicators (named allIndicators_export.id.csv; see below). If
 #'  \code{export.file = NULL}, the indicator dataframe will be returned to the
 #'  global environment, but not exported as a .csv file.
-#'@param export.id Character string for the name of the .csv file (if
+#'@param export.id Character string to modify the name of the .csv file (if
 #'  export.path is specified), for example an area name or date of analysis. The
 #'  exported .csv file is named allIndicators_export.id.csv. Default is
 #'  \code{export.id = NULL}.
@@ -43,7 +80,6 @@
 #'  Standardized indicators are noted with "_s" in the name.
 #'@importFrom stats aggregate
 #'@importFrom utils write.csv
-#'@family biodiversity indicators
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export

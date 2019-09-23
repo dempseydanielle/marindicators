@@ -68,10 +68,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{extractAll}}, \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{margalef}},
-  \code{\link{pielouEvenness}},
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{kemptonQ}},
+  \code{\link{margalef}}, \code{\link{pielouEvenness}},
   \code{\link{speciesRichness}}
 }
 \author{

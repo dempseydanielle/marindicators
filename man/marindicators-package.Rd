@@ -4,14 +4,14 @@
   Calculates marine ecosystem indicators
 }
 
-\description{ The \pkg{marindicators} package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fisheries independent trawl survey data and fisheries landings data.
+\description{ The \pkg{marindicators} package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fishery independent trawl survey data and commercial landings data.
  }
 
 \details{ A comprehensive evaluation and selection of robust ecological indicators is one of the key steps in the process of implementing an Ecosystem Approach to fisheries management and to track progress towards meeting ecosystem goals. The "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017) developed an Indicator Selection Guidance Framework to select and evaluate potential indicators for ecosystem monitoring and assessment at different spatial scales using established selection criteria. 
 
-The framework was successfully tested for the Scotian Shelf Biogregion. In Step 1, four ecosystem attributes and one pressure were defined: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, over 100 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators (Table 1), which were calculated in Step 4. The quantitative screening in Step 5 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fisheries independent and dependent data (Step 6). For more information, including attribute definitions and the methods used to select the final suite of indicators, please refer to the guidance framework document (Bundy, Gomez, and Cook, 2017).
+The framework was successfully tested for the Scotian Shelf Biogregion. In Step 1, four ecosystem attributes and one pressure were defined: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, over 100 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators (Table 1), which were calculated in Step 4. The quantitative screening in Step 5 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fishery independent and dependent data (Step 6). For more information, including attribute definitions and the methods used to select the final suite of indicators, please refer to the guidance framework document (Bundy, Gomez, and Cook, 2017).
 
-The \pkg{marindicators} package provides functions to calculate the suite of marine ecosystem indicators calculated in Step 4 of the guidance framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values. 
+The \pkg{marindicators} package provides functions to calculate the suite of marine ecosystem indicators calculated in Step 4 of the guidance framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values. The package also includes functions that can return all of the indicators for a given attribute, and a function that can extract and export all indicators. See the vignette "Introduction to \code{marindicators}" for more details on these functions.
 
 Table 1: Indicators for each ecosystem attribute and pressure and the \pkg{marindicators} function used to calculate each indicator. 
   \tabular{lll}{
@@ -87,7 +87,7 @@ Landings of Fished Groups (skates, flatfish, and large pelagics)
 }
 
   
-The data required to apply the \pkg{marindicators} package depends on the indicator(s) to be calculated. In general, indicators related to ecosystem attibutes require annual fishery-independent survey data, while indicators related to ecosystem pressure require annual commercial landings data. Additional species information is required to calculate some indicators, including: trophic level, intrinsic vulnerability index, maximum recorded age, maximum recorded length, and annual length-at-weight data. See the vignette or the help page for a specific function for more information on data requirements.
+The data required to apply the \pkg{marindicators} package depends on the indicator(s) to be calculated. In general, indicators related to ecosystem attibutes require annual fishery independent survey data, while indicators related to the ecosystem pressure require annual commercial landings data. Additional species information is required to calculate some indicators, including: trophic level, intrinsic vulnerability index, maximum recorded age, maximum recorded length, and annual length-at-weight data. See the vignette or the help page for a specific function for more information on data requirements.
 }
 
 \references{

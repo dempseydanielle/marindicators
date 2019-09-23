@@ -68,10 +68,10 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{extractAll}}, \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{margalef}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+  \code{\link{heips}}, \code{\link{hillN1}},
+  \code{\link{hillN2}}, \code{\link{kemptonQ}},
+  \code{\link{margalef}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

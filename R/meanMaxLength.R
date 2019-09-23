@@ -22,6 +22,7 @@
 #'  Marine Science. p 384-396
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
+#'@examples
 #'data(X)
 #'data(species.info)
 #'meanMaxLength(X, group = "FINFISH", species.table = species.groups, 

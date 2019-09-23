@@ -4,7 +4,10 @@
 \name{X}
 \alias{X}
 \title{Example fishery independent survey data}
-\format{A dataframe with 2003 rows and 5 variables: \describe{
+\format{Dimensions will vary depending on the number of species, years, and
+  areas of interest.
+
+  This example data is a dataframe with 2003 rows and 5 variables: \describe{
   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
   observation was recorded} \item{SPECIES}{Numeric code indicating the
   species sampled} \item{ABUNDANCE}{Abundance of the species sampled,

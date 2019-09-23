@@ -7,10 +7,13 @@
 #' (among other arguments): Community Condition, Large Fish Indicator, Mean
 #' Length.
 
-#' @format A dataframe with 14378 rows and 6 variables: \describe{
-#'   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
-#'   observation was recorded} \item{SPECIES}{Numeric code indicating the
-#'   species sampled} \item{LENGTH}{Length class of sample species, in cm}
+#' @format Dimensions will vary depending on the number of species, years, and
+#'   areas of interest.
+#'
+#'   This example data is a dataframe with 14378 rows and 6 variables:
+#'   \describe{ \item{YEAR}{Year the observation was recorded} \item{ID}{Area
+#'   where the observation was recorded} \item{SPECIES}{Numeric code indicating
+#'   the species sampled} \item{LENGTH}{Length class of sample species, in cm}
 #'   \item{ABUNDANCE}{Abundance of the species sampled, stratified and corrected
 #'   for catchability} \item{BIOMASS}{Biomass of the sampled species, stratified
 #'   and corrected for catchability} }

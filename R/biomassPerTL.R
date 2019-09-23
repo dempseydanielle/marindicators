@@ -18,8 +18,7 @@
 #'  biomass. For example, if \code{TL.grouping = 1}, trophic levels are binned
 #'  from 1.00 - 1.99, 2.00 - 2.99, etc. If \code{TL.grouping = 0.5}, trophic
 #'  levels are binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99,
-#'  etc. Default is \code{TL.grouping = 1} so that biomass is aggregated over
-#'  discrete trophic levels.
+#'  etc. Default is \code{TL.grouping = 1}.
 #'@param years A vector of years for which to calculate indicator.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and the
 #'  corresponding biomass for each trophic level grouping. For example: for
@@ -47,11 +46,12 @@
 #'  coastal upwellings by means of standardized ecological models and
 #'  indicators. Ecol. Model. 198, 53-70.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'  Catalina Gomez, Alida Bundy
-#'data(X)
-#'data(species.info)
-#'biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", 
-#'    TL.grouping = 1, years = c(2014:2019))
+#'  Catalina Gomez, Alida Bundy 
+#'@examples  
+#'  data(X) 
+#'  data(species.info) 
+#'  biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
+#'  TL.grouping = 1, years = c(2014:2019))
 #'@export
 
 

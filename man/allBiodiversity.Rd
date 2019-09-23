@@ -47,13 +47,13 @@ Q. Default is \code{minTL = 0}.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned from the function. If \code{raw = FALSE}, the raw indcator values
-are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
-\code{std} must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indcator values are
+not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
+must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned from the function. Here, indicators are
-standardized using Z-scores, i.e., by subtracting the mean and dividing by
+values for each area ID are returned by the function. Indicators are
+standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
@@ -61,7 +61,7 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
- Standardized indicators are noted with "_s" in the name.
+ Standardized indicators are noted with \code{_s} in the name.
 }
 \description{
 This function calculates all (or a subset) of the Biodiversity
@@ -77,6 +77,13 @@ This function calculates the Biodiversity indicators: Species
  Q, the remaining Biodiversity indicators will be returned. See the help file
  for the individual functions for information on how each indicator is
  calculated.
+
+ Notes on indicator calculations: In the individual functions, the user
+ generally has control over which metric (e.g., \code{BIOMASS} or
+ \code{ABUNDANCE}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"}) are
+ used to calculate the indicator. Here, the same metric and group are used to
+ calculate each indicator. Defaults are \code{metric = "ABUNDANCE"} and
+ \code{group = "ALL"}.
 }
 \examples{
 data(X)
@@ -87,11 +94,11 @@ allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.i
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \seealso{
-Other biodiversity indicators: \code{\link{extractAll}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
+Other biodiversity indicators: \code{\link{heips}},
+  \code{\link{hillN1}}, \code{\link{hillN2}},
+  \code{\link{kemptonQ}}, \code{\link{margalef}},
+  \code{\link{pielouEvenness}}, \code{\link{shannon}},
+  \code{\link{speciesRichness}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

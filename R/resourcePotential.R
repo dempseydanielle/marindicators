@@ -4,6 +4,13 @@
 #'@details This indicator reflects temporal dynamics of species groups.
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
+#'@param X A dataframe of fishery independent survey data or model output with
+#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
+#'  \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+#'  recorded, \code{ID} is an area code indicating where the observation was
+#'  recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+#'  and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
+#'  (stratified and corrected for catchability as required).
 #'@param groups A vector indicating the species group(s) for which to calculate
 #'  the indicator. Each entry must be a character string matching the name of a
 #'  column in \code{species.table}.
@@ -20,7 +27,7 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
-#'@examples 
+#'@examples
 #'data(X)
 #'data(species.groups)
 #'
@@ -28,11 +35,11 @@
 #'resourcePotential(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 #'
 #'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE")
-#'resourcePotential(X, groups = trophicguild.groups, 
+#'resourcePotential(X, groups = trophicguild.groups,
 #'    species.table = species.groups, metric = "BIOMASS", years = c(2014:2019))
-#'    
+#'
 #'resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", "FORAGE", "GADOIDS", "GROUNDFISH")
-#'resourcePotential(X, groups = resource.groups, species.table = species.groups, 
+#'resourcePotential(X, groups = resource.groups, species.table = species.groups,
 #'    metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

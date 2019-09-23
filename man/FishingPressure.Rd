@@ -8,12 +8,12 @@ fishingPressure(X, land, FP.groups, species.table = NULL, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
+(stratified and corrected for catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year

@@ -1,5 +1,5 @@
 library(testthat)
-library(indicators)
+library(marindicators)
 
-test_check("indicators")
+test_check("marindicators")
 

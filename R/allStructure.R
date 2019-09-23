@@ -1,23 +1,23 @@
-#'@title Calculates all structure and function indicators
+#'@title Calculates all Structure and Functioning indicators
 #'@description This function calculates all (or a subset) of the Structure and
 #'  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
 #'  choose whether the function returns the raw indicator values, the
 #'  standardized (z-score) values, or both.
 #'@details This function calculates the Structure and Functioning indicators:
-#'  biomass, biomass ratio(s), large species indicator, trophic level of the
-#'  community, large fish indicator, mean length (weighted by biomass and
-#'  abundance), and community condition. If data are not available to calculate
+#'  Biomass, Biomass Ratio(s), Large Species Indicator, Trophic Level of the
+#'  Community, Large Fish Indicator, Mean Length (weighted by biomass and
+#'  abundance), and Community Condition. If data are not available to calculate
 #'  one or more of these indicators, a subset will be returned. See the help
 #'  file for the individual functions for information on how each indicator is
 #'  calculated.
 #'
 #'  Notes on indicator calculations: In the individual functions, the user
-#'  generally has control over which metric is used to calculate indicator
+#'  generally has control over which metric is used to calculate the indicator
 #'  (e.g., \code{BIOMASS} or \code{ABUNDANCE}). Here, \code{BIOMASS} is used to
-#'  calculate biomass, biomass ratio(s), large species indicator, large fish
-#'  indicator, trophic level of the community, and mean length weighted by
-#'  biomass. \code{ABUNDANCE} is used to calculate mean length weighted by
-#'  abundance and community condition. See individual functions for more
+#'  calculate Biomass, Biomass Ratio(s), Large Species Indicator, Large Fish
+#'  Indicator, Trophic Level of the Community, and Mean Length weighted by
+#'  biomass. \code{ABUNDANCE} is used to calculate Mean Length weighted by
+#'  abundance and Community Condition. See individual functions for more
 #'  flexibility.
 #'@inheritParams resourcePotential
 #'@inheritParams communityCondition
@@ -32,9 +32,8 @@
 #'  Fish Indicator will not be calculated.
 #'@param guild.groups A vector indicating the species groups for which to
 #'  calculate the resource potential. Each entry must be a character string
-#'  matching the name of a column in \code{species.table}. If
-#'  \code{guild.groups = NULL}, these indicators will not be
-#'  calculated.
+#'  matching the name of a column in \code{species.table}. If \code{guild.groups
+#'  = NULL}, these indicators will not be calculated.
 #'@param condition.groups  A vector indicating the species groups for which to
 #'  calculate Fulton's community condition factor. Each entry must be a
 #'  character string matching the name of a column in \code{species.table}. If
@@ -52,24 +51,24 @@
 #'  (or \code{X_length}) included in each group. \code{species.table} may also
 #'  include columns for other species groups; these will be ignored.
 #'@param speciesinfo.table A table with columns \code{SPECIES} and the
-#'  corresponding \code{MAXLENGTH} and \code{TL} (maximum recorded length and
-#'  trophic level). Entries in the \code{SPECIES} column should be the unique
+#'  corresponding \code{TL} and \code{MAXLENGTH} (trophic level and maximum
+#'  recorded length). Entries in the \code{SPECIES} column should be the unique
 #'  values of species codes in \code{X}/\code{X_length} (or a subset thereof).
 #'  Other columns will be ignored.
 #'@param years A vector of years for which to calculate indicators.
 #'@param raw A logical value. If \code{raw = TRUE}, the raw indicator values are
-#'  returned from the function. If \code{raw = FALSE}, the raw indcator values
-#'  are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
-#'  \code{std} must be \code{TRUE}.
+#'  returned by the function. If \code{raw = FALSE}, the raw indcator values are
+#'  not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
+#'  must be \code{TRUE}.
 #'@param std A logical value. If \code{std = TRUE}, the standardized indicator
-#'  values for each area ID are returned from the function. Here, indicators are
-#'  standardized using Z-scores, i.e., by subtracting the mean and dividing by
+#'  values for each area ID are returned by the function. Indicators are
+#'  standardized using z-scores, i.e., by subtracting the mean and dividing by
 #'  the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 #'  standardized indcator values are not returned. Default is \code{std = TRUE}.
 #'  Either \code{raw} or \code{std} must be \code{TRUE}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
-#'  Standardized indicators are noted with "_s" in the name.
+#'  Standardized indicators are noted with \code{_s} in the name.
 #'@family ecosystem structure and function indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

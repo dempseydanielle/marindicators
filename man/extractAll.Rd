@@ -15,34 +15,41 @@ extractAll(X, X_length, land, speciesinfo.table, species.table,
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
-
-\item{X_length}{A dataframe of fishery independent survey data or model output
-with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{BIOMASS} and
 \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
 recorded, \code{ID} is an area code indicating where the observation was
-recorded, and \code{SPECIES} is a numeric code indicating the species
-sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for catchability
-as required). Species for which there are no length data should be assigned
-\code{LENGTH = -99}. These observations are removed by the function.}
+recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+and \code{ABUNDANCE} is the corresponding abundance (stratified and
+corrected for catchability as required).}
+
+\item{X_length}{A dataframe of fishery independent survey data or model output
+with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
+\code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, and \code{SPECIES} is a numeric code indicating
+the species sampled. \code{LENGTH} is the length class (cm) and
+\code{ABUNDANCE} is the corresponding abundance at length (stratified and
+corrected for catchability as required). Species for which there are no
+length data should be assigned \code{LENGTH = -99}. These observations are
+removed by the function.}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 the landing was recorded, \code{ID} is an area code indicating where the
 landing was recorded, \code{SPECIES} is a numeric code indicating the
-species landed, and \code{CATCH} is the corresponding landed weight.}
+species landed, and \code{CATCH} is the corresponding landed weight. If
+\code{land = NULL}, the landings-based indicators will not be calculated.}
 
 \item{speciesinfo.table}{A table with columns \code{SPECIES} and the
-corresponding \code{MAXLENGTH} and \code{TL} (maximum recorded length and
-trophic level). Entries in the \code{SPECIES} column should be the unique
-values of species codes in \code{X}/\code{X_length} (or a subset thereof).
-Other columns will be ignored.}
+corresponding \code{TL}, \code{MAXLENGTH}, \code{MAXAGE},  \code{IVI}, and
+\code{TL_LAND} (trophic level, maximum recorded age, maximum recorded
+length, intrinsic vulnerability index, and trophic level of the landings).
+Entries in the \code{SPECIES} column should be the unique values of species
+codes in \code{X}/\code{X_length} (or a subset thereof). If there are
+different species codes in \code{X} and \code{land}, the Fishing-in-Balance,
+Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the
+Landings, and Marine Trophic Index should be calculated using their
+respective single functions (see manual or vignette).}
 
 \item{species.table}{A table where the column names match the entries in
 \code{guild.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
@@ -84,9 +91,8 @@ Fish Indicator will not be calculated.}
 
 \item{guild.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
-matching the name of a column in \code{species.table}. If
-\code{guild.groups = NULL}, these indicators will not be
-calculated.}
+matching the name of a column in \code{species.table}. If \code{guild.groups
+= NULL}, these indicators will not be calculated.}
 
 \item{resource.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
@@ -128,9 +134,9 @@ the indicator are assigned \code{NA} to account for the moving average.
 Default is \code{wind = 5} years.}
 
 \item{negative}{If \code{negative = TRUE}, the Coefficient of Variation of the
-Biomasss will be multiplied by -1 so that the expected response is to
-decrease with increasing fishing pressure. Default is \code{negative =
-FALSE}.}
+Biomass and the Intrinsic Vulnerability Index of the Landings will be
+multiplied by -1 so that their expected response is to decrease with
+increasing fishing pressure. Default is \code{negative = FALSE}.}
 
 \item{minTL.FiB}{The minimum trophic level of species to include to calculate
 Fishing-in-Balance.}
@@ -170,13 +176,13 @@ c(0, 3.25)}, which will return the mean trophic level of the landings and
 the marine trophic index.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned from the function. If \code{raw = FALSE}, the raw indcator values
-are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
-\code{std} must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indcator values are
+not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
+must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned from the function. Here, indicators are
-standardized using Z-scores, i.e., by subtracting the mean and dividing by
+values for each area ID are returned by the function. Indicators are
+standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
@@ -186,7 +192,7 @@ calculated indicators (named allIndicators_export.id.csv; see below). If
 \code{export.file = NULL}, the indicator dataframe will be returned to the
 global environment, but not exported as a .csv file.}
 
-\item{export.id}{Character string for the name of the .csv file (if
+\item{export.id}{Character string to modify the name of the .csv file (if
 export.path is specified), for example an area name or date of analysis. The
 exported .csv file is named allIndicators_export.id.csv. Default is
 \code{export.id = NULL}.}
@@ -197,8 +203,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  Standardized indicators are noted with "_s" in the name.
 }
 \description{
-This function calculates all of the indicators described in this
- package. The user can choose whether the function returns the indicator
+This function can calculate all of the indicators described in
+ this package. The user can choose whether the function returns the indicator
  dataframe to the global environment, or exports the dataframe to a csv file.
  The user can also choose whether the function returns the raw indicator
  values, the standaradized (z-score) values, or both.
@@ -248,15 +254,7 @@ extractAll(X = X, X_length = X_length, land = land,
     years = c(2014:2019),
     raw = TRUE, std = TRUE, export.path = NULL)
 }
-\seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}, \code{\link{speciesRichness}}
-}
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
-\concept{biodiversity indicators}

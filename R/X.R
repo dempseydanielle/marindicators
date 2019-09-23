@@ -10,13 +10,16 @@
 #' Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean
 #' Maximum Length, and Fishing Pressure.
 
-#' @format A dataframe with 2003 rows and 5 variables: \describe{
+#' @format Dimensions will vary depending on the number of species, years, and
+#'   areas of interest.
+#'
+#'   This example data is a dataframe with 2003 rows and 5 variables: \describe{
 #'   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
 #'   observation was recorded} \item{SPECIES}{Numeric code indicating the
 #'   species sampled} \item{ABUNDANCE}{Abundance of the species sampled,
 #'   stratified and corrected for catchability} \item{BIOMASS}{Biomass of the
 #'   sampled species, stratified and corrected for catchability} }
-#'   
+#'
 #' @source This is made-up example data modified from Fisheries and Oceans
 #'   Canada summer research vessel trawl survey for the Scotian Shelf.
 "X"

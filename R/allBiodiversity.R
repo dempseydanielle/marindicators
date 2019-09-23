@@ -10,6 +10,14 @@
 #'  Q, the remaining Biodiversity indicators will be returned. See the help file
 #'  for the individual functions for information on how each indicator is
 #'  calculated.
+#'
+#'  Notes on indicator calculations: In the individual functions, the user
+#'  generally has control over which metric (e.g., \code{BIOMASS} or
+#'  \code{ABUNDANCE}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"}) are
+#'  used to calculate the indicator. Here, the same metric and group are used to
+#'  calculate each indicator. Defaults are \code{metric = "ABUNDANCE"} and
+#'  \code{group = "ALL"}.
+
 #'@inheritParams shannon
 #'@inheritParams allStructure
 #'@param metric A character string indicating which column in \code{X} to use to
@@ -30,7 +38,7 @@
 #'@param years A vector of years for which to calculate indicators.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
-#'  Standardized indicators are noted with "_s" in the name.
+#'  Standardized indicators are noted with \code{_s} in the name.
 #'@importFrom stats aggregate
 #'@family biodiversity indicators
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},

@@ -4,7 +4,7 @@
 #'@details The Coefficient of Variation of the Biomass (CVBiomass) was estimated
 #'  as an n-year moving average (Blanchard and Boucher, 2001):
 #'
-#'  CVbiomass = sd(total biomass for the past n years)/mean(total biomass for
+#'  CVBiomass = sd(total biomass for the past n years)/mean(total biomass for
 #'  the past n years)
 #'@inheritParams biomassPerTL
 #'@param X A dataframe of fishery independent survey data or model output with
@@ -23,9 +23,9 @@
 #'@return Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
 #'  \code{CVBiomass}.
 #'
-#'  The first and last \code{floor(wind/2)} values of the indicator are
-#'  assigned \code{NA} to account for the moving average. If there is no data
-#'  for spatial scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
+#'  The first and last \code{floor(wind/2)} values of the indicator are assigned
+#'  \code{NA} to account for the moving average. If there is no data for spatial
+#'  scale \eqn{j} in year \eqn{i}, indicator value is assigned NA.
 #'@family stability and resistance indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.

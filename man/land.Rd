@@ -3,12 +3,16 @@
 \docType{data}
 \name{land}
 \alias{land}
-\title{Example fishery dependent data}
-\format{A dataframe with 612 rows and 4 variables: \describe{
+\title{Example commercial landings data}
+\format{Dimensions will vary depending on the number of species, years, and
+  areas of interest.
+
+  This example data is a dataframe with 612 rows and 4 variables: \describe{
   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
   observation was recorded} \item{SPECIES}{Numeric code indicating the
-  species sampled (can be consistent with X or not; see vignette)} 
-  \item{CATCH}{Corresponding landed weight (in the same units as \code{BIOMASS} in \code{X}}}}
+  species sampled (can be consistent with X or not; see vignette)}
+  \item{CATCH}{Corresponding landed weight (in the same units as
+  \code{BIOMASS} in \code{X}})}}
 \source{
 This is made-up example data.
 }
@@ -16,8 +20,8 @@ This is made-up example data.
 land
 }
 \description{
-A dataframe of example fishery dependent (commercial) landings data for two
-areas (AREA1 and AREA2) from 2014 - 2019.
+A dataframe of example commercial landings data for two areas (AREA1 and
+AREA2) from 2014 - 2019.
 }
 \details{
 Indicators calculated using fishery dependent data (among other arguments):

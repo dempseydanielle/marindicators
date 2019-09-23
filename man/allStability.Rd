@@ -10,12 +10,12 @@ allStability(X, land, maxlength.group, species.table, speciesinfo.table,
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
+\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, \code{SPECIES} is a numeric code indicating the species sampled,
+and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
+(stratified and corrected for catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -36,10 +36,13 @@ Column entries are the species codes indicating the species from \code{X}
 include columns for other species groups; these will be ignored.}
 
 \item{speciesinfo.table}{A table with columns \code{SPECIES} and the
-corresponding \code{MAXAGE}, \code{MAXLENGTH}, and \code{TL} (maximum
-recorded age, maximum recorded length, and trophic level). Entries in the
-\code{SPECIES} column should be the unique values of species codes in
-\code{X} (or a subset thereof). Other columns will be ignored.}
+corresponding \code{TL}, \code{MAXLENGTH}, \code{MAXAGE}, and \code{IVI}
+(trophic level, maximum recorded age, maximum recorded length, and intrinsic
+vulnerability index). Entries in the \code{SPECIES} column should be the
+unique values of species codes in \code{X} (or a subset thereof). If there
+are different species codes in \code{X} and \code{land}, the Intrinsic
+Vulnerability Index of the Landings indicator should be calculated
+separately using the function \code{IVILandings()}.}
 
 \item{TL.grouping}{Size of the trophic level bin for which to aggregrate
 biomass when calculating Biomass per Trophic Level. For example, if
@@ -61,13 +64,13 @@ FALSE}.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned from the function. If \code{raw = FALSE}, the raw indcator values
-are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
-\code{std} must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indcator values are
+not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
+must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned from the function. Here, indicators are
-standardized using Z-scores, i.e., by subtracting the mean and dividing by
+values for each area ID are returned by the function. Indicators are
+standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
@@ -75,7 +78,7 @@ Either \code{raw} or \code{std} must be \code{TRUE}.}
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  indicators corresponding to the arguments supplied to the function.
- Standardized indicators are noted with "_s" in the name.
+ Standardized indicators are noted with \code{_s} in the name.
 }
 \description{
 This function calculates all (or a subset) of the Stability and
@@ -91,6 +94,15 @@ This function calculates the Stability and Resistance indicators:
  more of these indicators, a subset will be returned. See the help file for
  the individual functions for information on how each indicator is
  calculated.
+
+
+ Notes on indicator calculations: In the individual functions, the user
+ generally has control over which metric (e.g., \code{BIOMASS} or
+ \code{ABUNDANCE}) is used to calculate the indicator.  Here, \code{BIOMASS}
+ is used to calculate Coefficient of Variation of the Biomass, Mean Lifespan,
+ Biomass per Trophic Level, and Mean Maximum Length weighted by biomass.
+ \code{ABUNDANCE} is used to calculate Mean Maximum Length weighted by
+ abundance. See individual functions for more flexibility.
 }
 \examples{
 data(X)

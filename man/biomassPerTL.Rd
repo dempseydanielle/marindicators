@@ -27,8 +27,7 @@ calculate indicator. Default is \code{metric = "BIOMASS"}.}
 biomass. For example, if \code{TL.grouping = 1}, trophic levels are binned
 from 1.00 - 1.99, 2.00 - 2.99, etc. If \code{TL.grouping = 0.5}, trophic
 levels are binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99,
-etc. Default is \code{TL.grouping = 1} so that biomass is aggregated over
-discrete trophic levels.}
+etc. Default is \code{TL.grouping = 1}.}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }
@@ -47,6 +46,13 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and the
 \description{
 This function calculates the biomass per discrete trophic level
  for \eqn{j} areas and \eqn{i} years.
+}
+\examples{
+ 
+ data(X) 
+ data(species.info) 
+ biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
+ TL.grouping = 1, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -71,9 +77,5 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
-data(X)
-data(species.info)
-biomassPerTL(X, TL.table = species.info, metric = "BIOMASS", 
-   TL.grouping = 1, years = c(2014:2019))
 }
 \concept{stability and resistance indicators}

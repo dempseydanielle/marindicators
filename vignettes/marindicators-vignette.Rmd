@@ -1,5 +1,5 @@
 ---
-title: "Introduction to marindicators"
+title: "Introduction to `marindicators`"
 author: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -204,7 +204,7 @@ Table 2: Additional species information required to calculate given indicators. 
 | **SPECIES INFO** | **TABLE HEADER** |**DESCRIPTION** | **INDICATOR(S)** 
 |:------------| :------------:|:--------------------------------|:----------------|
 | Trophic Level | `TL` | Trophic level of species caught in fishery independent surveys | Kempton's Q[^2], Mean Trophic Level of Community, Biomass per Trophic Level | 
-| Maximum Length | `MAXLENGTH` | Maximum recorded length of species caught in fisheries independent surveys | Large Species Indicator, Mean Maximum Length |
+| Maximum Length | `MAXLENGTH` | Maximum recorded length of species caught in fishery independent surveys | Large Species Indicator, Mean Maximum Length |
 | Maximum Age | `MAXAGE` | Maximum recorded age of of species caught in fishery independent surveys | Maximum Lifespan |
 | Intrinsic Vulnerability Index | `IVI` | Vulnerability of commercial species, determined by considering several traits (e.g. max length, age at first maturity, longevity, von Bertalanffy growth parameter, natural mortality, fecundity, spatial behaviour, and geographic range) | IVI of landings | 
 | Trophic Level of Landed Species | `TL_LAND` | Trophic level of commercial species | Fishing-in-Balance, Marine Trophic Index, Mean Trophic Level of Landings |
@@ -253,7 +253,7 @@ Length_Weight_show
 ```
 
 ### Species Groups
-Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here `species.groups`. The column names of `species.groups` are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fishery independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in `X` and `land`, the fishery-independent groups should include species codes from `X`, and the commercial groups should include species codes from `land`).
+Several functions give the user the option to choose the species group(s) for which to calculate the indicator. The groups are defined by the user in a table, called here `species.groups`. The column names of `species.groups` are the groups of interest, and the entries in each column are the codes for species that belong in that group. Both fishery independent groups (e.g., trophic guilds) and commercial groups can be included in this table, but take care to be consistent with the species codes (e.g., if there are different species codes in `X` and `land`, the fishery independent groups should include species codes from `X`, and the commercial groups should include species codes from `land`).
 
 ```{r, echo = FALSE}
 species.groups_show <- species.groups[1:(n.show*2), c(1:7)]
@@ -353,7 +353,7 @@ inds_std <- allStructure(X = X, X_length = X_length,
 names(inds_std)
 ```
 
-Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. For example, the following function call calculates 53 standardized indicators and returns them to the global environment in variable `all_inds`.
+Finally, the function `extractAll()` can calculate all indicators. The user can choose whether the function returns the indicator dataframe to the global environment, or exports the dataframe to a csv file. The user can also choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following function call calculates 53 standardized indicators and returns them to the global environment in variable `all_inds`.
 
 
 ```{r}
@@ -384,13 +384,15 @@ all_inds <- extractAll(X = X, X_length = X_length, land = land,
 names(all_inds)
 
 ```
+Note that if there are different species codes in `X` and `land`, then the Fishing-in-Balance, Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the Landings, and Marine Trophic Index should be calculated using their respective single functions (see Table 1).
+
 
 ## Missing Data
 If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is assigned `NA` or `0`. We recognize that even if a species is not detected during the fishery independent survey, it may still be present in the community. All indicators calculated from `X` and `X_land` are therefore assigned `NA` (rather than `0`) for years that are missing data. 
 
 In contrast, we assume that if there are no recorded commercial landings of a species, then that species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fished group is `NA`, fishing pressure is set to `NA`.
 
-Other indicators that are calculated from `land` are assigned `NA` for years without observations (e.g., intrinsic vulnerability index, Fishing-in-Balance, Diversity of Target Species, Marine Trophic Index, Mean Trophic Level of Landings).
+Other indicators that are calculated from `land` are assigned `NA` for years without observations (e.g., Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of Target Species, Marine Trophic Index, Mean Trophic Level of Landings).
 
 # References 
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232: xii + 212 p.
