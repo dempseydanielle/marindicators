@@ -5,7 +5,7 @@
 \title{Calculates Species Richness of the community or the Diversity of Target
  Species}
 \usage{
-speciesRichness(X, group, species.table = NULL, metric, years)
+speciesRichness(X, groups, species.table = NULL, metric, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output OR
@@ -21,10 +21,10 @@ speciesRichness(X, group, species.table = NULL, metric, years)
  \code{ID}, \code{SPECIES} are as above, and \code{CATCH} is the
  corresponding landed weight.}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If \code{group = "ALL"}, all species will be
-included; otherwise, \code{group} should match a column name in
-\code{species.table}.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
+column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name
 is the string \code{group}, and the column entries are species codes from
@@ -68,10 +68,10 @@ Two useful species richness indicators are: "Species Richness" (S) of
 }
 \examples{
 data(X)
-speciesRichness(X, group = "ALL", metric = "BIOMASS", years = c(2014:2019))
+speciesRichness(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 
 data(land)
-speciesRichness(land, group = "ALL", metric = "CATCH",  years = c(2014:2019))
+speciesRichness(land, groups = "ALL", metric = "CATCH",  years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

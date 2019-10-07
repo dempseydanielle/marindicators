@@ -27,21 +27,34 @@
 #'   Catalina Gomez, Alida Bundy
 #' @examples
 #' data(X)
-#' heips(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+#' heips(X, groups = "ALL", species.table = NULL, metric = "ABUNDANCE", years = c(2014:2019))
 #' @export
 
-heips <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
+heips <- function(X, groups, species.table = NULL, metric = "ABUNDANCE", years)  {
   
-  H <-shannon(X = X, group = group, species.table = species.table,
-              metric = metric, years = years)            # calculate Shannon's diversity for each year
-  S <- speciesRichness(X = X, group = group, species.table = species.table,
-                       metric = metric, years = years)   # calculate species richness for each year
-  
-  H$heips = (exp(H$ShannonDiversity)-1)/(S$SpeciesRichness-1)
-  ind <- H
-  
-  ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
-  names(ind) = c("ID", "YEAR", "Heips")            # name the ind dataframe
-  ind <- ind[order(ind$ID), ]
+  for(k in 1:length(groups)){          # loop over species groups
+
+    ind.k <- NULL
+    H <- NULL
+    S <- NULL
+    
+    H <- shannon(X = X, groups = groups[k], species.table = species.table,
+                 metric = metric, years = years)            # calculate Shannon's diversity for each year
+    S <- speciesRichness(X = X, groups = groups[k], species.table = species.table,
+                         metric = metric, years = years)   # calculate species richness for each year
+    
+    H$heips = (exp(H[,3]) - 1)/(S[,3] - 1)
+    ind.k <- H
+    
+    ind.k[,3] <- NULL                                           # remove Shannon's diversity from ind
+    ind.name <- paste("Heips_", groups[k], sep = "")            # name indicator: Heips_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                    # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ]
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
+    
+  }
   ind      
 }

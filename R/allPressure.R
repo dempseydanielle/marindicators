@@ -74,7 +74,7 @@ allPressure <- function(X, land,
     inds <- createDataframe(unique(land$ID), years)
     
     # Diversity of target species
-    SR.L = speciesRichness(land, metric = "CATCH", group = "ALL", years = years)
+    SR.L = speciesRichness(land, metric = "CATCH", groups = "ALL", years = years)
     
     inds <- merge(inds, SR.L, all.x = TRUE)
     

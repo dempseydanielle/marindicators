@@ -26,22 +26,38 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'pielouEvenness(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+#'pielouEvenness(X, groups = "ALL", species.table = NULL, 
+#'    metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 
-pielouEvenness <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
-
-  H <-shannon(X, group = group, species.table = species.table, 
-              metric = metric, years = years)           # calculate Shannon's diversity for each year
-  S <- speciesRichness(X, group = group, species.table = species.table,
-                       metric = metric, years = years)  # calculate species richness for each year
-
-  H$Pielous = H$ShannonDiversity/log(S$SpeciesRichness) # calculate Pielou's species evenness
+pielouEvenness <- function(X, groups, species.table = NULL, metric = "ABUNDANCE", years)  {
   
-  ind <- H
-  ind$ShannonDiversity <- NULL                      # remove Shannon's diversity from ind
-  names(ind) = c("ID", "YEAR", "PielouEvenness")    # name the ind dataframe
-  ind <- ind[order(ind$ID), ] 
+  for(k in 1:length(groups)){          # loop over species groups
+    
+    ind.k <- NULL
+    H <- NULL
+    S <- NULL
+    
+    H <- shannon(X, groups = groups[k], species.table = species.table, 
+                metric = metric, years = years)           # calculate Shannon's diversity for each year
+    S <- speciesRichness(X, groups = groups[k], species.table = species.table,
+                         metric = metric, years = years)  # calculate species richness for each year
+    
+    H$Pielou = H[,3]/log(S[,3])                     # calculate Pielou's species evenness
+    
+    ind.k <- H
+    ind.k[,3] <- NULL                               # remove Shannon's diversity from ind
+    
+    ind.name <- paste("PielouEvenness_", groups[k], sep = "")            # name indicator: PielouEvenness_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                             # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ] 
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
+    
+  }
+  
   ind
 }

@@ -4,7 +4,7 @@
 \alias{allBiodiversity}
 \title{Calculates all Biodiversity indicators}
 \usage{
-allBiodiversity(X, metric = "ABUNDANCE", group = "ALL",
+allBiodiversity(X, metric = "ABUNDANCE", groups = "ALL",
   species.table = NULL, TL.table, percentiles = c(0.25, 0.75),
   minTL = 0, years, raw = TRUE, std = TRUE)
 }
@@ -20,10 +20,10 @@ required).}
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate the indicators. Default is \code{metric = "ABUNDANCE"}.}
 
-\item{group}{A character string indicating the species group for which to
-calculate the indicators. If \code{group = "ALL"}, all species will be
-included; otherwise, \code{group} should match a column name in
-\code{species.table}.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicators. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
+column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name
 is the string \code{group}, and the column entries are species codes from
@@ -90,7 +90,7 @@ data(X)
 data(species.info)
 data(species.groups)
 
-allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.info,
+allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.info,
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \seealso{

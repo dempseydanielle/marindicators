@@ -16,7 +16,7 @@ numeric code indicating the species sampled, and \code{BIOMASS} is the
 corresponding biomass (stratified and corrected for catchability as
 required).}
 
-\item{group}{A character string indicating which species to include in the
+\item{group}{character string indicating which species to include in the
 indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}

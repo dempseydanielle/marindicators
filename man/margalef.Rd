@@ -4,7 +4,7 @@
 \alias{margalef}
 \title{Calculates Margalef's Species Richness}
 \usage{
-margalef(X, group, species.table = NULL, metric = "ABUNDANCE", years)
+margalef(X, groups, species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -15,10 +15,10 @@ numeric code indicating the species sampled, and \code{ABUNDANCE} is the
 corresponding abundance (stratified and corrected for catchability as
 required).}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If \code{group = "ALL"}, all species will be
-included; otherwise, \code{group} should match a column name in
-\code{species.table}.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
+column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name
 is the string \code{group}, and the column entries are species codes from
@@ -33,32 +33,32 @@ calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
-  \code{MargalefRichness_group}.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+ column \code{MargalefRichness_group} for each entry in \code{groups}.
 
-  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
-  values is assigned \code{NA}.
+ If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
+ values is assigned \code{NA}.
 }
 \description{
 This function calculates Margalef's Species Richness for \eqn{j}
-  areas and \eqn{i} years.
+ areas and \eqn{i} years.
 }
 \details{
 Margalef's Species Richness: \deqn{S_{Marg} = (S_y - 1)/log(F_y)}
-  \eqn{S_y} is the count of the number of species recorded in all trawl
-  catches collected in year \eqn{y}. \eqn{F} is the total count of all
-  individuals caught in year \eqn{y} (Margalef, 1958).
+ \eqn{S_y} is the count of the number of species recorded in all trawl
+ catches collected in year \eqn{y}. \eqn{F} is the total count of all
+ individuals caught in year \eqn{y} (Margalef, 1958).
 }
 \examples{
 data(X)
-margalef(X, group = "ALL", metric= "ABUNDANCE", years = c(2014:2019))
+margalef(X, groups = c("ALL", "GROUNDFISH"), metric= "ABUNDANCE", years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
-  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
-  Aquat. Sci. 3232: xii + 212 p.
+ selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
+ Aquat. Sci. 3232: xii + 212 p.
 
-  Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
+ Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 }
 \seealso{
 Other biodiversity indicators: \code{\link{allBiodiversity}},
@@ -69,6 +69,6 @@ Other biodiversity indicators: \code{\link{allBiodiversity}},
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
-  Catalina Gomez, Alida Bundy
+ Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

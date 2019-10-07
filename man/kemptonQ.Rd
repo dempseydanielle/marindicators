@@ -4,7 +4,7 @@
 \alias{kemptonQ}
 \title{Calculates Kempton's Biodiversity Index}
 \usage{
-kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, group,
+kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, groups,
   species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
@@ -27,10 +27,10 @@ columns in \code{TL.table} are ignored.}
 \item{minTL}{Minimum trophic level for species included in the calculation.
 Default is \code{minTL = 0}.}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If \code{group = "ALL"}, all species will be
-included; otherwise, \code{group} should match a column name in
-\code{species.table}.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
+column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name
 is the string \code{group}, and the column entries are species codes from
@@ -70,7 +70,7 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
 data(X)
 data(species.info)
 kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
-   group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+   groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 }
 \references{
 Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species

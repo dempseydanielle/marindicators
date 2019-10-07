@@ -6,6 +6,7 @@
 #'  species and \eqn{S} is the number of species recorded in the sample. This
 #'  index is sensitive to the number of species recorded in the sample
 #'  (Magurran, 1988).
+#'@inheritParams resourcePotential
 #'@param X A dataframe of fishery independent survey data or model output with
 #'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
 #'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
@@ -13,10 +14,6 @@
 #'  numeric code indicating the species sampled, and \code{ABUNDANCE} is the
 #'  corresponding abundance (stratified and corrected for catchability as
 #'  required).
-#'@param group A character string indicating which species to include in the
-#'  indicator calculation. If \code{group = "ALL"}, all species will be
-#'  included; otherwise, \code{group} should match a column name in
-#'  \code{species.table}.
 #'@param species.table A table with at least one column, where the column name
 #'  is the string \code{group}, and the column entries are species codes from
 #'  \code{X} indicating which species are included that group.
@@ -46,38 +43,46 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'shannon(X, group = "ALL", metric = "ABUNDANCE", years = c(2015:2019))
+#'shannon(X, groups = c("ALL", "FINFISH"), metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 
-shannon <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years) {
+shannon <- function(X, groups, species.table = NULL, metric = "ABUNDANCE", years) {
   
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
-
-  uI = unique(X$ID)                   # extract the spatial scale ID's
-  ind <- NULL                         # initialize dataframe for storing indicator values
-  
-  for (j in 1:length(uI)){            # loop over all spatal scales
+  for(k in 1:length(groups)){          # loop over species groups
     
-    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
-  
-    for (i in 1:length(years)){                   # loop over all years
+    X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
+    
+    uI = unique(X$ID)                   # extract the spatial scale ID's
+    ind.k <- NULL                       # initialize dataframe for storing indicator values
+    
+    for (j in 1:length(uI)){            # loop over all spatal scales
       
-      year.i = years[i]                           # set years.i to current year  
-      X.ij = X.j[X.j$YEAR == year.i, metric]      # subset data to include only current year
+      X.j = X.k[X.k$ID == uI[j], ]          # subset data to spatial scale j
       
-      if(length(X.ij) > 0){                          # if there are no obs in X.ij,  set ind.i to NA
-        p <- X.ij/sum(X.ij)                          # calculate the proportion of each species by metric
-        ind.i <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
-      } else ind.i <- NA
-      
-      ind.i = data.frame(uI[j], year.i, ind.i)       # create a dataframe with spatial scale ID, year, and indicator value
-      ind = rbind(ind, ind.i)                        # bind ind.i to ind dataframe
+      for (i in 1:length(years)){                   # loop over all years
+        
+        year.i = years[i]                           # set years.i to current year  
+        X.ij = X.j[X.j$YEAR == year.i, metric]      # subset data to include only current year
+        
+        if(length(X.ij) > 0){                          # if there are no obs in X.ij,  set ind.i to NA
+          p <- X.ij/sum(X.ij)                          # calculate the proportion of each species by metric
+          ind.i <- -sum(p*log(p))                      # calculate Shannon's metric of diversity
+        } else ind.i <- NA
+        
+        ind.i = data.frame(uI[j], year.i, ind.i)       # create a dataframe with spatial scale ID, year, and indicator value
+        ind.k = rbind(ind.k, ind.i)                    # bind ind.i to ind dataframe
+      }
     }
+    
+    ind.name <- paste("ShannonDiversity_", groups[k], sep = "")            # name indicator: ShannonDiversity_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                               # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ] 
+    
+    if(k == 1) ind = ind.k
+  
+    ind <- merge(ind, ind.k)
   }
-  
-  names(ind) = c("ID", "YEAR", "ShannonDiversity")    # name the ind dataframe
-  ind <- ind[order(ind$ID), ] 
-  ind                                                  # return ind 
+  ind                                                                    # return ind 
 }
-  
+

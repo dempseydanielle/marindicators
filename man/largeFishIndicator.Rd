@@ -18,7 +18,7 @@ length (stratified and corrected for catchability as required). Species for
 which there are no length data should be assigned \code{LENGTH = -99}. These
 observations are removed by the function.}
 
-\item{group}{A character string indicating which species to include in the
+\item{group}{character string indicating which species to include in the
 indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
@@ -62,7 +62,7 @@ Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
 \examples{
 data(X_length)
 data(species.groups)
-largeFishIndicator(X_length, group = "FINFISH", species.table = species.groups, 
+largeFishIndicator(X_length, group = "FINFISH", species.table = species.groups,
    metric = "BIOMASS", years = c(2014:2019))
 }
 \references{

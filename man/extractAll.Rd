@@ -11,7 +11,8 @@ extractAll(X, X_length, land, speciesinfo.table, species.table,
   max.length, maxlength.group, TL.grouping = 1, wind = 5,
   negative = FALSE, minTL.FiB = 0, TE = 0.1, base.start, base.end,
   landings.groups, FP.groups, minTL.FP = c(0, 3.25), raw = TRUE,
-  std = TRUE, export.path = NULL, export.id = NULL)
+  std = TRUE, glob.env = TRUE, export.path = NULL,
+  export.id = NULL)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -186,6 +187,9 @@ standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
+
+\item{glob.env}{Logical value indicating whether to return output to global
+environment.}
 
 \item{export.path}{File path indicating where to save a .csv file of
 calculated indicators (named allIndicators_export.id.csv; see below). If

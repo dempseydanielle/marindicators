@@ -38,51 +38,57 @@
 #'data(X)
 #'data(species.info)
 #'kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
-#'    group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+#'    groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 0, 
-                    group, species.table = NULL, metric = "ABUNDANCE", years) {
+                    groups, species.table = NULL, metric = "ABUNDANCE", years) {
   
   TL.table <- na.omit(TL.table[, c("SPECIES", "TL")])
   
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
-  X <- merge(X, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
-  X <- X[X$TL > minTL, ]
-  
-  uI = unique(X$ID)                   # extract the spatial scale ID's
-  ind <- NULL                         # initialize dataframe for storing indicator values
-  
-  for (j in 1:length(uI)){            # loop over all spatal scales
+  for(k in 1:length(groups)){  
+    X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
+    X.k <- merge(X.k, TL.table, by = 'SPECIES')     # Add trophic level data to RV survey data
+    X.k <- X.k[X.k$TL > minTL, ]
     
-    X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+    uI = unique(X$ID)                   # extract the spatial scale ID's
+    ind.k <- NULL                         # initialize dataframe for storing indicator values
     
-    for (i in 1:length(years)){                     # loop over each year
+    for (j in 1:length(uI)){            # loop over all spatal scales
       
-      year.i = years[i]                             # set years.i to current year  
-      X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
-  
-      Y <- X.ij[order(X.ij[metric]),metric]        # set Y to metric ORDERED FROM SMALLEST TO LARGEST
-      S <- length(Y)                               # number of species recorded (simpler than speciesRichness function)
+      X.j = X.k[X.k$ID == uI[j], ]          # subset data to spatial scale j
       
-      if(S>2) {
-        w <- c(round(S*percentiles[1], 0), round(S*percentiles[2], 0)) # index of where percentile value is in Y
-                                                                       # this works becuase S = length(Y)
-        if(w[1]==0) w[1]<-1                                            # can't have index of 0, so if small number, set to 1
-        ind.i <- S*(percentiles[2]-percentiles[1])/log(Y[w[2]]/Y[w[1]]) # calculate Kemptons' Q
-      } else {
+      for (i in 1:length(years)){                     # loop over each year
+        
+        year.i = years[i]                             # set years.i to current year  
+        X.ij = X.j[X.j$YEAR == year.i, ]              # subset data to include only current year
+        
+        Y <- X.ij[order(X.ij[metric]),metric]        # set Y to metric ORDERED FROM SMALLEST TO LARGEST
+        S <- length(Y)                               # number of species recorded (simpler than speciesRichness function)
+        
+        if(S>2) {
+          w <- c(round(S*percentiles[1], 0), round(S*percentiles[2], 0)) # index of where percentile value is in Y
+          # this works becuase S = length(Y)
+          if(w[1]==0) w[1]<-1                                            # can't have index of 0, so if small number, set to 1
+          ind.i <- S*(percentiles[2]-percentiles[1])/log(Y[w[2]]/Y[w[1]]) # calculate Kemptons' Q
+        } else {
           ind.i <- NA
         } 
-      
-      ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
-      ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
-      
+        
+        ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+        ind.k = rbind(ind.k, ind.i)                      # bind ind.i to ind dataframe
+        
+      }
     }
+    
+    ind.name <- paste("KemptonQ_", groups[k], "_", minTL, sep ="")        # name indicator: KemptonQ_group_minTL
+    names(ind.k) = c("ID", "YEAR", ind.name)                              # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ]                 # order by ID to be consistent with other functions
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
   }
-  
-  ind.name <- paste("KemptonQ_", minTL, sep ="")            # name indicator: KemptonQ_minTL
-  names(ind) = c("ID", "YEAR", ind.name)                    # name the ind dataframe
-  ind <- ind[order(ind$ID), ]                 # order by ID to be consistent with other functions
   ind                                         # return vector of indicator values for years c(start.year:end.year) 
   
 }

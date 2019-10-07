@@ -7,6 +7,10 @@
 #'  is 85 cm; Shin et al., 2010).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
+#'@param group  character string indicating which species to include in the
+#'  indicator calculation. If \code{group = "ALL"}, all species will be
+#'  included; otherwise, \code{group} should match a column name in
+#'  \code{species.table}.
 #'@param maxlength.table A dataframe with columns \code{SPECIES} and
 #'  \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 #'  Entries in the \code{SPECIES} column should be the unique values of species

@@ -48,23 +48,25 @@
 #'@importFrom stats na.omit
 #'@examples
 #'data(X)
-#'speciesRichness(X, group = "ALL", metric = "BIOMASS", years = c(2014:2019))
+#'speciesRichness(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 #'
 #'data(land)
-#'speciesRichness(land, group = "ALL", metric = "CATCH",  years = c(2014:2019))
+#'speciesRichness(land, groups = "ALL", metric = "CATCH",  years = c(2014:2019))
 #'@export
 
 
-speciesRichness <- function(X, group, species.table = NULL, metric, years)  {
+speciesRichness <- function(X, groups, species.table = NULL, metric, years)  {
 
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
+  for(k in 1:length(groups)){          # loop over species groups
+    
+  X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
 	
 	uI = unique(X$ID)                   # extract the spatial scale ID's
-	ind <- NULL                         # initialize dataframe for storing indicator values
+	ind.k <- NULL                       # initialize dataframe for storing indicator values
 	
 	for (j in 1:length(uI)){            # loop over all spatal scales
 	  
-	  X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
+	  X.j = X.k[X.k$ID == uI[j], ]          # subset data to spatial scale j
 	  
 	  for (i in 1:length(years)){                     # loop over each year
 	    
@@ -79,13 +81,20 @@ speciesRichness <- function(X, group, species.table = NULL, metric, years)  {
 	   } else ind.i <- NA
 	    
 	    ind.i = data.frame(uI[j], year.i, ind.i)      # create a dataframe with spatial scale ID, year, and indicator value
-	    ind = rbind(ind, ind.i)                       # bind ind.i to ind dataframe
-	 	}
+	    ind.k = rbind(ind.k, ind.i)                       # bind ind.i to ind dataframe
+	  }
 	}
+
+	if(metric == "BIOMASS" || metric == "ABUNDANCE") ind.name =  paste("SpeciesRichness_", groups[k], sep = "")   # name the ind 
+	if(metric == "CATCH") ind.name = paste("DiversityTargetSpp_", groups[k], sep = "")                            # name the ind 
 	
-	if(metric == "BIOMASS" || metric == "ABUNDANCE") names(ind) = c("ID", "YEAR", "SpeciesRichness")    # name the ind dataframe
-	if(metric == "CATCH") names(ind) = c("ID", "YEAR", "DiversityTargetSpp")    # name the ind dataframe
-	ind <- ind[order(ind$ID), ] 
-	ind                                                                         # return vector of indicator values for years c(start.year:end.year) 
+	names(ind.k) = c("ID", "YEAR", ind.name)                                 # name the ind dataframe
+	ind.k <- ind.k[order(ind.k$ID), ] 
 	
+	if(k == 1) ind = ind.k
+	
+	ind <- merge(ind, ind.k)                                                                     # return vector of indicator values for years c(start.year:end.year) 
+	
+  }
+  ind  
 }

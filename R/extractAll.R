@@ -67,6 +67,8 @@
 #'  calculating the mean trophic level of the landings. Default is \code{minTL =
 #'  c(0, 3.25)}, which will return the mean trophic level of the landings and
 #'  the marine trophic index.
+#'@param glob.env Logical value indicating whether to return output to global
+#'  environment.
 #'@param export.path File path indicating where to save a .csv file of
 #'  calculated indicators (named allIndicators_export.id.csv; see below). If
 #'  \code{export.file = NULL}, the indicator dataframe will be returned to the
@@ -130,12 +132,16 @@ extractAll <- function(X, X_length, land,
                        maxlength.group, TL.grouping = 1, wind = 5, negative = FALSE,
                        minTL.FiB = 0, TE = 0.1, base.start, base.end,
                        landings.groups, FP.groups, minTL.FP = c(0, 3.25),
-                       raw = TRUE, std = TRUE,
+                       raw = TRUE, std = TRUE, glob.env = TRUE,
                        export.path = NULL, export.id = NULL){
   
+  if(glob.env == FALSE & length(export.path) == 0) {
+    stop("error: please specify a valid export.path or set glob.env = TRUE")
+  }
+   
   inds <- createDataframe(unique(X$ID), years)
   
-  diversity <- allBiodiversity(X, metric = metric.bio, group = group.bio, 
+  diversity <- allBiodiversity(X, metric = metric.bio, groups = group.bio, 
                                TL.table = speciesinfo.table, 
                                percentiles = c(0.25, 0.75), minTL = minTL.bio, 
                                years = years, raw = raw, std = std)
@@ -186,7 +192,8 @@ extractAll <- function(X, X_length, land,
   if(length(export.path) > 0){
     write.csv(inds, file = paste(export.path, "/allIndicators_", 
                                  export.id, ".csv", sep = ""), row.names = FALSE)
-  } else  inds
+  } 
+  if(glob.env) inds
   
 }
 

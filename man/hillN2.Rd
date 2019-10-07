@@ -4,7 +4,7 @@
 \alias{hillN2}
 \title{Calculates Hill's Species Dominance (N2)}
 \usage{
-hillN2(X, group, species.table = NULL, metric = "ABUNDANCE", years)
+hillN2(X, groups, species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -15,10 +15,10 @@ numeric code indicating the species sampled, and \code{ABUNDANCE} is the
 corresponding abundance (stratified and corrected for catchability as
 required).}
 
-\item{group}{A character string indicating which species to include in the
-indicator calculation. If \code{group = "ALL"}, all species will be
-included; otherwise, \code{group} should match a column name in
-\code{species.table}.}
+\item{groups}{A vector indicating the species group(s) for which to calculate
+the indicator. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
+column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name
 is the string \code{group}, and the column entries are species codes from
@@ -52,7 +52,7 @@ Hill's Species Dominance (HillN2): \deqn{HillN2 = 1/\Sigma p_i^2}
 }
 \examples{
 data(X)
-hillN2(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+hillN2(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

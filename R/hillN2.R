@@ -27,38 +27,48 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'hillN2(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+#'hillN2(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
- 
 
-hillN2 <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years)  {
 
-  X <- speciesGroups(X = X, group = group, species.table = species.table) # subset X to the species of interest
-	uI = unique(X$ID)                   # extract the spatial scale ID's
-	ind <- NULL                         # initialize dataframe for storing indicator values
-	
-	for (j in 1:length(uI)){            # loop over all spatal scales
-	  
-	  X.j = X[X$ID == uI[j], ]          # subset data to spatial scale j
-	  
-	  for (i in 1:length(years)){                     # loop over each year
-	    
-	    year.i = years[i]                             # set years.i to current year  
-	    X.ij = X.j[X.j$YEAR == year.i, metric]             # subset data to include only current year
-	    
-	    if(length(X.ij) > 0){
-	      X.ij = X.ij[order(X.ij)]                         # order from smallest to largest (not required)
-	      p <- X.ij/sum(X.ij)                              # calculate proportion of each species by metric
-	      ind.i <- 1/sum(p^2)                              # calculate Hill's species dominance
-	    } else ind.i <- NA
-	      
-	    ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
-	    ind = rbind(ind, ind.i)                      # bind ind.i to ind dataframe
-	  }
-	}
-	  names(ind) = c("ID", "YEAR", "HillDominance")    # name the ind dataframe
-	  ind <- ind[order(ind$ID), ]
-	  ind                                              # return Hill's species dominance
+hillN2 <- function(X, groups, species.table = NULL, metric = "ABUNDANCE", years)  {
+  
+  for(k in 1:length(groups)){          # loop over species groups
+    
+    X.k <- speciesGroups(X = X, group = groups[k], species.table = species.table) # subset X to the species of interest
+    uI = unique(X$ID)                   # extract the spatial scale ID's
+    ind.k <- NULL                       # initialize dataframe for storing indicator values
+    
+    for (j in 1:length(uI)){            # loop over all spatal scales
+      
+      X.j = X.k[X.k$ID == uI[j], ]          # subset data to spatial scale j
+      
+      for (i in 1:length(years)){                     # loop over each year
+        
+        year.i = years[i]                             # set years.i to current year  
+        X.ij = X.j[X.j$YEAR == year.i, metric]        # subset data to include only current year
+        
+        if(length(X.ij) > 0){
+          X.ij = X.ij[order(X.ij)]                         # order from smallest to largest (not required)
+          p <- X.ij/sum(X.ij)                              # calculate proportion of each species by metric
+          ind.i <- 1/sum(p^2)                              # calculate Hill's species dominance
+        } else ind.i <- NA
+        
+        ind.i = data.frame(uI[j], year.i, ind.i)     # create a dataframe with spatial scale ID, year, and indicator value
+        ind.k = rbind(ind.k, ind.i)                  # bind ind.i to ind dataframe
+      }
+    }
+    
+    ind.name <- paste("HillDominance_", groups[k], sep = "")            # name indicator: HillDominance_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                            # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ] 
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
+  }
+  
+  ind                                              # return Hill's species dominance
 }
 
 

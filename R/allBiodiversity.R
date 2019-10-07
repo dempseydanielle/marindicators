@@ -22,10 +22,10 @@
 #'@inheritParams allStructure
 #'@param metric A character string indicating which column in \code{X} to use to
 #'  calculate the indicators. Default is \code{metric = "ABUNDANCE"}.
-#'@param group A character string indicating the species group for which to
-#'  calculate the indicators. If \code{group = "ALL"}, all species will be
-#'  included; otherwise, \code{group} should match a column name in
-#'  \code{species.table}.
+#'@param groups A vector indicating the species group(s) for which to calculate
+#'  the indicators. If \code{group = "ALL"}, all species will be included;
+#'  otherwise, each entry must be a character string matching the name of a
+#'  column in \code{species.table}.
 #'@param TL.table A dataframe with columns \code{SPECIES} and the corresponding
 #'  \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
 #'  the unique values of species codes in \code{X} (or a subset thereof). Other
@@ -48,22 +48,22 @@
 #'data(species.info)
 #'data(species.groups)
 #'
-#'allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", TL.table = species.info,
+#'allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.info,
 #'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 #'@export
 
-allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.table = NULL, TL.table, 
+allBiodiversity <- function(X, metric = "ABUNDANCE", groups = "ALL", species.table = NULL, TL.table, 
                             percentiles = c(.25, 0.75), minTL = 0, years, raw = TRUE, std = TRUE){
   
   if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
-  S = speciesRichness(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  H = shannon(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  marg = margalef(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  pie = pielouEvenness(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  H1 = hillN1(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  H2 = hillN2(X = X, metric = metric, group = group, species.table = species.table, years = years)
-  Heips = heips(X = X, metric = metric, group = group, species.table = species.table, years = years)
+  S = speciesRichness(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  H = shannon(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  marg = margalef(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  pie = pielouEvenness(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  H1 = hillN1(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  H2 = hillN2(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
+  Heips = heips(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
 
   inds <- cbind(S, H$ShannonDiversity, marg$MargalefRichness_ALL, pie$PielouEvenness, H1$HillDiversity, H2$HillDominance, Heips$Heips)
   names(inds) <- c("ID", "YEAR", names(S)[3], names(H)[3], names(marg)[3], names(pie)[3],
@@ -71,7 +71,7 @@ allBiodiversity <- function(X, metric = "ABUNDANCE", group = "ALL", species.tabl
   
   if("TL" %in% colnames(TL.table)){
     
-    Q = kemptonQ(X = X, metric = metric, group = group, species.table = species.table, 
+    Q = kemptonQ(X = X, metric = metric, groups = groups, species.table = species.table, 
                TL.table = TL.table, years = years, percentiles = percentiles, minTL = minTL)
   
   inds <- cbind(inds, Q$KemptonQ)

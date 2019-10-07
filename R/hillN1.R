@@ -27,26 +27,40 @@
 #'  Gomez, Alida Bundy
 #'@examples 
 #'data(X)
-#'hillN1(X, group = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
+#'hillN1(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export
 
 
-hillN1 <- function(X, group, species.table = NULL, metric = "ABUNDANCE", years) {
+hillN1 <- function(X, groups, species.table = NULL, metric = "ABUNDANCE", years) {
   
-  H <- shannon(X = X, group = group, species.table = species.table,
-               metric = metric, years = years)     # calculate Shannon's index of diversity
-	
-  H$hill1 <- exp(H$ShannonDiversity)               # calculate Hill's index of diversity
+  for(k in 1:length(groups)){                      # loop over species groups
+    
+    ind.k <- NULL
+    H <- NULL
+    
+    H <- shannon(X = X, groups = groups[k], species.table = species.table,
+                 metric = metric, years = years)     # calculate Shannon's index of diversity
+    
+    H$hill1 <- exp(H[,3])               # calculate Hill's index of diversity
+    
+    ind.k <- H
+    ind.k[,3] <- NULL                     # remove Shannon's diversity from ind
+    
+    
+    ind.name <- paste("HillDiversity_", groups[k], sep = "")            # name indicator: HillDiversity_group
+    names(ind.k) = c("ID", "YEAR", ind.name)                            # name the ind dataframe
+    ind.k <- ind.k[order(ind.k$ID), ] 
+    
+    if(k == 1) ind = ind.k
+    
+    ind <- merge(ind, ind.k)
+    
+  }
   
-  ind <- H
-	ind$ShannonDiversity <- NULL                     # remove Shannon's diversity from ind
-	
-	names(ind) = c("ID", "YEAR", "HillDiversity")    # name the ind dataframe
-	ind <- ind[order(ind$ID), ]
-	ind                                              # return Hill's index of diversity
-	
-	}
-
+    ind                                              # return Hill's index of diversity
+    
+  }
+  
 
 
 

@@ -17,7 +17,8 @@ and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
 (stratified and corrected for catchability as required).}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. Each entry must be a character string matching the name of a
+the indicator. If \code{group = "ALL"}, all species will be included;
+otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
 \item{species.table}{A table with at least one column, where the column name

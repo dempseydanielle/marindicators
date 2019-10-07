@@ -49,25 +49,25 @@ test_that("dimensions are correct",{
 
 
 test_that("raw Biodiversity indicators are correct",{
-  expect_equal(check_inds$SpeciesRichness, example_inds$SpeciesRichness)
-  expect_equal(check_inds$ShannonDiversity, example_inds$ShannonDiversity)
+  expect_equal(check_inds$SpeciesRichness_ALL, example_inds$SpeciesRichness_ALL)
+  expect_equal(check_inds$ShannonDiversity_ALL, example_inds$ShannonDiversity_ALL)
   expect_equal(check_inds$MargalefRichness_ALL, example_inds$MargalefRichness_ALL)
-  expect_equal(check_inds$PielouEvenness, example_inds$PielouEvenness)
-  expect_equal(check_inds$HillDiversity, example_inds$HillDiversity)
-  expect_equal(check_inds$HillDominance, example_inds$HillDominance)
-  expect_equal(check_inds$Heips, example_inds$Heips)
-  expect_equal(check_inds$KemptonQ_0, example_inds$KemptonQ_0)
+  expect_equal(check_inds$PielouEvenness_ALL, example_inds$PielouEvenness_ALL)
+  expect_equal(check_inds$HillDiversity_ALL, example_inds$HillDiversity_ALL)
+  expect_equal(check_inds$HillDominance_ALL, example_inds$HillDominance_ALL)
+  expect_equal(check_inds$Heips_ALL, example_inds$Heips_ALL)
+  expect_equal(check_inds$KemptonQ_ALL_0, example_inds$KemptonQ_ALL_0)
 })
 
 test_that("standardized Biodiversity indicators are correct",{
-  expect_equal(check_inds$SpeciesRichness_s, example_inds$SpeciesRichness_s)
-  expect_equal(check_inds$ShannonDiversity_s, example_inds$ShannonDiversity_s)
+  expect_equal(check_inds$SpeciesRichness_ALL_s, example_inds$SpeciesRichness_ALL_s)
+  expect_equal(check_inds$ShannonDiversity_ALL_s, example_inds$ShannonDiversity_ALL_s)
   expect_equal(check_inds$MargalefRichness_ALL_s, example_inds$MargalefRichness_ALL_s)
-  expect_equal(check_inds$PielouEvenness_s, example_inds$PielouEvenness_s)
-  expect_equal(check_inds$HillDiversity_s, example_inds$HillDiversity_s)
-  expect_equal(check_inds$HillDominance_s, example_inds$HillDominance_s)
-  expect_equal(check_inds$Heips_s, example_inds$Heips_s)
-  expect_equal(check_inds$KemptonQ_0_s, example_inds$KemptonQ_0_s)
+  expect_equal(check_inds$PielouEvenness_ALL_s, example_inds$PielouEvenness_ALL_s)
+  expect_equal(check_inds$HillDiversity_ALL_s, example_inds$HillDiversity_ALL_s)
+  expect_equal(check_inds$HillDominance_ALL_s, example_inds$HillDominance_ALL_s)
+  expect_equal(check_inds$Heips_ALL_s, example_inds$Heips_ALL_s)
+  expect_equal(check_inds$KemptonQ_ALL_0_s, example_inds$KemptonQ_ALL_0_s)
 })
 
 test_that("raw Structure and Functioning indicators are correct",{
