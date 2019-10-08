@@ -60,9 +60,11 @@ Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
 \examples{
 data(X)
 data(species.info)
-meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
+data(species.table)
+
+meanMaxLength(X, group = "FINFISH", species.table = species.table, 
    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
-meanMaxLength(X, group = "FINFISH", species.table = species.groups, 
+meanMaxLength(X, group = "FINFISH", species.table = species.table, 
    maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
 }
 \references{

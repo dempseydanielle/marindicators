@@ -46,8 +46,9 @@
 #'  Gomez, Alida Bundy
 #'@examples
 #'data(X_length)
-#'data(species.groups)
-#'largeFishIndicator(X_length, group = "FINFISH", species.table = species.groups,
+#'data(species.table)
+#'
+#'largeFishIndicator(X_length, group = "FINFISH", species.table = species.table,
 #'    metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

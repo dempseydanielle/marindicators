@@ -62,8 +62,8 @@ Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} > 85
 }
 \examples{
 data(X)
-data(species.groups)
-largeSpeciesIndicator(X, group = "ALL", species.table = species.groups, 
+data(species.table)
+largeSpeciesIndicator(X, group = "ALL", species.table = species.table, 
    maxlength.table = species.info, max.length=85,  metric = "BIOMASS", years = c(2014:2019))
 }
 \references{

@@ -53,7 +53,7 @@
 	CVBiomass <- function(X, wind = 5, negative = FALSE, years){
 	  
 	  inx <- floor(wind/2)                       # determine how many NAs at the beginning and end, based on size of wind
-	  inx.start <- years[c(1:inx)]                 # first inx years
+	  inx.start <- years[c(1:inx)]               # first inx years
 	  inx <- inx - 1
 	  inx.end <- years[(length(years) - c(0:inx))] # last inx years
 	  inx.NA <- c(inx.start, inx.end)              # all years that will be set to NA

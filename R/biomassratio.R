@@ -62,9 +62,11 @@
 #'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'data(species.table)
 #'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 #'names(ratio.groups) <- c("group1", "group2")
-#'biomassRatio(X, ratio.groups = ratio.groups, species.table = species.groups, 
+#'
+#'biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table, 
 #'    metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

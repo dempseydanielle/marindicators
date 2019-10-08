@@ -44,12 +44,13 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X_length)
-#'data(species.groups)
+#'data(species.table)
 #'data(Length_Weight)
 #'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", 
 #'    "PLANKTIVORE", "ZOOPISCIVORE")
+#'    
 #'communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups, 
-#'    species.table = species.groups, years = c(2014:2019))
+#'    species.table = species.table, years = c(2014:2019))
 #'@export
 
 

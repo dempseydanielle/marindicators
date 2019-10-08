@@ -108,10 +108,10 @@ This function calculates the Stability and Resistance indicators:
 data(X)
 data(land)
 data(species.info)
-data(species.groups)
+data(species.table)
 
 allStability(X = X, land = land, maxlength.group = "FINFISH",
-   species.table = species.groups, speciesinfo.table = species.info,TL.grouping = 1,
+   species.table = species.table, speciesinfo.table = species.info,TL.grouping = 1,
    wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \references{

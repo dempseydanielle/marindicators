@@ -78,7 +78,7 @@
 #'@examples
 #'data(X)
 #'data(X_length)
-#'data(species.groups)
+#'data(species.table)
 #'data(species.info)
 #'data(Length_Weight)
 #'
@@ -92,7 +92,7 @@
 #'    LSI.group = "ALL", LFI.group = "ALL",
 #'    guild.groups = trophicguild.groups, condition.groups = condition.groups,
 #'    ratio.groups = ratio.groups,
-#'    species.table = species.groups, speciesinfo.table = species.info,
+#'    species.table = species.table, speciesinfo.table = species.info,
 #'    LenWt.table = Length_Weight,
 #'    max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
 #'@export

@@ -26,7 +26,7 @@ example_inds
 \description{
 A dataframe of indicators for AREA1 and AREA2 from 2014 - 2019, calculated
 from the example data described in this package. Type ?X, ?X_length, ?land,
-?species.info, ?species.groups, or ?Length_Weight for information on the
+?species.info, ?species.table, or ?Length_Weight for information on the
 example data.
 }
 \keyword{datasets}

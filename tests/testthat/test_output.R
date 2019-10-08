@@ -4,7 +4,7 @@ library(marindicators)
 data(X)
 data(X_length)
 data(land)
-data(species.groups)
+data(species.table)
 data(species.info)
 data(Length_Weight)
 data(example_inds)
@@ -26,7 +26,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
 names(FP.groups) <- c("group.X", "group.land")
 
 check_inds <- extractAll(X = X, X_length = X_length, land = land,
-                           speciesinfo.table = species.info, species.table = species.groups,
+                           speciesinfo.table = species.info, species.table = species.table,
                            LenWt.table = Length_Weight,
                            LSI.group = "ALL", LFI.group = "ALL",
                            guild.groups = trophicguild.groups,

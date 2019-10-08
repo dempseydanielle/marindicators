@@ -48,7 +48,7 @@
 #'@examples
 #'data(X)
 #'data(land)
-#'data(species.groups)
+#'data(species.table)
 #'data(species.info)
 #'
 #'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
@@ -58,7 +58,7 @@
 #'    c("GROUNDFISH", "GROUNDFISH.L")))
 #'names(FP.groups) <- c("group.X", "group.land")
 #'
-#'allPressure(X = X, land = land, species.table = species.groups,
+#'allPressure(X = X, land = land, species.table = species.table,
 #'    speciesinfo.table = species.info, landings.groups = landings.groups,
 #'    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)
 #'@export

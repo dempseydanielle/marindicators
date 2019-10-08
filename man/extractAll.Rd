@@ -209,9 +209,9 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 \description{
 This function can calculate all of the indicators described in
  this package. The user can choose whether the function returns the indicator
- dataframe to the global environment, or exports the dataframe to a csv file.
- The user can also choose whether the function returns the raw indicator
- values, the standaradized (z-score) values, or both.
+ dataframe to the global environment, exports the dataframe to a csv file, or
+ both. The user can also choose whether the function returns the raw
+ indicator values, the standaradized (z-score) values, or both.
 }
 \details{
 This function calculates the indicators for each attribute and
@@ -225,7 +225,7 @@ This function calculates the indicators for each attribute and
 data(X)
 data(X_length)
 data(land)
-data(species.groups)
+data(species.table)
 data(species.info)
 data(Length_Weight)
 
@@ -246,7 +246,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
 names(FP.groups) <- c("group.X", "group.land")
 
 extractAll(X = X, X_length = X_length, land = land,
-    speciesinfo.table = species.info, species.table = species.groups,
+    speciesinfo.table = species.info, species.table = species.table,
     LenWt.table = Length_Weight,
     LSI.group = "ALL", LFI.group = "ALL",
     guild.groups = trophicguild.groups,

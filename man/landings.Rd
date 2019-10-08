@@ -42,10 +42,10 @@ Calculates the Landings of predefined species groups.
 }
 \examples{
 data(land)
-data(species.groups)
+data(species.table)
 
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
-landings(land, groups = landings.groups, species.table = species.groups, 
+landings(land, groups = landings.groups, species.table = species.table, 
    years = c(2014:2019))
 }
 \references{

@@ -13,4 +13,4 @@
 #'
 #' @source This is example data using species groups that are of interest the
 #'   Scotian Shelf.
-"species.groups"
+"species.table"

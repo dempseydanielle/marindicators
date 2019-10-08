@@ -64,9 +64,11 @@ One useful biomass ratio is the proportion of predatory fish in the
  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 }
 \examples{
+data(species.table)
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 names(ratio.groups) <- c("group1", "group2")
-biomassRatio(X, ratio.groups = ratio.groups, species.table = species.groups, 
+
+biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table, 
    metric = "BIOMASS", years = c(2014:2019))
 }
 \references{
