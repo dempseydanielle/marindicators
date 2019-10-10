@@ -12,13 +12,12 @@ Description: The marindicators package provides functions to calculate indicator
 Depends:
     R (>= 3.6.0)
 Imports:
-    stats
+    stats,
+    knitr,
+    rmarkdown,
+    testthat
 License: GPL-3 | file LICENSE
 LazyData: true
 RoxygenNote: 6.1.1
 Encoding: UTF-8
-Suggests: 
-    knitr,
-    rmarkdown,
-    testthat
 VignetteBuilder: knitr
