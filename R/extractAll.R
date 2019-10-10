@@ -67,12 +67,10 @@
 #'  calculating the mean trophic level of the landings. Default is \code{minTL =
 #'  c(0, 3.25)}, which will return the mean trophic level of the landings and
 #'  the marine trophic index.
-#'@param glob.env Logical value indicating whether to return output to global
-#'  environment.
 #'@param export.path File path indicating where to save a .csv file of
 #'  calculated indicators (named allIndicators_export.id.csv; see below). If
-#'  \code{export.file = NULL}, the indicator dataframe will be returned to the
-#'  global environment, but not exported as a .csv file.
+#'  \code{export.file = NULL}, the indicator dataframe will not be exported as a
+#'  .csv file. Default is \code{export.path = NULL}.
 #'@param export.id Character string to modify the name of the .csv file (if
 #'  export.path is specified), for example an area name or date of analysis. The
 #'  exported .csv file is named allIndicators_export.id.csv. Default is
@@ -122,6 +120,8 @@
 #'     years = c(2014:2019),
 #'     raw = TRUE, std = TRUE, export.path = NULL)
 
+
+
 extractAll <- function(X, X_length, land, 
                        speciesinfo.table, species.table, LenWt.table, years,
                        metric.bio = "ABUNDANCE", group.bio = "ALL", 
@@ -144,7 +144,8 @@ extractAll <- function(X, X_length, land,
   diversity <- allBiodiversity(X, metric = metric.bio, groups = group.bio, 
                                TL.table = speciesinfo.table, 
                                percentiles = c(0.25, 0.75), minTL = minTL.bio, 
-                               years = years, raw = raw, std = std)
+                               years = years, raw = raw, std = std,
+                               export.path = NULL, export.id = NULL, glob.env = TRUE)
 
   
   structure <- allStructure(X = X, X_length = X_length, 
@@ -153,25 +154,29 @@ extractAll <- function(X, X_length, land,
                             ratio.groups = ratio.groups,
                             species.table = species.table, speciesinfo.table = speciesinfo.table, 
                             LenWt.table = LenWt.table,
-                            max.length = max.length, years = years, raw = raw, std =  std)
+                            max.length = max.length, years = years, raw = raw, std =  std,
+                            export.path = NULL, export.id = NULL, glob.env = TRUE)
 
   stability <- allStability(X = X, land = land, 
                             maxlength.group = maxlength.group,
                             species.table = species.table, speciesinfo.table = speciesinfo.table,  
                             TL.grouping = TL.grouping, wind = wind, negative = negative, 
-                            years = years, raw = raw, std = std)
+                            years = years, raw = raw, std = std,
+                            export.path = NULL, export.id = NULL, glob.env = TRUE)
   
   potential <- allPotential(X = X, land = land, 
                             species.table = species.table, speciesinfo.table = speciesinfo.table, 
                             resource.groups = resource.groups, 
                             minTL = minTL.FiB, TE = TE, base.start = base.start, base.end = base.end, 
-                            years = years, raw = raw, std = std)
+                            years = years, raw = raw, std = std,
+                            export.path = NULL, export.id = NULL, glob.env = TRUE)
   
   if("CATCH" %in% colnames(land)) {
   pressure <- allPressure(X = X, land = land, 
                           species.table = species.table, speciesinfo.table = speciesinfo.table, 
                           landings.groups = landings.groups, FP.groups = FP.groups,
-                          minTL = c(0, 3.25),  years, raw = raw, std = std)
+                          minTL = c(0, 3.25),  years, raw = raw, std = std,
+                          export.path = NULL, export.id = NULL, glob.env = TRUE)
   }
   
   inds <- merge(inds, diversity, all.x = TRUE)

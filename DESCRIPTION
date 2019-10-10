@@ -1,14 +1,14 @@
 Package: marindicators
-Title: Calculates Marine Ecosystem Indicators 
+Title: Calculates Marine Ecosystem and Fishing Pressure Indicators 
 Version: 0.0.1
-Date: 2019-09-23
+Date: 2019-10-09
 Authors: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
 Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role = c("aut", "cre")),
            person("Adam", "Cook", email="Adam.Cook@dfo-mpo.gc.ca", role= "aut"),
            person("Catalina", "Gomez", email="Catalina.Gomez@dfo-mpo.gc.ca", role= "aut"),
            person("Alida", "Bundy", email="Alida.Bundy@dfo-mpo.gc.ca", role= c("aut")))
 Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
-Description: The marindicators package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fishery independent trawl survey data and commercial landings data, following the "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017). 
+Description: The marindicators package provides functions to calculate indicators for four marine ecosystem attributes (Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential) and one marine ecosystem pressure (Fishing Pressure) from fishery independent trawl survey data and commercial landings data. All indicators were selected and evaluated using the “Indicator Selection Guidance Framework” developed by Bundy, Gomez, and Cook (2017).
 Depends:
     R (>= 3.6.0)
 Imports:

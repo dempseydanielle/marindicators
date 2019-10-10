@@ -56,7 +56,7 @@ test_that("raw Biodiversity indicators are correct",{
   expect_equal(check_inds$HillDiversity_ALL, example_inds$HillDiversity_ALL)
   expect_equal(check_inds$HillDominance_ALL, example_inds$HillDominance_ALL)
   expect_equal(check_inds$Heips_ALL, example_inds$Heips_ALL)
-  expect_equal(check_inds$KemptonQ_ALL_0, example_inds$KemptonQ_ALL_0)
+  expect_equal(check_inds$KemptonQ_0_ALL, example_inds$KemptonQ_0_ALL)
 })
 
 test_that("standardized Biodiversity indicators are correct",{
@@ -67,7 +67,7 @@ test_that("standardized Biodiversity indicators are correct",{
   expect_equal(check_inds$HillDiversity_ALL_s, example_inds$HillDiversity_ALL_s)
   expect_equal(check_inds$HillDominance_ALL_s, example_inds$HillDominance_ALL_s)
   expect_equal(check_inds$Heips_ALL_s, example_inds$Heips_ALL_s)
-  expect_equal(check_inds$KemptonQ_ALL_0_s, example_inds$KemptonQ_ALL_0_s)
+  expect_equal(check_inds$KemptonQ_0_ALL_s, example_inds$KemptonQ_0_ALL_s)
 })
 
 test_that("raw Structure and Functioning indicators are correct",{

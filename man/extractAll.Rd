@@ -189,12 +189,12 @@ standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
-environment.}
+environment. Default is \code{glob.env = TRUE}.}
 
 \item{export.path}{File path indicating where to save a .csv file of
 calculated indicators (named allIndicators_export.id.csv; see below). If
-\code{export.file = NULL}, the indicator dataframe will be returned to the
-global environment, but not exported as a .csv file.}
+\code{export.file = NULL}, the indicator dataframe will not be exported as a
+.csv file. Default is \code{export.path = NULL}.}
 
 \item{export.id}{Character string to modify the name of the .csv file (if
 export.path is specified), for example an area name or date of analysis. The

@@ -1,8 +1,10 @@
 #'@title Calculates all Biodiversity indicators
 #'@description This function calculates all (or a subset) of the Biodiversity
 #'  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
-#'  the function returns the raw indicator values, the standaradized (z-score)
-#'  values, or both.
+#'  the function returns the indicator dataframe to the global environment,
+#'  exports the dataframe to a csv file, or both. The user can also choose
+#'  whether the function returns the raw indicator values, the standaradized
+#'  (z-score) values, or both.
 #'@details This function calculates the Biodiversity indicators: Species
 #'  Richness, Shannon's Index of Diversity, Margalef's Species Richness,
 #'  Pielou's Species Evenness, Hill's N1, Hill's N2, Heip's Evenness Index, and
@@ -36,6 +38,14 @@
 #'@param minTL Minimum trophic level for species included to calculate Kempton's
 #'  Q. Default is \code{minTL = 0}.
 #'@param years A vector of years for which to calculate indicators.
+#'@param export.path File path indicating where to save a .csv file of
+#'  calculated indicators (named biodiversity_export.id.csv; see below). If
+#'  \code{export.file = NULL}, the indicator dataframe will not be exported as a
+#'  .csv file. Default is \code{export.path = NULL}.
+#'@param export.id Character string to modify the name of the .csv file (if
+#'  export.path is specified), for example an area name or date of analysis. The
+#'  exported .csv file is named biodiversity_export.id.csv. Default is
+#'  \code{export.id = NULL}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
 #'  Standardized indicators are noted with \code{_s} in the name.
@@ -51,8 +61,15 @@
 #'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 #'@export
 
-allBiodiversity <- function(X, metric = "ABUNDANCE", groups = "ALL", species.table = NULL, TL.table, 
-                            percentiles = c(.25, 0.75), minTL = 0, years, raw = TRUE, std = TRUE){
+allBiodiversity <- function(X, metric = "ABUNDANCE", groups = "ALL", species.table = NULL, 
+                            TL.table, percentiles = c(.25, 0.75), minTL = 0, years, 
+                            raw = TRUE, std = TRUE, 
+                            glob.env = TRUE, export.path = NULL, export.id = NULL){
+  
+  
+  if(glob.env == FALSE & length(export.path) == 0) {
+    stop("error: please specify a valid export.path or set glob.env = TRUE")
+  }
   
   if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
@@ -85,6 +102,10 @@ allBiodiversity <- function(X, metric = "ABUNDANCE", groups = "ALL", species.tab
     if(raw == TRUE) inds <- merge(inds, inds_std)
   }
 
-  inds
+  if(length(export.path) > 0){
+    write.csv(inds, file = paste(export.path, "/biodiversity_", 
+                                 export.id, ".csv", sep = ""), row.names = FALSE)
+  } 
+  if(glob.env) inds
 }
                             

@@ -6,7 +6,8 @@
 \usage{
 allStructure(X, X_length, LSI.group, LFI.group, guild.groups,
   condition.groups, ratio.groups, species.table, speciesinfo.table,
-  LenWt.table, max.length, years, raw = TRUE, std = TRUE)
+  LenWt.table, max.length, years, raw = TRUE, std = TRUE,
+  glob.env = TRUE, export.path = NULL, export.id = NULL)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent survey data or model output with
@@ -88,6 +89,19 @@ standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 standardized indcator values are not returned. Default is \code{std = TRUE}.
 Either \code{raw} or \code{std} must be \code{TRUE}.}
+
+\item{glob.env}{Logical value indicating whether to return output to global
+environment. Default is \code{glob.env = TRUE}.}
+
+\item{export.path}{File path indicating where to save a .csv file of
+calculated indicators (named structure_export.id.csv; see below). If
+\code{export.file = NULL}, the indicator dataframe will not be exported as a
+.csv file. Default is \code{export.path = NULL}.}
+
+\item{export.id}{Character string to modify the name of the .csv file (if
+export.path is specified), for example an area name or date of analysis. The
+exported .csv file is named structure_export.id.csv. Default is
+\code{export.id = NULL}.}
 }
 \value{
 Returns a dataframe with columns \code{ID}, \code{YEAR}, and
@@ -97,6 +111,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 \description{
 This function calculates all (or a subset) of the Structure and
  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
+ choose whether the function returns the indicator dataframe to the global
+ environment, exports the dataframe to a csv file, or both. The user can also
  choose whether the function returns the raw indicator values, the
  standardized (z-score) values, or both.
 }

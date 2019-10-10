@@ -1,8 +1,10 @@
 #'@title Calculates all Pressure indicators
 #'@description This function calculates all (or a subset) of the Pressure
 #'  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
-#'  the function returns the raw indicator values, the standaradized (z-score)
-#'  values, or both.
+#'  the function returns the indicator dataframe to the global environment,
+#'  exports the dataframe to a csv file, or both. The user can also choose
+#'  whether the function returns the raw indicator values, the standaradized
+#'  (z-score) values, or both.
 #'@details This function calculates the Pressure indicators: Diversity of the
 #'  Target Species, Total Landings, Landings of Target Groups, Fishing Pressure
 #'  on the Community, Fishing Pressure on Target Groups, Mean Trophic Level of
@@ -36,6 +38,14 @@
 #'  c(0, 3.25)}, which will return the mean trophic level of the landings and
 #'  the marine trophic index.
 #'@param years A vector of years for which to calculate indicators.
+#'@param export.path File path indicating where to save a .csv file of
+#'  calculated indicators (named pressure_export.id.csv; see below). If
+#'  \code{export.file = NULL}, the indicator dataframe will not be exported as a
+#'  .csv file. Default is \code{export.path = NULL}.
+#'@param export.id Character string to modify the name of the .csv file (if
+#'  export.path is specified), for example an area name or date of analysis. The
+#'  exported .csv file is named pressure_export.id.csv. Default is
+#'  \code{export.id = NULL}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
 #'  Standardized indicators are noted with \code{_s} in the name.
@@ -65,7 +75,12 @@
 
 allPressure <- function(X, land, 
                         species.table, speciesinfo.table, landings.groups, FP.groups,
-                        minTL = c(0, 3.25),  years, raw = TRUE, std = TRUE){
+                        minTL = c(0, 3.25),  years, raw = TRUE, std = TRUE,
+                        glob.env = TRUE, export.path = NULL, export.id = NULL){
+  
+  if(glob.env == FALSE & length(export.path) == 0) {
+    stop("error: please specify a valid export.path or set glob.env = TRUE")
+  }
   
   if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
@@ -114,7 +129,12 @@ allPressure <- function(X, land,
     }
   }
   
-  if(exists("inds")) inds 
-  else print("warning: argument land = NULL. No Pressure indicators were calculated")
+  if(exists("inds")){
+    if(length(export.path) > 0){
+      write.csv(inds, file = paste(export.path, "/pressure_", 
+                                   export.id, ".csv", sep = ""), row.names = FALSE)
+    } 
+    if(glob.env) inds
+  }else print("warning: argument land = NULL. No Pressure indicators were calculated")
   
 }

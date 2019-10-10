@@ -1,6 +1,8 @@
 #'@title Calculates all Structure and Functioning indicators
 #'@description This function calculates all (or a subset) of the Structure and
 #'  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
+#'  choose whether the function returns the indicator dataframe to the global
+#'  environment, exports the dataframe to a csv file, or both. The user can also
 #'  choose whether the function returns the raw indicator values, the
 #'  standardized (z-score) values, or both.
 #'@details This function calculates the Structure and Functioning indicators:
@@ -66,6 +68,16 @@
 #'  the standard deviation (ignoring NA values). If \code{std = FALSE}, the
 #'  standardized indcator values are not returned. Default is \code{std = TRUE}.
 #'  Either \code{raw} or \code{std} must be \code{TRUE}.
+#'@param glob.env Logical value indicating whether to return output to global
+#'  environment. Default is \code{glob.env = TRUE}.
+#'@param export.path File path indicating where to save a .csv file of
+#'  calculated indicators (named structure_export.id.csv; see below). If
+#'  \code{export.file = NULL}, the indicator dataframe will not be exported as a
+#'  .csv file. Default is \code{export.path = NULL}.
+#'@param export.id Character string to modify the name of the .csv file (if
+#'  export.path is specified), for example an area name or date of analysis. The
+#'  exported .csv file is named structure_export.id.csv. Default is
+#'  \code{export.id = NULL}.
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
 #'  Standardized indicators are noted with \code{_s} in the name.
@@ -101,8 +113,13 @@ allStructure <- function(X, X_length,
                          LSI.group, LFI.group,
                          guild.groups, condition.groups, ratio.groups,
                          species.table, speciesinfo.table, LenWt.table,
-                         max.length, years, raw = TRUE, std = TRUE){
+                         max.length, years, raw = TRUE, std = TRUE,
+                         glob.env = TRUE, export.path = NULL, export.id = NULL){
 
+  if(glob.env == FALSE & length(export.path) == 0) {
+    stop("error: please specify a valid export.path or set glob.env = TRUE")
+  }
+  
   if(raw == FALSE & std == FALSE) stop("error: both raw and std are FALSE")
   
   if("BIOMASS" %in% colnames(X)) {
@@ -184,5 +201,9 @@ allStructure <- function(X, X_length,
     if(raw == TRUE) inds <- merge(inds, inds_std)
   }
   
-  inds
+  if(length(export.path) > 0){
+    write.csv(inds, file = paste(export.path, "/structure_", 
+                                 export.id, ".csv", sep = ""), row.names = FALSE)
+  } 
+  if(glob.env) inds
 }

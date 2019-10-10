@@ -295,13 +295,16 @@ data(species.info)
 ```
 
 ```{r}
-biomass <- resourcePotential(X = X, groups = c("ALL", "GROUNDFISH"), species.table = species.table, years = c(2014:2019))
+biomass <- resourcePotential(X = X, groups = c("ALL", "GROUNDFISH"), 
+                             species.table = species.table, years = c(2014:2019))
 head(biomass)
 
-marg <- margalef(X= X, groups = c("ALL", "GROUNDFISH"), metric = "ABUNDANCE",  species.table = species.table, years = c(2014:2019))
+marg <- margalef(X= X, groups = c("ALL", "GROUNDFISH"), metric = "ABUNDANCE",  
+                 species.table = species.table, years = c(2014:2019))
 head(marg)
 
-biomass_TL <- biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", TL.grouping = 1, years = c(2014:2019))
+biomass_TL <- biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
+                           TL.grouping = 1, years = c(2014:2019))
 head(biomass_TL)
 
 IVI <- IVILandings(land = land, IVI.table = species.info, years = c(2014:2019))
@@ -325,13 +328,19 @@ data(species.info)
 ```
 
 ```{r}
-allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, raw = TRUE, std = FALSE)
+allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),
+                percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, 
+                raw = TRUE, std = FALSE, 
+                export.path = NULL, glob.env = TRUE)
 ```
 
 By changing the arguments to `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions of the same Biodiversity indicators (denoted with _s in the indicator name):
 
 ```{r}
-allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, raw = FALSE, std = TRUE)
+allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),
+                percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, 
+                raw = FALSE, std = TRUE,
+                 export.path = NULL, glob.env = TRUE)
 ```
 
 #### Example 3

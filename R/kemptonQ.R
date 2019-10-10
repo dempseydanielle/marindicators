@@ -81,7 +81,7 @@ kemptonQ<- function(X, TL.table, percentiles = c(.25, 0.75), minTL = 0,
       }
     }
     
-    ind.name <- paste("KemptonQ_", groups[k], "_", minTL, sep ="")        # name indicator: KemptonQ_group_minTL
+    ind.name <- paste("KemptonQ_", minTL, "_", groups[k], sep ="")        # name indicator: KemptonQ_group_minTL
     names(ind.k) = c("ID", "YEAR", ind.name)                              # name the ind dataframe
     ind.k <- ind.k[order(ind.k$ID), ]                 # order by ID to be consistent with other functions
     
