@@ -1,6 +1,6 @@
 # `marindicators`
 
-September 20, 2019 - Danielle Dempsey (danielle.dempsey@dfo-mpo.gc.ca)
+October 10, 2019 - Danielle Dempsey (danielle.dempsey@dfo-mpo.gc.ca)
 
 The `marindicators` package provides functions to calculate indicators for four marine ecosystem attributes and one marine ecosystem pressure from fishery independent trawl survey data and commercial landings data, following the "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017). 
 
