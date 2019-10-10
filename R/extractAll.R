@@ -142,7 +142,7 @@ extractAll <- function(X, X_length, land,
   inds <- createDataframe(unique(X$ID), years)
   
   diversity <- allBiodiversity(X, metric = metric.bio, groups = group.bio, 
-                               TL.table = speciesinfo.table, 
+                               TL.table = speciesinfo.table, species.table = species.table,
                                percentiles = c(0.25, 0.75), minTL = minTL.bio, 
                                years = years, raw = raw, std = std,
                                export.path = NULL, export.id = NULL, glob.env = TRUE)
