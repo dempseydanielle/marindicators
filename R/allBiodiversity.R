@@ -81,17 +81,20 @@ allBiodiversity <- function(X, metric = "ABUNDANCE", groups = "ALL", species.tab
   H2 = hillN2(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
   Heips = heips(X = X, metric = metric, groups = groups, species.table = species.table, years = years)
 
-  inds <- cbind(S, H$ShannonDiversity, marg$MargalefRichness_ALL, pie$PielouEvenness, H1$HillDiversity, H2$HillDominance, Heips$Heips)
-  names(inds) <- c("ID", "YEAR", names(S)[3], names(H)[3], names(marg)[3], names(pie)[3],
-                   names(H1)[3], names(H2)[3], names(Heips)[3])
-  
+  inds <- merge(S, H)
+  inds <- merge(inds, marg)
+  inds <- merge(inds, pie)
+  inds <- merge(inds, H1)
+  inds <- merge(inds, H2)
+  inds <- merge(inds, Heips)
+
   if("TL" %in% colnames(TL.table)){
     
     Q = kemptonQ(X = X, metric = metric, groups = groups, species.table = species.table, 
                TL.table = TL.table, years = years, percentiles = percentiles, minTL = minTL)
   
-  inds <- cbind(inds, Q$KemptonQ)
-  names(inds)[10] <- names(Q)[3]
+  inds <- merge(inds, Q)
+
   }
   
 
