@@ -1,6 +1,6 @@
 Package: marindicators
 Title: Calculates Marine Ecosystem and Fishing Pressure Indicators 
-Version: 0.0.1
+Version: 0.0.2
 Date: 2019-10-09
 Authors: Danielle Dempsey, Adam Cook, Catalina Gomez, Alida Bundy
 Authors@R: c(person("Danielle", "Dempsey", email="Danielle.Dempsey@dfo-mpo.gc.ca", role = c("aut", "cre")),
