@@ -2,8 +2,8 @@
 #'@description This function calculates all (or a subset) of the Resource
 #'  Potential indicators for \eqn{j} areas and \eqn{i} years. The user can
 #'  choose whether the function returns the indicator dataframe to the global
-#'  environment, exports the dataframe to a csv file, or both. The user can also
-#'  choose whether the function returns the raw indicator values, the
+#'  environment, exports the dataframe to a .csv file, or both. The user can
+#'  also choose whether the function returns the raw indicator values, the
 #'  standaradized (z-score) values, or both.
 #'@details This function calculates the Resource Potential indicators: Abundance
 #'  and Biomass of the community, Resource Potential of predefined species
@@ -15,6 +15,14 @@
 #'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams fishingInBalance
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR} indicates
+#'  the year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, \code{SPECIES} is a numeric code
+#'  indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is the
+#'  corresponding biomass/abundance (stratified and corrected for catchability
+#'  as required).
 #'@param resource.groups A vector indicating the species groups for which to
 #'  calculate the resource potential. Each entry must be a character string
 #'  matching the name of a column in \code{species.table}. If
@@ -28,7 +36,8 @@
 #'  the \code{SPECIES} column should be the unique values of species codes in
 #'  \code{land} (or a subset thereof). Other columns will be ignored.
 #'@param minTL The minimum trophic level of species to include to calculate FiB.
-#'  If \code{minTL = NULL}, FiB wll not be calculated.
+#'  If \code{minTL = NULL}, FiB wll not be calculated. Default is \code{minTL =
+#'  0}.
 #'@param TE Trophic efficiency, used to calculate FiB. Default is \code{TE =
 #'  0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
 #'  be calculated.
@@ -36,12 +45,12 @@
 #'  calculating FiB. The average landings and average mean trophic level of the
 #'  landings over the baseline period are used as baseline values to calculate
 #'  FiB. \code{land} must include data for the baseline period. If
-#'  \code{base.start = NULL}, FiB wll not be calculated.
+#'  \code{base.start = NULL}, FiB will not be calculated.
 #'@param base.end Year indicating the end of the baseline period for calculating
 #'  FiB. The average landings and average mean trophic level of the landings
 #'  over the baseline period are used as baseline values to calculate FiB.
 #'  \code{land} must include data for the baseline period. If \code{base.end =
-#'  NULL}, FiB wll not be calculated.
+#'  NULL}, FiB will not be calculated.
 #'@param export.path File path indicating where to save a .csv file of
 #'  calculated indicators (named potential_export.id.csv; see below). If
 #'  \code{export.file = NULL}, the indicator dataframe will not be exported as a
@@ -53,20 +62,24 @@
 #'@return Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 #'  indicators corresponding to the arguments supplied to the function.
 #'  Standardized indicators are noted with \code{_s} in the name.
-#'@family ecosystem structure and function indicators
+#'@family resource potential indicators
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(land)
 #'data(species.table)
 #'data(species.info)
 #'
+#'# Species groups of interest
 #'resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH",
 #'    "FORAGE",  "GADOIDS", "GROUNDFISH")
+#'
+#'# Calculate standardized indicators
 #'allPotential(X = X, land = land, species.table = species.table,
 #'    speciesinfo.table = species.info, resource.groups = resource.groups,
 #'    TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019),

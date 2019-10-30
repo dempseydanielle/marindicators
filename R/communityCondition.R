@@ -7,15 +7,16 @@
 #'  \eqn{W_j} is the mean weight at length \eqn{L} for species \eqn{j} (Ricker,
 #'  1975).
 #'@inheritParams resourcePotential
-#'@param X_length A dataframe of fishery independent survey data or model output
-#'  with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
-#'  \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-#'  recorded, \code{ID} is an area code indicating where the observation was
-#'  recorded, and \code{SPECIES} is a numeric code indicating the species
-#'  sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-#'  corresponding abundance at length (stratified and corrected for catchability
-#'  as required). Species for which there are no length data should be assigned
-#'  \code{LENGTH = -99}. These observations are removed by the function.
+#'@param X_length A dataframe of fishery independent data derived from research
+#'  vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{LENGTH}, and \code{ABUNDANCE}. \code{YEAR} indicates
+#'  the year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, and \code{SPECIES} is a numeric code
+#'  indicating the species sampled. \code{LENGTH} is the length class (cm) and
+#'  \code{ABUNDANCE} is the corresponding abundance at length (stratified and
+#'  corrected for catchability as required). Species for which there are no
+#'  length data should be assigned \code{LENGTH = -99}. These observations are
+#'  removed by the function.
 #'@param LenWt.table A table of annual length at weight data with 5 columns.
 #'  \code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
 #'  \code{X_length}. \code{LENGTH} is fish length at the corresponding
@@ -40,15 +41,19 @@
 #'  Ricker, W. E. 1975. Computation and interpretation of biological statistics
 #'  of fish populations. Bulletin of the Fisheries Research Board of Canada
 #'  191:1-382.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X_length)
 #'data(species.table)
 #'data(Length_Weight)
+#'
+#'# Species groups of interest
 #'condition.groups <- c("FINFISH", "LBENTHIVORE", "PISCIVORE", "PLANKTIVORE")
-#'    
-#'communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups, 
+#'
+#'# Calculate indicators
+#'communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups,
 #'    species.table = species.table, years = c(2014:2019))
 #'@export
 

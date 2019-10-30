@@ -11,7 +11,13 @@
 #'  \eqn{Landings_{FG}} and \eqn{Biomass_{FG}} change in the same direction,
 #'  exploitation rate may not change.
 #'@inheritParams landings
-#'@inheritParams resourcePotential
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+#'  and corrected for catchability as required).
 #'@param land A dataframe of commercial landings data with columns \code{YEAR},
 #'  \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 #'  the landing was recorded, \code{ID} is an area code indicating where the
@@ -52,18 +58,22 @@
 #'  indicators for evaluating, comparing and communicating the ecological status
 #'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
 #'  Marine Science, 67: 692-716
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(land)
 #'data(species.table)
 #'
+#'# Species groups of interest
 #' FP.groups <- data.frame(rbind(c("ALL", "ALL"), 
 #'    c("CLUPEIDS", "CLUPEIDS.L"),
 #'    c("FLATFISH", "FLATFISH.L"),
 #'    c("GROUNDFISH", "GROUNDFISH.L")))
 #'names(FP.groups) <- c("group.X", "group.land")
+#'
+#'# Calculate indicators
 #'fishingPressure(X = X, land = land, FP.groups = FP.groups, 
 #'    species.table = species.table,  years = c(2014:2019))
 #'@export

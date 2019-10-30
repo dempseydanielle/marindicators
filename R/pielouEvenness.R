@@ -22,7 +22,7 @@
 #'  management. ICES J Mar Sci J du Cons 63:573 593
 #'
 #'  Pielou EC. 1975. Ecological Diversity. Wiley, New York. ISBN 0-471-68925-4
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

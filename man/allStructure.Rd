@@ -10,23 +10,24 @@ allStructure(X, X_length, LSI.group, LFI.group, guild.groups,
   glob.env = TRUE, export.path = NULL, export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
-(stratified and corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
-\item{X_length}{A dataframe of fishery independent survey data or model output
-with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, and \code{SPECIES} is a numeric code indicating the species
-sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for catchability
-as required). Species for which there are no length data should be assigned
-\code{LENGTH = -99}. These observations are removed by the function.}
+\item{X_length}{A dataframe of fishery independent data derived from research
+vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{LENGTH}, and \code{ABUNDANCE}. \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, and \code{SPECIES} is a numeric code
+indicating the species sampled. \code{LENGTH} is the length class (cm) and
+\code{ABUNDANCE} is the corresponding abundance at length (stratified and
+corrected for catchability as required). Species for which there are no
+length data should be assigned \code{LENGTH = -99}. These observations are
+removed by the function.}
 
 \item{LSI.group}{A character string indicating the species group for which to
 calculate the Large Species Indicator. Must be set to \code{"ALL"} or match
@@ -84,11 +85,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -112,8 +113,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 This function calculates all (or a subset) of the Structure and
  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
  choose whether the function returns the indicator dataframe to the global
- environment, exports the dataframe to a csv file, or both. The user can also
- choose whether the function returns the raw indicator values, the
+ environment, exports the dataframe to a .csv file, or both. The user can
+ also choose whether the function returns the raw indicator values, the
  standardized (z-score) values, or both.
 }
 \details{
@@ -135,18 +136,22 @@ This function calculates the Structure and Functioning indicators:
  flexibility.
 }
 \examples{
+# Compile data
 data(X)
 data(X_length)
 data(species.table)
 data(species.info)
 data(Length_Weight)
 
+# Species groups of interest
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 names(ratio.groups) <- c("group1", "group2")
 trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
    "ZOOPISCIVORE")
 condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
     "PLANKTIVORE", "ZOOPISCIVORE")
+
+# Calculate indicators
 allStructure(X = X, X_length = X_length,
    LSI.group = "ALL", LFI.group = "ALL",
    guild.groups = trophicguild.groups, condition.groups = condition.groups,
@@ -161,15 +166,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

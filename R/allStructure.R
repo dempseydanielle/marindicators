@@ -2,8 +2,8 @@
 #'@description This function calculates all (or a subset) of the Structure and
 #'  Functioning indicators for \eqn{j} areas and \eqn{i} years. The user can
 #'  choose whether the function returns the indicator dataframe to the global
-#'  environment, exports the dataframe to a csv file, or both. The user can also
-#'  choose whether the function returns the raw indicator values, the
+#'  environment, exports the dataframe to a .csv file, or both. The user can
+#'  also choose whether the function returns the raw indicator values, the
 #'  standardized (z-score) values, or both.
 #'@details This function calculates the Structure and Functioning indicators:
 #'  Biomass, Biomass Ratio(s), Large Species Indicator, Trophic Level of the
@@ -24,6 +24,13 @@
 #'@inheritParams resourcePotential
 #'@inheritParams communityCondition
 #'@inheritParams largeSpeciesIndicator
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+#'  and corrected for catchability as required).
 #'@param LSI.group A character string indicating the species group for which to
 #'  calculate the Large Species Indicator. Must be set to \code{"ALL"} or match
 #'  a column name in \code{species.table}. If \code{LSI.group = NULL}, the Large
@@ -63,11 +70,11 @@
 #'  not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 #'  must be \code{TRUE}.
 #'@param std A logical value. If \code{std = TRUE}, the standardized indicator
-#'  values for each area ID are returned by the function. Indicators are
+#'  values for each area \code{ID} are returned by the function. Indicators are
 #'  standardized using z-scores, i.e., by subtracting the mean and dividing by
-#'  the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-#'  standardized indcator values are not returned. Default is \code{std = TRUE}.
-#'  Either \code{raw} or \code{std} must be \code{TRUE}.
+#'  the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+#'  the standardized indcator values are not returned. Default is \code{std =
+#'  TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.
 #'@param glob.env Logical value indicating whether to return output to global
 #'  environment. Default is \code{glob.env = TRUE}.
 #'@param export.path File path indicating where to save a .csv file of
@@ -85,21 +92,25 @@
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(X_length)
 #'data(species.table)
 #'data(species.info)
 #'data(Length_Weight)
 #'
+#'# Species groups of interest
 #'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 #'names(ratio.groups) <- c("group1", "group2")
 #'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
 #'    "ZOOPISCIVORE")
 #'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
 #'     "PLANKTIVORE", "ZOOPISCIVORE")
+#'
+#'# Calculate raw indicators
 #'allStructure(X = X, X_length = X_length,
 #'    LSI.group = "ALL", LFI.group = "ALL",
 #'    guild.groups = trophicguild.groups, condition.groups = condition.groups,

@@ -7,13 +7,14 @@
 CVBiomass(X, wind = 5, negative = FALSE, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, and \code{BIOMASS}.  \code{YEAR} indicates
-the year the observation was recorded, \code{ID} is an area code indicating
-where the observation was recorded, and \code{BIOMASS} is the total recorded
-biomass (stratified and corrected for catchability as required). (Note: if
-\code{X} has an additional \code{SPECIES} column, the function will
-automatically calculate the total biomass).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID}, and
+\code{BIOMASS}.  \code{YEAR} indicates the year the observation was
+recorded, \code{ID} is an area code indicating where the observation was
+recorded, and \code{BIOMASS} is the total recorded biomass (stratified and
+corrected for catchability as required). (Note: if \code{X} has an
+additional \code{SPECIES} column, the function will automatically calculate
+the total biomass).}
 
 \item{wind}{Window for the moving average. The first and last
 \code{floor(wind/2)} values of the indicator are assigned \code{NA} to
@@ -71,7 +72,7 @@ Other stability and resistance indicators: \code{\link{IVILandings}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

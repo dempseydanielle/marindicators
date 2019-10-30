@@ -8,30 +8,29 @@
 speciesRichness(X, groups, species.table = NULL, metric, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output OR
- commercial landings data. Fishery independent suvey data has columns
- \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE} and/or
- \code{BIOMASS}. \code{YEAR} indicates the year the observation was recorded,
- \code{ID} is an area code indicating where the observation was recorded,
- \code{SPECIES} is a numeric code indicating the species sampled, and
- \code{ABUNDANCE}/\code{BIOMASS} is the corresponding abundance/biomass
- (stratified and corrected for catchability as required).
+\item{X}{A dataframe of fishery independent data derived from research vessel
+ survey data or model output, OR commercial landings data. Fishery
+ independent suvey data has columns \code{YEAR}, \code{ID}, \code{SPECIES},
+ and \code{ABUNDANCE} and/or \code{BIOMASS}. \code{YEAR} indicates the year
+ the observation was recorded, \code{ID} is an area code indicating where the
+ observation was recorded, \code{SPECIES} is a numeric code indicating the
+ species sampled, and \code{ABUNDANCE}/\code{BIOMASS} is the corresponding
+ abundance/biomass (stratified and corrected for catchability as required).
 
  Similarly, commercial landings data should have columns \code{YEAR},
  \code{ID}, \code{SPECIES} are as above, and \code{CATCH} is the
  corresponding landed weight.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. If \code{group = "ALL"}, all species will be included;
+the indicator. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
@@ -67,9 +66,11 @@ Two useful species richness indicators are: "Species Richness" (S) of
  year for a given area.
 }
 \examples{
+# Calculate species richness (community)
 data(X)
 speciesRichness(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 
+# Calculate diversity of target species
 data(land)
 speciesRichness(land, groups = "ALL", metric = "CATCH",  years = c(2014:2019))
 }
@@ -93,7 +94,7 @@ Other fishing pressure indicators: \code{\link{allPressure}},
   \code{\link{meanTLLandings}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

@@ -16,13 +16,13 @@
 #'  Other useful biomass \eqn{(B)} ratios indicators include:
 #'  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 #'@inheritParams resourcePotential
-#'@param X A dataframe of fishery independent survey data or model output with
-#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-#'  area code indicating where the observation was recorded, \code{SPECIES} is a
-#'  numeric code indicating the species sampled, and \code{BIOMASS} is the
-#'  corresponding biomass (stratified and corrected for catchability as
-#'  required).
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+#'  and corrected for catchability as required).
 #'@param ratio.groups A dataframe with two columns, which must be named
 #'  \code{group1} and \code{group2}. Each row holds the group names for one
 #'  biomass ratio, with the numerator in column \code{group1} and the
@@ -59,14 +59,19 @@
 #'  indicators for evaluating, comparing and communicating the ecological status
 #'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
 #'  Marine Science, 67: 692-716
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
+#'data(X)
 #'data(species.table)
+#'
+#'# Species groups of interest
 #'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 #'names(ratio.groups) <- c("group1", "group2")
 #'
-#'biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table, 
+#'# Calculate indicators
+#'biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table,
 #'    metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

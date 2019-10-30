@@ -8,27 +8,27 @@ communityCondition(X_length, groups, species.table = NULL, LenWt.table,
   years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data or model output
-with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, and \code{SPECIES} is a numeric code indicating the species
-sampled. \code{LENGTH} is the length class (cm) and \code{ABUNDANCE} is the
-corresponding abundance at length (stratified and corrected for catchability
-as required). Species for which there are no length data should be assigned
-\code{LENGTH = -99}. These observations are removed by the function.}
+\item{X_length}{A dataframe of fishery independent data derived from research
+vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{LENGTH}, and \code{ABUNDANCE}. \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, and \code{SPECIES} is a numeric code
+indicating the species sampled. \code{LENGTH} is the length class (cm) and
+\code{ABUNDANCE} is the corresponding abundance at length (stratified and
+corrected for catchability as required). Species for which there are no
+length data should be assigned \code{LENGTH = -99}. These observations are
+removed by the function.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. If \code{group = "ALL"}, all species will be included;
+the indicator. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{LenWt.table}{A table of annual length at weight data with 5 columns.
 \code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
@@ -56,13 +56,16 @@ Fulton's Condition Index (\eqn{K}): \deqn{K = \Sigma(K_j *
  1975).
 }
 \examples{
+# Compile data
 data(X_length)
 data(species.table)
 data(Length_Weight)
-condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", 
-   "PLANKTIVORE", "ZOOPISCIVORE")
-   
-communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups, 
+
+# Species groups of interest
+condition.groups <- c("FINFISH", "LBENTHIVORE", "PISCIVORE", "PLANKTIVORE")
+
+# Calculate indicators
+communityCondition(X_length, LenWt.table = Length_Weight, groups = condition.groups,
    species.table = species.table, years = c(2014:2019))
 }
 \references{
@@ -82,14 +85,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  191:1-382.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{allStructure}}, \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allStructure}},
+  \code{\link{biomassRatio}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

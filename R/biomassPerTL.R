@@ -1,13 +1,13 @@
 #'@title Calculates the biomass per discrete trophic level
 #'@description This function calculates the biomass per discrete trophic level
 #'  for \eqn{j} areas and \eqn{i} years.
-#'@param X A dataframe of fishery independent survey data or model output with
-#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-#'  area code indicating where the observation was recorded, \code{SPECIES} is a
-#'  numeric code indicating the species sampled, and \code{BIOMASS} is the
-#'  corresponding biomass (stratified and corrected for catchability as
-#'  required).
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+#'  and corrected for catchability as required).
 #'@param TL.table A dataframe with columns \code{SPECIES} and the corresponding
 #'  \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
 #'  the unique values of species codes in \code{X} (or a subset thereof). Other
@@ -45,13 +45,16 @@
 #'  trophic flows and fishing impacts of a NW Mediterranean ecosystem with
 #'  coastal upwellings by means of standardized ecological models and
 #'  indicators. Ecol. Model. 198, 53-70.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'  Catalina Gomez, Alida Bundy 
-#'@examples  
-#'  data(X) 
-#'  data(species.info) 
-#'  biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
-#'  TL.grouping = 1, years = c(2014:2019))
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'  Catalina Gomez, Alida Bundy
+#'@examples
+#'# Compile data
+#'data(X)
+#'data(species.info)
+#'
+#'# Calculate indicators
+#'biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS",
+#'TL.grouping = 1, years = c(2014:2019))
 #'@export
 
 

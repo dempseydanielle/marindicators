@@ -8,13 +8,13 @@ kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, groups,
   species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{ABUNDANCE} is the
-corresponding abundance (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{ABUNDANCE}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{ABUNDANCE} is the corresponding abundance
+(stratified and corrected for catchability as required).}
 
 \item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
 \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
@@ -28,16 +28,15 @@ columns in \code{TL.table} are ignored.}
 Default is \code{minTL = 0}.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. If \code{group = "ALL"}, all species will be included;
+the indicator. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
@@ -67,8 +66,11 @@ Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
  defaulted to 0.25 and 0.75, respectively (Kempton and Taylor, 1976).
 }
 \examples{
+# Compile data
 data(X)
 data(species.info)
+
+# Calculate indicator
 kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
    groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 }
@@ -92,7 +94,7 @@ Other biodiversity indicators: \code{\link{allBiodiversity}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

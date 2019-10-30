@@ -15,24 +15,24 @@ extractAll(X, X_length, land, speciesinfo.table, species.table,
   export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{BIOMASS} and
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{ABUNDANCE} is the corresponding abundance (stratified and
-corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, \code{SPECIES} is a numeric code
+indicating the species sampled, and \code{ABUNDANCE} is the corresponding
+abundance (stratified and corrected for catchability as required).}
 
-\item{X_length}{A dataframe of fishery independent survey data or model output
-with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
-\code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates the year the
-observation was recorded, \code{ID} is an area code indicating where the
-observation was recorded, and \code{SPECIES} is a numeric code indicating
-the species sampled. \code{LENGTH} is the length class (cm) and
-\code{ABUNDANCE} is the corresponding abundance at length (stratified and
-corrected for catchability as required). Species for which there are no
-length data should be assigned \code{LENGTH = -99}. These observations are
-removed by the function.}
+\item{X_length}{A dataframe of fishery independent data derived from research
+vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{LENGTH}, \code{BIOMASS} and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, and \code{SPECIES}
+is a numeric code indicating the species sampled. \code{LENGTH} is the
+length class (cm) and \code{ABUNDANCE} is the corresponding abundance at
+length (stratified and corrected for catchability as required). Species for
+which there are no length data should be assigned \code{LENGTH = -99}. These
+observations are removed by the function.}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -150,13 +150,13 @@ be calculated.}
 calculating FiB. The average landings and average mean trophic level of the
 landings over the baseline period are used as baseline values to calculate
 FiB. \code{land} must include data for the baseline period. If
-\code{base.start = NULL}, FiB wll not be calculated.}
+\code{base.start = NULL}, FiB will not be calculated.}
 
 \item{base.end}{Year indicating the end of the baseline period for calculating
 FiB. The average landings and average mean trophic level of the landings
 over the baseline period are used as baseline values to calculate FiB.
 \code{land} must include data for the baseline period. If \code{base.end =
-NULL}, FiB wll not be calculated.}
+NULL}, FiB will not be calculated.}
 
 \item{landings.groups}{A vector indicating the species groups for which to
 calculate the landings. Each entry must be a character string matching the
@@ -182,11 +182,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -209,8 +209,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 \description{
 This function can calculate all of the indicators described in
  this package. The user can choose whether the function returns the indicator
- dataframe to the global environment, exports the dataframe to a csv file, or
- both. The user can also choose whether the function returns the raw
+ dataframe to the global environment, exports the dataframe to a .csv file,
+ or both. The user can also choose whether the function returns the raw
  indicator values, the standaradized (z-score) values, or both.
 }
 \details{
@@ -222,6 +222,7 @@ This function calculates the indicators for each attribute and
  indicator is calculated.
 }
 \examples{
+# Compile data
 data(X)
 data(X_length)
 data(land)
@@ -229,6 +230,7 @@ data(species.table)
 data(species.info)
 data(Length_Weight)
 
+# Species groups of interest
 trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
    "ZOOPISCIVORE")
 condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
@@ -245,6 +247,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
     c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
+# Calculate indicators
 extractAll(X = X, X_length = X_length, land = land,
     speciesinfo.table = species.info, species.table = species.table,
     LenWt.table = Length_Weight,
@@ -259,6 +262,6 @@ extractAll(X = X, X_length = X_length, land = land,
     raw = TRUE, std = TRUE, export.path = NULL)
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }

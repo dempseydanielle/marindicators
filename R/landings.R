@@ -22,13 +22,17 @@
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(land)
 #'data(species.table)
 #'
+#'# Species of interest
 #'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+#'
+#'# Calculate indicators
 #'landings(land, groups = landings.groups, species.table = species.table, 
 #'    years = c(2014:2019))
 #'@export

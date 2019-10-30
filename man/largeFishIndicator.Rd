@@ -8,27 +8,27 @@ largeFishIndicator(X_length, group, species.table = NULL,
   metric = "BIOMASS", large.fish = 35, years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data with columns
-\code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, and \code{SPECIES}
-is a numeric code indicating the species sampled. \code{LENGTH} is the
-length class (cm) and \code{BIOMASS} is the corresponding abundance at
-length (stratified and corrected for catchability as required). Species for
-which there are no length data should be assigned \code{LENGTH = -99}. These
-observations are removed by the function.}
+\item{X_length}{A dataframe of fishery independent data derived from research
+vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}. \code{YEAR} indicates the
+year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, and \code{SPECIES} is a numeric code
+indicating the species sampled. \code{LENGTH} is the length class (cm) and
+\code{BIOMASS} is the corresponding abundance at length (stratified and
+corrected for catchability as required). Species for which there are no
+length data should be assigned \code{LENGTH = -99}. These observations are
+removed by the function.}
 
 \item{group}{character string indicating which species to include in the
 indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
@@ -60,9 +60,11 @@ Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
  2006).
 }
 \examples{
+# Compile data
 data(X_length)
 data(species.table)
 
+# Calculate indicator
 largeFishIndicator(X_length, group = "FINFISH", species.table = species.table,
    metric = "BIOMASS", years = c(2014:2019))
 }
@@ -79,14 +81,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{allStructure}}, \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allStructure}},
+  \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca}, Catalina
- Gomez, Alida Bundy
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+ Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

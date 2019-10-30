@@ -24,16 +24,16 @@ n.digits <- 2
 ```
 
 # Motivation
-A comprehensive evaluation and selection of robust ecological indicators is one of the key steps in the process of implementing an Ecosystem Approach to fisheries management and to track progress towards meeting ecosystem goals. The "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017) developed an Indicator Selection Guidance Framework (Fig. 1) to select and evaluate potential indicators for ecosystem monitoring and assessment at different spatial scales using established selection criteria. 
+A comprehensive evaluation and selection of robust ecological indicators is one of the key steps in the process of implementing an Ecosystem Approach to fisheries management and to track progress towards meeting ecosystem goals. The "Guidance framework for the selection and evaluation of ecological indicators" (Bundy, Gomez, and Cook, 2017) was developed to select and evaluate potential indicators for ecosystem monitoring and assessment at different spatial scales using established selection criteria (Fig. 1). 
 
 ![Figure 1. Indicator Selection Guidance Framework](Figure1.png)
 
-The framework was successfully tested for the Scotian Shelf Biogregion. In Step 1, four ecosystem attributes and one pressure were defined: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, 186 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators, which were calculated in Step 4 (Table 1). The quantitative screening in Step 5 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fishery independent and dependent data (Table 1; Step 6). For more information, including attribute and sub-attribute definitions and the methods used to select the final suite of indicators, please refer to the Guidance Framework document (Bundy, Gomez, and Cook, 2017).
+The framework was successfully tested for the Scotian Shelf Biogregion, Canada. In Step 1, four ecosystem attributes and one pressure were defined: Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability and Resistance to Perturbations, Resource Potential, and Fishing Pressure. In Step 2, 186 indicators were selected to represent these attributes and pressure. The qualitative screening in Step 3 reduced this set to 68 indicators, which were calculated in Step 4 (Table 1). The quantitative screening in Step 5 resulted in a final suite of 30 non-redundant ecological and fishing pressure indicators derived from fishery independent and dependent data (Table 1; Step 6). For more information, including attribute and sub-attribute definitions and the methods used to select the final suite of indicators, please refer to the Guidance Framework document (Bundy, Gomez, and Cook, 2017).
 
 The `marindicators` package provides functions to calculate the suite of marine ecosystem indicators calculated in Step 4 of the Guidance Framework (Table 1; Bundy, Gomez, and Cook, 2017). Some functions may be used to calculate additional indicators, for example by specifying different species groups or using alternative values for arguments with default values.
 
 
-Table 1: `marindicators` function to calculate each of the 68 indicators calculated for the Scotian Shelf in Step 4 of the Guidance Framework. Ecosystem attributes/pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf are highlighted in **bold**.
+Table 1: `marindicators` function to calculate each of the 68 indicators calculated for the Scotian Shelf Bioregion in Step 4 of the Guidance Framework. Ecosystem attributes/pressure are shown in **BOLD CAPS**. Indicators included in the final suite for the Scotian Shelf Bioregion are highlighted in **bold**.
 
   | **SUB-ATTRIBUTE** | **INDICATOR** | **FUNCTION** |
   |:-----------------------|:-------------------------|:---------------:|
@@ -56,8 +56,8 @@ Table 1: `marindicators` function to calculate each of the 68 indicators calcula
   | Structure: Trophic Guilds | Biomass of Planktivores | `resourcePotential()` |
   | Structure: Trophic Guilds | **Biomass of Piscivores** | `resourcePotential()` |
   | Structure: Trophic Guilds | **Biomass of Zoopiscivores** | `resourcePotential()` |
-  | Size structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
-  | Size structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
+  | Size Structure: Fish Community | **Mean Length (weighted by abundance)** | `meanLengthCommunity()` |
+  | Size Structure: Fish Community | Mean Length (weighted by biomass) | `meanLengthCommunity()` |
   | Trophic Structure | **Mean Trophic Level of Community** | `meanTLCommunity()` |
   | Structural Change | Pelagic to Demersal biomass ratio | `biomassRatio()` | 
   | Structural Change | Invertebrate to Demersal biomass ratio | `biomassRatio()` | 
@@ -113,20 +113,20 @@ Table 1: `marindicators` function to calculate each of the 68 indicators calcula
 [^1]: 1/(Coefficient of Variation of Biomass) was calculated in the Guidance Framework (Bundy, Gomez, and Cook, 2017)
 
 # Application
-There are three main steps for applying `marindicators`: Step 1: Decide which indicators to calculate; Step 2: Compile data; Step 3: Calculate indicators. Steps 1 and 2 may be interchangeable - the availability of data may inform the choice of indicators. These steps are described in detail below.
+There are three main steps for applying `marindicators`: Step 1: Decide which indicators to calculate; Step 2: Compile data; Step 3: Calculate indicators. Steps 1 and 2 may be interchangeable and the availability of data may inform the choice of indicators. These steps are described in detail below.
 
 ## Step 1: Decide which indicators to calculate
-The decision of which indicators to calculate may be informed by an indicator selection process like the Guidance Framework (Bundy, Gomez, and Cook, 2017), a specific research question, and/or the availability of data. The selected indicators will dictate the data required and the choice of function(s) (Steps 2 and 3).
+The decision of which indicators to calculate will ideally be informed by an indicator selection process like the Guidance Framework (Bundy, Gomez, and Cook, 2017) and in addition may be informed by specific research questions, and/or the availability of data. The selected indicators will dictate the data required and the choice of function(s) (Steps 2 and 3).
 
-Table 1 may be used as a guide for which indicators can be calculated by the package. Note that species groups are user-defined, and so the package is not restricted to calculating indicators for the groups in Table 1 (see the description of `species.table` below).
+Table 1 provides a guide for the indicators calculated by the package. Note that species groups are user-defined, and so the package is not restricted to calculating indicators for the groups in Table 1 (see **Species Groups** below).
 
 ## Step 2: Compile Data 
-The data required will depend on which indicators were selected in Step 1. In general, indicators related to ecosystem attibutes require annual fishery independent survey data, while indicators related to the ecosystem pressure require annual commercial landings data. Additional species information is required to calculate some indicators (Table 2). See the `help` page for a specific function for its data requirements.
+The data required will depend on which indicators were selected in Step 1. In general, indicators related to ecosystem attributes require annual fishery independent survey data, while indicators related to fishing pressure require annual commercial landings data. Additional species information is required to calculate some indicators (Table 2). See the `help` page for a specific function for its data requirements.
 
 This section describes the six dataframes required to calculate all of the indicators listed in Table 1. 
 
 ### Fishery independent data
-**X** is a dataframe of fishery independent survey data or model output with columns `YEAR`, `ID`, `SPECIES`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, `SPECIES` is a numeric code indicating the species sampled, and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass (stratified and corrected for catchability as required).
+**X** is a dataframe of fishery independent data derived from research vessel survey data or model output, with columns `YEAR`, `ID`, `SPECIES`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, `SPECIES` is a numeric code indicating the species sampled, and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass (stratified and corrected for catchability as required).
 
 ```{r, echo = FALSE}
 X1 <- X[X$YEAR == 2014 & X$ID == "AREA1", ]
@@ -151,7 +151,7 @@ X_show
 Indicators calculated using `X` (among other arguments): Heip's Evenness Index, Hill's N1, Hill's N2, Kempton's Q, Margalef's Species Richness, Pielou's Species Evenness, Shannon's Diversity Index, Biomass ratio(s), Abundance/Biomass of Species Groups, Large Species Indicator, Mean Trophic Level of the Community, CV of Biomass, Mean Maximum Lifespan, Mean Maximum Length, and Fishing Pressure.
 
 
-**X_length** is a dataframe of fishery independent survey data or model output with columns `YEAR`, `ID`, `SPECIES`, `LENGTH`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). As with `X`, `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, and `SPECIES` is a numeric code indicating the species sampled. `LENGTH` is the length class (cm) and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned `LENGTH = -99`. These observations are removed by the function(s).
+**X_length** is a dataframe of fishery independent data derived from research vessel survey data or model output, with columns `YEAR`, `ID`, `SPECIES`, `LENGTH`, and `ABUNDANCE` and/or `BIOMASS` (depending on which indicator is being calculated). As with `X`, `YEAR` indicates the year the observation was recorded, `ID` is an area code indicating where the observation was recorded, and `SPECIES` is a numeric code indicating the species sampled. `LENGTH` is the length class (cm) and `ABUNDANCE`/`BIOMASS` is the corresponding abundance/biomass at length (stratified and corrected for catchability as required). Species for which there are no length data should be assigned `LENGTH = -99`. These observations are removed by the function(s).
 
 ```{r, echo = FALSE}
 X_length <- X_length[-which(X_length$LENGTH == -99), ]
@@ -180,7 +180,7 @@ Indicators calculated using `X_length` (among other arguments): Community Condit
 ### Commercial landings data
 **land** is a dataframe of commercial landings data with columns `YEAR`, `ID`, `SPECIES` and `CATCH`. `YEAR` indicates the year the landing was recorded, `ID` is an area code indicating where the landing was recorded, `SPECIES` is a numeric code indicating the species landed, and `CATCH` is the corresponding landed weight (in the same units as `BIOMASS` in `X` and `X_length`).
 
-The species codes in `land` can be consistent with those in `X` and `X_length` or specific to commercial landings; however, they must be consistent with the additional information described below (see Species Information and Species Groups).
+The species codes in `land` may not be consistent with those in `X` and `X_length` (this may be the case when dealing with different data sources). In this case, ensure that the species codes are consistent with the **Species Information** and **Species Groups** tables described below. Additionally, the Fishing-in-Balance, Intrinsic Vulnerability Index of Landings, Mean Tophic Level of the Landings, and Marine Trophic Index should be calculated using their respective single functions (see **Examples** below).  
 
 ```{r, echo = FALSE}
 land <- land[order(land$YEAR),]
@@ -229,7 +229,7 @@ TL.table <- TL.table[1:(n.show*2), ]
 TL.table
 ```
 
-If the species codes used in `X` and `land` are the same, it may be convenient to store all of the additional information in a single table. If information is not available for a given species, assign a value of `NA`. This whole table may be passed to a function; superfluous columns will be ignored.
+If the species codes used in `X` and `land` are the same, it may be convenient to store all of the additional information in a single table. If the species codes in `X` and `land` are not the same, then the extra information should be stored in at least two tables (e.g., `TL`, `MAXLENGTH`, and `MAXAGE` in one table, and `IVI` and `TL_LAND` in the other). If information is not available for a given species, assign a value of `NA`. This whole table may be passed to a function; superfluous columns will be ignored.
 
 ```{r, echo = FALSE}
 species.info_show <- species.info[1:10, ]
@@ -237,7 +237,6 @@ species.info_show$TL <- round(species.info_show$TL, digits = 3)
 species.info_show$TL_LAND <- round(species.info_show$TL_LAND, digits = 3)
 species.info_show
 ```
-If the species codes in `X` and `land` are not the same, then the extra information should be stored in at least two tables (e.g., `TL`, `MAXLENGTH`, and `MAXAGE` in one table, and `IVI` and `TL_LAND` in the other).
 
 ### Length-Weight data
 The Community Condition indicator (based on Fulton's condition index) requires annual length-weight data for all species of interest. This table should have 5 columns: `YEAR`, `ID`, and `SPECIES` correspond with those columns in `X_length`, while `LENGTH` is fish length at the corresponding `WEIGHT` (fish weight).
@@ -268,14 +267,14 @@ species.table_show <- species.table[1:(n.show*2), c(1:7)]
 
 species.table_show
 ```
-Note that the user does not need to include a column with all species (i.e., all species are automatically included in the calculation if argument `group = "ALL"`).
+The user does not need to include a column with all species (i.e., all species are automatically included in the calculation if argument `group = "ALL"`).
 
 ## Step 3: Calculate Indicators
 The functions used to calculate the indicators will depend on which indicators were selected in Step 1. There are three different levels of functions: 
 
 1. Individual functions: generally calculate a single indicator for one or more user-defined species groups. These functions return a dataframe with columns: `ID`, `YEAR`, and a column with the indicator values for each species group. 
 
-2. "allAttribute" functions: call the individual functions to calculate and return all (or a subset) of the indicators for an attribute or pressure. The user can choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. These functions return a dataframe with columns `ID`, `YEAR`, and indicators corresponding to the arguments supplied to the function.
+2. "allAttribute" functions: call the individual functions to calculate and return all (or a subset) of the indicators for an attribute or pressure. The user can choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. Additionally, the user can choose whether the function returns the indicator dataframe to the global environment, exports the dataframe to a csv file, or both. These functions return a dataframe with columns `ID`, `YEAR`, and indicators corresponding to the arguments supplied to the function.
 
 3. `extractAll()` function, which calls the "allAttribute" functions to calculate and return all of the indicators. The user can choose whether the function returns the raw indicator values, the standaradized (z-score) values, or both. Additionally, the user can choose whether the function returns the indicator dataframe to the global environment, exports the dataframe to a csv file, or both.
 
@@ -297,34 +296,33 @@ data(species.info)
 ```{r}
 biomass <- resourcePotential(X = X, groups = c("ALL", "GROUNDFISH"), 
                              species.table = species.table, years = c(2014:2019))
-head(biomass)
+biomass
 
 marg <- margalef(X= X, groups = c("ALL", "GROUNDFISH"), metric = "ABUNDANCE",  
                  species.table = species.table, years = c(2014:2019))
-head(marg)
+marg
 
 biomass_TL <- biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
                            TL.grouping = 1, years = c(2014:2019))
-head(biomass_TL)
+biomass_TL
 
 IVI <- IVILandings(land = land, IVI.table = species.info, years = c(2014:2019))
-head(IVI)
+IVI
 
 TL_land <- meanTLLandings(land = land, TL.table = species.info, minTL = 0, years = c(2014:2019))
-head(TL_land)
+TL_land
 
 MTI_land <- meanTLLandings(land = land, TL.table = species.info, minTL = 3.25, years = c(2014:2019))
-head(MTI_land)
+MTI_land
 
 ```
 
 #### Example 2
-If all of the indicators to be calculated are related to one attribute or pressure, it may be the most efficient and convenient to use the corresponding "allAttribute" function (Table 1). For example, if in Step 1 we decide that we are only interested in the biodiversity indicators for all species, then we would apply the `allBiodiversity()` function. Here we choose to return only the raw values by setting arguments `raw = TRUE` and `std = FALSE`.
+If all of the indicators to be calculated are related to one attribute or pressure, it may be the most efficient and convenient to use the corresponding "allAttribute" function (Table 1). For example, if in Step 1 we decide that we are only interested in the Biodiversity indicators, then the `allBiodiversity()` function should be applied. The user can choose whether the function returns the indicator dataframe to the global environment, exports the dataframe to a csv file, or both. The user can also choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following function call returns 8 raw Biodiversity indicators to to the global environment.
 
 ```{r, eval = FALSE}
 # Compiled Data
 data(X)
-data(species.info)
 ```
 
 ```{r}
@@ -334,20 +332,29 @@ allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019)
                 export.path = NULL, glob.env = TRUE)
 ```
 
-By changing the arguments to `raw = FALSE` and `std = TRUE`, the function call will return the standarized versions of the same Biodiversity indicators (denoted with _s in the indicator name):
+By changing the arguments to `raw = FALSE` and `std = TRUE`, the function call returns the standarized versions of the same Biodiversity indicators (denoted with _s in the indicator name):
 
 ```{r}
 allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),
                 percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, 
                 raw = FALSE, std = TRUE,
-                 export.path = NULL, glob.env = TRUE)
+                export.path = NULL, glob.env = TRUE)
 ```
 
 #### Example 3
-If in Step 1 it is decided that all indicators should be calculated, and data are available to do so, the `extractAll()` function may be the most effificent and convenient. The user can choose whether the function returns the indicator dataframe to the global environment, exports the dataframe to a csv file, or both. The user can also choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following function call calculates 47 standardized indicators and returns them to the global environment in variable `all_inds`.
+If we decide in Step 1 that all indicators should be calculated, and data are available to do so, the `extractAll()` function may be the most efficient and convenient. The user can choose whether the function returns the indicator dataframe to the global environment, exports the dataframe to a csv file, or both. The user can also choose whether the function returns the raw indicator values, the standardized (z-score) values, or both. For example, the following function call calculates 47 standardized indicators and returns them to the global environment in variable `all_inds`.
 
 
 ```{r}
+# Compiled data
+data(X)
+data(X_length)
+data(land)
+data(Length_Weight)
+data(species.info)
+data(species.table)
+
+# Species groups of interest
 resource.groups <- c("ALL", "GROUNDFISH")
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE")
@@ -359,6 +366,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
    c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
+# Calculate indicators
 all_inds <- extractAll(X = X, X_length = X_length, land = land,
            speciesinfo.table = species.info, 
            species.table = species.table, 
@@ -379,13 +387,13 @@ all_inds <- extractAll(X = X, X_length = X_length, land = land,
 names(all_inds)
 
 ```
-Note that if there are different species codes in `X` and `land`, then the Fishing-in-Balance, Intrinsic Vulnerability Index of Landings, Mean Tophic Level of the Landings, and Marine Trophic Index should be calculated using their respective single functions (see Table 1).
+Recall that if there are different species codes in `X` and `land`, then the Fishing-in-Balance, Intrinsic Vulnerability Index of Landings, Mean Tophic Level of the Landings, and Marine Trophic Index should be calculated using their respective single functions (see Table 1).
 
 
 ### Missing Data
-If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is assigned `NA` or `0`. We recognize that even if a species is not detected during the fishery independent survey, it may still be present in the community. All indicators calculated from `X` and `X_land` are therefore assigned `NA` (rather than `0`) for years that are missing data. 
+If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is either assigned `NA` or `0`. In the case of fishery independent data, a species may still be present in the community even if it is not detected during the survey, and so all indicators calculated from `X` and `X_land` are assigned `NA` for years that are missing data. 
 
-In contrast, we assume that if there are no recorded commercial landings of a species, then that species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fished group is `NA`, fishing pressure is set to `NA`.
+In contrast, for commercial landings data, `land`, we assume that no recorded landings of a species means that the species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fished group is `NA`, fishing pressure is set to `NA`.
 
 Other indicators that are calculated from `land` are assigned `NA` for years without observations (e.g., Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of Target Species, Marine Trophic Index, Mean Trophic Level of Landings).
 

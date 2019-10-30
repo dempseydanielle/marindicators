@@ -7,13 +7,13 @@
 biomassPerTL(X, TL.table, metric = "BIOMASS", TL.grouping = 1, years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
 \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
@@ -48,11 +48,13 @@ This function calculates the biomass per discrete trophic level
  for \eqn{j} areas and \eqn{i} years.
 }
 \examples{
- 
- data(X) 
- data(species.info) 
- biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
- TL.grouping = 1, years = c(2014:2019))
+# Compile data
+data(X)
+data(species.info)
+
+# Calculate indicators
+biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS",
+TL.grouping = 1, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -75,7 +77,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

@@ -14,20 +14,19 @@
 #'  calculated.
 #'
 #'  Notes on indicator calculations: In the individual functions, the user
-#'  generally has control over which metric (e.g., \code{BIOMASS} or
-#'  \code{ABUNDANCE}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"}) are
-#'  used to calculate the indicator. Here, the same metric and group are used to
-#'  calculate each indicator. Defaults are \code{metric = "ABUNDANCE"} and
-#'  \code{group = "ALL"}.
-
+#'  generally has control over which metric (e.g., \code{"BIOMASS"} or
+#'  \code{"ABUNDANCE"}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"})
+#'  are used to calculate the indicator. Here, the same metric and group are
+#'  used to calculate each indicator. Defaults are \code{metric = "ABUNDANCE"}
+#'  and \code{group = "ALL"}.
 #'@inheritParams shannon
 #'@inheritParams allStructure
 #'@param metric A character string indicating which column in \code{X} to use to
 #'  calculate the indicators. Default is \code{metric = "ABUNDANCE"}.
 #'@param groups A vector indicating the species group(s) for which to calculate
-#'  the indicators. If \code{group = "ALL"}, all species will be included;
+#'  the indicators. If \code{groups = "ALL"}, all species will be included;
 #'  otherwise, each entry must be a character string matching the name of a
-#'  column in \code{species.table}.
+#'  column in \code{species.table}. Default is \code{groups = "ALL"}.
 #'@param TL.table A dataframe with columns \code{SPECIES} and the corresponding
 #'  \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
 #'  the unique values of species codes in \code{X} (or a subset thereof). Other
@@ -51,12 +50,12 @@
 #'  Standardized indicators are noted with \code{_s} in the name.
 #'@importFrom stats aggregate
 #'@family biodiversity indicators
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'data(species.info)
 #'
+#'# Calculate raw and standardized indicators
 #'allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.info,
 #'    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 #'@export

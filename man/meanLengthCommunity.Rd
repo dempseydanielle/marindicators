@@ -8,15 +8,16 @@
 meanLengthCommunity(X_length, metric, years)
 }
 \arguments{
-\item{X_length}{A dataframe of fishery independent survey data with columns
-\code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, and \code{SPECIES}
-is a numeric code indicating the species sampled. \code{LENGTH} is the
-length class (cm) and \code{BIOMASS} is the corresponding abundance at
-length (stratified and corrected for catchability as required). Species for
-which there are no length data should be assigned \code{LENGTH = -99}. These
-observations are removed by the function.}
+\item{X_length}{A dataframe of fishery independent data derived from research
+vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}. \code{YEAR} indicates the
+year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, and \code{SPECIES} is a numeric code
+indicating the species sampled. \code{LENGTH} is the length class (cm) and
+\code{BIOMASS} is the corresponding abundance at length (stratified and
+corrected for catchability as required). Species for which there are no
+length data should be assigned \code{LENGTH = -99}. These observations are
+removed by the function.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator.}
@@ -60,7 +61,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Marine Science, 67: 692-716
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{structure and functioning indicators}

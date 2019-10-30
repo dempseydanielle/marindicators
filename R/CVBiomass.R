@@ -7,13 +7,14 @@
 #'  CVBiomass = sd(total biomass for the past n years)/mean(total biomass for
 #'  the past n years)
 #'@inheritParams biomassPerTL
-#'@param X A dataframe of fishery independent survey data or model output with
-#'  columns \code{YEAR}, \code{ID}, and \code{BIOMASS}.  \code{YEAR} indicates
-#'  the year the observation was recorded, \code{ID} is an area code indicating
-#'  where the observation was recorded, and \code{BIOMASS} is the total recorded
-#'  biomass (stratified and corrected for catchability as required). (Note: if
-#'  \code{X} has an additional \code{SPECIES} column, the function will
-#'  automatically calculate the total biomass).
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID}, and
+#'  \code{BIOMASS}.  \code{YEAR} indicates the year the observation was
+#'  recorded, \code{ID} is an area code indicating where the observation was
+#'  recorded, and \code{BIOMASS} is the total recorded biomass (stratified and
+#'  corrected for catchability as required). (Note: if \code{X} has an
+#'  additional \code{SPECIES} column, the function will automatically calculate
+#'  the total biomass).
 #'@param wind Window for the moving average. The first and last
 #'  \code{floor(wind/2)} values of the indicator are assigned \code{NA} to
 #'  account for the moving average. Default is \code{wind = 5} years.
@@ -42,7 +43,7 @@
 #'  Using indicators for evaluating, comparing and communicating the ecological
 #'  status of exploited marine ecosystems. Part 2: Setting the scene. ICES
 #'  Journal of Marine Science, 67: 692-716
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

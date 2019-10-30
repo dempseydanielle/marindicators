@@ -10,15 +10,16 @@
 #'  2006).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
-#'@param X_length A dataframe of fishery independent survey data with columns
-#'  \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}.
-#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-#'  area code indicating where the observation was recorded, and \code{SPECIES}
-#'  is a numeric code indicating the species sampled. \code{LENGTH} is the
-#'  length class (cm) and \code{BIOMASS} is the corresponding abundance at
-#'  length (stratified and corrected for catchability as required). Species for
-#'  which there are no length data should be assigned \code{LENGTH = -99}. These
-#'  observations are removed by the function.
+#'@param X_length A dataframe of fishery independent data derived from research
+#'  vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{LENGTH}, and \code{BIOMASS}. \code{YEAR} indicates the
+#'  year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, and \code{SPECIES} is a numeric code
+#'  indicating the species sampled. \code{LENGTH} is the length class (cm) and
+#'  \code{BIOMASS} is the corresponding abundance at length (stratified and
+#'  corrected for catchability as required). Species for which there are no
+#'  length data should be assigned \code{LENGTH = -99}. These observations are
+#'  removed by the function.
 #'@param group  character string indicating which species to include in the
 #'  indicator calculation. If \code{group = "ALL"}, all species will be
 #'  included; otherwise, \code{group} should match a column name in
@@ -42,12 +43,14 @@
 #'
 #'  ICES. 2006. Report of the Working Group on Ecosystem Effects of Fishing
 #'  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
-#'@author Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca}, Catalina
-#'  Gomez, Alida Bundy
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X_length)
 #'data(species.table)
 #'
+#'# Calculate indicator
 #'largeFishIndicator(X_length, group = "FINFISH", species.table = species.table,
 #'    metric = "BIOMASS", years = c(2014:2019))
 #'@export

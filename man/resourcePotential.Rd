@@ -8,25 +8,25 @@ resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
   years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
-(stratified and corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS} or \code{ABUNDANCE}. \code{YEAR}
+indicates the year the observation was recorded, \code{ID} is an area code
+indicating where the observation was recorded, \code{SPECIES} is a numeric
+code indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is
+the corresponding biomass/abundance (stratified and corrected for
+catchability as required).}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. If \code{group = "ALL"}, all species will be included;
+the indicator. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
@@ -49,16 +49,20 @@ This function calculates the Biomass or Abundance of a
 This indicator reflects temporal dynamics of species groups.
 }
 \examples{
+# Compile data
 data(X)
 data(species.table)
 
+# Calculate total abundance and biomass
 resourcePotential(X, groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 resourcePotential(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 
+# Calculate biomass of trophic guilds
 trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE")
 resourcePotential(X, groups = trophicguild.groups,
    species.table = species.table, metric = "BIOMASS", years = c(2014:2019))
 
+# Calculate biomass of fished groups
 resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", "FORAGE", "GADOIDS", "GROUNDFISH")
 resourcePotential(X, groups = resource.groups, species.table = species.table,
    metric = "BIOMASS", years = c(2014:2019))
@@ -69,10 +73,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other resource potential indicators: \code{\link{fishingInBalance}}
+Other resource potential indicators: \code{\link{allPotential}},
+  \code{\link{fishingInBalance}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and functioning indicators}

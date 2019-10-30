@@ -7,19 +7,18 @@
 #'  index is sensitive to the number of species recorded in the sample
 #'  (Magurran, 1988).
 #'@inheritParams resourcePotential
-#'@param X A dataframe of fishery independent survey data or model output with
-#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
-#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-#'  area code indicating where the observation was recorded, \code{SPECIES} is a
-#'  numeric code indicating the species sampled, and \code{ABUNDANCE} is the
-#'  corresponding abundance (stratified and corrected for catchability as
-#'  required).
-#'@param species.table A table with at least one column, where the column name
-#'  is the string \code{group}, and the column entries are species codes from
-#'  \code{X} indicating which species are included that group.
-#'  \code{species.table} may also include columns for other species groups;
-#'  these will be ignored. If \code{group = "ALL"}, this table is not required.
-#'  Default is \code{species.table = NULL}.
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, and \code{ABUNDANCE}. \code{YEAR} indicates the year the
+#'  observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{ABUNDANCE} is the corresponding abundance
+#'  (stratified and corrected for catchability as required).
+#'@param species.table A table where the column names match the entries in
+#'  \code{groups}. Column entries are species codes indicating the species from
+#'  \code{X} included in each group. \code{species.table} may also include
+#'  columns for other species groups; these will be ignored. If \code{groups =
+#'  "ALL"}, this table is not required. Default is \code{species.table = NULL}.
 #'@param metric A character string indicating which column in \code{X} to use to
 #'  calculate the indicator. Default is \code{metric = "ABUNDANCE"}.
 #'@param years A vector of years for which to calculate indicator.
@@ -39,7 +38,7 @@
 #'
 #'  Magurran, AE. 1988. Ecological Diversity and its Measurement. Chapman and
 #'  Hall, London. 179 pp.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

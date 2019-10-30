@@ -10,13 +10,14 @@ allStability(X, land, maxlength.group, species.table, speciesinfo.table,
   export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
-(stratified and corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR}
+indicates the year the observation was recorded, \code{ID} is an area code
+indicating where the observation was recorded, \code{SPECIES} is a numeric
+code indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is
+the corresponding biomass/abundance (stratified and corrected for
+catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -70,11 +71,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -98,7 +99,7 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 This function calculates all (or a subset) of the Stability and
  Resistance indicators for \eqn{j} areas and \eqn{i} years. The user can
  choose whether the function returns the indicator dataframe to the global
- environment, exports the dataframe to a csv file, or both. The user can also
+ environment, exports the dataframe to a .csv file, or both. The user can also
  choose whether the function returns the raw indicator values, the
  standaradized (z-score) values, or both.
 }
@@ -121,11 +122,13 @@ This function calculates the Stability and Resistance indicators:
  abundance. See individual functions for more flexibility.
 }
 \examples{
+# Compile data
 data(X)
 data(land)
 data(species.info)
 data(species.table)
 
+# Calculate indicators
 allStability(X = X, land = land, maxlength.group = "FINFISH",
    species.table = species.table, speciesinfo.table = species.info,TL.grouping = 1,
    wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
@@ -141,7 +144,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

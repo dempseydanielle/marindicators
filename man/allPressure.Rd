@@ -9,13 +9,13 @@ allPressure(X, land, species.table, speciesinfo.table, landings.groups,
   glob.env = TRUE, export.path = NULL, export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
-(stratified and corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -60,11 +60,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -88,7 +88,7 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 This function calculates all (or a subset) of the Pressure
  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
  the function returns the indicator dataframe to the global environment,
- exports the dataframe to a csv file, or both. The user can also choose
+ exports the dataframe to a .csv file, or both. The user can also choose
  whether the function returns the raw indicator values, the standaradized
  (z-score) values, or both.
 }
@@ -102,11 +102,13 @@ This function calculates the Pressure indicators: Diversity of the
  indicator is calculated.
 }
 \examples{
+# Compile data
 data(X)
 data(land)
 data(species.table)
 data(species.info)
 
+# Species groups of interest
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
 FP.groups <- data.frame(rbind(c("ALL", "ALL"),
    c("CLUPEIDS", "CLUPEIDS.L"),
@@ -114,6 +116,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
    c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
+# Calculate indicators
 allPressure(X = X, land = land, species.table = species.table,
    speciesinfo.table = species.info, landings.groups = landings.groups,
    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)
@@ -129,7 +132,7 @@ Other fishing pressure indicators: \code{\link{fishingPressure}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

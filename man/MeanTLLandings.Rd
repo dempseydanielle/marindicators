@@ -61,9 +61,14 @@ Mean trophic level of fisheries landings (\eqn{TL_{Land}}):
  the more threatened high-trophic level fishes (Pauly et al., 1998).
 }
 \examples{
+# Compile data
 data(land)
 data(species.info)
+
+# Calculate indicators
+# Mean trophic level of landings
 meanTLLandings(land, TL.table = species.info, minTL = 0, years = c(2014:2019))
+# Marine trophic index
 meanTLLandings(land, TL.table = species.info, minTL = 3.25, years = c(2014:2019))
 }
 \references{
@@ -89,7 +94,7 @@ Other fishing pressure indicators: \code{\link{allPressure}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

@@ -8,25 +8,24 @@ largeSpeciesIndicator(X, group, species.table = NULL, maxlength.table,
   max.length = 85, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{group}{character string indicating which species to include in the
 indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{maxlength.table}{A dataframe with columns \code{SPECIES} and
 \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
@@ -84,8 +83,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Marine Science, 67: 692-716
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{allStructure}}, \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allStructure}},
+  \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{meanTLCommunity}}

@@ -8,25 +8,24 @@ meanMaxLength(X, group, species.table = NULL, maxlength.table, metric,
   years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{group}{character string indicating which species to include in the
 indicator calculation. If \code{group = "ALL"}, all species will be
 included; otherwise, \code{group} should match a column name in
 \code{species.table}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{maxlength.table}{A dataframe with columns \code{SPECIES} and
 \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
@@ -58,10 +57,12 @@ Mean Maximum Length: \deqn{Mean Maximum Length = \Sigma
  species \eqn{i} (excluding invertebrates; Shin et al., 2005).
 }
 \examples{
+# Compile data
 data(X)
 data(species.info)
 data(species.table)
 
+# Calculate indicators
 meanMaxLength(X, group = "FINFISH", species.table = species.table, 
    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 meanMaxLength(X, group = "FINFISH", species.table = species.table, 
@@ -82,7 +83,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

@@ -78,7 +78,8 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  706
 }
 \seealso{
-Other resource potential indicators: \code{\link{resourcePotential}}
+Other resource potential indicators: \code{\link{allPotential}},
+  \code{\link{resourcePotential}}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

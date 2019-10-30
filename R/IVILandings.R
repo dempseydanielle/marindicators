@@ -35,11 +35,14 @@
 #'
 #'  Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007. Intrinsic
 #'  vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(land)
 #'data(species.info)
+#'
+#'# Calculate indicator
 #'IVILandings(land, IVI.table = species.info, negative = TRUE, years = c(2014:2019))
 #'@export
 

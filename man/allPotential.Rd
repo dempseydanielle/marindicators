@@ -10,13 +10,14 @@ allPotential(X, land, species.table, speciesinfo.table, resource.groups,
   export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS} or
-\code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-recorded, \code{ID} is an area code indicating where the observation was
-recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding biomass/abundance
-(stratified and corrected for catchability as required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, \code{SPECIES} is a numeric code
+indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is the
+corresponding biomass/abundance (stratified and corrected for catchability
+as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -40,7 +41,8 @@ matching the name of a column in \code{species.table}. If
 \code{resource.groups = NULL}, these indicators will not be calculated.}
 
 \item{minTL}{The minimum trophic level of species to include to calculate FiB.
-If \code{minTL = NULL}, FiB wll not be calculated.}
+If \code{minTL = NULL}, FiB wll not be calculated. Default is \code{minTL =
+0}.}
 
 \item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE =
 0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
@@ -50,13 +52,13 @@ be calculated.}
 calculating FiB. The average landings and average mean trophic level of the
 landings over the baseline period are used as baseline values to calculate
 FiB. \code{land} must include data for the baseline period. If
-\code{base.start = NULL}, FiB wll not be calculated.}
+\code{base.start = NULL}, FiB will not be calculated.}
 
 \item{base.end}{Year indicating the end of the baseline period for calculating
 FiB. The average landings and average mean trophic level of the landings
 over the baseline period are used as baseline values to calculate FiB.
 \code{land} must include data for the baseline period. If \code{base.end =
-NULL}, FiB wll not be calculated.}
+NULL}, FiB will not be calculated.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 
@@ -66,11 +68,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -94,8 +96,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 This function calculates all (or a subset) of the Resource
  Potential indicators for \eqn{j} areas and \eqn{i} years. The user can
  choose whether the function returns the indicator dataframe to the global
- environment, exports the dataframe to a csv file, or both. The user can also
- choose whether the function returns the raw indicator values, the
+ environment, exports the dataframe to a .csv file, or both. The user can
+ also choose whether the function returns the raw indicator values, the
  standaradized (z-score) values, or both.
 }
 \details{
@@ -107,13 +109,17 @@ This function calculates the Resource Potential indicators: Abundance
  calculated.
 }
 \examples{
+# Compile data
 data(X)
 data(land)
 data(species.table)
 data(species.info)
 
+# Species groups of interest
 resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH",
    "FORAGE",  "GADOIDS", "GROUNDFISH")
+
+# Calculate indicators
 allPotential(X = X, land = land, species.table = species.table,
    speciesinfo.table = species.info, resource.groups = resource.groups,
    TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019),
@@ -126,15 +132,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allStructure}},
-  \code{\link{biomassRatio}},
-  \code{\link{communityCondition}},
-  \code{\link{largeFishIndicator}},
-  \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTLCommunity}}
+Other resource potential indicators: \code{\link{fishingInBalance}},
+  \code{\link{resourcePotential}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
-\concept{ecosystem structure and function indicators}
+\concept{resource potential indicators}

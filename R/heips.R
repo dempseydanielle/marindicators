@@ -23,8 +23,8 @@
 #'   Kenchington T, Kenchington E (2013) Biodiversity Metrics for Use in the
 #'   Ecosystem Approach to Oceans Management. Can. Tech. Rep. Fish. Aquat. Sci.
 #'   3059: vi+188p.
-#' @author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
-#'   Catalina Gomez, Alida Bundy
+#' @author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'  Catalina Gomez, Alida Bundy
 #' @examples
 #' data(X)
 #' heips(X, groups = "ALL", species.table = NULL, metric = "ABUNDANCE", years = c(2014:2019))

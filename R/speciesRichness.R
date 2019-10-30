@@ -16,14 +16,14 @@
 #'  the number of target species recorded in all trawl catches collected in that
 #'  year for a given area.
 #'@inheritParams shannon
-#'@param X A dataframe of fishery independent survey data or model output OR
-#'  commercial landings data. Fishery independent suvey data has columns
-#'  \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE} and/or
-#'  \code{BIOMASS}. \code{YEAR} indicates the year the observation was recorded,
-#'  \code{ID} is an area code indicating where the observation was recorded,
-#'  \code{SPECIES} is a numeric code indicating the species sampled, and
-#'  \code{ABUNDANCE}/\code{BIOMASS} is the corresponding abundance/biomass
-#'  (stratified and corrected for catchability as required).
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, OR commercial landings data. Fishery
+#'  independent suvey data has columns \code{YEAR}, \code{ID}, \code{SPECIES},
+#'  and \code{ABUNDANCE} and/or \code{BIOMASS}. \code{YEAR} indicates the year
+#'  the observation was recorded, \code{ID} is an area code indicating where the
+#'  observation was recorded, \code{SPECIES} is a numeric code indicating the
+#'  species sampled, and \code{ABUNDANCE}/\code{BIOMASS} is the corresponding
+#'  abundance/biomass (stratified and corrected for catchability as required).
 #'
 #'  Similarly, commercial landings data should have columns \code{YEAR},
 #'  \code{ID}, \code{SPECIES} are as above, and \code{CATCH} is the
@@ -43,13 +43,15 @@
 #'
 #'  Hurlbert SH. 1971. The non-concept of species diversity: a critique and
 #'  alternative parameters. Ecology, 52, 577-86.
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@importFrom stats na.omit
 #'@examples
+#'# Calculate species richness (community)
 #'data(X)
 #'speciesRichness(X, groups = "ALL", metric = "BIOMASS", years = c(2014:2019))
 #'
+#'# Calculate diversity of target species
 #'data(land)
 #'speciesRichness(land, groups = "ALL", metric = "CATCH",  years = c(2014:2019))
 #'@export

@@ -29,7 +29,7 @@
 #'  indicators for evaluating, comparing and communicating the ecological status
 #'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
 #'  Marine Science, 67: 692-716
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X_length)

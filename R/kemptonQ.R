@@ -32,11 +32,14 @@
 #'
 #'  Kempton R, Taylor L. 1976. Models and statistics for species diversity.
 #'  Nature 262:818-820
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(species.info)
+#'
+#'# Calculate indicator
 #'kemptonQ(X, TL.table = species.info, percentiles = c(.25, 0.75), minTL = 0,
 #'    groups = "ALL", metric = "ABUNDANCE", years = c(2014:2019))
 #'@export

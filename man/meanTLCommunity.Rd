@@ -7,13 +7,13 @@
 meanTLCommunity(X, TL.table, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
 \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
@@ -46,8 +46,11 @@ Mean trophic level (TL): \deqn{TL = \Sigma (TL_i*B_i)/\Sigma B_i}
  the structure of the community (Christensen, 1998).
 }
 \examples{
+# Compile data
 data(X)
 data(species.info)
+
+# Calculate indicator
 meanTLCommunity(X, TL.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 }
 \references{
@@ -65,14 +68,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Prog. Ser. 512, 115–140.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{allStructure}}, \code{\link{biomassRatio}},
+Other ecosystem structure and function indicators: \code{\link{allStructure}},
+  \code{\link{biomassRatio}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

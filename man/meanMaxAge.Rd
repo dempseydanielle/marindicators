@@ -7,13 +7,13 @@
 meanMaxAge(X, age.table, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{age.table}{A dataframe with columns \code{SPECIES} and \code{MAXAGE},
 the maximum recorded age of the corresponding species. Entries in the
@@ -48,8 +48,11 @@ Mean Maximum Age: \deqn{Mean Maximum Age = \Sigma
  average lifespan (Shin et al., 2010).
 }
 \examples{
+# Compile data
 data(X)
 data(species.info)
+
+# Calculate indicator
 meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 }
 \references{
@@ -71,7 +74,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{biomassPerTL}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

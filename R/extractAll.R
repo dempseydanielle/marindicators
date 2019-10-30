@@ -1,8 +1,8 @@
 #'@title Calculates indicators from all attributes
 #'@description This function can calculate all of the indicators described in
 #'  this package. The user can choose whether the function returns the indicator
-#'  dataframe to the global environment, exports the dataframe to a csv file, or
-#'  both. The user can also choose whether the function returns the raw
+#'  dataframe to the global environment, exports the dataframe to a .csv file,
+#'  or both. The user can also choose whether the function returns the raw
 #'  indicator values, the standaradized (z-score) values, or both.
 #'@details This function calculates the indicators for each attribute and
 #'  pressure: Biodiversity, Structure and Functioning, Stability and Resistance,
@@ -15,23 +15,23 @@
 #'@inheritParams allStability
 #'@inheritParams allPotential
 #'@inheritParams allPressure
-#'@param X A dataframe of fishery independent survey data or model output with
-#'  columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{BIOMASS} and
-#'  \code{ABUNDANCE}. \code{YEAR} indicates the year the observation was
-#'  recorded, \code{ID} is an area code indicating where the observation was
-#'  recorded, \code{SPECIES} is a numeric code indicating the species sampled,
-#'  and \code{ABUNDANCE} is the corresponding abundance (stratified and
-#'  corrected for catchability as required).
-#'@param X_length A dataframe of fishery independent survey data or model output
-#'  with columns \code{YEAR}, \code{ID}, \code{SPECIES}, \code{LENGTH},
-#'  \code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates the year the
-#'  observation was recorded, \code{ID} is an area code indicating where the
-#'  observation was recorded, and \code{SPECIES} is a numeric code indicating
-#'  the species sampled. \code{LENGTH} is the length class (cm) and
-#'  \code{ABUNDANCE} is the corresponding abundance at length (stratified and
-#'  corrected for catchability as required). Species for which there are no
-#'  length data should be assigned \code{LENGTH = -99}. These observations are
-#'  removed by the function.
+#'@param X A dataframe of fishery independent data derived from research vessel
+#'  survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{BIOMASS} and \code{ABUNDANCE}. \code{YEAR} indicates
+#'  the year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, \code{SPECIES} is a numeric code
+#'  indicating the species sampled, and \code{ABUNDANCE} is the corresponding
+#'  abundance (stratified and corrected for catchability as required).
+#'@param X_length A dataframe of fishery independent data derived from research
+#'  vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{LENGTH}, \code{BIOMASS} and \code{ABUNDANCE}.
+#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+#'  area code indicating where the observation was recorded, and \code{SPECIES}
+#'  is a numeric code indicating the species sampled. \code{LENGTH} is the
+#'  length class (cm) and \code{ABUNDANCE} is the corresponding abundance at
+#'  length (stratified and corrected for catchability as required). Species for
+#'  which there are no length data should be assigned \code{LENGTH = -99}. These
+#'  observations are removed by the function.
 #'@param land A dataframe of commercial landings data with columns \code{YEAR},
 #'  \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
 #'  the landing was recorded, \code{ID} is an area code indicating where the
@@ -80,10 +80,11 @@
 #'  Standardized indicators are noted with "_s" in the name.
 #'@importFrom stats aggregate
 #'@importFrom utils write.csv
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@export
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(X_length)
 #'data(land)
@@ -91,6 +92,7 @@
 #'data(species.info)
 #'data(Length_Weight)
 #'
+#'# Species groups of interest
 #'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
 #'    "ZOOPISCIVORE")
 #'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
@@ -107,6 +109,7 @@
 #'     c("GROUNDFISH", "GROUNDFISH.L")))
 #' names(FP.groups) <- c("group.X", "group.land")
 #'
+#'# Calculate indicators
 #' extractAll(X = X, X_length = X_length, land = land,
 #'     speciesinfo.table = species.info, species.table = species.table,
 #'     LenWt.table = Length_Weight,

@@ -14,7 +14,7 @@ landing was recorded, \code{SPECIES} is a numeric code indicating the
 species landed, and \code{CATCH} is the corresponding landed weight.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicator. If \code{group = "ALL"}, all species will be included;
+the indicator. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
 column in \code{species.table}.}
 
@@ -41,10 +41,14 @@ This function calculates the commercial landings of predefined
 Calculates the Landings of predefined species groups.
 }
 \examples{
+# Compile data
 data(land)
 data(species.table)
 
+# Species of interest
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
+
+# Calculate indicators
 landings(land, groups = landings.groups, species.table = species.table, 
    years = c(2014:2019))
 }
@@ -60,7 +64,7 @@ Other fishing pressure indicators: \code{\link{allPressure}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

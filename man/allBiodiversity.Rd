@@ -10,28 +10,27 @@ allBiodiversity(X, metric = "ABUNDANCE", groups = "ALL",
   export.path = NULL, export.id = NULL)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{ABUNDANCE}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{ABUNDANCE} is the
-corresponding abundance (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{ABUNDANCE}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{ABUNDANCE} is the corresponding abundance
+(stratified and corrected for catchability as required).}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate the indicators. Default is \code{metric = "ABUNDANCE"}.}
 
 \item{groups}{A vector indicating the species group(s) for which to calculate
-the indicators. If \code{group = "ALL"}, all species will be included;
+the indicators. If \code{groups = "ALL"}, all species will be included;
 otherwise, each entry must be a character string matching the name of a
-column in \code{species.table}.}
+column in \code{species.table}. Default is \code{groups = "ALL"}.}
 
-\item{species.table}{A table with at least one column, where the column name
-is the string \code{group}, and the column entries are species codes from
-\code{X} indicating which species are included that group.
-\code{species.table} may also include columns for other species groups;
-these will be ignored. If \code{group = "ALL"}, this table is not required.
-Default is \code{species.table = NULL}.}
+\item{species.table}{A table where the column names match the entries in
+\code{groups}. Column entries are species codes indicating the species from
+\code{X} included in each group. \code{species.table} may also include
+columns for other species groups; these will be ignored. If \code{groups =
+"ALL"}, this table is not required. Default is \code{species.table = NULL}.}
 
 \item{TL.table}{A dataframe with columns \code{SPECIES} and the corresponding
 \code{TL} (trophic level). Entries in the \code{SPECIES} column should be
@@ -53,11 +52,11 @@ not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
-values for each area ID are returned by the function. Indicators are
+values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
-the standard deviation (ignoring NA values). If \code{std = FALSE}, the
-standardized indcator values are not returned. Default is \code{std = TRUE}.
-Either \code{raw} or \code{std} must be \code{TRUE}.}
+the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
+the standardized indcator values are not returned. Default is \code{std =
+TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
 environment. Default is \code{glob.env = TRUE}.}
@@ -95,15 +94,14 @@ This function calculates the Biodiversity indicators: Species
  calculated.
 
  Notes on indicator calculations: In the individual functions, the user
- generally has control over which metric (e.g., \code{BIOMASS} or
- \code{ABUNDANCE}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"}) are
- used to calculate the indicator. Here, the same metric and group are used to
- calculate each indicator. Defaults are \code{metric = "ABUNDANCE"} and
- \code{group = "ALL"}.
+ generally has control over which metric (e.g., \code{"BIOMASS"} or
+ \code{"ABUNDANCE"}) and group (e.g., \code{"ALL"} or \code{"GROUNDFISH"})
+ are used to calculate the indicator. Here, the same metric and group are
+ used to calculate each indicator. Defaults are \code{metric = "ABUNDANCE"}
+ and \code{group = "ALL"}.
 }
 \examples{
 data(X)
-data(species.info)
 
 allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.info,
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
@@ -116,7 +114,7 @@ Other biodiversity indicators: \code{\link{heips}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

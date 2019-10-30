@@ -50,8 +50,11 @@ The weighted Intrinsic Vulnerability Index (IVI) of species in the
  \url{http://www.int-res.com/articles/suppl/m333p001_app.pdf}
 }
 \examples{
+# Compile data
 data(land)
 data(species.info)
+
+# Calculate indicator
 IVILandings(land, IVI.table = species.info, negative = TRUE, years = c(2014:2019))
 }
 \references{
@@ -72,7 +75,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

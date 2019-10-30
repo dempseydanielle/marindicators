@@ -20,13 +20,15 @@
 #'  Shin YJ, Rochet MJ, Jennings S, Field JG, Gislason H. 2005. Using size-based
 #'  indicators to evaluate the ecosystem effects of fishing. In: ICES Journal of
 #'  Marine Science. p 384-396
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
+#'# Compile data
 #'data(X)
 #'data(species.info)
 #'data(species.table)
 #'
+#'# Calculate indicators
 #'meanMaxLength(X, group = "FINFISH", species.table = species.table, 
 #'    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 #'meanMaxLength(X, group = "FINFISH", species.table = species.table, 

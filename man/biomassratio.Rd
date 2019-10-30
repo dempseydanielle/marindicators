@@ -7,13 +7,13 @@
 biomassRatio(X, ratio.groups, species.table, metric = "BIOMASS", years)
 }
 \arguments{
-\item{X}{A dataframe of fishery independent survey data or model output with
-columns \code{YEAR}, \code{ID}, \code{SPECIES}, and \code{BIOMASS}.
-\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
-area code indicating where the observation was recorded, \code{SPECIES} is a
-numeric code indicating the species sampled, and \code{BIOMASS} is the
-corresponding biomass (stratified and corrected for catchability as
-required).}
+\item{X}{A dataframe of fishery independent data derived from research vessel
+survey data or model output, with columns \code{YEAR}, \code{ID},
+\code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
+observation was recorded, \code{ID} is an area code indicating where the
+observation was recorded, \code{SPECIES} is a numeric code indicating the
+species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
+and corrected for catchability as required).}
 
 \item{ratio.groups}{A dataframe with two columns, which must be named
 \code{group1} and \code{group2}. Each row holds the group names for one
@@ -64,11 +64,16 @@ One useful biomass ratio is the proportion of predatory fish in the
  \deqn{B_{invertebrates}/B_{demersal}} and \deqn{B_{pelagic}/B_{demersal}}
 }
 \examples{
+# Compile data
+data(X)
 data(species.table)
+
+# Species groups of interest
 ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))
 names(ratio.groups) <- c("group1", "group2")
 
-biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table, 
+# Calculate indicators
+biomassRatio(X, ratio.groups = ratio.groups, species.table = species.table,
    metric = "BIOMASS", years = c(2014:2019))
 }
 \references{
@@ -90,15 +95,14 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Marine Science, 67: 692-716
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allPotential}},
-  \code{\link{allStructure}},
+Other ecosystem structure and function indicators: \code{\link{allStructure}},
   \code{\link{communityCondition}},
   \code{\link{largeFishIndicator}},
   \code{\link{largeSpeciesIndicator}},
   \code{\link{meanTLCommunity}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}
