@@ -24,8 +24,8 @@
 #'  indicator calculation. If \code{group = "ALL"}, all species will be
 #'  included; otherwise, \code{group} should match a column name in
 #'  \code{species.table}.
-#'@param large.fish Threshold for large fish (cm). Default is 35 cm (i.e., large
-#'  fish are those with \code{X_length$LENGTH} >= 35 cm).
+#'@param large.fish Threshold for large fish (cm). Default is \code{large.fish =
+#'  35} (i.e., large fish are those with \code{X_length$LENGTH} >= 35 cm).
 #'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
 #'  \code{LargeFishIndicator}.
 #'

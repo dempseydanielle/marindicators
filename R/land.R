@@ -8,10 +8,7 @@
 #' Species, Fishing Pressure, Landings, Marine Trophic Index, and Mean Trophic
 #' Index of Landings.
 #'
-#' @format Dimensions will vary depending on the number of species, years, and
-#'   areas of interest.
-#'
-#'   This example data is a dataframe with 612 rows and 4 variables: \describe{
+#' @format This example data is a dataframe with 612 rows and 4 variables: \describe{
 #'   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
 #'   observation was recorded} \item{SPECIES}{Numeric code indicating the
 #'   species sampled (can be consistent with X or not; see vignette)}

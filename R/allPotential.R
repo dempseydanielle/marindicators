@@ -12,7 +12,6 @@
 #'  file for the individual functions for information on how each indicator is
 #'  calculated.
 #'@inheritParams allStructure
-#'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams fishingInBalance
 #'@param X A dataframe of fishery independent data derived from research vessel

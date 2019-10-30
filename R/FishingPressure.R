@@ -78,7 +78,7 @@
 #'    species.table = species.table,  years = c(2014:2019))
 #'@export
 
-fishingPressure <- function(X, land, FP.groups, species.table = NULL, years){
+fishingPressure <- function(X, land, FP.groups, species.table, years){
   
   for (k in 1:nrow(FP.groups)){
     

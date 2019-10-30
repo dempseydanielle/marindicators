@@ -3,8 +3,8 @@
 #'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Species Indicator (LSI): \deqn{LSI = \Sigma B_i(L_{max} > 85
 #'  cm)/\Sigma B_i} where \eqn{B_i} is biomass of individual species, \eqn{i},
-#'  and \eqn{L_{max}} is the maximum asymptotic length in cm (here the default
-#'  is 85 cm; Shin et al., 2010).
+#'  and \eqn{L_{max}} is the maximum asymptotic length in cm (threshold default
+#'  here is 85 cm; Shin et al., 2010).
 #'@inheritParams biomassPerTL
 #'@inheritParams shannon
 #'@param group  character string indicating which species to include in the
@@ -14,10 +14,11 @@
 #'@param maxlength.table A dataframe with columns \code{SPECIES} and
 #'  \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 #'  Entries in the \code{SPECIES} column should be the unique values of species
-#'  codes in \code{X} (or a subset thereof). Other columns in \code{maxlength.table}
-#'  are ignored.
-#'@param max.length The threshold for large fish (cm). Default is 85 cm (i.e., large
-#'  species are those with \code{MAXLENGTH} >= 85 cm).
+#'  codes in \code{X} (or a subset thereof). Other columns in
+#'  \code{maxlength.table} are ignored.
+#'@param max.length The threshold for large species (cm). Default is
+#'  \code{max.length = 85} (i.e., large species are those with \code{MAXLENGTH}
+#'  >= 85 cm).
 #'@return Returns a dataframe with 3 columns. \code{ID}, \code{YEAR}, and
 #'  \code{LargeSpeciesIndicator}.
 #'
@@ -29,7 +30,7 @@
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
-#'  Shephard S, Fung T, Houle JE, Farnsworth KD, Reid DG, Rossberg AG (2012)
+#'  Shephard S, Fung T, Houle JE, Farnsworth KD, Reid DG, Rossberg AG. 2012.
 #'  Size-selective fishing drives species composition in the Celtic Sea. ICES J
 #'  Mar Sci 69:223-234
 #'
@@ -40,12 +41,12 @@
 #'  indicators for evaluating, comparing and communicating the ecological status
 #'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
 #'  Marine Science, 67: 692-716
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
 #'data(species.table)
-#'largeSpeciesIndicator(X, group = "ALL", species.table = species.table, 
+#'largeSpeciesIndicator(X, group = "ALL", species.table = species.table,
 #'    maxlength.table = species.info, max.length=85,  metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

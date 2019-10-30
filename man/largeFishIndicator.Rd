@@ -33,8 +33,8 @@ columns for other species groups; these will be ignored. If \code{groups =
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
-\item{large.fish}{Threshold for large fish (cm). Default is 35 cm (i.e., large
-fish are those with \code{X_length$LENGTH} >= 35 cm).}
+\item{large.fish}{Threshold for large fish (cm). Default is \code{large.fish =
+35} (i.e., large fish are those with \code{X_length$LENGTH} >= 35 cm).}
 
 \item{years}{A vector of years for which to calculate indicator.}
 }

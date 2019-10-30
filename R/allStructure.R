@@ -21,9 +21,9 @@
 #'  biomass. \code{ABUNDANCE} is used to calculate Mean Length weighted by
 #'  abundance and Community Condition. See individual functions for more
 #'  flexibility.
-#'@inheritParams resourcePotential
 #'@inheritParams communityCondition
 #'@inheritParams largeSpeciesIndicator
+#'@inheritParams largeFishIndicator
 #'@param X A dataframe of fishery independent data derived from research vessel
 #'  survey data or model output, with columns \code{YEAR}, \code{ID},
 #'  \code{SPECIES}, and \code{BIOMASS}. \code{YEAR} indicates the year the
@@ -31,6 +31,16 @@
 #'  observation was recorded, \code{SPECIES} is a numeric code indicating the
 #'  species sampled, and \code{BIOMASS} is the corresponding biomass (stratified
 #'  and corrected for catchability as required).
+#'@param X_length A dataframe of fishery independent data derived from research
+#'  vessel survey data or model output, with columns \code{YEAR}, \code{ID},
+#'  \code{SPECIES}, \code{LENGTH}, \code{BIOMASS} and \code{ABUNDANCE}.
+#'  \code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+#'  area code indicating where the observation was recorded, and \code{SPECIES}
+#'  is a numeric code indicating the species sampled. \code{LENGTH} is the
+#'  length class (cm) and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding
+#'  biomass/abundance at length (stratified and corrected for catchability as
+#'  required). Species for which there are no length data should be assigned
+#'  \code{LENGTH = -99}. These observations are removed by the function.
 #'@param LSI.group A character string indicating the species group for which to
 #'  calculate the Large Species Indicator. Must be set to \code{"ALL"} or match
 #'  a column name in \code{species.table}. If \code{LSI.group = NULL}, the Large
@@ -113,18 +123,20 @@
 #'# Calculate raw indicators
 #'allStructure(X = X, X_length = X_length,
 #'    LSI.group = "ALL", LFI.group = "ALL",
+#'     max.length = 85, large.fish = 35,
 #'    guild.groups = trophicguild.groups, condition.groups = condition.groups,
 #'    ratio.groups = ratio.groups,
 #'    species.table = species.table, speciesinfo.table = species.info,
 #'    LenWt.table = Length_Weight,
-#'    max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
+#'    years = c(2014:2019), raw = TRUE, std = FALSE)
 #'@export
 
 allStructure <- function(X, X_length,
                          LSI.group, LFI.group,
+                         max.length = 85, large.fish = 35,
                          guild.groups, condition.groups, ratio.groups,
                          species.table, speciesinfo.table, LenWt.table,
-                         max.length, years, raw = TRUE, std = TRUE,
+                         years, raw = TRUE, std = TRUE,
                          glob.env = TRUE, export.path = NULL, export.id = NULL){
 
   if(glob.env == FALSE & length(export.path) == 0) {
@@ -181,7 +193,7 @@ allStructure <- function(X, X_length,
     if(length(LFI.group > 0)){
       
       LFI = largeFishIndicator(X_length, group = LFI.group, species.table = species.table,
-                             metric = "BIOMASS", years = years)
+                             metric = "BIOMASS", large.fish = large.fish, years = years)
       inds <- merge(inds, LFI, all.x = TRUE)
     }
     

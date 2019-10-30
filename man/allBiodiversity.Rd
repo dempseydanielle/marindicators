@@ -103,6 +103,7 @@ This function calculates the Biodiversity indicators: Species
 \examples{
 data(X)
 
+# Calculate raw and standardized indicators
 allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.info,
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 }

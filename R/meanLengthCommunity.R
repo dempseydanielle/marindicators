@@ -33,7 +33,9 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X_length)
-#'meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
+#'# Weighted by abundance
+#'meanLengthCommunity(X_length, metric = "ABUNDANCE", years = c(2014:2019))
+#'# Weighted by biomass
 #'meanLengthCommunity(X_length, metric = "BIOMASS", years = c(2014:2019))
 #'@export
 

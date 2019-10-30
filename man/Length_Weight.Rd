@@ -4,10 +4,7 @@
 \name{Length_Weight}
 \alias{Length_Weight}
 \title{Example length-weight data}
-\format{Dimensions will vary depending on the number of species, years, and
-  areas of interest.
-
-  This example data is a dataframe with 98 436 rows and 5 variables:
+\format{This example data is a dataframe with 98 436 rows and 5 variables:
   \describe{ \item{YEAR}{Year the observation was recorded} \item{ID}{Area
   where the observation was recorded} \item{SPECIES}{Numeric code indicating
   the species sampled} \item{LENGTH}{Length (class)1 cm intervals)}

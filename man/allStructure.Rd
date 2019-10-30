@@ -4,10 +4,11 @@
 \alias{allStructure}
 \title{Calculates all Structure and Functioning indicators}
 \usage{
-allStructure(X, X_length, LSI.group, LFI.group, guild.groups,
-  condition.groups, ratio.groups, species.table, speciesinfo.table,
-  LenWt.table, max.length, years, raw = TRUE, std = TRUE,
-  glob.env = TRUE, export.path = NULL, export.id = NULL)
+allStructure(X, X_length, LSI.group, LFI.group, max.length = 85,
+  large.fish = 35, guild.groups, condition.groups, ratio.groups,
+  species.table, speciesinfo.table, LenWt.table, years, raw = TRUE,
+  std = TRUE, glob.env = TRUE, export.path = NULL,
+  export.id = NULL)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -20,14 +21,14 @@ and corrected for catchability as required).}
 
 \item{X_length}{A dataframe of fishery independent data derived from research
 vessel survey data or model output, with columns \code{YEAR}, \code{ID},
-\code{SPECIES}, \code{LENGTH}, and \code{ABUNDANCE}. \code{YEAR} indicates
-the year the observation was recorded, \code{ID} is an area code indicating
-where the observation was recorded, and \code{SPECIES} is a numeric code
-indicating the species sampled. \code{LENGTH} is the length class (cm) and
-\code{ABUNDANCE} is the corresponding abundance at length (stratified and
-corrected for catchability as required). Species for which there are no
-length data should be assigned \code{LENGTH = -99}. These observations are
-removed by the function.}
+\code{SPECIES}, \code{LENGTH}, \code{BIOMASS} and \code{ABUNDANCE}.
+\code{YEAR} indicates the year the observation was recorded, \code{ID} is an
+area code indicating where the observation was recorded, and \code{SPECIES}
+is a numeric code indicating the species sampled. \code{LENGTH} is the
+length class (cm) and \code{BIOMASS}/\code{ABUNDANCE} is the corresponding
+biomass/abundance at length (stratified and corrected for catchability as
+required). Species for which there are no length data should be assigned
+\code{LENGTH = -99}. These observations are removed by the function.}
 
 \item{LSI.group}{A character string indicating the species group for which to
 calculate the Large Species Indicator. Must be set to \code{"ALL"} or match
@@ -38,6 +39,13 @@ Species Indicator will not be calculated.}
 calculate the Large Fish Indicator. Must be set to \code{"ALL"} or match a
 column name in \code{species.table}. If \code{LFI.group = NULL}, the Large
 Fish Indicator will not be calculated.}
+
+\item{max.length}{The threshold for large species (cm). Default is
+\code{max.length = 85} (i.e., large species are those with \code{MAXLENGTH}
+>= 85 cm).}
+
+\item{large.fish}{Threshold for large fish (cm). Default is \code{large.fish =
+35} (i.e., large fish are those with \code{X_length$LENGTH} >= 35 cm).}
 
 \item{guild.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
@@ -73,9 +81,6 @@ Other columns will be ignored.}
 \code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
 \code{X_length}. \code{LENGTH} is fish length at the corresponding
 \code{WEIGHT} (fish weight).}
-
-\item{max.length}{The threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with \code{MAXLENGTH} >= 85 cm).}
 
 \item{years}{A vector of years for which to calculate indicators.}
 
@@ -151,14 +156,15 @@ trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE
 condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
     "PLANKTIVORE", "ZOOPISCIVORE")
 
-# Calculate indicators
+# Calculate raw indicators
 allStructure(X = X, X_length = X_length,
    LSI.group = "ALL", LFI.group = "ALL",
+    max.length = 85, large.fish = 35,
    guild.groups = trophicguild.groups, condition.groups = condition.groups,
    ratio.groups = ratio.groups,
    species.table = species.table, speciesinfo.table = species.info,
    LenWt.table = Length_Weight,
-   max.length = 85, years = c(2014:2019), raw = TRUE, std = FALSE)
+   years = c(2014:2019), raw = TRUE, std = FALSE)
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

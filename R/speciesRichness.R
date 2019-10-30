@@ -28,10 +28,10 @@
 #'  Similarly, commercial landings data should have columns \code{YEAR},
 #'  \code{ID}, \code{SPECIES} are as above, and \code{CATCH} is the
 #'  corresponding landed weight.
-#'@return Returns a dataframe with 3 columns. If \code{metric = "BIOMASS"} or
-#'  \code{metric = "ABUNDANCE"}, columns will be named \code{ID}, \code{YEAR},
-#'  \code{SpeciesRichness}. If \code{metric = "CATCH"}, columns will be named
-#'  \code{ID}, \code{YEAR}, \code{DiversityTargetSpp}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and if
+#'  \code{metric = "ABUNDANCE"}, a column \code{SpeciesRichness_group} for each
+#'  entry in \code{groups} OR if \code{metric = "CATCH"}, a column
+#'  \code{DiversityTargetSpp_group} for each entry in \code{groups}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  values is assigned \code{NA}.

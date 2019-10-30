@@ -1,6 +1,6 @@
 #'@title Calculates indicators from all attributes
-#'@description This function can calculate all of the indicators described in
-#'  this package. The user can choose whether the function returns the indicator
+#'@description This function calculates all of the indicators described in this
+#'  package. The user can choose whether the function returns the indicator
 #'  dataframe to the global environment, exports the dataframe to a .csv file,
 #'  or both. The user can also choose whether the function returns the raw
 #'  indicator values, the standaradized (z-score) values, or both.
@@ -48,6 +48,14 @@
 #'  Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the
 #'  Landings, and Marine Trophic Index should be calculated using their
 #'  respective single functions (see manual or vignette).
+#'@param species.table A table where the column names match the entries in
+#'  \code{condition.groups}, \code{FP.groups}, \code{group.bio},
+#'  \code{guild.groups}, \code{landings.group}, \code{LFI.group},
+#'  \code{LSI.group}, \code{maxlength.group}, \code{ratio.groups}, and
+#'  \code{resource.groups}. Column entries are the species codes
+#'  indicating the species from \code{X} (or \code{X_length}) included in each
+#'  group. \code{species.table} may also include columns for other species
+#'  groups; these will be ignored.
 #'@param metric.bio A character string indicating which column in \code{X} to
 #'  use to calculate the biodiversity indicators. Default is \code{metric =
 #'  "ABUNDANCE"}.
@@ -109,32 +117,35 @@
 #'     c("GROUNDFISH", "GROUNDFISH.L")))
 #' names(FP.groups) <- c("group.X", "group.land")
 #'
-#'# Calculate indicators
+#'# Calculate raw and standardized indicators
 #' extractAll(X = X, X_length = X_length, land = land,
-#'     speciesinfo.table = species.info, species.table = species.table,
-#'     LenWt.table = Length_Weight,
-#'     LSI.group = "ALL", LFI.group = "ALL",
-#'     guild.groups = trophicguild.groups,
-#'     resource.groups = resource.groups, condition.groups = condition.groups,
+#'     speciesinfo.table = species.info, species.table = species.table, years = c(2014:2019),
+#'     LSI.group = "ALL", LFI.group = "ALL", LenWt.table = Length_Weight,
+#'     guild.groups = trophicguild.groups, condition.groups = condition.groups,
 #'     ratio.groups = ratio.groups,
-#'     max.length = 85, maxlength.group = "FINFISH",
+#'     maxlength.group = "FINFISH",
+#'     resource.groups = resource.groups,
 #'     minTL.FiB = 0, base.start = 2014, base.end = 2015,
 #'     landings.groups = landings.groups, FP.groups = FP.groups,
-#'     years = c(2014:2019),
 #'     raw = TRUE, std = TRUE, export.path = NULL)
 
-
-
 extractAll <- function(X, X_length, land, 
-                       speciesinfo.table, species.table, LenWt.table, years,
+                       speciesinfo.table, species.table,  years,
+                       # biodiversity
                        metric.bio = "ABUNDANCE", group.bio = "ALL", 
                        percentiles = c(.25, 0.75), minTL.bio = 0,
-                       LSI.group, LFI.group, 
-                       guild.groups, resource.groups, condition.groups, 
-                       ratio.groups, max.length,
+                       # structure
+                       LSI.group, max.length = 85,
+                       LFI.group, large.fish = 35, LenWt.table,
+                       guild.groups, condition.groups, ratio.groups, 
+                       # stability
                        maxlength.group, TL.grouping = 1, wind = 5, negative = FALSE,
+                       # potential
+                       resource.groups,
                        minTL.FiB = 0, TE = 0.1, base.start, base.end,
+                       # pressure
                        landings.groups, FP.groups, minTL.FP = c(0, 3.25),
+                       # return
                        raw = TRUE, std = TRUE, glob.env = TRUE,
                        export.path = NULL, export.id = NULL){
   

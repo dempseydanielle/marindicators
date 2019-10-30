@@ -44,8 +44,8 @@ calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
- \code{KemptonQ_minTL}.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+ column \code{KemptonQ_minTL_group} for each entry in \code{groups}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned \code{NA}.
@@ -55,15 +55,14 @@ This function calculates Kempton's Biodiversity index (Q) for
  \eqn{j} areas and \eqn{i} years.
 }
 \details{
-Kempton's Biodiversity Index \eqn{(Q)} is a relative index of biomass
+Kempton's Biodiversity Index \eqn{(Q)} is a relative index of
  diversity calculated from the Kempton's Q75 index developed for expressing
- species diversity. This index includes those species or functional groups
- with a trophic level of three or higher. \deqn{Q = S*(p_2 -
- p_1)*log(R_2/R_1)} \eqn{S} is the total number of species or functional
- groups, \eqn{p_1} and  \eqn{p_2} are the lower and upper percentiles of
- interest and \eqn{R_1} and \eqn{R_2} are the corresponding lower and upper
- quartiles of the species abundance distribution. \eqn{p_1} and \eqn{p_2} are
- defaulted to 0.25 and 0.75, respectively (Kempton and Taylor, 1976).
+ species diversity. \deqn{Q = S*(p_2 - p_1)*log(R_2/R_1)} \eqn{S} is the
+ total number of species or functional groups, \eqn{p_1} and  \eqn{p_2} are
+ the lower and upper percentiles of interest and \eqn{R_1} and \eqn{R_2} are
+ the corresponding lower and upper quartiles of the species abundance
+ distribution. \eqn{p_1} and \eqn{p_2} are defaulted to 0.25 and 0.75,
+ respectively (Kempton and Taylor, 1976).
 }
 \examples{
 # Compile data

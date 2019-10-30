@@ -33,8 +33,8 @@ calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
- \code{PielouEvenness}.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+ column \code{PielouEvenness_group} for each entry in \code{groups}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned \code{NA}.
@@ -52,8 +52,8 @@ Pielou's Species Evenness: \deqn{J' = -\Sigma p_i ln( p_i )/ln(S)}
 }
 \examples{
 data(X)
-pielouEvenness(X, groups = "ALL", species.table = NULL, 
-   metric = "ABUNDANCE", years = c(2014:2019))
+pielouEvenness(X, groups = "ALL", species.table = NULL, metric = "ABUNDANCE", 
+   years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

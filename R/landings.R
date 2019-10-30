@@ -14,8 +14,8 @@
 #'  \code{species.table} may also include columns for other species groups;
 #'  these will be ignored. If \code{group = "ALL"}, this table is not required.
 #'  Default is \code{species.table = NULL}.
-#'@return returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
-#'  \code{group_Landings}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'   column \code{landings_group} for each entry in \code{groups}.
 #'
 #'  If there is no data for a given year, the indicator value is set to 0.
 #'@family fishing pressure indicators

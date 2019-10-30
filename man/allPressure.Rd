@@ -116,7 +116,7 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
    c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
-# Calculate indicators
+# Calculate standardized indicators
 allPressure(X = X, land = land, species.table = species.table,
    speciesinfo.table = species.info, landings.groups = landings.groups,
    FP.groups = FP.groups, minTL = c(0, 3.25), years = c(2014:2019), raw = FALSE, std = TRUE)

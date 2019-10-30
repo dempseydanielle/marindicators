@@ -30,8 +30,8 @@ columns for other species groups; these will be ignored. If \code{groups =
 \item{maxlength.table}{A dataframe with columns \code{SPECIES} and
 \code{MAXLENGTH}, the maximum recorded length of the corresponding species.
 Entries in the \code{SPECIES} column should be the unique values of species
-codes in \code{X} (or a subset thereof). Other columns in \code{maxlength.table}
-are ignored.}
+codes in \code{X} (or a subset thereof). Other columns in
+\code{maxlength.table} are ignored.}
 
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
@@ -63,10 +63,13 @@ data(species.info)
 data(species.table)
 
 # Calculate indicators
-meanMaxLength(X, group = "FINFISH", species.table = species.table, 
-   maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+# Weighted by abundance
 meanMaxLength(X, group = "FINFISH", species.table = species.table, 
    maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
+#Weighted by biomass
+meanMaxLength(X, group = "FINFISH", species.table = species.table, 
+   maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the

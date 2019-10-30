@@ -119,7 +119,7 @@ data(species.info)
 resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH",
    "FORAGE",  "GADOIDS", "GROUNDFISH")
 
-# Calculate indicators
+# Calculate standardized indicators
 allPotential(X = X, land = land, species.table = species.table,
    speciesinfo.table = species.info, resource.groups = resource.groups,
    TE = 0.1, base.start = 2014, base.end = 2015, years = c(2014:2019),

@@ -4,21 +4,15 @@
 \name{example_inds}
 \alias{example_inds}
 \title{Indicators calculated from the example data included in the package}
-\format{Dimensions will vary depending on the number of indicators
-  calculated, the value of arguments \code{raw} and \code{std}, and the
-  number of years and areas of interest.
-
-  This example data is a dataframe with 12 rows and 114 variables: \describe{
+\format{This example data is a dataframe with 12 rows and 114 variables: \describe{
   \item{YEAR}{Year for which indicator was calculated} \item{ID}{Area for
   which the indicator was calculated} \item{56 Raw Indicators}{Raw values of
   Biodiversity, Structure and Functioning, Stability and Resistance,
   Potential and Fishing Pressure indicators.} \item{56 Standardized
   Indicators}{The same indicators noted above, but standardized using z-score
-  (subtract mean and divide by standard deviation)} }}
+  (subtract mean and divide by standard deviation).} }}
 \source{
-These are example indicators calculated from made-up example data
-  modified from Fisheries and Oceans Canada summer research vessel trawl
-  survey for the Scotian Shelf.
+These are example indicators calculated from made-up example data.
 }
 \usage{
 example_inds

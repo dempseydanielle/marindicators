@@ -29,10 +29,13 @@
 #'data(species.table)
 #'
 #'# Calculate indicators
-#'meanMaxLength(X, group = "FINFISH", species.table = species.table, 
-#'    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+#'# Weighted by abundance
 #'meanMaxLength(X, group = "FINFISH", species.table = species.table, 
 #'    maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
+#'#Weighted by biomass
+#'meanMaxLength(X, group = "FINFISH", species.table = species.table, 
+#'    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
+#'
 #'@export
 
 meanMaxLength <- function(X, group, species.table = NULL, maxlength.table, metric, years) {

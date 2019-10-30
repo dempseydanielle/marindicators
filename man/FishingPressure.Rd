@@ -4,7 +4,7 @@
 \alias{fishingPressure}
 \title{Calculates Fishing Pressure}
 \usage{
-fishingPressure(X, land, FP.groups, species.table = NULL, years)
+fishingPressure(X, land, FP.groups, species.table, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel

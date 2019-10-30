@@ -4,10 +4,7 @@
 \name{X_length}
 \alias{X_length}
 \title{Example length-based fishery independent survey data}
-\format{Dimensions will vary depending on the number of species, years, and
-  areas of interest.
-
-  This example data is a dataframe with 14378 rows and 6 variables:
+\format{This example data is a dataframe with 14378 rows and 6 variables:
   \describe{ \item{YEAR}{Year the observation was recorded} \item{ID}{Area
   where the observation was recorded} \item{SPECIES}{Numeric code indicating
   the species sampled} \item{LENGTH}{Length class of sample species, in cm}
@@ -16,7 +13,7 @@
   and corrected for catchability} }}
 \source{
 This is made-up example data modified from Fisheries and Oceans
-  Canada summer research vessel trawl survey for the Scotian Shelf.
+  Canada summer research vessel trawl survey for the Scotian Shelf Bioregion.
 }
 \usage{
 X_length

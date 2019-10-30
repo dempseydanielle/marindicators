@@ -7,8 +7,8 @@
 #'  Pielou's Index is the Shannon-Weiner Index computed for the sample \eqn{S}
 #'  and represents a measure of evenness of the community (Pielou, 1966).
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
-#'  \code{PielouEvenness}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'  column \code{PielouEvenness_group} for each entry in \code{groups}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  values is assigned \code{NA}.
@@ -26,8 +26,8 @@
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)
-#'pielouEvenness(X, groups = "ALL", species.table = NULL, 
-#'    metric = "ABUNDANCE", years = c(2014:2019))
+#'pielouEvenness(X, groups = "ALL", species.table = NULL, metric = "ABUNDANCE", 
+#'    years = c(2014:2019))
 #'@export
 
 

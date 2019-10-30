@@ -38,10 +38,10 @@ calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns. If \code{metric = "BIOMASS"} or
- \code{metric = "ABUNDANCE"}, columns will be named \code{ID}, \code{YEAR},
- \code{SpeciesRichness}. If \code{metric = "CATCH"}, columns will be named
- \code{ID}, \code{YEAR}, \code{DiversityTargetSpp}.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and if
+ \code{metric = "ABUNDANCE"}, a column \code{SpeciesRichness_group} for each
+ entry in \code{groups} OR if \code{metric = "CATCH"}, a column
+ \code{DiversityTargetSpp_group} for each entry in \code{groups}.
 
  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
  values is assigned \code{NA}.

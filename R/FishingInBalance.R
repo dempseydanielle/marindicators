@@ -15,7 +15,8 @@
 #'  ecosystem is less productive owing to excessive fishery removals (Pauly et
 #'  al., 2000).
 #'@inheritParams meanTLLandings
-#'@param minTL The minimum trophic level of species to include.
+#'@param minTL The minimum trophic level of species to include. Default is
+#'  \code{minTL = 0}.
 #'@param TE Trophic efficiency. Default is \code{TE = 0.1}, i.e., a trophic
 #'  efficiency of 10\%.
 #'@param base.start Year indicating the beginning of the baseline period. The
@@ -40,13 +41,13 @@
 #'  Pauly D, Christensen V, Walters C. 2000. Ecopath, Ecosim, and Ecospace as
 #'  tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci 57:697
 #'  706
-#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
+#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(land)
 #'data(species.info)
-#'fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,  
-#'    base.start = 2014, base.end = 2015, years = c(2014:2019))  
+#'fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,
+#'    base.start = 2014, base.end = 2015, years = c(2014:2019))
 #'@export
 
 fishingInBalance<- function(land, TL.table, minTL = 0, TE = 0.1,   

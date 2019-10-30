@@ -7,7 +7,7 @@
 #'  standaradized (z-score) values, or both.
 #'@details This function calculates the Stability and Resistance indicators:
 #'  Biomass per Trophic Level, Intrinsic Vulnerability Index, Coefficient of
-#'  Variation of the biomass, Mean Lifespan, and Mean Maximum Length (weighted
+#'  Variation of the Biomass, Mean Lifespan, and Mean Maximum Length (weighted
 #'  by biomass and abundance). If data are not available to calculate one or
 #'  more of these indicators, a subset will be returned. See the help file for
 #'  the individual functions for information on how each indicator is
@@ -21,8 +21,6 @@
 #'  Biomass per Trophic Level, and Mean Maximum Length weighted by biomass.
 #'  \code{ABUNDANCE} is used to calculate Mean Maximum Length weighted by
 #'  abundance. See individual functions for more flexibility.
-
-#'@inheritParams resourcePotential
 #'@inheritParams landings
 #'@inheritParams communityCondition
 #'@inheritParams allStructure

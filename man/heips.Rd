@@ -32,8 +32,8 @@ calculate the indicator. Default is \code{metric = "ABUNDANCE"}.}
 \item{years}{A vector of years for which to calculate indicator.}
 }
 \value{
-Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
-  \code{Heips}.
+Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+  column \code{Heips_group} for each entry in \code{groups}.
 
   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
   value is assigned NA.
@@ -74,6 +74,6 @@ Other biodiversity indicators: \code{\link{allBiodiversity}},
 }
 \author{
 Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
- Catalina Gomez, Alida Bundy
+  Catalina Gomez, Alida Bundy
 }
 \concept{biodiversity indicators}

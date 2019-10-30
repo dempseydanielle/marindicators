@@ -34,7 +34,7 @@
 #'
 #'  Blanchard F, Boucher J (2001) Temporal variability of total biomass in
 #'  harvested communities of demersal fishes. Fisheries Research. 49. 283–293.
-#'  10.1016/S0165-7836(00)00203-4. (not in Tech refs)
+#'  10.1016/S0165-7836(00)00203-4.
 #'
 #'  Shin, YJ, Shannon LJ, Bundy A, Coll M, Aydin K, Bez N, Blanchard JL, Borges,
 #'  MF, Diallo I, Diaz E, Heymans JJ, Hill L, Johannesen E, Jouffre D, Kifani S,

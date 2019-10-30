@@ -367,22 +367,22 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
 names(FP.groups) <- c("group.X", "group.land")
 
 # Calculate indicators
-all_inds <- extractAll(X = X, X_length = X_length, land = land,
-           speciesinfo.table = species.info, 
-           species.table = species.table, 
-           LenWt.table = Length_Weight,
-           metric.bio = "ABUNDANCE", group.bio = "ALL", minTL.bio = 3,
-           LSI.group = "ALL", LFI.group = "ALL",
-           guild.groups = trophicguild.groups,
-           resource.groups = resource.groups, condition.groups = condition.groups, 
-           ratio.groups = ratio.groups,
-           max.length = 85,  maxlength.group = "FINFISH", 
-           TL.grouping = 1, wind = 5, negative = TRUE,
-           minTL.FiB = 0, base.start = 2014, base.end = 2015,
-           landings.groups = landings.groups, FP.groups = FP.groups, 
-           minTL.FP = c(0, 3.25), years = c(2014:2019), 
-           export.path = NULL, glob.env = TRUE,
-           raw = FALSE, std = TRUE)
+all_inds <- extractAll(X = X, X_length = X_length, land = land, years = c(2014:2019), 
+                       speciesinfo.table = species.info, species.table = species.table, 
+                       metric.bio = "ABUNDANCE", group.bio = "ALL", minTL.bio = 3,
+                       LSI.group = "ALL", max.length = 85, 
+                       LFI.group = "ALL", large.fish = 35,
+                       LenWt.table = Length_Weight,
+                       guild.groups = trophicguild.groups, 
+                       condition.groups = condition.groups, 
+                       ratio.groups = ratio.groups,
+                       maxlength.group = "FINFISH",  TL.grouping = 1, wind = 5, negative = TRUE,
+                       resource.groups = resource.groups,
+                       minTL.FiB = 0, base.start = 2014, base.end = 2015,
+                       landings.groups = landings.groups, FP.groups = FP.groups, 
+                       minTL.FP = c(0, 3.25), 
+                       export.path = NULL, glob.env = TRUE,
+                       raw = FALSE, std = TRUE)
 
 names(all_inds)
 

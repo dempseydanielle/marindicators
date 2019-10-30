@@ -19,7 +19,8 @@ species landed, and \code{CATCH} is the corresponding landed weight.}
 be the unique values of species codes in \code{land} (or a subset thereof).
 Other columns in \code{TL.table} are ignored.}
 
-\item{minTL}{The minimum trophic level of species to include.}
+\item{minTL}{The minimum trophic level of species to include. Default is
+\code{minTL = 0}.}
 
 \item{TE}{Trophic efficiency. Default is \code{TE = 0.1}, i.e., a trophic
 efficiency of 10\%.}
@@ -65,8 +66,8 @@ Fishing-in-Balance (FiB) Index: \deqn{FiB = log(Y_k*(1/TE)^{TL_k}) -
 \examples{
 data(land)
 data(species.info)
-fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,  
-   base.start = 2014, base.end = 2015, years = c(2014:2019))  
+fishingInBalance(land, TL.table = species.info, minTL = 0, TE = 0.1,
+   base.start = 2014, base.end = 2015, years = c(2014:2019))
 }
 \references{
 Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
@@ -82,7 +83,7 @@ Other resource potential indicators: \code{\link{allPotential}},
   \code{\link{resourcePotential}}
 }
 \author{
-Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
+Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
  Catalina Gomez, Alida Bundy
 }
 \concept{resource potential indicators}

@@ -7,8 +7,8 @@
 #'   contributes to the total abundance or biomass of the community (Heip,
 #'   1974).
 #' @inheritParams  shannon
-#' @return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
-#'   \code{Heips}.
+#' @return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'   column \code{Heips_group} for each entry in \code{groups}.
 #'
 #'   If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'   value is assigned NA.
@@ -24,7 +24,7 @@
 #'   Ecosystem Approach to Oceans Management. Can. Tech. Rep. Fish. Aquat. Sci.
 #'   3059: vi+188p.
 #' @author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
-#'  Catalina Gomez, Alida Bundy
+#'   Catalina Gomez, Alida Bundy
 #' @examples
 #' data(X)
 #' heips(X, groups = "ALL", species.table = NULL, metric = "ABUNDANCE", years = c(2014:2019))

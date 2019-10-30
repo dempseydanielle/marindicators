@@ -2,7 +2,7 @@
 % Please edit documentation in R/IVILandings.R
 \name{IVILandings}
 \alias{IVILandings}
-\title{Calculates the Intrinsic Vulnerability Index of fishery landings}
+\title{Calculates the Intrinsic Vulnerability Index of commercial landings}
 \usage{
 IVILandings(land, IVI.table, negative = FALSE, years)
 }
@@ -33,12 +33,12 @@ Returns a dataframe with three columns: \code{ID}, \code{YEAR}, and
 }
 \description{
 This function calculates the Intrinsic Vulnerability Index (IVI)
- of the fishery landings for \eqn{j} areas and \eqn{i} years.
+ of the commercial landings for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 The weighted Intrinsic Vulnerability Index (IVI) of species in the
- fishery landings was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma
- C_j} where the sum is over all species, j. The vulnerability for each
+ commercial landings was estimated as: \deqn{IVI = \Sigma(IVI_j * C_j)/\Sigma
+ C_j} where the sum is over all species, \eqn{j}. The vulnerability for each
  species was determined by considering several traits including maximum
  length, age at first maturity, longevity, von Bertalanffy growth parameter,
  natural mortality, fecundity, spatial behaviour and geographic range (e.g.

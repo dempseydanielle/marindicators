@@ -4,15 +4,15 @@
 \alias{extractAll}
 \title{Calculates indicators from all attributes}
 \usage{
-extractAll(X, X_length, land, speciesinfo.table, species.table,
-  LenWt.table, years, metric.bio = "ABUNDANCE", group.bio = "ALL",
-  percentiles = c(0.25, 0.75), minTL.bio = 0, LSI.group, LFI.group,
-  guild.groups, resource.groups, condition.groups, ratio.groups,
-  max.length, maxlength.group, TL.grouping = 1, wind = 5,
-  negative = FALSE, minTL.FiB = 0, TE = 0.1, base.start, base.end,
-  landings.groups, FP.groups, minTL.FP = c(0, 3.25), raw = TRUE,
-  std = TRUE, glob.env = TRUE, export.path = NULL,
-  export.id = NULL)
+extractAll(X, X_length, land, speciesinfo.table, species.table, years,
+  metric.bio = "ABUNDANCE", group.bio = "ALL", percentiles = c(0.25,
+  0.75), minTL.bio = 0, LSI.group, max.length = 85, LFI.group,
+  large.fish = 35, LenWt.table, guild.groups, condition.groups,
+  ratio.groups, maxlength.group, TL.grouping = 1, wind = 5,
+  negative = FALSE, resource.groups, minTL.FiB = 0, TE = 0.1,
+  base.start, base.end, landings.groups, FP.groups, minTL.FP = c(0,
+  3.25), raw = TRUE, std = TRUE, glob.env = TRUE,
+  export.path = NULL, export.id = NULL)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -53,15 +53,13 @@ Landings, and Marine Trophic Index should be calculated using their
 respective single functions (see manual or vignette).}
 
 \item{species.table}{A table where the column names match the entries in
-\code{guild.groups}, \code{ratio.groups}, and/or \code{condition.groups}.
-Column entries are the species codes indicating the species from \code{X}
-(or \code{X_length}) included in each group. \code{species.table} may also
-include columns for other species groups; these will be ignored.}
-
-\item{LenWt.table}{A table of annual length at weight data with 5 columns.
-\code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
-\code{X_length}. \code{LENGTH} is fish length at the corresponding
-\code{WEIGHT} (fish weight).}
+\code{condition.groups}, \code{FP.groups}, \code{group.bio},
+\code{guild.groups}, \code{landings.group}, \code{LFI.group},
+\code{LSI.group}, \code{maxlength.group}, \code{ratio.groups}, and
+\code{resource.groups}. Column entries are the species codes
+indicating the species from \code{X} (or \code{X_length}) included in each
+group. \code{species.table} may also include columns for other species
+groups; these will be ignored.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 
@@ -85,20 +83,27 @@ calculate the Large Species Indicator. Must be set to \code{"ALL"} or match
 a column name in \code{species.table}. If \code{LSI.group = NULL}, the Large
 Species Indicator will not be calculated.}
 
+\item{max.length}{The threshold for large species (cm). Default is
+\code{max.length = 85} (i.e., large species are those with \code{MAXLENGTH}
+>= 85 cm).}
+
 \item{LFI.group}{A character string indicating the species group for which to
 calculate the Large Fish Indicator. Must be set to \code{"ALL"} or match a
 column name in \code{species.table}. If \code{LFI.group = NULL}, the Large
 Fish Indicator will not be calculated.}
 
+\item{large.fish}{Threshold for large fish (cm). Default is \code{large.fish =
+35} (i.e., large fish are those with \code{X_length$LENGTH} >= 35 cm).}
+
+\item{LenWt.table}{A table of annual length at weight data with 5 columns.
+\code{YEAR}, \code{ID}, and \code{SPECIES} are as described in
+\code{X_length}. \code{LENGTH} is fish length at the corresponding
+\code{WEIGHT} (fish weight).}
+
 \item{guild.groups}{A vector indicating the species groups for which to
 calculate the resource potential. Each entry must be a character string
 matching the name of a column in \code{species.table}. If \code{guild.groups
 = NULL}, these indicators will not be calculated.}
-
-\item{resource.groups}{A vector indicating the species groups for which to
-calculate the resource potential. Each entry must be a character string
-matching the name of a column in \code{species.table}. If
-\code{resource.groups = NULL}, these indicators will not be calculated.}
 
 \item{condition.groups}{A vector indicating the species groups for which to
 calculate Fulton's community condition factor. Each entry must be a
@@ -112,9 +117,6 @@ biomass ratio, with the numerator in column \code{group1} and the
 denominator in column \code{group2}. Each entry must be a character string
 matching the name of a column in \code{species.table} or \code{"ALL"}. If
 \code{ratio.groups = NULL}, biomass ratio indicators will not be calculated.}
-
-\item{max.length}{The threshold for large fish (cm). Default is 85 cm (i.e., large
-species are those with \code{MAXLENGTH} >= 85 cm).}
 
 \item{maxlength.group}{A character string indicating the species group for
 which to calculate the mean maximum length of fish in the community. Must be
@@ -138,6 +140,11 @@ Default is \code{wind = 5} years.}
 Biomass and the Intrinsic Vulnerability Index of the Landings will be
 multiplied by -1 so that their expected response is to decrease with
 increasing fishing pressure. Default is \code{negative = FALSE}.}
+
+\item{resource.groups}{A vector indicating the species groups for which to
+calculate the resource potential. Each entry must be a character string
+matching the name of a column in \code{species.table}. If
+\code{resource.groups = NULL}, these indicators will not be calculated.}
 
 \item{minTL.FiB}{The minimum trophic level of species to include to calculate
 Fishing-in-Balance.}
@@ -207,8 +214,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
  Standardized indicators are noted with "_s" in the name.
 }
 \description{
-This function can calculate all of the indicators described in
- this package. The user can choose whether the function returns the indicator
+This function calculates all of the indicators described in this
+ package. The user can choose whether the function returns the indicator
  dataframe to the global environment, exports the dataframe to a .csv file,
  or both. The user can also choose whether the function returns the raw
  indicator values, the standaradized (z-score) values, or both.
@@ -247,18 +254,16 @@ FP.groups <- data.frame(rbind(c("ALL", "ALL"),
     c("GROUNDFISH", "GROUNDFISH.L")))
 names(FP.groups) <- c("group.X", "group.land")
 
-# Calculate indicators
+# Calculate raw and standardized indicators
 extractAll(X = X, X_length = X_length, land = land,
-    speciesinfo.table = species.info, species.table = species.table,
-    LenWt.table = Length_Weight,
-    LSI.group = "ALL", LFI.group = "ALL",
-    guild.groups = trophicguild.groups,
-    resource.groups = resource.groups, condition.groups = condition.groups,
+    speciesinfo.table = species.info, species.table = species.table, years = c(2014:2019),
+    LSI.group = "ALL", LFI.group = "ALL", LenWt.table = Length_Weight,
+    guild.groups = trophicguild.groups, condition.groups = condition.groups,
     ratio.groups = ratio.groups,
-    max.length = 85, maxlength.group = "FINFISH",
+    maxlength.group = "FINFISH",
+    resource.groups = resource.groups,
     minTL.FiB = 0, base.start = 2014, base.end = 2015,
     landings.groups = landings.groups, FP.groups = FP.groups,
-    years = c(2014:2019),
     raw = TRUE, std = TRUE, export.path = NULL)
 }
 \author{

@@ -7,8 +7,8 @@
 #'  number of species recorded in the sample. This index is sensitive to the
 #'  number of species recorded in the sample (Hill, 1973).
 #'@inheritParams shannon
-#'@return Returns a dataframe with 3 columns: \code{ID}, \code{YEAR}, and
-#'  \code{HillDiversity}.
+#'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
+#'  column \code{HillDiversity_group} for each entry in \code{groups}.
 #'
 #'  If there is no data for spatial scale \eqn{j} in year \eqn{i}, indicator
 #'  values is assigned \code{NA}.

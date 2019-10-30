@@ -106,7 +106,7 @@ This function calculates all (or a subset) of the Stability and
 \details{
 This function calculates the Stability and Resistance indicators:
  Biomass per Trophic Level, Intrinsic Vulnerability Index, Coefficient of
- Variation of the biomass, Mean Lifespan, and Mean Maximum Length (weighted
+ Variation of the Biomass, Mean Lifespan, and Mean Maximum Length (weighted
  by biomass and abundance). If data are not available to calculate one or
  more of these indicators, a subset will be returned. See the help file for
  the individual functions for information on how each indicator is
@@ -128,7 +128,7 @@ data(land)
 data(species.info)
 data(species.table)
 
-# Calculate indicators
+# Calculate raw and standardized indicators
 allStability(X = X, land = land, maxlength.group = "FINFISH",
    species.table = species.table, speciesinfo.table = species.info,TL.grouping = 1,
    wind = 5, negative = FALSE, years = c(2014:2019), raw = TRUE, std = TRUE)
