@@ -35,7 +35,7 @@ Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
 }
 \description{
 This function calculates the commercial landings of predefined
- speceies groups for \eqn{j} areas and \eqn{i} years.
+ species groups for \eqn{j} areas and \eqn{i} years.
 }
 \details{
 Calculates the Landings of predefined species groups.

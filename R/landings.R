@@ -1,6 +1,6 @@
 #'@title Calculates the Landings per fished group
 #'@description This function calculates the commercial landings of predefined
-#'  speceies groups for \eqn{j} areas and \eqn{i} years.
+#'  species groups for \eqn{j} areas and \eqn{i} years.
 #'@details Calculates the Landings of predefined species groups.
 #'@inheritParams resourcePotential
 #'@param land A dataframe of commercial landings data with columns \code{YEAR},

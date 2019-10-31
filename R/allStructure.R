@@ -76,14 +76,14 @@
 #'  Other columns will be ignored.
 #'@param years A vector of years for which to calculate indicators.
 #'@param raw A logical value. If \code{raw = TRUE}, the raw indicator values are
-#'  returned by the function. If \code{raw = FALSE}, the raw indcator values are
+#'  returned by the function. If \code{raw = FALSE}, the raw indicator values are
 #'  not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 #'  must be \code{TRUE}.
 #'@param std A logical value. If \code{std = TRUE}, the standardized indicator
 #'  values for each area \code{ID} are returned by the function. Indicators are
 #'  standardized using z-scores, i.e., by subtracting the mean and dividing by
 #'  the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
-#'  the standardized indcator values are not returned. Default is \code{std =
+#'  the standardized indicator values are not returned. Default is \code{std =
 #'  TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.
 #'@param glob.env Logical value indicating whether to return output to global
 #'  environment. Default is \code{glob.env = TRUE}.

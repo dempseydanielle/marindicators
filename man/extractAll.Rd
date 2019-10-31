@@ -48,7 +48,7 @@ length, intrinsic vulnerability index, and trophic level of the landings).
 Entries in the \code{SPECIES} column should be the unique values of species
 codes in \code{X}/\code{X_length} (or a subset thereof). If there are
 different species codes in \code{X} and \code{land}, the Fishing-in-Balance,
-Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the
+Intrinsic Vulnerability Index of Landings, Mean Trophic Level of the
 Landings, and Marine Trophic Index should be calculated using their
 respective single functions (see manual or vignette).}
 
@@ -124,7 +124,7 @@ set to \code{"ALL"} or match a column name in \code{species.table}. If
 \code{maxlength.group = NULL}, the mean maximum length will not be
 calculated.}
 
-\item{TL.grouping}{Size of the trophic level bin for which to aggregrate
+\item{TL.grouping}{Size of the trophic level bin for which to aggregate
 biomass when calculating Biomass per Trophic Level. For example, if
 \code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
 2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
@@ -150,7 +150,7 @@ matching the name of a column in \code{species.table}. If
 Fishing-in-Balance.}
 
 \item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE =
-0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
+0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB will not
 be calculated.}
 
 \item{base.start}{Year indicating the beginning of the baseline period for
@@ -184,7 +184,7 @@ c(0, 3.25)}, which will return the mean trophic level of the landings and
 the marine trophic index.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned by the function. If \code{raw = FALSE}, the raw indcator values are
+returned by the function. If \code{raw = FALSE}, the raw indicator values are
 not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
@@ -192,7 +192,7 @@ must be \code{TRUE}.}
 values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
-the standardized indcator values are not returned. Default is \code{std =
+the standardized indicator values are not returned. Default is \code{std =
 TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
@@ -218,7 +218,7 @@ This function calculates all of the indicators described in this
  package. The user can choose whether the function returns the indicator
  dataframe to the global environment, exports the dataframe to a .csv file,
  or both. The user can also choose whether the function returns the raw
- indicator values, the standaradized (z-score) values, or both.
+ indicator values, the standardized (z-score) values, or both.
 }
 \details{
 This function calculates the indicators for each attribute and

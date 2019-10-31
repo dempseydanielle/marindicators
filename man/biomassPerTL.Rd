@@ -23,7 +23,7 @@ columns in \code{TL.table} will be ignored.}
 \item{metric}{A character string indicating which column in \code{X} to use to
 calculate indicator. Default is \code{metric = "BIOMASS"}.}
 
-\item{TL.grouping}{Size of the trophic level bin for which to aggregrate
+\item{TL.grouping}{Size of the trophic level bin for which to aggregate
 biomass. For example, if \code{TL.grouping = 1}, trophic levels are binned
 from 1.00 - 1.99, 2.00 - 2.99, etc. If \code{TL.grouping = 0.5}, trophic
 levels are binned from 1.00 - 1.49, 1.50 - 1.99, 2.00 - 2.49, 2.50 - 2.99,

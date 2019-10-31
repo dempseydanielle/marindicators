@@ -23,7 +23,7 @@ A dataframe of example length-based fishery independent survey data for two
 areas (AREA1 and AREA2) from 2014 - 2019.
 }
 \details{
-Indicators calculated using length-based fishsery independent suvery data
+Indicators calculated using length-based fishery independent survey data
 (among other arguments): Community Condition, Large Fish Indicator, Mean
 Length.
 }

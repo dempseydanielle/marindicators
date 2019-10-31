@@ -9,7 +9,7 @@ and Resistance to Perturbations, Resource Potential) and one marine ecosystem pr
 data. All indicators were selected and evaluated using the “Indicator Selection Guidance
 Framework” developed by Bundy, Gomez, and Cook (2017).
 
-For information on the Guidance Framework, including defintions of ecosystem attributes and sub-attributes, and methods for screening indicators, please refer to: Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232: xii + 212 p.
+For information on the Guidance Framework, including definitions of ecosystem attributes and sub-attributes, and methods for screening indicators, please refer to: Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the selection and evaluation of ecological indicators. Can. Tech. Rep. Fish. Aquat. Sci. 3232: xii + 212 p.
 
 For general information on the `marindicators` package, including the indicators that can be calculated, descriptions of data, and examples, please refer to the vignette: Introduction to `marindicators`.
 

@@ -4,7 +4,7 @@
 #'  choose whether the function returns the indicator dataframe to the global
 #'  environment, exports the dataframe to a .csv file, or both. The user can
 #'  also choose whether the function returns the raw indicator values, the
-#'  standaradized (z-score) values, or both.
+#'  standardized (z-score) values, or both.
 #'@details This function calculates the Resource Potential indicators: Abundance
 #'  and Biomass of the community, Resource Potential of predefined species
 #'  groups, and Fishing-in-Balance (FiB). If data are not available to calculate
@@ -35,10 +35,10 @@
 #'  the \code{SPECIES} column should be the unique values of species codes in
 #'  \code{land} (or a subset thereof). Other columns will be ignored.
 #'@param minTL The minimum trophic level of species to include to calculate FiB.
-#'  If \code{minTL = NULL}, FiB wll not be calculated. Default is \code{minTL =
+#'  If \code{minTL = NULL}, FiB will not be calculated. Default is \code{minTL =
 #'  0}.
 #'@param TE Trophic efficiency, used to calculate FiB. Default is \code{TE =
-#'  0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
+#'  0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB will not
 #'  be calculated.
 #'@param base.start Year indicating the beginning of the baseline period for
 #'  calculating FiB. The average landings and average mean trophic level of the

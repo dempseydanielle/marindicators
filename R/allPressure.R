@@ -3,7 +3,7 @@
 #'  indicators for \eqn{j} areas and \eqn{i} years. The user can choose whether
 #'  the function returns the indicator dataframe to the global environment,
 #'  exports the dataframe to a .csv file, or both. The user can also choose
-#'  whether the function returns the raw indicator values, the standaradized
+#'  whether the function returns the raw indicator values, the standardized
 #'  (z-score) values, or both.
 #'@details This function calculates the Pressure indicators: Diversity of the
 #'  Target Species, Total Landings, Landings of Target Groups, Fishing Pressure

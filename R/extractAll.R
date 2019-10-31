@@ -3,7 +3,7 @@
 #'  package. The user can choose whether the function returns the indicator
 #'  dataframe to the global environment, exports the dataframe to a .csv file,
 #'  or both. The user can also choose whether the function returns the raw
-#'  indicator values, the standaradized (z-score) values, or both.
+#'  indicator values, the standardized (z-score) values, or both.
 #'@details This function calculates the indicators for each attribute and
 #'  pressure: Biodiversity, Structure and Functioning, Stability and Resistance,
 #'  Resource Potential, and Fishing Pressure.
@@ -45,7 +45,7 @@
 #'  Entries in the \code{SPECIES} column should be the unique values of species
 #'  codes in \code{X}/\code{X_length} (or a subset thereof). If there are
 #'  different species codes in \code{X} and \code{land}, the Fishing-in-Balance,
-#'  Intrinisc Vulnerability Index of Landings, Mean Tophic Level of the
+#'  Intrinsic Vulnerability Index of Landings, Mean Trophic Level of the
 #'  Landings, and Marine Trophic Index should be calculated using their
 #'  respective single functions (see manual or vignette).
 #'@param species.table A table where the column names match the entries in

@@ -41,11 +41,11 @@ matching the name of a column in \code{species.table}. If
 \code{resource.groups = NULL}, these indicators will not be calculated.}
 
 \item{minTL}{The minimum trophic level of species to include to calculate FiB.
-If \code{minTL = NULL}, FiB wll not be calculated. Default is \code{minTL =
+If \code{minTL = NULL}, FiB will not be calculated. Default is \code{minTL =
 0}.}
 
 \item{TE}{Trophic efficiency, used to calculate FiB. Default is \code{TE =
-0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB wll not
+0.1}, i.e., a trophic efficiency of 10\%. If \code{TE = NULL}, FiB will not
 be calculated.}
 
 \item{base.start}{Year indicating the beginning of the baseline period for
@@ -63,7 +63,7 @@ NULL}, FiB will not be calculated.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned by the function. If \code{raw = FALSE}, the raw indcator values are
+returned by the function. If \code{raw = FALSE}, the raw indicator values are
 not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
@@ -71,7 +71,7 @@ must be \code{TRUE}.}
 values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
-the standardized indcator values are not returned. Default is \code{std =
+the standardized indicator values are not returned. Default is \code{std =
 TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
@@ -98,7 +98,7 @@ This function calculates all (or a subset) of the Resource
  choose whether the function returns the indicator dataframe to the global
  environment, exports the dataframe to a .csv file, or both. The user can
  also choose whether the function returns the raw indicator values, the
- standaradized (z-score) values, or both.
+ standardized (z-score) values, or both.
 }
 \details{
 This function calculates the Resource Potential indicators: Abundance

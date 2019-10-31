@@ -46,7 +46,7 @@ are different species codes in \code{X} and \code{land}, the Intrinsic
 Vulnerability Index of the Landings indicator should be calculated
 separately using the function \code{IVILandings()}.}
 
-\item{TL.grouping}{Size of the trophic level bin for which to aggregrate
+\item{TL.grouping}{Size of the trophic level bin for which to aggregate
 biomass when calculating Biomass per Trophic Level. For example, if
 \code{TL.grouping = 1}, trophic levels are binned from 1.00 - 1.99, 2.00 -
 2.99, etc. If TL.grouping = 0.5, trophic levels are binned from 1.00 - 1.49,
@@ -59,14 +59,14 @@ the indicator are assigned \code{NA} to account for the moving average.
 Default is \code{wind = 5} years.}
 
 \item{negative}{If \code{negative = TRUE}, the Coefficient of Variation of the
-Biomasss will be multiplied by -1 so that the expected response is to
+Biomass will be multiplied by -1 so that the expected response is to
 decrease with increasing fishing pressure. Default is \code{negative =
 FALSE}.}
 
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned by the function. If \code{raw = FALSE}, the raw indcator values are
+returned by the function. If \code{raw = FALSE}, the raw indicator values are
 not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
 must be \code{TRUE}.}
 
@@ -74,7 +74,7 @@ must be \code{TRUE}.}
 values for each area \code{ID} are returned by the function. Indicators are
 standardized using z-scores, i.e., by subtracting the mean and dividing by
 the standard deviation (ignoring \code{NA} values). If \code{std = FALSE},
-the standardized indcator values are not returned. Default is \code{std =
+the standardized indicator values are not returned. Default is \code{std =
 TRUE}. Either \code{raw} or \code{std} must be \code{TRUE}.}
 
 \item{glob.env}{Logical value indicating whether to return output to global
@@ -101,7 +101,7 @@ This function calculates all (or a subset) of the Stability and
  choose whether the function returns the indicator dataframe to the global
  environment, exports the dataframe to a .csv file, or both. The user can also
  choose whether the function returns the raw indicator values, the
- standaradized (z-score) values, or both.
+ standardized (z-score) values, or both.
 }
 \details{
 This function calculates the Stability and Resistance indicators:

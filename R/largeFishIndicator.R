@@ -2,7 +2,7 @@
 #'@description This function calculates the Large Fish Indicator (LFI) for
 #'  \eqn{j} areas and \eqn{i} years.
 #'@details Large Fish Indicator (LFI): \deqn{LFI = \Sigma B_m(L >35 cm)/\Sigma
-#'  B_m} \eqn{B_m} is biomass of individuals in a body size class centred at
+#'  B_m} \eqn{B_m} is biomass of individuals in a body size class centered at
 #'  mass m, and \eqn{L} is the length (cm) of an individual. This indicator
 #'  describes the proportion (by weight) of the fish community that is larger
 #'  than some length threshold (default here is 35 cm, i.e., the proportion of

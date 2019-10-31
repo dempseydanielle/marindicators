@@ -10,7 +10,7 @@ speciesRichness(X, groups, species.table = NULL, metric, years)
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
  survey data or model output, OR commercial landings data. Fishery
- independent suvey data has columns \code{YEAR}, \code{ID}, \code{SPECIES},
+ independent survey data has columns \code{YEAR}, \code{ID}, \code{SPECIES},
  and \code{ABUNDANCE} and/or \code{BIOMASS}. \code{YEAR} indicates the year
  the observation was recorded, \code{ID} is an area code indicating where the
  observation was recorded, \code{SPECIES} is a numeric code indicating the

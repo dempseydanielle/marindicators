@@ -12,8 +12,8 @@
  \item{IVI}{Vulnerability of commercial species} \item{TL_LAND}{Trophic level
  of commercial species} }}
 \source{
-This is example data using species that are of interest the Scotian
- Shelf.
+This is example data using species that are of interest in the Scotian
+ Shelf Bioregion.
 }
 \usage{
 species.info
