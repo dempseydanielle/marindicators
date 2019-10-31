@@ -13,6 +13,7 @@ Depends:
     R (>= 3.6.0)
 Imports:
     stats
+Remotes: dempseydanielle/marindicators
 License: GPL-3 | file LICENSE
 LazyData: true
 RoxygenNote: 6.1.1
