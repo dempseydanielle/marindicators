@@ -116,7 +116,7 @@ Table 1: `marindicators` function to calculate each of the 68 indicators calcula
 There are three main steps for applying `marindicators`: Step 1: Decide which indicators to calculate; Step 2: Compile data; Step 3: Calculate indicators. Steps 1 and 2 may be interchangeable and the availability of data may inform the choice of indicators. These steps are described in detail below.
 
 ## Step 1: Decide which indicators to calculate
-The decision of which indicators to calculate will ideally be informed by an indicator selection process like the Guidance Framework (Bundy, Gomez, and Cook, 2017) and in addition may be informed by specific research questions, and/or the availability of data. The selected indicators will dictate the data required and the choice of function(s) (Steps 2 and 3).
+The decision of which indicators to calculate will ideally be informed by an indicator selection process like the Guidance Framework (Bundy, Gomez, and Cook, 2017), and may also be informed by specific research questions, and/or the availability of data. The selected indicators will dictate the data required and the choice of function(s) (Steps 2 and 3).
 
 Table 1 provides a guide for the indicators calculated by the package. Note that species groups are user-defined, and so the package is not restricted to calculating indicators for the groups in Table 1 (see **Species Groups** below).
 
@@ -294,24 +294,31 @@ data(species.info)
 ```
 
 ```{r}
+# Calculate indicators:
+# Biomass of community and groundfish species
 biomass <- resourcePotential(X = X, groups = c("ALL", "GROUNDFISH"), 
                              species.table = species.table, years = c(2014:2019))
 biomass
 
+# Margalef's Species Richness of community and groundfish species
 marg <- margalef(X= X, groups = c("ALL", "GROUNDFISH"), metric = "ABUNDANCE",  
                  species.table = species.table, years = c(2014:2019))
 marg
 
+# Biomass per Trophic Level
 biomass_TL <- biomassPerTL(X = X, TL.table = species.info, metric = "BIOMASS", 
                            TL.grouping = 1, years = c(2014:2019))
 biomass_TL
 
+# Intrinsic Vulnerability Index
 IVI <- IVILandings(land = land, IVI.table = species.info, years = c(2014:2019))
 IVI
 
+# Trophic Level of Landings
 TL_land <- meanTLLandings(land = land, TL.table = species.info, minTL = 0, years = c(2014:2019))
 TL_land
 
+# Marine Trophic Index
 MTI_land <- meanTLLandings(land = land, TL.table = species.info, minTL = 3.25, years = c(2014:2019))
 MTI_land
 
@@ -326,6 +333,7 @@ data(X)
 ```
 
 ```{r}
+# Calculate raw indicators
 allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),
                 percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, 
                 raw = TRUE, std = FALSE, 
@@ -335,6 +343,7 @@ allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019)
 By changing the arguments to `raw = FALSE` and `std = TRUE`, the function call returns the standarized versions of the same Biodiversity indicators (denoted with _s in the indicator name):
 
 ```{r}
+# Calculate standardized indicators
 allBiodiversity(X = X, metric = "ABUNDANCE", group = "ALL", years = c(2014:2019),
                 percentiles = c(.25, 0.75), minTL = 0, TL.table = species.info, 
                 raw = FALSE, std = TRUE,
@@ -393,7 +402,7 @@ Recall that if there are different species codes in `X` and `land`, then the Fis
 ### Missing Data
 If there are no observations for a given year in `X`, `X_length` or `land`, the indicator value is either assigned `NA` or `0`. In the case of fishery independent data, a species may still be present in the community even if it is not detected during the survey, and so all indicators calculated from `X` and `X_land` are assigned `NA` for years that are missing data. 
 
-In contrast, for commercial landings data, `land`, we assume that no recorded landings of a species means that the species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fished group is `NA`, fishing pressure is set to `NA`.
+In contrast, for commercial landings data, we assume that no recorded landings of a species means that the species was not landed. All landings indicators are therefore assigned `0` for years without data. For fishing pressure, if the biomass of the fished group is `NA` and landings of the group are `0`, the fishing pressure is set to `0`. Otherwise, if biomass of the fished group is `NA`, fishing pressure is set to `NA`.
 
 Other indicators that are calculated from `land` are assigned `NA` for years without observations (e.g., Intrinsic Vulnerability Index, Fishing-in-Balance, Diversity of Target Species, Marine Trophic Index, Mean Trophic Level of Landings).
 
