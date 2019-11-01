@@ -4,6 +4,8 @@
 - R-hub ubuntu-gcc-release (r-release)
 - R-hub fedora-clang-devel (r-devel)
 
+* checked using devtools::check_win_devel()
+
 ## R CMD check results (from R-hub)
 There were 0 errors, 0 warnings, and 2 notes returned from the R-hub R CMD check.
 The notes are both related to possibly mis-spelled words in the DESCRIPTION. We have verified that these words are spelled correctly.
@@ -27,13 +29,18 @@ This is a new submission.
 > On fedora-clang-devel (r-devel)
   checking CRAN incoming feasibility ...NB: need Internet access to use CRAN incoming checks
    NOTE
-  Maintainer: ‘Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>’
+  Maintainer: Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>
   
   Possibly mis-spelled words in DESCRIPTION:
     Bundy (11:478)
     marindicators (11:18)
   
   Unknown, possibly mis-spelled, fields in DESCRIPTION:
-    ‘Authors’
+    Authors
 
-0 errors √ | 0 warnings √ | 2 notes x
+0 errors | 0 warnings | 2 notes x
+
+## R CMD check results (from check_win_devel)
+There were 0 errors, 0 warnings, and 1 notes returned from the check_win_devel R CMD check.
+The note is related to possibly mis-spelled words in the DESCRIPTION. We have verified that these words are spelled correctly.
+
