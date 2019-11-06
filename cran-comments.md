@@ -1,7 +1,10 @@
 ## Comments
 
 * This is a re-submission.
-- We have omitted the mis-spelled 'Authors' field, as directed by CRAN
+* We have addressed the issues noted by the CRAN reviewer
+1. We removed the redundant part "Calculates"" from the title.
+2. We revised the Description so it does not begin with "The marindicators package".
+3. We added an ISBN to the reference in the Description.
 
 ## Test environments
 * checked on all recommended platforms using rhub::check_for_cran()

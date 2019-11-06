@@ -1,6 +1,6 @@
 # `marindicators`
 
-October 31, 2019 - Danielle Dempsey (danielle.dempsey@dfo-mpo.gc.ca)
+November 6, 2019 - Danielle Dempsey (danielle.dempsey@dfo-mpo.gc.ca)
 
 The `marindicators` package provides functions to calculate indicators for four marine
 ecosystem attributes (Biodiversity, Ecosystem Structure and Functioning, Ecosystem Stability
