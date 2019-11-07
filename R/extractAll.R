@@ -103,8 +103,7 @@
 #'# Species groups of interest
 #'trophicguild.groups <- c("LBENTHIVORE", "MBENTHIVORE", "PISCIVORE", "PLANKTIVORE",
 #'    "ZOOPISCIVORE")
-#'condition.groups <- c("FINFISH", "LBENTHIVORE", "MBENTHIVORE", "PISCIVORE",
-#'    "PLANKTIVORE", "ZOOPISCIVORE")
+#'condition.groups <- c("FINFISH", "PISCIVORE", "PLANKTIVORE", "ZOOPISCIVORE")
 #'resource.groups <- c("ALL", "CLUPEIDS", "FINFISH", "FLATFISH", "FORAGE",
 #'    "GADOIDS", "GROUNDFISH", "PELAGIC", "SKATES")
 #'ratio.groups <- data.frame(rbind(c("PELAGIC", "GROUNDFISH"), c("PREDATORS", "ALL")))

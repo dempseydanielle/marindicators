@@ -20,23 +20,23 @@ This is a re-submission.
 
 ## R CMD check results
 > On windows-x86_64-devel (r-devel), ubuntu-gcc-release (r-release)
+
+checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>'
+New submission
   
-  checking CRAN incoming feasibility ... NOTE
-  Maintainer: 'Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>'
+Possibly mis-spelled words in DESCRIPTION:
   
-  New submission
-  
-  Possibly mis-spelled words in DESCRIPTION:
-    Bundy (10:478)
-    marindicators (10:18)
+    Bundy (10:452)
 
 > On fedora-clang-devel (r-devel)
-  checking CRAN incoming feasibility ...NB: need Internet access to use CRAN incoming checks
   
-  NOTE
+  checking CRAN incoming feasibility ...NB: need Internet access to use CRAN incoming checks
+   NOTE
   Maintainer: ‘Danielle Dempsey <Danielle.Dempsey@dfo-mpo.gc.ca>’
   
   Possibly mis-spelled words in DESCRIPTION:
-    Bundy (10:478)
-    marindicators (10:18)
+    Bundy (10:452)
+
+0 errors | 0 warnings | 2 notes 
 
