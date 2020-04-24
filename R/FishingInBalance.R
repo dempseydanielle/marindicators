@@ -41,7 +41,7 @@
 #'  Pauly D, Christensen V, Walters C. 2000. Ecopath, Ecosim, and Ecospace as
 #'  tools for evaluating ecosystem impact of fisheries. ICES J Mar Sci 57:697
 #'  706
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(land)

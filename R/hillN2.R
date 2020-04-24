@@ -23,7 +23,7 @@
 #'
 #'  Hill MO. 1973. Diversity and evenness: a unifying notation and its
 #'  consequences. Ecology 54: 427-431.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

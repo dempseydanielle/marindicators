@@ -45,7 +45,7 @@
 #'  trophic flows and fishing impacts of a NW Mediterranean ecosystem with
 #'  coastal upwellings by means of standardized ecological models and
 #'  indicators. Ecol. Model. 198, 53-70.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

@@ -75,7 +75,7 @@ Other ecosystem structure and function indicators: \code{\link{allStructure}},
   \code{\link{largeSpeciesIndicator}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{ecosystem structure and function indicators}

@@ -35,7 +35,7 @@
 #'
 #'  Cheung WWL, Watson R, Morato T, Pitcher, TJ, Pauly, D. 2007. Intrinsic
 #'  vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

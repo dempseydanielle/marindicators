@@ -18,7 +18,7 @@
 #'  Aquat. Sci. 3232: xii + 212 p.
 #'
 #'  Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

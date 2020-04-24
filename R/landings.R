@@ -15,14 +15,14 @@
 #'  these will be ignored. If \code{group = "ALL"}, this table is not required.
 #'  Default is \code{species.table = NULL}.
 #'@return Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
-#'   column \code{landings_group} for each entry in \code{groups}.
+#'  column \code{landings_group} for each entry in \code{groups}.
 #'
 #'  If there is no data for a given year, the indicator value is set to 0.
 #'@family fishing pressure indicators
 #'@references  Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data
@@ -33,7 +33,7 @@
 #'landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
 #'
 #'# Calculate indicators
-#'landings(land, groups = landings.groups, species.table = species.table, 
+#'landings(land, groups = landings.groups, species.table = species.table,
 #'    years = c(2014:2019))
 #'@export
 

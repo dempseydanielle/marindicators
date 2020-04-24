@@ -38,7 +38,7 @@
 #'
 #'  Magurran, AE. 1988. Ecological Diversity and its Measurement. Chapman and
 #'  Hall, London. 179 pp.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

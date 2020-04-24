@@ -64,10 +64,10 @@ data(species.table)
 
 # Calculate indicators
 # Weighted by abundance
-meanMaxLength(X, group = "FINFISH", species.table = species.table, 
+meanMaxLength(X, group = "FINFISH", species.table = species.table,
    maxlength.table = species.info, metric = "ABUNDANCE", years = c(2014:2019))
 #Weighted by biomass
-meanMaxLength(X, group = "FINFISH", species.table = species.table, 
+meanMaxLength(X, group = "FINFISH", species.table = species.table,
    maxlength.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 
 }
@@ -86,7 +86,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

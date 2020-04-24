@@ -63,9 +63,9 @@ NULL}, FiB will not be calculated.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned by the function. If \code{raw = FALSE}, the raw indicator values are
-not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
-must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indicator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
 values for each area \code{ID} are returned by the function. Indicators are
@@ -136,7 +136,7 @@ Other resource potential indicators: \code{\link{fishingInBalance}},
   \code{\link{resourcePotential}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{resource potential indicators}

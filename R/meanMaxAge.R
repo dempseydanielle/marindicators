@@ -32,13 +32,13 @@
 #'  indicators for evaluating, comparing and communicating the ecological status
 #'  of exploited marine ecosystems. Part 2: Setting the scene. ICES Journal of
 #'  Marine Science, 67: 692-716
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #' # Compile data
 #' data(X)
 #' data(species.info)
-#' 
+#'
 #' # Calculate indicator
 #' meanMaxAge(X, age.table = species.info, metric = "BIOMASS", years = c(2014:2019))
 #'@export

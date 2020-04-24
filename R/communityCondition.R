@@ -41,7 +41,7 @@
 #'  Ricker, W. E. 1975. Computation and interpretation of biological statistics
 #'  of fish populations. Bulletin of the Fisheries Research Board of Canada
 #'  191:1-382.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

@@ -53,7 +53,7 @@
 #'  Piroddi C, Tam J, Travers-Trolet M and Shin Y. 2014. Trophic level-based
 #'  indicators to track fishing impacts across marine ecosystems. Marine Ecology
 #'  Progress Series, 512, pp.115-140.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

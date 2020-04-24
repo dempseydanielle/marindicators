@@ -72,7 +72,7 @@ Other stability and resistance indicators: \code{\link{IVILandings}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

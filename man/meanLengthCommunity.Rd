@@ -63,7 +63,7 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Marine Science, 67: 692-716
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{structure and functioning indicators}

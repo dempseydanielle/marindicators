@@ -12,12 +12,12 @@ allStability(X, land, maxlength.group, species.table, speciesinfo.table,
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
 survey data or model output, with columns \code{YEAR}, \code{ID},
-\code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR}
-indicates the year the observation was recorded, \code{ID} is an area code
-indicating where the observation was recorded, \code{SPECIES} is a numeric
-code indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is
-the corresponding biomass/abundance (stratified and corrected for
-catchability as required).}
+\code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR} indicates
+the year the observation was recorded, \code{ID} is an area code indicating
+where the observation was recorded, \code{SPECIES} is a numeric code
+indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is the
+corresponding biomass/abundance (stratified and corrected for catchability
+as required).}
 
 \item{land}{A dataframe of commercial landings data with columns \code{YEAR},
 \code{ID}, \code{SPECIES} and \code{CATCH}. \code{YEAR} indicates the year
@@ -66,9 +66,9 @@ FALSE}.}
 \item{years}{A vector of years for which to calculate indicators.}
 
 \item{raw}{A logical value. If \code{raw = TRUE}, the raw indicator values are
-returned by the function. If \code{raw = FALSE}, the raw indicator values are
-not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
-must be \code{TRUE}.}
+returned by the function. If \code{raw = FALSE}, the raw indicator values
+are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+\code{std} must be \code{TRUE}.}
 
 \item{std}{A logical value. If \code{std = TRUE}, the standardized indicator
 values for each area \code{ID} are returned by the function. Indicators are
@@ -99,8 +99,8 @@ Returns a dataframe with columns \code{ID}, \code{YEAR}, and
 This function calculates all (or a subset) of the Stability and
  Resistance indicators for \eqn{j} areas and \eqn{i} years. The user can
  choose whether the function returns the indicator dataframe to the global
- environment, exports the dataframe to a .csv file, or both. The user can also
- choose whether the function returns the raw indicator values, the
+ environment, exports the dataframe to a .csv file, or both. The user can
+ also choose whether the function returns the raw indicator values, the
  standardized (z-score) values, or both.
 }
 \details{
@@ -144,7 +144,7 @@ Other stability and resistance indicators: \code{\link{CVBiomass}},
   \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{stability and resistance indicators}

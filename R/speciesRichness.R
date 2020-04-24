@@ -43,7 +43,7 @@
 #'
 #'  Hurlbert SH. 1971. The non-concept of species diversity: a critique and
 #'  alternative parameters. Ecology, 52, 577-86.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@importFrom stats na.omit
 #'@examples

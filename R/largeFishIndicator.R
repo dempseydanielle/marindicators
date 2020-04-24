@@ -43,7 +43,7 @@
 #'
 #'  ICES. 2006. Report of the Working Group on Ecosystem Effects of Fishing
 #'  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

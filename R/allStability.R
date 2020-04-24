@@ -2,8 +2,8 @@
 #'@description This function calculates all (or a subset) of the Stability and
 #'  Resistance indicators for \eqn{j} areas and \eqn{i} years. The user can
 #'  choose whether the function returns the indicator dataframe to the global
-#'  environment, exports the dataframe to a .csv file, or both. The user can also
-#'  choose whether the function returns the raw indicator values, the
+#'  environment, exports the dataframe to a .csv file, or both. The user can
+#'  also choose whether the function returns the raw indicator values, the
 #'  standardized (z-score) values, or both.
 #'@details This function calculates the Stability and Resistance indicators:
 #'  Biomass per Trophic Level, Intrinsic Vulnerability Index, Coefficient of
@@ -26,12 +26,12 @@
 #'@inheritParams allStructure
 #'@param X A dataframe of fishery independent data derived from research vessel
 #'  survey data or model output, with columns \code{YEAR}, \code{ID},
-#'  \code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR}
-#'  indicates the year the observation was recorded, \code{ID} is an area code
-#'  indicating where the observation was recorded, \code{SPECIES} is a numeric
-#'  code indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is
-#'  the corresponding biomass/abundance (stratified and corrected for
-#'  catchability as required).
+#'  \code{SPECIES}, \code{BIOMASS}, and \code{ABUNDANCE}. \code{YEAR} indicates
+#'  the year the observation was recorded, \code{ID} is an area code indicating
+#'  where the observation was recorded, \code{SPECIES} is a numeric code
+#'  indicating the species sampled, and \code{BIOMASS}/\code{ABUNDANCE} is the
+#'  corresponding biomass/abundance (stratified and corrected for catchability
+#'  as required).
 #'@param maxlength.group A character string indicating the species group for
 #'  which to calculate the mean maximum length of fish in the community. Must be
 #'  set to \code{"ALL"} or match a column name in \code{species.table}. If
@@ -80,7 +80,7 @@
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data

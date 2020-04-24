@@ -83,7 +83,7 @@ Other resource potential indicators: \code{\link{allPotential}},
   \code{\link{resourcePotential}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{resource potential indicators}

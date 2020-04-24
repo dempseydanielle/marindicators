@@ -50,7 +50,7 @@
 #'  Standardized indicators are noted with \code{_s} in the name.
 #'@importFrom stats aggregate
 #'@family biodiversity indicators
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'data(X)

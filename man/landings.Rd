@@ -29,7 +29,7 @@ Default is \code{species.table = NULL}.}
 }
 \value{
 Returns a dataframe with columns \code{ID} and \code{YEAR}, and a
-  column \code{landings_group} for each entry in \code{groups}.
+ column \code{landings_group} for each entry in \code{groups}.
 
  If there is no data for a given year, the indicator value is set to 0.
 }
@@ -49,7 +49,7 @@ data(species.table)
 landings.groups <- c("ALL", "CLUPEIDS.L", "FLATFISH.L", "GROUNDFISH.L")
 
 # Calculate indicators
-landings(land, groups = landings.groups, species.table = species.table, 
+landings(land, groups = landings.groups, species.table = species.table,
    years = c(2014:2019))
 }
 \references{
@@ -64,7 +64,7 @@ Other fishing pressure indicators: \code{\link{allPressure}},
   \code{\link{speciesRichness}}
 }
 \author{
-Danielle Dempsey \email{Danielle.Dempsey@dfo-mpo.gc.ca}, Adam Cook,
+Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
  Catalina Gomez, Alida Bundy
 }
 \concept{fishing pressure indicators}

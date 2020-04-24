@@ -88,7 +88,7 @@
 #'  Standardized indicators are noted with "_s" in the name.
 #'@importFrom stats aggregate
 #'@importFrom utils write.csv
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@export
 #'@examples

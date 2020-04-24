@@ -76,9 +76,9 @@
 #'  Other columns will be ignored.
 #'@param years A vector of years for which to calculate indicators.
 #'@param raw A logical value. If \code{raw = TRUE}, the raw indicator values are
-#'  returned by the function. If \code{raw = FALSE}, the raw indicator values are
-#'  not returned. Default is \code{raw = TRUE}. Either \code{raw} or \code{std}
-#'  must be \code{TRUE}.
+#'  returned by the function. If \code{raw = FALSE}, the raw indicator values
+#'  are not returned. Default is \code{raw = TRUE}. Either \code{raw} or
+#'  \code{std} must be \code{TRUE}.
 #'@param std A logical value. If \code{std = TRUE}, the standardized indicator
 #'  values for each area \code{ID} are returned by the function. Indicators are
 #'  standardized using z-scores, i.e., by subtracting the mean and dividing by
@@ -102,7 +102,7 @@
 #'@references Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
 #'  selection and evaluation of ecological indicators. Can. Tech. Rep. Fish.
 #'  Aquat. Sci. 3232: xii + 212 p.
-#'@author  Danielle Dempsey \email{Danielle.Dempsey@@dfo-mpo.gc.ca}, Adam Cook,
+#'@author  Danielle Dempsey, Adam Cook \email{Adam.Cook@@dfo-mpo.gc.ca},
 #'  Catalina Gomez, Alida Bundy
 #'@examples
 #'# Compile data
