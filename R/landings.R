@@ -50,7 +50,7 @@ landings <- function(land, groups, species.table = NULL, years) {
     ind.k <- merge(DF, ind.k, by = c("ID", "YEAR"), all.x = T)        # merge ind with df. This makes the indicator value "NA" for any year without data
     
     index <- which(is.na(ind.k[,3]))                                # index NAs
-    ind.k[index, 3] <- 0                                          # replace NA with 0
+    ind.k[index, 3] <- 0                                            # replace NA with 0
     
     ind.name <- paste("landings_", groups[k], sep ="")        # name indicator: group_landings
     names(ind.k) <- c("ID", "YEAR", ind.name)
