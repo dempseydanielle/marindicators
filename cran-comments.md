@@ -11,7 +11,7 @@
 - R-hub fedora-clang-devel (r-devel)
 
 
-##### Adam: update this section based on the results of the r-hub check
+##### Adam: update this section based on the results of the r-hub and win-developer checks
 
 ## R CMD check results (from R-hub)
 There were 0 errors, 0 warnings, and 2 notes returned from the R-hub R CMD check.
