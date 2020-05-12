@@ -4,8 +4,7 @@
 \alias{resourcePotential}
 \title{Calculates the Resource Potential of species groups}
 \usage{
-resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS",
-  years)
+resourcePotential(X, groups, species.table = NULL, metric = "BIOMASS", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -73,8 +72,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other resource potential indicators: \code{\link{allPotential}},
-  \code{\link{fishingInBalance}}
+Other resource potential indicators: 
+\code{\link{allPotential}()},
+\code{\link{fishingInBalance}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

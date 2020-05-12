@@ -60,11 +60,15 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Margalef R. 1958. Information theory in ecology. General Systems 3, 36–71.
 }
 \seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{pielouEvenness}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: 
+\code{\link{allBiodiversity}()},
+\code{\link{heips}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{kemptonQ}()},
+\code{\link{pielouEvenness}()},
+\code{\link{shannon}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

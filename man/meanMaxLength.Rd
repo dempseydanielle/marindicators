@@ -4,8 +4,7 @@
 \alias{meanMaxLength}
 \title{Calculates the Mean Maximum Length of fish in the community}
 \usage{
-meanMaxLength(X, group, species.table = NULL, maxlength.table, metric,
-  years)
+meanMaxLength(X, group, species.table = NULL, maxlength.table, metric, years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -81,9 +80,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Marine Science. p 384-396
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{CVBiomass}},
-  \code{\link{IVILandings}}, \code{\link{allStability}},
-  \code{\link{biomassPerTL}}, \code{\link{meanMaxAge}}
+Other stability and resistance indicators: 
+\code{\link{CVBiomass}()},
+\code{\link{IVILandings}()},
+\code{\link{allStability}()},
+\code{\link{biomassPerTL}()},
+\code{\link{meanMaxAge}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

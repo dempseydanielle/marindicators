@@ -67,9 +67,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Journal of Marine Science, 67: 692-716
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{IVILandings}},
-  \code{\link{allStability}}, \code{\link{biomassPerTL}},
-  \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
+Other stability and resistance indicators: 
+\code{\link{IVILandings}()},
+\code{\link{allStability}()},
+\code{\link{biomassPerTL}()},
+\code{\link{meanMaxAge}()},
+\code{\link{meanMaxLength}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

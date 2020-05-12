@@ -72,9 +72,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  indicators. Ecol. Model. 198, 53-70.
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{CVBiomass}},
-  \code{\link{IVILandings}}, \code{\link{allStability}},
-  \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
+Other stability and resistance indicators: 
+\code{\link{CVBiomass}()},
+\code{\link{IVILandings}()},
+\code{\link{allStability}()},
+\code{\link{meanMaxAge}()},
+\code{\link{meanMaxLength}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

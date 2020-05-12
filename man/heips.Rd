@@ -66,11 +66,15 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
   3059: vi+188p.
 }
 \seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{margalef}},
-  \code{\link{pielouEvenness}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: 
+\code{\link{allBiodiversity}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{kemptonQ}()},
+\code{\link{margalef}()},
+\code{\link{pielouEvenness}()},
+\code{\link{shannon}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

@@ -4,13 +4,15 @@
 \name{species.info}
 \alias{species.info}
 \title{Species information}
-\format{This example data is a dataframe with 306 rows and 6 variables: \describe{
+\format{
+This example data is a dataframe with 306 rows and 6 variables: \describe{
  \item{SPECIES}{Species codes} \item{TL}{Trophic level of species caught in
  fishery independent surveys} \item{MAXLENGTH}{Maximum recorded length of of
  species caught in fishery independent surveys} \item{MAXAGE}{Maximum
  recorded age of of species caught in fishery independent surveys}
  \item{IVI}{Vulnerability of commercial species} \item{TL_LAND}{Trophic level
- of commercial species} }}
+ of commercial species} }
+}
 \source{
 This is example data using species that are of interest in the Scotian
  Shelf Bioregion.

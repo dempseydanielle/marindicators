@@ -4,15 +4,43 @@
 \alias{extractAll}
 \title{Calculates indicators from all attributes}
 \usage{
-extractAll(X, X_length, land, speciesinfo.table, species.table, years,
-  metric.bio = "ABUNDANCE", group.bio = "ALL", percentiles = c(0.25,
-  0.75), minTL.bio = 0, LSI.group, max.length = 85, LFI.group,
-  large.fish = 35, LenWt.table, guild.groups, condition.groups,
-  ratio.groups, maxlength.group, TL.grouping = 1, wind = 5,
-  negative = FALSE, resource.groups, minTL.FiB = 0, TE = 0.1,
-  base.start, base.end, landings.groups, FP.groups, minTL.FP = c(0,
-  3.25), raw = TRUE, std = TRUE, glob.env = TRUE,
-  export.path = NULL, export.id = NULL)
+extractAll(
+  X,
+  X_length,
+  land,
+  speciesinfo.table,
+  species.table,
+  years,
+  metric.bio = "ABUNDANCE",
+  group.bio = "ALL",
+  percentiles = c(0.25, 0.75),
+  minTL.bio = 0,
+  LSI.group,
+  max.length = 85,
+  LFI.group,
+  large.fish = 35,
+  LenWt.table,
+  guild.groups,
+  condition.groups,
+  ratio.groups,
+  maxlength.group,
+  TL.grouping = 1,
+  wind = 5,
+  negative = FALSE,
+  resource.groups,
+  minTL.FiB = 0,
+  TE = 0.1,
+  base.start,
+  base.end,
+  landings.groups,
+  FP.groups,
+  minTL.FP = c(0, 3.25),
+  raw = TRUE,
+  std = TRUE,
+  glob.env = TRUE,
+  export.path = NULL,
+  export.id = NULL
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel

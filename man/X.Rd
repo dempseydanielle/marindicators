@@ -4,12 +4,14 @@
 \name{X}
 \alias{X}
 \title{Example fishery independent survey data}
-\format{This example data is a dataframe with 2003 rows and 5 variables: \describe{
+\format{
+This example data is a dataframe with 2003 rows and 5 variables: \describe{
   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
   observation was recorded} \item{SPECIES}{Numeric code indicating the
   species sampled} \item{ABUNDANCE}{Abundance of the species sampled,
   stratified and corrected for catchability} \item{BIOMASS}{Biomass of the
-  sampled species, stratified and corrected for catchability} }}
+  sampled species, stratified and corrected for catchability} }
+}
 \source{
 This is made-up example data modified from Fisheries and Oceans
   Canada summer research vessel trawl survey for the Scotian Shelf Bioregion.

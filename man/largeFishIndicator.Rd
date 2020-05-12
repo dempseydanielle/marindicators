@@ -4,8 +4,14 @@
 \alias{largeFishIndicator}
 \title{Calculates the Large Fish Indicator}
 \usage{
-largeFishIndicator(X_length, group, species.table = NULL,
-  metric = "BIOMASS", large.fish = 35, years)
+largeFishIndicator(
+  X_length,
+  group,
+  species.table = NULL,
+  metric = "BIOMASS",
+  large.fish = 35,
+  years
+)
 }
 \arguments{
 \item{X_length}{A dataframe of fishery independent data derived from research
@@ -81,11 +87,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Activities. ICES Document CM 2006/ACE: 05. 174 pp.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allStructure}},
-  \code{\link{biomassRatio}},
-  \code{\link{communityCondition}},
-  \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTLCommunity}}
+Other ecosystem structure and function indicators: 
+\code{\link{allStructure}()},
+\code{\link{biomassRatio}()},
+\code{\link{communityCondition}()},
+\code{\link{largeSpeciesIndicator}()},
+\code{\link{meanTLCommunity}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

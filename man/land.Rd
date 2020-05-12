@@ -4,12 +4,14 @@
 \name{land}
 \alias{land}
 \title{Example commercial landings data}
-\format{This example data is a dataframe with 612 rows and 4 variables: \describe{
+\format{
+This example data is a dataframe with 612 rows and 4 variables: \describe{
   \item{YEAR}{Year the observation was recorded} \item{ID}{Area where the
   observation was recorded} \item{SPECIES}{Numeric code indicating the
   species sampled (can be consistent with X or not; see vignette)}
   \item{CATCH}{Corresponding landed weight (in the same units as
-  \code{BIOMASS} in \code{X}})}}
+  \code{BIOMASS} in \code{X}})}
+}
 \source{
 This is made-up example data.
 }

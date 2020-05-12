@@ -4,8 +4,7 @@
 \alias{pielouEvenness}
 \title{Calculates Pielou's Species Evenness}
 \usage{
-pielouEvenness(X, groups, species.table = NULL, metric = "ABUNDANCE",
-  years)
+pielouEvenness(X, groups, species.table = NULL, metric = "ABUNDANCE", years)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -67,11 +66,15 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Pielou EC. 1975. Ecological Diversity. Wiley, New York. ISBN 0-471-68925-4
 }
 \seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: 
+\code{\link{allBiodiversity}()},
+\code{\link{heips}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{kemptonQ}()},
+\code{\link{margalef}()},
+\code{\link{shannon}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

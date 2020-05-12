@@ -70,9 +70,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  vulnerability in the global fish catch. Mar Ecol Prog Ser 333: 1 - 12
 }
 \seealso{
-Other stability and resistance indicators: \code{\link{CVBiomass}},
-  \code{\link{allStability}}, \code{\link{biomassPerTL}},
-  \code{\link{meanMaxAge}}, \code{\link{meanMaxLength}}
+Other stability and resistance indicators: 
+\code{\link{CVBiomass}()},
+\code{\link{allStability}()},
+\code{\link{biomassPerTL}()},
+\code{\link{meanMaxAge}()},
+\code{\link{meanMaxLength}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

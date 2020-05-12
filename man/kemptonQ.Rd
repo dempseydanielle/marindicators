@@ -4,8 +4,16 @@
 \alias{kemptonQ}
 \title{Calculates Kempton's Biodiversity Index}
 \usage{
-kemptonQ(X, TL.table, percentiles = c(0.25, 0.75), minTL = 0, groups,
-  species.table = NULL, metric = "ABUNDANCE", years)
+kemptonQ(
+  X,
+  TL.table,
+  percentiles = c(0.25, 0.75),
+  minTL = 0,
+  groups,
+  species.table = NULL,
+  metric = "ABUNDANCE",
+  years
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -86,11 +94,15 @@ Ainsworth, C, Pitcher, T. 2006. Modifying Kempton's species
  Nature 262:818-820
 }
 \seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{margalef}},
-  \code{\link{pielouEvenness}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: 
+\code{\link{allBiodiversity}()},
+\code{\link{heips}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{margalef}()},
+\code{\link{pielouEvenness}()},
+\code{\link{shannon}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

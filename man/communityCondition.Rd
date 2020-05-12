@@ -4,8 +4,7 @@
 \alias{communityCondition}
 \title{Calculates Fulton's Condition Index for the community}
 \usage{
-communityCondition(X_length, groups, species.table = NULL, LenWt.table,
-  years)
+communityCondition(X_length, groups, species.table = NULL, LenWt.table, years)
 }
 \arguments{
 \item{X_length}{A dataframe of fishery independent data derived from research
@@ -85,11 +84,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  191:1-382.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allStructure}},
-  \code{\link{biomassRatio}},
-  \code{\link{largeFishIndicator}},
-  \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTLCommunity}}
+Other ecosystem structure and function indicators: 
+\code{\link{allStructure}()},
+\code{\link{biomassRatio}()},
+\code{\link{largeFishIndicator}()},
+\code{\link{largeSpeciesIndicator}()},
+\code{\link{meanTLCommunity}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

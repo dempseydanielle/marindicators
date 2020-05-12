@@ -4,10 +4,23 @@
 \alias{allPotential}
 \title{Calculates all Resource Potential indicators}
 \usage{
-allPotential(X, land, species.table, speciesinfo.table, resource.groups,
-  minTL = 0, TE = 0.1, base.start, base.end, years, raw = TRUE,
-  std = TRUE, glob.env = TRUE, export.path = NULL,
-  export.id = NULL)
+allPotential(
+  X,
+  land,
+  species.table,
+  speciesinfo.table,
+  resource.groups,
+  minTL = 0,
+  TE = 0.1,
+  base.start,
+  base.end,
+  years,
+  raw = TRUE,
+  std = TRUE,
+  glob.env = TRUE,
+  export.path = NULL,
+  export.id = NULL
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -132,8 +145,9 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other resource potential indicators: \code{\link{fishingInBalance}},
-  \code{\link{resourcePotential}}
+Other resource potential indicators: 
+\code{\link{fishingInBalance}()},
+\code{\link{resourcePotential}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

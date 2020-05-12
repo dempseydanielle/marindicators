@@ -58,10 +58,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{allPressure}},
-  \code{\link{fishingPressure}},
-  \code{\link{meanTLLandings}},
-  \code{\link{speciesRichness}}
+Other fishing pressure indicators: 
+\code{\link{allPressure}()},
+\code{\link{fishingPressure}()},
+\code{\link{meanTLLandings}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

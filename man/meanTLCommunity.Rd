@@ -68,11 +68,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Prog. Ser. 512, 115–140.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{allStructure}},
-  \code{\link{biomassRatio}},
-  \code{\link{communityCondition}},
-  \code{\link{largeFishIndicator}},
-  \code{\link{largeSpeciesIndicator}}
+Other ecosystem structure and function indicators: 
+\code{\link{allStructure}()},
+\code{\link{biomassRatio}()},
+\code{\link{communityCondition}()},
+\code{\link{largeFishIndicator}()},
+\code{\link{largeSpeciesIndicator}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

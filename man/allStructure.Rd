@@ -4,11 +4,26 @@
 \alias{allStructure}
 \title{Calculates all Structure and Functioning indicators}
 \usage{
-allStructure(X, X_length, LSI.group, LFI.group, max.length = 85,
-  large.fish = 35, guild.groups, condition.groups, ratio.groups,
-  species.table, speciesinfo.table, LenWt.table, years, raw = TRUE,
-  std = TRUE, glob.env = TRUE, export.path = NULL,
-  export.id = NULL)
+allStructure(
+  X,
+  X_length,
+  LSI.group,
+  LFI.group,
+  max.length = 85,
+  large.fish = 35,
+  guild.groups,
+  condition.groups,
+  ratio.groups,
+  species.table,
+  speciesinfo.table,
+  LenWt.table,
+  years,
+  raw = TRUE,
+  std = TRUE,
+  glob.env = TRUE,
+  export.path = NULL,
+  export.id = NULL
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -172,11 +187,12 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other ecosystem structure and function indicators: \code{\link{biomassRatio}},
-  \code{\link{communityCondition}},
-  \code{\link{largeFishIndicator}},
-  \code{\link{largeSpeciesIndicator}},
-  \code{\link{meanTLCommunity}}
+Other ecosystem structure and function indicators: 
+\code{\link{biomassRatio}()},
+\code{\link{communityCondition}()},
+\code{\link{largeFishIndicator}()},
+\code{\link{largeSpeciesIndicator}()},
+\code{\link{meanTLCommunity}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

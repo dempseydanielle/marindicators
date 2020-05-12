@@ -4,9 +4,21 @@
 \alias{allPressure}
 \title{Calculates all Pressure indicators}
 \usage{
-allPressure(X, land, species.table, speciesinfo.table, landings.groups,
-  FP.groups, minTL = c(0, 3.25), years, raw = TRUE, std = TRUE,
-  glob.env = TRUE, export.path = NULL, export.id = NULL)
+allPressure(
+  X,
+  land,
+  species.table,
+  speciesinfo.table,
+  landings.groups,
+  FP.groups,
+  minTL = c(0, 3.25),
+  years,
+  raw = TRUE,
+  std = TRUE,
+  glob.env = TRUE,
+  export.path = NULL,
+  export.id = NULL
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -127,9 +139,11 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  Aquat. Sci. 3232: xii + 212 p.
 }
 \seealso{
-Other fishing pressure indicators: \code{\link{fishingPressure}},
-  \code{\link{landings}}, \code{\link{meanTLLandings}},
-  \code{\link{speciesRichness}}
+Other fishing pressure indicators: 
+\code{\link{fishingPressure}()},
+\code{\link{landings}()},
+\code{\link{meanTLLandings}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

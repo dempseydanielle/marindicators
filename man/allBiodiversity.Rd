@@ -4,10 +4,21 @@
 \alias{allBiodiversity}
 \title{Calculates all Biodiversity indicators}
 \usage{
-allBiodiversity(X, metric = "ABUNDANCE", groups = "ALL",
-  species.table = NULL, TL.table, percentiles = c(0.25, 0.75),
-  minTL = 0, years, raw = TRUE, std = TRUE, glob.env = TRUE,
-  export.path = NULL, export.id = NULL)
+allBiodiversity(
+  X,
+  metric = "ABUNDANCE",
+  groups = "ALL",
+  species.table = NULL,
+  TL.table,
+  percentiles = c(0.25, 0.75),
+  minTL = 0,
+  years,
+  raw = TRUE,
+  std = TRUE,
+  glob.env = TRUE,
+  export.path = NULL,
+  export.id = NULL
+)
 }
 \arguments{
 \item{X}{A dataframe of fishery independent data derived from research vessel
@@ -108,11 +119,15 @@ allBiodiversity(X = X, metric = "ABUNDANCE", groups = "ALL", TL.table = species.
    percentiles = c(.25, 0.75), minTL = 0, years = c(2014:2019), raw = TRUE, std = TRUE)
 }
 \seealso{
-Other biodiversity indicators: \code{\link{heips}},
-  \code{\link{hillN1}}, \code{\link{hillN2}},
-  \code{\link{kemptonQ}}, \code{\link{margalef}},
-  \code{\link{pielouEvenness}}, \code{\link{shannon}},
-  \code{\link{speciesRichness}}
+Other biodiversity indicators: 
+\code{\link{heips}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{kemptonQ}()},
+\code{\link{margalef}()},
+\code{\link{pielouEvenness}()},
+\code{\link{shannon}()},
+\code{\link{speciesRichness}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},

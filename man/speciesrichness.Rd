@@ -83,15 +83,21 @@ Bundy A, Gomez C, Cook AM. 2017. Guidance framework for the
  alternative parameters. Ecology, 52, 577-86.
 }
 \seealso{
-Other biodiversity indicators: \code{\link{allBiodiversity}},
-  \code{\link{heips}}, \code{\link{hillN1}},
-  \code{\link{hillN2}}, \code{\link{kemptonQ}},
-  \code{\link{margalef}}, \code{\link{pielouEvenness}},
-  \code{\link{shannon}}
+Other biodiversity indicators: 
+\code{\link{allBiodiversity}()},
+\code{\link{heips}()},
+\code{\link{hillN1}()},
+\code{\link{hillN2}()},
+\code{\link{kemptonQ}()},
+\code{\link{margalef}()},
+\code{\link{pielouEvenness}()},
+\code{\link{shannon}()}
 
-Other fishing pressure indicators: \code{\link{allPressure}},
-  \code{\link{fishingPressure}}, \code{\link{landings}},
-  \code{\link{meanTLLandings}}
+Other fishing pressure indicators: 
+\code{\link{allPressure}()},
+\code{\link{fishingPressure}()},
+\code{\link{landings}()},
+\code{\link{meanTLLandings}()}
 }
 \author{
 Danielle Dempsey, Adam Cook \email{Adam.Cook@dfo-mpo.gc.ca},
